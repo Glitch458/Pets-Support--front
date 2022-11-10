@@ -1,5 +1,3 @@
-const App = () => {
-  return <h1>Test commit 1</h1>;
-};
+const App = () => {};
 
 export default App;
