@@ -8,7 +8,7 @@ export const NoticesCategoriesNavContainer = styled.div`
     margin-top: 40px;
   }
 `;
-export const CotegiriesButonContainer = styled.div`
+export const CategoriesButonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   @media screen and (min-width: 1280px) {

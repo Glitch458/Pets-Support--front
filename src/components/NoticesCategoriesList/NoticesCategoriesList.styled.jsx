@@ -51,7 +51,7 @@ export const DetailsItem = styled.li`
 export const ButtonContainer = styled.div`
   padding: 0 45px 30px 45px;
 `;
-export const CategiryName = styled.div`
+export const CategoryName = styled.div`
   position: absolute;
   top: 20px;
   left: 0;

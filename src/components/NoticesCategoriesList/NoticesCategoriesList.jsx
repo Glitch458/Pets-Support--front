@@ -10,7 +10,7 @@ import {
   DetailsList,
   DetailsItem,
   ButtonContainer,
-  CategiryName,
+  CategoryName,
   ButtonLike,
 } from './NoticesCategoriesList.styled';
 
@@ -18,7 +18,7 @@ const NoticesCategoriesList = () => {
   return (
     <NoticesCategoriesListContainer>
       <NoticesCategoriesListCard>
-        <CategiryName>in good hands</CategiryName>
+        <CategoryName>in good hands</CategoryName>
         <ButtonLike type="button">
           <FavoriteBorderIcon
             sx={{
@@ -53,7 +53,7 @@ const NoticesCategoriesList = () => {
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
-        <CategiryName>in good hands</CategiryName>
+        <CategoryName>in good hands</CategoryName>
         <ButtonLike type="button">
           <FavoriteBorderIcon
             sx={{
