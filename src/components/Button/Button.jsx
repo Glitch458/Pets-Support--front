@@ -1,9 +1,5 @@
 import { Btn } from './Button.styled';
 
-export const Button = ({ type, content }) => {
-  return (
-    <button className={Btn} type={type}>
-      {content}
-    </button>
-  );
+export const Button = ({ icon = null, type = 'button', children }) => {
+  return <Btn type={type}>{children}</Btn>;
 };

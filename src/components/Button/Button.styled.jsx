@@ -11,4 +11,5 @@ export const Btn = styled.button`
   letter-spacing: 0.04em;
   border: 2px solid #f59256;
   border-radius: 40px;
+  cursor: pointer;
 `;
