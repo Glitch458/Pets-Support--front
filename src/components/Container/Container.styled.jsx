@@ -1,3 +1,4 @@
+import { theme } from 'constants';
 import styled from 'styled-components';
 
 export const ContainerDiv = styled.div`
@@ -6,7 +7,7 @@ export const ContainerDiv = styled.div`
   padding-right: 20px;
   margin-right: auto;
   margin-left: auto;
-  background-color: #fdf7f2;
+  background-color: ${p => theme.colors.background};
   @media screen and (min-width: 480px) {
     width: 480px;
   }
