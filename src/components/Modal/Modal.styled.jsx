@@ -12,7 +12,7 @@ export const Backdrop = styled.div`
   overflow: scroll;
 `;
 
-export const Container = styled.div`
+export const ModalWindow = styled.div`
   position: absolute;
   top: 160px;
   left: 50%;

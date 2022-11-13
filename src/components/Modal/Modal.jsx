@@ -2,7 +2,7 @@
 import { createPortal } from 'react-dom';
 import { handleBackdropClick, handleKeyDown } from '../../helpers/modalHelpers';
 
-const { Backdrop, Container } = require('./Modal.styled');
+const { Backdrop, ModalWindow } = require('./Modal.styled');
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -14,7 +14,7 @@ const modalRoot = document.querySelector('#modal-root');
 const Modal = ({ children }) => {
   return createPortal(
     <Backdrop onClick={e => handleBackdropClick(e)}>
-      <Container>{children}</Container>
+      <ModalWindow>{children}</ModalWindow>
     </Backdrop>,
     modalRoot
   );
