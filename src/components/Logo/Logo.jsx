@@ -1,10 +1,15 @@
-import { Logo } from '../../images/Logo/petly.png1x-mob.png';
-import { LogoStyle } from './Logo.styled';
+import { LogoStyle, LogoStyleLetter } from './Logo.styled';
 
-export default function Logo() {
+export const Logo = () => {
   return (
     <LogoStyle>
-      <img src={Logo} alt="logo" aria-label="logo" />
+      <span>
+        pe
+        <LogoStyleLetter>
+          <span>t</span>
+        </LogoStyleLetter>
+        ly
+      </span>
     </LogoStyle>
   );
-}
+};
