@@ -1,5 +1,5 @@
-import { theme } from 'constants';
-import styled from 'styled-components';
+import { theme } from "constants";
+import styled from "styled-components";
 
 export const ContainerDiv = styled.div`
   width: 100%;
@@ -7,7 +7,6 @@ export const ContainerDiv = styled.div`
   padding-right: 20px;
   margin-right: auto;
   margin-left: auto;
-  /* background-color: ${p => theme.colors.background}; */
   @media screen and (min-width: 480px) {
     width: 480px;
   }
