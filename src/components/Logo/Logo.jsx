@@ -1,6 +1,6 @@
 import { LogoStyle, LogoStyleLetter } from './Logo.styled';
 
-export const Logo = () => {
+const Logo = () => {
   return (
     <LogoStyle>
       <span>
@@ -13,3 +13,4 @@ export const Logo = () => {
     </LogoStyle>
   );
 };
+export default Logo;

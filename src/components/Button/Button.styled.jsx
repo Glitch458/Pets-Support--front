@@ -6,6 +6,7 @@ export const ButtonBasic = styled.button`
   justify-content: center;
   align-items: center;
   padding: 10px 28px;
+  width: ${p => (p.fullwidth ? '100%' : 'auto')};
   font-family: ${p => p.theme.fonts.body};
   font-size: 14px;
   font-weight: ${p => p.theme.fontWeights.medium};
@@ -13,7 +14,8 @@ export const ButtonBasic = styled.button`
   line-height: 1.35;
   border: 2px solid #f59256;
   border-radius: 40px;
-  color: ${p => p.theme.colors.black};
+  color: ${p =>
+    p.fullwidth ? p.theme.colors.accent : p.theme.colors.primaryText};
   background-color: ${p => p.theme.colors.white};
   &.active {
     background-color: ${p => p.theme.colors.accent};

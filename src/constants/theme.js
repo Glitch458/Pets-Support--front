@@ -33,4 +33,10 @@ export const theme = {
     normal: '40px',
     round: '50%',
   },
+
+  media: {
+    mobile: '(min-width: 480px)',
+    tablet: '(max-width: 1279px) and (min-width: 768px)',
+    desktop: '(min-width: 1280px)',
+  },
 };

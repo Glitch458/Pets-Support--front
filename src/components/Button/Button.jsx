@@ -5,13 +5,17 @@ import {
   AddButtonBasicStyle,
 } from './Button.styled';
 
-const Button = ({ type, content }) => {
-  return <ButtonBasic type={type}>{content}</ButtonBasic>;
+const Button = ({ type = 'button', children, fullwidth = NaN }) => {
+  return (
+    <ButtonBasic fullwidth={fullwidth} type={type}>
+      {children}
+    </ButtonBasic>
+  );
 };
-const AddButtonBasic = ({ content, type }) => {
+const AddButtonBasic = ({ type = 'button', children }) => {
   return (
     <AddButtonBasicStyle type={type}>
-      {content}
+      {children}
       <div>
         <AddIcon
           sx={{
@@ -25,7 +29,7 @@ const AddButtonBasic = ({ content, type }) => {
   );
 };
 
-const AddButtonCircle = ({ content, type }) => {
+const AddButtonCircle = ({ type = 'button', children }) => {
   return (
     <AddButtonCircleStyle type={type}>
       <AddIcon
@@ -35,7 +39,7 @@ const AddButtonCircle = ({ content, type }) => {
           color: '#ffffff',
         }}
       />
-      {content}
+      {children}
     </AddButtonCircleStyle>
   );
 };

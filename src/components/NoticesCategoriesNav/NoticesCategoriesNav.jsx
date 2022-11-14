@@ -1,7 +1,7 @@
 // import { useSelector } from 'react-redux';
 import {
   NoticesCategoriesNavContainer,
-  CotegiriesButonContainer,
+  CategoriesButonContainer,
   PrivateUl,
   PublicUl,
   Li,
@@ -17,11 +17,11 @@ const NoticesCategoriesNav = () => {
 
   return (
     <NoticesCategoriesNavContainer>
-      <CotegiriesButonContainer>
+      <CategoriesButonContainer>
         <PublicUl>
           {publicCategories.map(item => (
             <Li key={item}>
-              <Button type="button" content={item} />
+              <Button>{item}</Button>
             </Li>
           ))}
         </PublicUl>
@@ -29,16 +29,16 @@ const NoticesCategoriesNav = () => {
           {token &&
             privateCategories.map(item => (
               <Li key={item}>
-                <Button content={item} />
+                <Button>{item}</Button>
               </Li>
             ))}
         </PrivateUl>
-      </CotegiriesButonContainer>
+      </CategoriesButonContainer>
       <AddButton>
         {window.innerWidth <= 768 ? (
-          <AddButtonCircle type="button" content="Add pet" />
+          <AddButtonCircle>Add pet</AddButtonCircle>
         ) : (
-          <AddButtonBasic type="button" content="Add pet" />
+          <AddButtonBasic>Add pet</AddButtonBasic>
         )}
       </AddButton>
     </NoticesCategoriesNavContainer>
