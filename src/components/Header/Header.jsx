@@ -1,4 +1,4 @@
-import { Logo } from '../Logo/Logo';
+// import { Logo } from '../Logo/Logo';
 
 import { HeaderBox } from './Header.styled';
 
@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
       <HeaderBox>
-        {<Logo />}
+        {/* {<Logo />} */}
         {/* <Nav/> */}
       </HeaderBox>
     </>
