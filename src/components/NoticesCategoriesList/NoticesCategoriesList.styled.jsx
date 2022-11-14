@@ -3,19 +3,38 @@ import styled from 'styled-components';
 export const NoticesCategoriesListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0;
-  padding: 0;
+  padding: 0 0 100px 0;
+  @media screen and (min-width: 768px) {
+    margin: -16px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-bottom: 200px;
+    margin: -8px;
+  }
 `;
 export const NoticesCategoriesListCard = styled.li`
   position: relative;
-  margin: 0;
+  margin: 0 0 30px 0;
   padding: 0;
-  //max-width: 280px;
   list-style-type: none;
   border-radius: 0 0 20px 20px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   background-color: #ffffff;
+  @media screen and (max-width: 767px) {
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 2 * 32px) / 2);
+    margin: 16px;
+  }
+  @media screen and (min-width: 1280px) {
+    flex-basis: calc((100% - 4 * 16px) / 4);
+    margin: 8px;
+  }
 `;
 export const Img = styled.img`
   width: 100%;
