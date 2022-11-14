@@ -1,4 +1,3 @@
-import { theme } from "constants";
 import styled from "styled-components";
 
 export const ContainerDiv = styled.div`
