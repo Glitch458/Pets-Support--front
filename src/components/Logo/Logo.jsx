@@ -13,4 +13,5 @@ const Logo = () => {
     </LogoStyle>
   );
 };
+
 export default Logo;
