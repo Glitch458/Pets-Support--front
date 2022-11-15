@@ -6,7 +6,7 @@ import {
   AddButton,
   NavLinkStyled,
 } from './NoticesCategoriesNav.styled';
-import { AddButtonCircle, AddButtonBasic } from '../Button/Button';
+import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
 
 const NoticesCategoriesNav = () => {
   //const { token } = useSelector(state => state.user);
@@ -49,9 +49,9 @@ const NoticesCategoriesNav = () => {
       </CategoriesButonContainer>
       <AddButton>
         {window.innerWidth <= 768 ? (
-          <AddButtonCircle>Add pet</AddButtonCircle>
+          <AddButtonCircleLink>Add pet</AddButtonCircleLink>
         ) : (
-          <AddButtonBasic>Add pet</AddButtonBasic>
+          <AddButtonLink>Add pet</AddButtonLink>
         )}
       </AddButton>
     </NoticesCategoriesNavContainer>

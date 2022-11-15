@@ -27,7 +27,7 @@ export const CategoriesList = styled.div`
 `;
 
 export const AddButton = styled.div`
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     position: absolute;
     top: 50%;
     right: 0;
@@ -42,7 +42,17 @@ export const AddButton = styled.div`
 export const NavLinkStyled = styled(NavLink)`
   margin-right: 15px;
   margin-bottom: 15px;
+
   ${ButtonStyles};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-family: ${p => p.theme.fonts.body};
+  background-color: ${p => p.theme.colors.white};
+
+  &.active {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+  }
+
   :hover:not(.active),
   :focus-visible:not(.active) {
     background-color: ${p => p.theme.colors.accent};

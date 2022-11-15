@@ -1,20 +1,25 @@
 import AddIcon from '@mui/icons-material/Add';
 import {
   ButtonBasic,
-  AddButtonCircleStyle,
-  AddButtonBasicStyle,
+  LinkBasic,
+  AddLinkCircle,
+  AddLinkBasic,
 } from './Button.styled';
 
-const Button = ({ name = '', href = '', children }) => {
+const Button = ({ type = 'button', children }) => {
+  return <ButtonBasic type={type}>{children}</ButtonBasic>;
+};
+
+const ButtonLink = ({ name = '', href = '', children }) => {
   return (
-    <ButtonBasic href={href} name={name}>
+    <LinkBasic href={href} name={name}>
       {children}
-    </ButtonBasic>
+    </LinkBasic>
   );
 };
-const AddButtonBasic = ({ name = '', href = '', children }) => {
+const AddButtonLink = ({ name = '', href = '', children }) => {
   return (
-    <AddButtonBasicStyle href={href} name={name}>
+    <AddLinkBasic href={href} name={name}>
       {children}
       <div>
         <AddIcon
@@ -25,13 +30,13 @@ const AddButtonBasic = ({ name = '', href = '', children }) => {
           }}
         />
       </div>
-    </AddButtonBasicStyle>
+    </AddLinkBasic>
   );
 };
 
-const AddButtonCircle = ({ name = '', href = '', children }) => {
+const AddButtonCircleLink = ({ name = '', href = '', children }) => {
   return (
-    <AddButtonCircleStyle href={href} name={name}>
+    <AddLinkCircle href={href} name={name}>
       <AddIcon
         sx={{
           width: 32,
@@ -40,8 +45,8 @@ const AddButtonCircle = ({ name = '', href = '', children }) => {
         }}
       />
       {children}
-    </AddButtonCircleStyle>
+    </AddLinkCircle>
   );
 };
 
-export { Button, AddButtonBasic, AddButtonCircle };
+export { ButtonLink, AddButtonLink, AddButtonCircleLink, Button };
