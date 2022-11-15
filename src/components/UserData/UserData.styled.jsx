@@ -1,8 +1,4 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import styled from 'styled-components';
-// import PropTypes from 'prop-types'
-
-// временное фото для стилизации
 
 export const User = styled.div`
   box-sizing: border-box;
@@ -15,11 +11,11 @@ export const User = styled.div`
 `;
 
 export const Title = styled.h2`
+  padding: 24px 17px;
   font-weight: 500;
   font-size: 28px;
   line-height: 135%;
   color: #111111;
-  margin-left: 17px;
 `;
 
 export const UserPhoto = styled.div`
@@ -37,7 +33,7 @@ export const Photo = styled.img`
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.11);
 `;
 
-export const InfoItems = styled.table`
+export const InfoItems = styled.div`
   padding-top: 36px;
   width: 100%;
   font-size: 18px;
@@ -45,21 +41,31 @@ export const InfoItems = styled.table`
   letter-spacing: 0.04em;
 `;
 
-export const InfoItemTitle = styled.td`
+export const InfoItem = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+`;
+
+export const Property = styled.p`
+  min-width: 120px;
   font-weight: 500;
 `;
 
-export const InfoItemValue = styled.td`
+export const Values = styled.div`
   font-weight: 400;
 `;
 
-export const InfoItemEdit = styled.button`
+export const EditInputBtn = styled.button`
   background: #fdf7f2;
   border-radius: 50%;
   border: none;
   width: 32px;
   height: 32px;
-  margin-right: -16px;
+  margin-left: auto;
 `;
 
 export const PhotoEditLabel = styled.label`
@@ -86,9 +92,15 @@ export const PhotoEdit = styled.input`
 `;
 
 export const EditInput = styled.input`
+  font-size: 18px;
+  line-height: 138%;
+  align-items: center;
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   padding-left: 12px;
   margin-left: -12px;
+  &:focus {
+    outline: 0;
+  }
 `;
