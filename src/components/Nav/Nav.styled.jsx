@@ -23,7 +23,8 @@ export const NavLink = styled(Link)`
     margin-left: 80px;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #f59256;
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
@@ -49,7 +50,8 @@ export const NavLinkExtends = styled(Link)`
     display: none;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #f59256;
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
