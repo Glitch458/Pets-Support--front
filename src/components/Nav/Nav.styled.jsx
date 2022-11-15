@@ -2,19 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const NavContainer = styled.nav`
-  display: flex;
-  align-items: center;
-  height: 48px;
-`;
-
-export const NavInnerContainer = styled.div`
-  display: flex;
-  height: 48px;
-`;
-
-export const NavLinkContainer = styled.div`
-  display: flex;
-  position: relative;
+  display: inline-flex;
+  position: absolute;
+  top: 25px;
+  right: 25px;
 `;
 
 export const NavLink = styled(Link)`
@@ -70,15 +61,8 @@ export const NavLinkExtends = styled(Link)`
 `;
 
 export const OpenLinksButton = styled.button`
-  display: flex;
-  align-items: center;
   background: none;
   border: none;
-  font-size: 40px;
-  width: 40px;
-  height: 40px;
-  margin-left: auto;
-  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     display: none;
@@ -86,10 +70,10 @@ export const OpenLinksButton = styled.button`
 `;
 
 export const NavExtendedContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 88px;
-  transform: translateX(-50%);
+  position: fixed;
+  left: 0px;
+  top: 64px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
