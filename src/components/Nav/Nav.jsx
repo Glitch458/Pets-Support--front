@@ -33,7 +33,7 @@ export const Nav = () => {
         {extendNav && (
           <NavExtendedContainer>
             <NavLinkExtends to="/news">News</NavLinkExtends>
-            <NavLinkExtends to="/notices">Find pet</NavLinkExtends>
+            <NavLinkExtends to="/notices/sell">Find pet</NavLinkExtends>
             <NavLinkExtends to="/friends">Our friends</NavLinkExtends>
           </NavExtendedContainer>
         )}
