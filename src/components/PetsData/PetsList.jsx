@@ -1,4 +1,4 @@
-import { List, Image } from './PetsList.styled';
+import { List, Image, PetsInfo } from './PetsList.styled';
 
 export const PetsList = ({ data }) => {
   console.log(data);
@@ -7,10 +7,10 @@ export const PetsList = ({ data }) => {
       {data.map(({ name, url, date, breed, comments }) => (
         <List key={name}>
           <Image src={url} alt={name} />
-          <p>NamePets: {name}</p>
-          <p>Date of birth: {date}</p>
-          <p>Breed: {breed}</p>
-          <p>Comments: {comments}</p>
+          <PetsInfo>NamePets: {name}</PetsInfo>
+          <PetsInfo>Date of birth: {date}</PetsInfo>
+          <PetsInfo>Breed: {breed}</PetsInfo>
+          <PetsInfo>Comments: {comments}</PetsInfo>
         </List>
       ))}
     </ul>
