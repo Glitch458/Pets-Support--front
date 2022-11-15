@@ -3,13 +3,11 @@ import { LogoStyle, LogoStyleLetter } from './Logo.styled';
 const Logo = () => {
   return (
     <LogoStyle>
-      <span>
-        pe
-        <LogoStyleLetter>
-          <span>t</span>
-        </LogoStyleLetter>
-        ly
-      </span>
+      {/* <span> */}
+      pe
+      <LogoStyleLetter>t</LogoStyleLetter>
+      ly
+      {/* </span> */}
     </LogoStyle>
   );
 };

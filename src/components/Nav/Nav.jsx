@@ -8,14 +8,12 @@ import {
   NavExtendedContainer,
   NavLinkExtends,
 } from './Nav.styled';
-// import Logo from '../Logo/Logo';
 
 export const Nav = () => {
   const [extendNav, setExtendNav] = useState(false);
 
   return (
     <NavContainer extendNav={extendNav}>
-      {/* <Logo></Logo> */}
       <NavInnerContainer>
         <NavLinkContainer>
           <NavLink to="/news">News</NavLink>
