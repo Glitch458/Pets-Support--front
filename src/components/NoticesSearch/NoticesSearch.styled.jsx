@@ -4,6 +4,13 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 45px;
+  @media screen and (min-width: 768px) {
+    margin-top: 95px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-top: 60px;
+  }
 `;
 
 export const SearchTitle = styled.p`
@@ -11,8 +18,10 @@ export const SearchTitle = styled.p`
   font-size: 24px;
   line-height: 0.7;
   color: #111111;
+  margin-bottom: 30px;
   @media screen and (min-width: 768px) {
     font-size: 48px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -20,6 +29,7 @@ export const SearchInputContainer = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+
   @media screen and (min-width: 768px) {
     max-width: 608px;
   }

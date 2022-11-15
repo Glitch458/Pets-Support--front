@@ -2,37 +2,50 @@
 import {
   NoticesCategoriesNavContainer,
   CategoriesButonContainer,
-  PrivateUl,
-  PublicUl,
-  Li,
+  CategoriesList,
   AddButton,
+  NavLinkStyled,
 } from './NoticesCategoriesNav.styled';
-import { Button, AddButtonCircle, AddButtonBasic } from '../Button/Button';
+import { AddButtonCircle, AddButtonBasic } from '../Button/Button';
 
 const NoticesCategoriesNav = () => {
   //const { token } = useSelector(state => state.user);
-  const publicCategories = ['sell', 'lost/found', 'in godod hands'];
-  const privateCategories = ['Favorite ads', 'My adds'];
+
+  const publicCategories = [
+    { sell: 'sell' },
+    { 'lost/found': 'lost-found' },
+    { 'in godod hands': 'for-free' },
+  ];
+  const privateCategories = [
+    { 'Favorite ads': 'favorite' },
+    { 'My adds': 'own' },
+  ];
   const token = 'token';
 
   return (
     <NoticesCategoriesNavContainer>
       <CategoriesButonContainer>
-        <PublicUl>
+        <CategoriesList>
           {publicCategories.map(item => (
-            <Li key={item}>
-              <Button>{item}</Button>
-            </Li>
+            <NavLinkStyled
+              to={`/notices/${Object.values(item)}`}
+              key={Object.keys(item)}
+            >
+              {Object.keys(item)}
+            </NavLinkStyled>
           ))}
-        </PublicUl>
-        <PrivateUl>
+        </CategoriesList>
+        <CategoriesList>
           {token &&
             privateCategories.map(item => (
-              <Li key={item}>
-                <Button>{item}</Button>
-              </Li>
+              <NavLinkStyled
+                to={`/notices/${Object.values(item)}`}
+                key={Object.keys(item)}
+              >
+                {Object.keys(item)}
+              </NavLinkStyled>
             ))}
-        </PrivateUl>
+        </CategoriesList>
       </CategoriesButonContainer>
       <AddButton>
         {window.innerWidth <= 768 ? (

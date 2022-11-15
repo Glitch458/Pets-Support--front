@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+import { ButtonStyles } from '../Button/Button.styled';
 
 export const NoticesCategoriesNavContainer = styled.div`
   display: flex;
@@ -16,23 +19,13 @@ export const CategoriesButonContainer = styled.div`
     flex-wrap: wrap;
   }
 `;
-export const PrivateUl = styled.ul`
+export const CategoriesList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
 `;
-export const PublicUl = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-`;
-export const Li = styled.li`
-  margin-right: 15px;
-  margin-bottom: 15px;
-  list-style-type: none;
-`;
+
 export const AddButton = styled.div`
   @media screen and (max-width: 767px) {
     position: absolute;
@@ -43,5 +36,16 @@ export const AddButton = styled.div`
     display: flex;
     flex-shrink: 0;
     align-self: flex-start;
+  }
+`;
+
+export const NavLinkStyled = styled(NavLink)`
+  margin-right: 15px;
+  margin-bottom: 15px;
+  ${ButtonStyles};
+  :hover:not(.active),
+  :focus-visible:not(.active) {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
   }
 `;

@@ -14,12 +14,13 @@ import {
   ButtonLike,
 } from './NoticesCategoriesList.styled';
 
-const NoticesCategoriesList = () => {
+const NoticesCategoriesList = ({ category }) => {
+  console.log(category);
   return (
     <NoticesCategoriesListContainer>
       <NoticesCategoriesListCard>
         <CategoryName>in good hands</CategoryName>
-        <ButtonLike type="button">
+        <ButtonLike>
           <FavoriteBorderIcon
             sx={{
               width: 28,
@@ -49,7 +50,7 @@ const NoticesCategoriesList = () => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button fullwidth>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
@@ -84,11 +85,11 @@ const NoticesCategoriesList = () => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button fullwidth>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
-        <CategiryName>in good hands</CategiryName>
+        <CategoryName>in good hands</CategoryName>
         <ButtonLike type="button">
           <FavoriteBorderIcon
             sx={{
@@ -119,11 +120,11 @@ const NoticesCategoriesList = () => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button fullwidth>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
-        <CategiryName>in good hands</CategiryName>
+        <CategoryName>in good hands</CategoryName>
         <ButtonLike type="button">
           <FavoriteBorderIcon
             sx={{
@@ -154,11 +155,11 @@ const NoticesCategoriesList = () => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button fullwidth>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
-        <CategiryName>in good hands</CategiryName>
+        <CategoryName>in good hands</CategoryName>
         <ButtonLike type="button">
           <FavoriteBorderIcon
             sx={{
@@ -189,7 +190,7 @@ const NoticesCategoriesList = () => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button fullwidth>Learn more</Button>
+          <Button>Learn more</Button>
         </ButtonContainer>
       </NoticesCategoriesListCard>
     </NoticesCategoriesListContainer>
