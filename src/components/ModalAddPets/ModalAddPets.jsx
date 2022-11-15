@@ -1,11 +1,17 @@
 import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
+import {
+  Container,
+  Title,
+  ActionButtons,
+  CloseButton,
+} from './ModalAddPets.styled';
 
 export const ModalAddPets = () => {
   return (
     <Modal>
-      <div>
-        <h3>Add pet</h3>
+      <Container>
+        <Title>Add pet</Title>
         <div>
           <label>
             name pet
@@ -24,9 +30,13 @@ export const ModalAddPets = () => {
             <input name="Breed" />
           </label>
         </div>
-        <Button>Next</Button>
-        <Button>Cancel</Button>
-      </div>
+
+        <ActionButtons>
+          <Button>Next</Button>
+          <Button>Cancel</Button>
+        </ActionButtons>
+        <CloseButton>X</CloseButton>
+      </Container>
     </Modal>
   );
 };

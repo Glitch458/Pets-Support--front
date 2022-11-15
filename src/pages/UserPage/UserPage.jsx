@@ -1,4 +1,4 @@
-import PetsData from "components/PetsData/PetsData";
+import PetsData from 'components/PetsData/PetsData';
 
 const UserPage = () => {
   return (
