@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import {
   NavContainer,
-  NavLinkKontainer,
+  NavLinkContainer,
   NavLink,
   OpenLinksButton,
   NavInnerContainer,
   NavExtendedContainer,
   NavLinkExtends,
 } from './Nav.styled';
+import Logo from '../Logo/Logo';
 
 export const Nav = () => {
   const [extendNav, setExtendNav] = useState(false);
 
   return (
-    <NavContainer>
+    <NavContainer extendNav={extendNav}>
+      <Logo></Logo>
       <NavInnerContainer>
-        <NavLinkKontainer>
+        <NavLinkContainer>
           <NavLink to="/news">News</NavLink>
           <NavLink to="/notices">Find pet</NavLink>
-          <NavLink to="/friends">Our friends</NavLink>
+          <NavLink to="/friends">Our friend</NavLink>
+
           <OpenLinksButton
             onClick={() => {
               setExtendNav(curr => !curr);
@@ -26,15 +29,15 @@ export const Nav = () => {
           >
             {extendNav ? <>&#10005;</> : <> &#8801;</>}
           </OpenLinksButton>
-        </NavLinkKontainer>
+        </NavLinkContainer>
+        {extendNav && (
+          <NavExtendedContainer>
+            <NavLinkExtends to="/news">News</NavLinkExtends>
+            <NavLinkExtends to="/notices">Find pet</NavLinkExtends>
+            <NavLinkExtends to="/friends">Our friends</NavLinkExtends>
+          </NavExtendedContainer>
+        )}
       </NavInnerContainer>
-      {extendNav && (
-        <NavExtendedContainer>
-          <NavLinkExtends to="/news">News</NavLinkExtends>
-          <NavLinkExtends to="/notices">Find pet</NavLinkExtends>
-          <NavLinkExtends to="/friends">Our friends</NavLinkExtends>
-        </NavExtendedContainer>
-      )}
     </NavContainer>
   );
 };
