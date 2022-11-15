@@ -20,7 +20,7 @@ import EditPhotoIcon from './icons/editPhoto.svg';
 
 export default function UserData() {
   const [isEdit, setIsEdit] = useState(false);
-  const [userName, setUserName] = useState('Anna');
+  const [userName] = useState('Anna');
   return (
     <div>
       <Title>My information:</Title>
