@@ -5,12 +5,10 @@ export const NoticesCategoriesListContainer = styled.ul`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 0;
-  padding: 0 0 100px 0;
   @media screen and (min-width: 768px) {
     margin: -16px;
   }
   @media screen and (min-width: 1280px) {
-    padding-bottom: 200px;
     margin: -8px;
   }
 `;
@@ -69,6 +67,7 @@ export const DetailsItem = styled.li`
 `;
 export const ButtonContainer = styled.div`
   padding: 0 45px 30px 45px;
+  color: ${p => p.theme.colors.accent};
 `;
 export const CategoryName = styled.div`
   position: absolute;

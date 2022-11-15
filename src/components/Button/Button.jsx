@@ -5,16 +5,16 @@ import {
   AddButtonBasicStyle,
 } from './Button.styled';
 
-const Button = ({ type = 'button', children, fullwidth = NaN }) => {
+const Button = ({ name = '', href = '', children }) => {
   return (
-    <ButtonBasic fullwidth={fullwidth} type={type}>
+    <ButtonBasic href={href} name={name}>
       {children}
     </ButtonBasic>
   );
 };
-const AddButtonBasic = ({ type = 'button', children }) => {
+const AddButtonBasic = ({ name = '', href = '', children }) => {
   return (
-    <AddButtonBasicStyle type={type}>
+    <AddButtonBasicStyle href={href} name={name}>
       {children}
       <div>
         <AddIcon
@@ -29,9 +29,9 @@ const AddButtonBasic = ({ type = 'button', children }) => {
   );
 };
 
-const AddButtonCircle = ({ type = 'button', children }) => {
+const AddButtonCircle = ({ name = '', href = '', children }) => {
   return (
-    <AddButtonCircleStyle type={type}>
+    <AddButtonCircleStyle href={href} name={name}>
       <AddIcon
         sx={{
           width: 32,
