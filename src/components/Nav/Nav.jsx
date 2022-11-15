@@ -19,7 +19,7 @@ export const Nav = () => {
       <NavInnerContainer>
         <NavLinkContainer>
           <NavLink to="/news">News</NavLink>
-          <NavLink to="/notices">Find pet</NavLink>
+          <NavLink to="/notices/sell">Find pet</NavLink>
           <NavLink to="/friends">Our friend</NavLink>
 
           <OpenLinksButton
