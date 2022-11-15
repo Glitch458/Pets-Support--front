@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 
 export const NavContainer = styled.nav`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   height: 48px;
-  position: relative;
 `;
 
 export const NavInnerContainer = styled.div`
@@ -16,6 +14,7 @@ export const NavInnerContainer = styled.div`
 
 export const NavLinkContainer = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const NavLink = styled(Link)`
@@ -39,7 +38,7 @@ export const NavLink = styled(Link)`
     text-decoration-thickness: 1px;
   }
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -55,6 +54,10 @@ export const NavLinkExtends = styled(Link)`
   text-decoration: none;
   padding: 10px;
 
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+
   &:hover {
     color: #f59256;
     text-decoration-line: underline;
@@ -69,13 +72,15 @@ export const NavLinkExtends = styled(Link)`
 export const OpenLinksButton = styled.button`
   display: flex;
   align-items: center;
-  width: 40px;
-  height: 40px;
   background: none;
   border: none;
   font-size: 40px;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  cursor: pointer;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     display: none;
   }
 `;
@@ -90,7 +95,7 @@ export const NavExtendedContainer = styled.div`
   align-items: center;
   background: #fdf7f2;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     display: none;
   }
 `;

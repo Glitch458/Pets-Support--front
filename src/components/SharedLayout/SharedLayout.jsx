@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Nav } from 'components/Nav/Nav';
-// import Logo from 'components/Logo/Logo';
+import Logo from 'components/Logo/Logo';
 import Container from 'components/Container/Container';
 import Header from 'components/Header/Header';
 
@@ -11,7 +11,7 @@ const SharedLayout = () => {
     <>
       <Header>
         <Container>
-          {/* <Logo></Logo> */}
+          <Logo></Logo>
           <Nav></Nav>
         </Container>
       </Header>
