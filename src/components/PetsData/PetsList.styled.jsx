@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
-export const List = styled.li`
+export const List = styled.ul`
+  width: auto;
+  height: 100%;
+`;
+
+export const Item = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
   /* margin: 0 auto; */
 
-  width: 280px;
+  width: auto;
   height: 100%;
   padding: 16px 20px;
   margin-top: 26px;
