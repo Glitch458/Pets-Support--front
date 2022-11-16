@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
 import Container from 'components/Container/Container';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
@@ -11,6 +11,9 @@ import { NoticesPageMain, NoticePageContainer } from './NoticesPage.styled';
 const NoticesPage = () => {
   const { categoryName } = useParams();
   const [category, setCategory] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramFilter = searchParams.get('filter');
+  const location = useLocation();
 
   useEffect(() => {
     setCategory(categoryName);
@@ -20,13 +23,18 @@ const NoticesPage = () => {
     setCategory('sell');
   }
 
+  const handleSearch = value => {
+    setSearchParams(value !== '' ? { filter: value } : {});
+  };
+
   return (
     <NoticePageContainer>
       <Container>
-        <NoticesSearch>Find your favorite pet</NoticesSearch>
-        <NoticesCategoriesNav />
+        <NoticesSearch onSubmit={handleSearch} filter={paramFilter}>
+          Find your favorite pet
+        </NoticesSearch>
+        <NoticesCategoriesNav location={location} />
         <NoticesPageMain>
-          <Outlet />
           <NoticesCategoriesList category={category} />
         </NoticesPageMain>
       </Container>
