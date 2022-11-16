@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NewsListWrapper = styled.div`
-background-color:#F5F5F5;
+export const PageWrapper = styled.div`
+background-color:#FDF7F2;
 `
 
