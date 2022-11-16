@@ -2,18 +2,19 @@ import styled from 'styled-components';
 
 export const User = styled.div`
   box-sizing: border-box;
-  max-width: 411px;
-  padding: 20px 16px;
+  width: 100%;
+  padding: 20px 12px 20px 16px;
   background-color: #fff;
-  border-top-right-radius: 7%;
-  border-bottom-right-radius: 7%;
+  border-radius: 7%;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
 `;
 
 export const Title = styled.h2`
-  padding: 24px 17px;
+  font-family: 'Manrope';
+  padding-bottom: 18px;
+  padding-top: 60px;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 135%;
   color: #111111;
 `;
@@ -34,14 +35,18 @@ export const Photo = styled.img`
 `;
 
 export const InfoItems = styled.div`
-  padding-top: 36px;
+  padding-top: 70px;
   width: 100%;
-  font-size: 18px;
-  line-height: 138%;
+  font-size: 12px;
+  line-height: 133%;
   letter-spacing: 0.04em;
 `;
 
 export const InfoItem = styled.div`
+  font-family: 'Manrope';
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
   align-items: center;
   display: flex;
   height: 100%;
@@ -51,27 +56,29 @@ export const InfoItem = styled.div`
 `;
 
 export const Property = styled.p`
-  min-width: 120px;
+  min-width: 82px;
   font-weight: 500;
 `;
 
-export const Values = styled.div`
-  font-weight: 400;
-`;
+export const Values = styled.div``;
 
 export const EditInputBtn = styled.button`
   background: #fdf7f2;
   border-radius: 50%;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   margin-left: auto;
+  padding: 4px;
+  & svg {
+    fill: red;
+  }
 `;
 
 export const PhotoEditLabel = styled.label`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -25px;
   display: flex;
   justify-content: center;
   & img {
@@ -92,7 +99,7 @@ export const PhotoEdit = styled.input`
 `;
 
 export const EditInput = styled.input`
-  font-size: 18px;
+  font-size: inherit;
   line-height: 138%;
   align-items: center;
   background: #fdf7f2;
