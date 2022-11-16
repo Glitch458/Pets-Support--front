@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
+import Container from 'components/Container/Container';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from 'components/NoticesCategoriesList/NoticesCategoriesList';
 
-import { NoticesPageMain } from './NoticesPage.styled';
+import { NoticesPageMain, NoticePageContainer } from './NoticesPage.styled';
 
 const NoticesPage = () => {
   const { categoryName } = useParams();
   const [category, setCategory] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramFilter = searchParams.get('filter');
+  const location = useLocation();
 
   useEffect(() => {
     setCategory(categoryName);
@@ -19,15 +23,22 @@ const NoticesPage = () => {
     setCategory('sell');
   }
 
+  const handleSearch = value => {
+    setSearchParams(value !== '' ? { filter: value } : {});
+  };
+
   return (
-    <>
-      <NoticesSearch>Find your favorite pet</NoticesSearch>
-      <NoticesCategoriesNav />
-      <NoticesPageMain>
-        <Outlet />
-        <NoticesCategoriesList category={category} />
-      </NoticesPageMain>
-    </>
+    <NoticePageContainer>
+      <Container>
+        <NoticesSearch onSubmit={handleSearch} filter={paramFilter}>
+          Find your favorite pet
+        </NoticesSearch>
+        <NoticesCategoriesNav location={location} />
+        <NoticesPageMain>
+          <NoticesCategoriesList category={category} />
+        </NoticesPageMain>
+      </Container>
+    </NoticePageContainer>
   );
 };
 export default NoticesPage;

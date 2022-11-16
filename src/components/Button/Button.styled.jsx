@@ -4,37 +4,50 @@ export const ButtonStyles = `display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px 28px;
-  // width: ${p => (p.fullwidth ? '100%' : 'auto')};
-  font-family: ${p => p.theme.fonts.body};
   font-size: 14px;
-  font-weight: ${p => p.theme.fontWeights.medium};
   letter-spacing: 0.04em;
   line-height: 1.35;
   border: 2px solid #f59256;
   border-radius: 40px;
-  /* color: ${p =>
-    p.fullwidth ? p.theme.colors.accent : p.theme.colors.primaryText}; */
-  background-color: ${p => p.theme.colors.white};
   cursor: pointer;
-  &.active {
-    background-color: ${p => p.theme.colors.accent};
-    color: ${p => p.theme.colors.white};
-  }
-  `;
+   `;
+//Button
 
-//Category Button
-
-export const ButtonBasic = styled.a`
+export const ButtonBasic = styled.button`
   ${ButtonStyles};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-family: ${p => p.theme.fonts.body};
+  background-color: ${p => p.theme.colors.white};
   :hover:not(.active),
   :focus-visible:not(.active) {
     background-color: ${p => p.theme.colors.accent};
     color: ${p => p.theme.colors.white};
   }
+  &.active {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+  }
 `;
 
-//Add Button
-export const AddButtonCircleStyle = styled.a`
+//Category Link
+export const LinkBasic = styled.a`
+  ${ButtonStyles};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-family: ${p => p.theme.fonts.body};
+  background-color: ${p => p.theme.colors.white};
+  :hover:not(.active),
+  :focus-visible:not(.active) {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+  }
+  &.active {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+  }
+`;
+
+//Add Link
+export const AddLinkCircle = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,8 +64,12 @@ export const AddButtonCircleStyle = styled.a`
   line-height: 1.3;
   color: ${p => p.theme.colors.white};
   cursor: pointer;
+  :hover,
+  :focus-visible {
+    background-color: ${p => p.theme.colors.buttonAccent};
+  }
 `;
-export const AddButtonBasicStyle = styled.a`
+export const AddLinkBasic = styled.a`
   display: flex;
   align-items: center;
   border: none;
@@ -63,6 +80,12 @@ export const AddButtonBasicStyle = styled.a`
   background-color: transparent;
   color: ${p => p.theme.colors.black};
   cursor: pointer;
+  :hover,
+  :focus-visible {
+    div {
+      background-color: ${p => p.theme.colors.buttonAccent};
+    }
+  }
   div {
     display: flex;
     justify-content: center;

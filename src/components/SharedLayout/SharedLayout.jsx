@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import ContainerDivLogoNav from 'components/ContainerLogoNav/ContainerLogoNav';
 import { Nav } from 'components/Nav/Nav';
 import Logo from 'components/Logo/Logo';
 import Container from 'components/Container/Container';
@@ -12,17 +11,13 @@ const SharedLayout = () => {
     <>
       <Header>
         <Container>
-          <ContainerDivLogoNav>
-            <Logo></Logo>
-            <Nav></Nav>
-          </ContainerDivLogoNav>
+          <Logo />
+          <Nav />
         </Container>
       </Header>
-      <Container>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </Container>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

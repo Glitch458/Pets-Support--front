@@ -6,9 +6,9 @@ import {
   AddButton,
   NavLinkStyled,
 } from './NoticesCategoriesNav.styled';
-import { AddButtonCircle, AddButtonBasic } from '../Button/Button';
+import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
 
-const NoticesCategoriesNav = () => {
+const NoticesCategoriesNav = ({ location }) => {
   //const { token } = useSelector(state => state.user);
 
   const publicCategories = [
@@ -28,7 +28,8 @@ const NoticesCategoriesNav = () => {
         <CategoriesList>
           {publicCategories.map(item => (
             <NavLinkStyled
-              to={`/notices/${Object.values(item)}`}
+              to={`/notices/${Object.values(item)}${location.search}`}
+              state
               key={Object.keys(item)}
             >
               {Object.keys(item)}
@@ -49,9 +50,9 @@ const NoticesCategoriesNav = () => {
       </CategoriesButonContainer>
       <AddButton>
         {window.innerWidth <= 768 ? (
-          <AddButtonCircle>Add pet</AddButtonCircle>
+          <AddButtonCircleLink>Add pet</AddButtonCircleLink>
         ) : (
-          <AddButtonBasic>Add pet</AddButtonBasic>
+          <AddButtonLink>Add pet</AddButtonLink>
         )}
       </AddButton>
     </NoticesCategoriesNavContainer>

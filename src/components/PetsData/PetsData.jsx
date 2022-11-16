@@ -1,20 +1,27 @@
 import myPets from '../../data/myPets.json';
-import { AddButtonCircle } from 'components/Button/Button';
+import { AddButtonCircleLink } from 'components/Button/Button';
 import PetsList from './PetsList';
-import { Box, Container, Title, Text } from './PetsData.styled';
+import {
+  AddButton,
+  Container,
+  HeadPetsData,
+  Title,
+  Text,
+} from './PetsData.styled';
 
 export const PetsData = () => {
   return (
-    <>
-      <Container>
+    <Container>
+      <HeadPetsData>
         <Title>My Pets:</Title>
-        <Box>
+
+        <AddButton>
           <Text>Add pet</Text>
-          <AddButtonCircle />
-        </Box>
-      </Container>
+          <AddButtonCircleLink />
+        </AddButton>
+      </HeadPetsData>
       <PetsList data={myPets} />
-    </>
+    </Container>
   );
 };
 

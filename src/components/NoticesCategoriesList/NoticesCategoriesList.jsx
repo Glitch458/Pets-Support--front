@@ -1,6 +1,6 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ImgCover from 'images/pet-cover.jpg';
-import { Button } from 'components/Button/Button';
+import { ButtonLink } from 'components/Button/Button';
 
 import {
   NoticesCategoriesListContainer,
@@ -15,7 +15,6 @@ import {
 } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = ({ category }) => {
-  console.log(category);
   return (
     <NoticesCategoriesListContainer>
       <NoticesCategoriesListCard>
@@ -50,7 +49,7 @@ const NoticesCategoriesList = ({ category }) => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button>Learn more</Button>
+          <ButtonLink>Learn more</ButtonLink>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
@@ -85,7 +84,7 @@ const NoticesCategoriesList = ({ category }) => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button>Learn more</Button>
+          <ButtonLink>Learn more</ButtonLink>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
@@ -120,7 +119,7 @@ const NoticesCategoriesList = ({ category }) => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button>Learn more</Button>
+          <ButtonLink>Learn more</ButtonLink>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
@@ -155,7 +154,7 @@ const NoticesCategoriesList = ({ category }) => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button>Learn more</Button>
+          <ButtonLink>Learn more</ButtonLink>
         </ButtonContainer>
       </NoticesCategoriesListCard>
       <NoticesCategoriesListCard>
@@ -190,7 +189,7 @@ const NoticesCategoriesList = ({ category }) => {
           </DetailsItem>
         </DetailsList>
         <ButtonContainer>
-          <Button>Learn more</Button>
+          <ButtonLink>Learn more</ButtonLink>
         </ButtonContainer>
       </NoticesCategoriesListCard>
     </NoticesCategoriesListContainer>
