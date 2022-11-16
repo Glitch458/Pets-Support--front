@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { theme } from 'constants';
+
+export const NoticePageContainer = styled.div`
+  background-color: ${p => theme.colors.background};
+`;
 
 export const NoticesPageMain = styled.main`
   margin-top: 30px;

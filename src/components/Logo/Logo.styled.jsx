@@ -8,7 +8,6 @@ export const LogoStyle = styled.span`
   letter-spacing: 0.07em;
   font-family: ${p => p.theme.fonts.logo};
   color: ${p => p.theme.colors.black};
-  margin-top: 12px;
 `;
 
 export const LogoStyleLetter = styled(LogoStyle)`

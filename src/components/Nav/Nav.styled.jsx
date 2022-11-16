@@ -6,6 +6,14 @@ export const NavContainer = styled.nav`
   position: absolute;
   top: 25px;
   right: 25px;
+
+  @media screen and (min-width: 768px) {
+    top: 32px;
+    right: 37px;
+  }
+  @media screen and (min-width: 1280px) {
+    position: static;
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -30,8 +38,13 @@ export const NavLink = styled(Link)`
     text-decoration-thickness: 1px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1279px) {
     display: none;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-left: 80px;
+    padding: 0px;
   }
 `;
 
@@ -44,9 +57,10 @@ export const NavLinkExtends = styled(Link)`
   align-items: center;
   letter-spacing: 0.04em;
   text-decoration: none;
+  margin-top: 40px;
   padding: 10px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1280px) {
     display: none;
   }
 
@@ -57,8 +71,8 @@ export const NavLinkExtends = styled(Link)`
     text-decoration-thickness: 1px;
   }
 
-  &:not(:last-child) {
-    margin-bottom: 40px;
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    font-size: 48px;
   }
 `;
 
@@ -66,7 +80,7 @@ export const OpenLinksButton = styled.button`
   background: none;
   border: none;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1280px) {
     display: none;
   }
 `;
@@ -74,14 +88,19 @@ export const OpenLinksButton = styled.button`
 export const NavExtendedContainer = styled.div`
   position: fixed;
   left: 0px;
-  top: 64px;
+  top: 54px;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fdf7f2;
 
   @media screen and (min-width: 768px) {
+    top: 62px;
+  }
+
+  @media screen and (min-width: 1280px) {
     display: none;
   }
 `;

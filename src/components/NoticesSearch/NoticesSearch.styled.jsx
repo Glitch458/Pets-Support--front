@@ -4,12 +4,12 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 45px;
+  padding-top: 45px;
   @media screen and (min-width: 768px) {
-    margin-top: 95px;
+    padding-top: 95px;
   }
   @media screen and (min-width: 1280px) {
-    margin-top: 60px;
+    padding-top: 60px;
   }
 `;
 
