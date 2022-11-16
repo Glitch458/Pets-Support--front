@@ -15,7 +15,6 @@ import {
 } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = ({ category }) => {
-  console.log(category);
   return (
     <NoticesCategoriesListContainer>
       <NoticesCategoriesListCard>
