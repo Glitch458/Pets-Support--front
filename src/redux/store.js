@@ -19,17 +19,17 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistUserConfig = {
-  key: 'user',
-  version: 1,
+const persistAuthConfig = {
+  key: 'auth',
   storage,
+  whitelist: ['token'],
 };
 
-const persistedUserReducer = persistReducer(persistUserConfig, authReducer);
+const persistedUserReducer = persistReducer(persistAuthConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedUserReducer,
+    auth: persistedUserReducer,
     [authApi.reducerPath]: authApi.reducer,
     [noticesApi.reducerPath]: noticesApi.reducer,
     notices: noticesReducer,
