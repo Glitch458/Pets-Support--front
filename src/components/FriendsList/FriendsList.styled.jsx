@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { theme } from 'constants';
 
 export const List = styled.ul`
     display: grid;
     list-style:none;
     margin-top:40px;
-    
+
     @media screen and (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
          margin-top:45px;
@@ -17,12 +18,11 @@ export const List = styled.ul`
 `
 
 export const Title = styled.h2`
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
     text-align: center;
-    color: #000000;
+    color: ${p => theme.colors.black};
     margin-top:47px;
 
 @media screen and (min-width: 768px) {

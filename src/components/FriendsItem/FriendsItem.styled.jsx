@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+import { theme } from 'constants';
 
 export const TitleLink = styled.a`
 margin-bottom:12px;
-font-family: 'Manrope';
-font-style: normal;
 font-weight: 700;
 font-size: 12px;
 line-height: 16px;
-color: #F59256;
+color:${p => theme.colors.accent };
 text-align :center;
 @media screen and (min-width: 768px) {
 margin-bottom:16px;
@@ -17,10 +16,6 @@ font-size: 20px;
 line-height: 27px;
 }
 `
-
-// export const Info = styled.div`
-
-// `
 
 export const FriendCard = styled.div`
 display:flex;
@@ -67,7 +62,6 @@ line-height: 22px;
 `
 
 export const MapLink = styled.a`
-font-style: normal;
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;
@@ -103,10 +97,11 @@ align-items: center;
 margin-bottom:12px;
 width:280px;
 height:192px;
-background-color: #FFFFFF;
+background-color: ${p => theme.colors.white };
 box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
 border-radius: 20px;
-}
+padding:16px 10px 0 16px;
+
 @media screen and (min-width: 768px) {
 margin-right:32px;
 margin-bottom:32px;
@@ -117,6 +112,5 @@ border-radius: 40px;
 @media screen and (min-width: 1280px) {
 width:395px;
 height:287px;
-padding:16px 10px 0 16px;
 }
 `
