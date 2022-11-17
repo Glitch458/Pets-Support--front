@@ -2,17 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const NavContainer = styled.nav`
-  display: inline-flex;
-  position: absolute;
-  top: 25px;
-  right: 25px;
+  display: none;
 
-  @media screen and (min-width: 768px) {
-    top: 32px;
-    right: 37px;
-  }
   @media screen and (min-width: 1280px) {
-    position: static;
+    display: flex;
+    margin-left: 80px;
+    padding: 0px;
   }
 `;
 
@@ -36,15 +31,6 @@ export const NavLink = styled(Link)`
     color: #f59256;
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
-  }
-
-  @media screen and (max-width: 1279px) {
-    display: none;
-  }
-
-  @media screen and (min-width: 1280px) {
-    margin-left: 80px;
-    padding: 0px;
   }
 `;
 
@@ -77,10 +63,16 @@ export const NavLinkExtends = styled(Link)`
 `;
 
 export const OpenLinksButton = styled.button`
+  display: flex;
   background: none;
   border: none;
+  width: 40px;
+  height: 40px;
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (max-width: 768px) {
+  }
+
+  @media screen and (min-width: 769px) {
     display: none;
   }
 `;
@@ -97,7 +89,6 @@ export const NavExtendedContainer = styled.div`
   background: #fdf7f2;
 
   @media screen and (min-width: 768px) {
-    top: 62px;
   }
 
   @media screen and (min-width: 1280px) {
