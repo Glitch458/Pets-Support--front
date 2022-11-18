@@ -4,9 +4,9 @@ export const authApi = createApi({
   reducerPath: 'authApi',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pets-support.onrender.com',
+    baseUrl: 'https://pets-support.onrender.com/api',
     prepareHeaders: (headers, { getState }) => {
-      const { token = '' } = getState().user;
+      const { token = '' } = getState().auth;
 
       headers.set('Authorization', token);
 

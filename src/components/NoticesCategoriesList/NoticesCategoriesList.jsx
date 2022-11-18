@@ -3,8 +3,8 @@ import ImgCover from 'images/pet-cover.jpg';
 import { ButtonLink } from 'components/Button/Button';
 
 import {
-  NoticesCategoriesListContainer,
-  NoticesCategoriesListCard,
+  NoticesCategoriesContainerList,
+  NoticesCategoriesItem,
   Img,
   Title,
   DetailsList,
@@ -14,185 +14,47 @@ import {
   ButtonLike,
 } from './NoticesCategoriesList.styled';
 
-const NoticesCategoriesList = ({ category }) => {
+const NoticesCategoriesList = ({ data }) => {
   return (
-    <NoticesCategoriesListContainer>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike>
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike type="button">
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike type="button">
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a homeCute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike type="button">
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike type="button">
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-    </NoticesCategoriesListContainer>
+    <NoticesCategoriesContainerList>
+      {data.map(item => (
+        <NoticesCategoriesItem key={item._id}>
+          <CategoryName>{item.category}</CategoryName>
+          <ButtonLike type="button">
+            <FavoriteBorderIcon
+              sx={{
+                width: 28,
+                height: 28,
+                color: '#F59256',
+              }}
+            />
+          </ButtonLike>
+          <Img src={ImgCover} alt="" />
+          <Title>{item.title}</Title>
+          <DetailsList>
+            <DetailsItem key={item.breed}>
+              <span>Breed:</span>
+              {item.breed}
+            </DetailsItem>
+            <DetailsItem key={item.place}>
+              <span>Place:</span>
+              {item.place}
+            </DetailsItem>
+            <DetailsItem key={data.birthday}>
+              <span>Age:</span>
+              {data.birthday}
+            </DetailsItem>
+            <DetailsItem key="id4">
+              <span>Price:</span>
+              50$
+            </DetailsItem>
+          </DetailsList>
+          <ButtonContainer>
+            <ButtonLink>Learn more</ButtonLink>
+          </ButtonContainer>
+        </NoticesCategoriesItem>
+      ))}
+    </NoticesCategoriesContainerList>
   );
 };
 export default NoticesCategoriesList;
