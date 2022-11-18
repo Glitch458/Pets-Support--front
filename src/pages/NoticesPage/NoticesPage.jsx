@@ -8,20 +8,26 @@ import NoticesCategoriesList from 'components/NoticesCategoriesList/NoticesCateg
 
 import { NoticesPageMain, NoticePageContainer } from './NoticesPage.styled';
 
+import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
+
 const NoticesPage = () => {
   const { categoryName } = useParams();
-  const [category, setCategory] = useState('');
+  //const [category, setCategory] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const paramFilter = searchParams.get('filter');
   const location = useLocation();
+  const {
+    data = [],
+    isFetching,
+    isError,
+  } = useGetNoticesByCategoryQuery(categoryName, {
+    skip: categoryName === '',
+  });
 
   useEffect(() => {
-    setCategory(categoryName);
-  }, [categoryName]);
-
-  if (!category) {
-    setCategory('sell');
-  }
+    //setCategory(categoryName);
+    //console.log(data);
+  }, [data]);
 
   const handleSearch = value => {
     setSearchParams(value !== '' ? { filter: value } : {});
@@ -35,7 +41,19 @@ const NoticesPage = () => {
         </NoticesSearch>
         <NoticesCategoriesNav location={location} />
         <NoticesPageMain>
-          <NoticesCategoriesList category={category} />
+          {isFetching && <h2>Loading ....</h2>}
+
+          {!isFetching && data.length === 0 && (
+            <h2>Category {categoryName} is empty </h2>
+          )}
+
+          {!isFetching && isError && (
+            <h2>Sorry, an error occurred. Please try again later</h2>
+          )}
+
+          {data && !isFetching && !isError && (
+            <NoticesCategoriesList data={data} />
+          )}
         </NoticesPageMain>
       </Container>
     </NoticePageContainer>
