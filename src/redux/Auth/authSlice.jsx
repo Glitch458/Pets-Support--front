@@ -8,7 +8,7 @@ const initialState = {
   token: '',
 };
 
-export const filterSlice = createSlice({
+export const authSlice = createSlice({
   name: 'authReducer',
   initialState,
   reducers: {},
@@ -68,4 +68,4 @@ export const filterSlice = createSlice({
   },
 });
 
-export default filterSlice.reducer;
+export default authSlice.reducer;
