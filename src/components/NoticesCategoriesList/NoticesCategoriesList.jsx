@@ -5,8 +5,8 @@ import { useState } from "react";
 import { ModalNotice } from "../ModalNotice/ModatNotice";
 
 import {
-  NoticesCategoriesListContainer,
-  NoticesCategoriesListCard,
+  NoticesCategoriesContainerList,
+  NoticesCategoriesItem,
   Img,
   Title,
   DetailsList,
@@ -16,7 +16,8 @@ import {
   ButtonLike,
 } from './NoticesCategoriesList.styled';
 
-const NoticesCategoriesList = ({ category }) => {
+const NoticesCategoriesList = ({ data }) => {
+
   // console.log(category);
   const [detailed, setDetailed] = useState(false);
 
@@ -25,48 +26,48 @@ const NoticesCategoriesList = ({ category }) => {
       return !prev;
     });
   };
-
+  
   return (
-    <>
-    <NoticesCategoriesListContainer>
-      <NoticesCategoriesListCard>
-        <CategoryName>in good hands</CategoryName>
-        <ButtonLike>
-          <FavoriteBorderIcon
-            sx={{
-              width: 28,
-              height: 28,
-              color: '#F59256',
-            }}
-          />
-        </ButtonLike>
-        <Img src={ImgCover} alt="" />
-        <Title>Cute dog looking for a home</Title>
-        <DetailsList>
-          <DetailsItem key="id1">
-            <span>Breed:</span>
-            Pomeranian
-          </DetailsItem>
-          <DetailsItem key="id2">
-            <span>Place:</span>
-            Lviv
-          </DetailsItem>
-          <DetailsItem key="id3">
-            <span>Age:</span>
-            one year
-          </DetailsItem>
-          <DetailsItem key="id4">
-            <span>Price:</span>
-            50$
-          </DetailsItem>
-        </DetailsList>
-        <ButtonContainer>
-          <ButtonLink onClick ={toggleModal}>Learn more</ButtonLink>
-        </ButtonContainer>
-      </NoticesCategoriesListCard>
-    </NoticesCategoriesListContainer>
-    { detailed && <ModalNotice toggleModal={toggleModal} /> }
-  </>
+    <NoticesCategoriesContainerList>
+      {data.map(item => (
+        <NoticesCategoriesItem key={item._id}>
+          <CategoryName>{item.category}</CategoryName>
+          <ButtonLike type="button">
+            <FavoriteBorderIcon
+              sx={{
+                width: 28,
+                height: 28,
+                color: '#F59256',
+              }}
+            />
+          </ButtonLike>
+          <Img src={ImgCover} alt="" />
+          <Title>{item.title}</Title>
+          <DetailsList>
+            <DetailsItem key={item.breed}>
+              <span>Breed:</span>
+              {item.breed}
+            </DetailsItem>
+            <DetailsItem key={item.place}>
+              <span>Place:</span>
+              {item.place}
+            </DetailsItem>
+            <DetailsItem key={data.birthday}>
+              <span>Age:</span>
+              {data.birthday}
+            </DetailsItem>
+            <DetailsItem key="id4">
+              <span>Price:</span>
+              50$
+            </DetailsItem>
+          </DetailsList>
+          <ButtonContainer>
+            <ButtonLink onClick ={toggleModal}>Learn more</ButtonLink>
+          </ButtonContainer>
+        </NoticesCategoriesItem>
+      ))}
+    </NoticesCategoriesContainerList>
   );
 };
+
 export default NoticesCategoriesList;

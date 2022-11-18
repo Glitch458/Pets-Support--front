@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NoticesCategoriesListContainer = styled.ul`
+export const NoticesCategoriesContainerList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -12,7 +12,7 @@ export const NoticesCategoriesListContainer = styled.ul`
     margin: -8px;
   }
 `;
-export const NoticesCategoriesListCard = styled.li`
+export const NoticesCategoriesItem = styled.li`
   position: relative;
   margin: 0 0 30px 0;
   padding: 0;

@@ -14,11 +14,11 @@ const NoticesCategoriesNav = ({ location }) => {
   const publicCategories = [
     { sell: 'sell' },
     { 'lost/found': 'lost-found' },
-    { 'in godod hands': 'for-free' },
+    { 'in good hands': 'for-free' },
   ];
   const privateCategories = [
     { 'Favorite ads': 'favorite' },
-    { 'My adds': 'own' },
+    { 'My ads': 'own' },
   ];
   const token = 'token';
 
@@ -40,7 +40,7 @@ const NoticesCategoriesNav = ({ location }) => {
           {token &&
             privateCategories.map(item => (
               <NavLinkStyled
-                to={`/notices/${Object.values(item)}`}
+                to={`/notices/${Object.values(item)}${location.search}`}
                 key={Object.keys(item)}
               >
                 {Object.keys(item)}
