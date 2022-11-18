@@ -8,7 +8,7 @@ import {
 } from './NoticesCategoriesNav.styled';
 import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
 
-const NoticesCategoriesNav = () => {
+const NoticesCategoriesNav = ({ location }) => {
   //const { token } = useSelector(state => state.user);
 
   const publicCategories = [
@@ -28,7 +28,8 @@ const NoticesCategoriesNav = () => {
         <CategoriesList>
           {publicCategories.map(item => (
             <NavLinkStyled
-              to={`/notices/${Object.values(item)}`}
+              to={`/notices/${Object.values(item)}${location.search}`}
+              state
               key={Object.keys(item)}
             >
               {Object.keys(item)}
