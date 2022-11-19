@@ -9,7 +9,7 @@ import {
   TextWrapper,
   List,
 } from './FriendsItem.styled';
-import { TimeTable } from './TimeTable';
+// import { TimeTable } from './TimeTable';
 import defaultImage from '../../images/defaultImage.jpg';
 
 export const FriendsItem = ({
