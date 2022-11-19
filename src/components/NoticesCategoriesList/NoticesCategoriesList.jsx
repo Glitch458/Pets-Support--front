@@ -61,7 +61,7 @@ const NoticesCategoriesList = ({ data }) => {
             </DetailsItem>
           </DetailsList>
           <ButtonContainer>
-            <ButtonLink onClick={toggleModal}>Learn more</ButtonLink>
+            <ButtonLink /*onClick={toggleModal}*/>Learn more</ButtonLink>
           </ButtonContainer>
         </NoticesCategoriesItem>
       ))}
