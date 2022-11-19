@@ -1,13 +1,13 @@
 import NoticesSearch from "components/NoticesSearch/NoticesSearch";
 import { NewsList } from "components/NewsList/NewsList";
-import { PageWrapper } from "./NewsPage.styled";
+import Container from "components/Container/Container";
 
 const NewsPage = () => {   
     return (
-        <PageWrapper>
-            <NoticesSearch>News</NoticesSearch> 
-            <NewsList></NewsList>  
-        </PageWrapper>
+        <Container>
+                <NoticesSearch>News</NoticesSearch> 
+                <NewsList/> 
+        </Container>
     )
 };
 

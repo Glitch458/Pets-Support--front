@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { theme } from 'constants';
 
 export const TitleLink = styled.a`
 margin-bottom:12px;
 font-weight: 700;
 font-size: 12px;
 line-height: 16px;
-color:${p => theme.colors.accent };
+color:${p => p.theme.colors.accent };
 text-align :center;
 @media screen and (min-width: 768px) {
 margin-bottom:16px;
@@ -23,14 +22,20 @@ flex-direction:row;
 align-items:center;
 `
 
-export const Time = styled.p`
-font-style: normal;
+export const Time = styled.button`
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;
 display: flex;
 align-items: center;
-margin-bottom:12px;
+padding: 0;
+cursor:pointer;
+border:none;
+background-color:inherit;
+:hover,
+:focus{
+  color:${p=>p.theme.colors.accent}
+}
 
 @media screen and (min-width: 768px) {
 font-size: 14px;
@@ -43,13 +48,9 @@ line-height: 22px;
 `
 
 export const Text = styled.p`
-font-style: normal;
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;
-display: flex;
-align-items: center;
-margin-bottom:12px;
 
 @media screen and (min-width: 768px) {
 font-size: 14px;
@@ -61,13 +62,22 @@ line-height: 22px;
 }
 `
 
-export const MapLink = styled.a`
+export const TextWrapper = styled.li`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+margin-bottom:12px;
+`
+
+export const Link = styled.a`
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;
-display: flex;
-align-items: center;
-margin-bottom:12px;
+:hover,
+:focus{
+  color:${p=>p.theme.colors.accent}
+}
+
 @media screen and (min-width: 768px) {
 font-size: 14px;
 line-height: 19px;
@@ -95,22 +105,24 @@ display: flex;
 flex-direction: column;
 align-items: center;
 margin-bottom:12px;
-width:280px;
-height:192px;
-background-color: ${p => theme.colors.white };
+background-color: ${p => p.theme.colors.white };
 box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
 border-radius: 20px;
-padding:16px 10px 0 16px;
+padding:16px 10px;
 
 @media screen and (min-width: 768px) {
 margin-right:32px;
 margin-bottom:32px;
-width:336px;
-height:246px;
 border-radius: 40px;
 }
 @media screen and (min-width: 1280px) {
-width:395px;
-height:287px;
+max-width:395px
 }
+`
+
+export const List = styled.ul`
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+justify-content:center;
 `

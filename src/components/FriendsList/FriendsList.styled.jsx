@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from 'constants';
 
 export const List = styled.ul`
     display: grid;
@@ -9,11 +8,13 @@ export const List = styled.ul`
     @media screen and (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
          margin-top:45px;
+         margin-right:-32px;
+         margin-bottom:-32px;
     }
     @media screen and (min-width: 1280px) {
         grid-template-columns: 1fr 1fr 1fr;
         margin-top:60px;
-        margin-right:-32px
+        
     }
 `
 
@@ -22,7 +23,7 @@ export const Title = styled.h2`
     font-size: 24px;
     line-height: 33px;
     text-align: center;
-    color: ${p => theme.colors.black};
+    color: ${p => p.theme.colors.black};
     margin-top:47px;
 
 @media screen and (min-width: 768px) {
