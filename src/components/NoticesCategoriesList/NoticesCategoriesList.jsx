@@ -1,6 +1,8 @@
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ImgCover from 'images/pet-cover.jpg';
-import { ButtonLink } from 'components/Button/Button';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ImgCover from "images/pet-cover.jpg";
+import { ButtonLink } from "components/Button/Button";
+// import { useState } from "react";
+// import { ModalNotice } from "../ModalNotice/ModatNotice";
 
 import {
   NoticesCategoriesContainerList,
@@ -12,12 +14,21 @@ import {
   ButtonContainer,
   CategoryName,
   ButtonLike,
-} from './NoticesCategoriesList.styled';
+} from "./NoticesCategoriesList.styled";
 
 const NoticesCategoriesList = ({ data }) => {
+  // console.log(category);
+  // const [detailed, setDetailed] = useState(false);
+
+  // const toggleModal = () => {
+  //   setDetailed((prev) => {
+  //     return !prev;
+  //   });
+  // };
+
   return (
     <NoticesCategoriesContainerList>
-      {data.map(item => (
+      {data.map((item) => (
         <NoticesCategoriesItem key={item._id}>
           <CategoryName>{item.category}</CategoryName>
           <ButtonLike type="button">
@@ -25,7 +36,7 @@ const NoticesCategoriesList = ({ data }) => {
               sx={{
                 width: 28,
                 height: 28,
-                color: '#F59256',
+                color: "#F59256",
               }}
             />
           </ButtonLike>
@@ -50,11 +61,12 @@ const NoticesCategoriesList = ({ data }) => {
             </DetailsItem>
           </DetailsList>
           <ButtonContainer>
-            <ButtonLink>Learn more</ButtonLink>
+            <ButtonLink /*onClick={toggleModal}*/>Learn more</ButtonLink>
           </ButtonContainer>
         </NoticesCategoriesItem>
       ))}
     </NoticesCategoriesContainerList>
   );
 };
+
 export default NoticesCategoriesList;

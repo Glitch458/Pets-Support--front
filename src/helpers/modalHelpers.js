@@ -1,20 +1,20 @@
-export const handleBackdropClick = (e, toggleModal) => {
-  if (e.target !== e.currentTarget) {
-    console.log('нажали в backDrop, нужно закрыть модалку');
-  }
-  // toggleModal();
+export const handleBackdropClick = (e, close) => {
+    if (e.target === e.currentTarget) {
+        return;
+    }
+    close();
 };
 
-export const handleKeyDown = toggleModal => {
-  // const handleEscDown = e => {
-  //   if (e.code === 'Escape') {
-  //     console.log('нажали ESC, нужно закрыть модалку');
-  //   }
-  // toggleModal();
-  // };
-  // window.addEventListener('keydown', handleEscDown);
-  // const clean = () => {
-  //   window.removeEventListener('keydown', handleEscDown);
-  // };
-  // return clean;
-};
+export const handleEscClick = (closeModal) => {
+    const handleCloseOnEsc = e => {
+        if (e.code !== 'Escape') {
+            return;
+        }
+        closeModal();
+    };
+
+    window.addEventListener('keydown', handleCloseOnEsc);
+    return () => {
+        window.removeEventListener('keydown', handleCloseOnEsc);
+    }
+}
