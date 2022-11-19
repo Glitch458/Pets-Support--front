@@ -24,6 +24,7 @@ export const FriendsList = () => {
             workDays={workDays}
             phone={phone}
             email={email} />)}
-    </List></>
+            </List>
+        </>
     )
 }

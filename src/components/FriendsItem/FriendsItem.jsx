@@ -1,13 +1,15 @@
-// import { workDaysCard } from "./workDaysCard"
 import {
   TitleLink,
   FriendCard,
   Time,
   Text,
-  MapLink,
+  Link,
   Img,
   SponsorItem,
+  TextWrapper,
+  List,
 } from './FriendsItem.styled';
+// import { TimeTable } from './TimeTable';
 import defaultImage from '../../images/defaultImage.jpg';
 
 export const FriendsItem = ({
@@ -20,23 +22,40 @@ export const FriendsItem = ({
   phone,
   email,
 }) => {
+
+  // const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+  // const newWorkDays = workDays.map((day, index) => day.isOpen && { day: week[index], ...day });
+  
   return (
     <SponsorItem>
       <TitleLink href={siteUrl}>{title}</TitleLink>
       <FriendCard>
         <Img src={imageUrl ?? defaultImage} alt={title} />
-        <div>
-          <Time>Time: </Time>
-          <MapLink href={mapUrl}>
-            Adress: {adress ?? '------------------'}
-          </MapLink>
-          <Text>
-            Email: <p>{email ?? '------------------'}</p>
-          </Text>
-          <Text>
-            Phone: <p>{phone ?? '+38(0XX)XXXXXXX'}</p>
-          </Text>
-        </div>
+        <List>
+           <TextWrapper>
+          {(workDays === null || workDays === undefined)
+            ? <Time>Time: дані відсутні</Time>
+            : <><Time>
+                Time:{workDays[0].from}-{workDays[0].to}
+              </Time>
+                {/* <TimeTable shedule={newWorkDays} /> */}
+              </>
+            }
+            
+          </TextWrapper>
+          <TextWrapper >
+            <Text>Adress:</Text>
+            <Link href={mapUrl}>{adress ?? 'дані відсутні'}</Link>
+          </TextWrapper>
+          <TextWrapper>
+            <Text>Email:</Text>
+            <Link href={email}>{email ?? 'дані відсутні'}</Link>
+          </TextWrapper>
+          <TextWrapper>
+            <Text>Phone:</Text>
+            <Link href={phone}>{phone ?? 'дані відсутні'}</Link>
+          </TextWrapper>
+        </List>
       </FriendCard>
     </SponsorItem>
   );

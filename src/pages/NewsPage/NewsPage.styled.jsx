@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { theme } from 'constants';
 
 export const PageWrapper = styled.div`
-background-color:${p => theme.colors.background };
-`
-
+  background-color: ${p => p.theme.colors.background};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
