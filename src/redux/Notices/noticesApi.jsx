@@ -1,19 +1,19 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const noticesApi = createApi({
-  reducerPath: 'noticesApi',
+  reducerPath: "noticesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api',
+    baseUrl: "https://pets-support.onrender.com/api",
     prepareHeaders: (headers, { getState }) => {
-      const { token = '' } = getState().auth;
+      const { token = "" } = getState().auth;
 
-      headers.set('Authorization', token);
+      headers.set("Authorization", token);
 
       return headers;
     },
   }),
-  tagTypes: ['Notices'],
-  endpoints: builder => ({
+  tagTypes: ["Notices"],
+  endpoints: (builder) => ({
     // //useGetNoticesQuery
     // getNotices: builder.query({
     //   query: () => `/`,
@@ -21,19 +21,19 @@ export const noticesApi = createApi({
     // }),
     //useGetNoticesByCategoryQuery
     getNoticesByCategory: builder.query({
-      query: categoryName => ({
+      query: (categoryName) => ({
         url: `/notices/${categoryName}`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Notices'],
+      providesTags: ["Notices"],
     }),
     //useGetNoticesByIdQuery
     getNoticesById: builder.query({
-      query: noticeId => ({
+      query: (noticeId) => ({
         url: `/notices/id/${noticeId}`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Notices'],
+      providesTags: ["Notices"],
     }),
     //useAddNoticesMutation
     // addNotices: builder.mutation({

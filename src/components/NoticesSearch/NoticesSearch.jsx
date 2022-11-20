@@ -10,15 +10,15 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const NoticesSearch = ({ children, onSubmit, filter }) => {
+const NoticesSearch = ({ children, onSubmit, search }) => {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    if (filter) {
-      setValue(filter);
+    if (search) {
+      setValue(search);
     }
-  }, [filter]);
-  
+  }, [search]);
+
   const handeInputChange = e => {
     setValue(e.target.value);
   };
