@@ -15,9 +15,11 @@ export const noticesSlice = createSlice({
     // addItems: (state, { payload }) => {
     //   state.items = [...state.items, payload];
     // },
+    renewItems: (state, { payload }) => {
+      state.items = payload;
+    },
   },
   extraReducers: builder => {
-    //getNotices
     builder.addMatcher(
       noticesApi.endpoints.getNoticesByCategory.matchFulfilled,
       (state, { payload }) => {
@@ -40,6 +42,6 @@ export const noticesSlice = createSlice({
   },
 });
 
-export const { removeItems, addItems } = noticesSlice.actions;
+export const { renewItems } = noticesSlice.actions;
 
 export default noticesSlice.reducer;
