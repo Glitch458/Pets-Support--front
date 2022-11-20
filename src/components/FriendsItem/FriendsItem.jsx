@@ -1,10 +1,11 @@
 import { useState } from 'react';
+
 import {
-  TitleLink,
+  SponsorLink,
   FriendCard,
   Time,
   Text,
-  Link,
+  Adress,
   Img,
   SponsorItem,
   TextWrapper,
@@ -33,13 +34,13 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
       
   return (
     <SponsorItem>
-      <TitleLink href={siteUrl}>{title}</TitleLink>
+      <SponsorLink href={siteUrl}>{title}</SponsorLink>
       <FriendCard>
         <Img src={imageUrl ?? defaultImage} alt={title} />
         <List>
           <TextWrapper
             onClick={() => { setIsVisible(!isVisible) }}
-            onMouseLeave={() => { setIsVisible(true) }}>
+            onMouseLeave={() => {setTimeout(()=>{setIsVisible(true)}, 1000)}}>
             
           {(workDays === null || workDays === undefined)
             ? <Time>Time: дані відсутні</Time>
@@ -50,15 +51,21 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
           </TextWrapper>
           <TextWrapper >
             <Text>Adress:</Text>
-            <Link href={mapUrl}>{adress ?? 'дані відсутні'}</Link>
+            {mapUrl
+              ? <Adress href={mapUrl}>{adress}</Adress>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Email:</Text>
-            <Link href={email}>{email ?? 'дані відсутні'}</Link>
+            {email
+              ? <Text>{email}</Text>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Phone:</Text>
-            <Link href={phone}>{phone ?? 'дані відсутні'}</Link>
+            {phone
+              ? <Text>{phone}</Text>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
         </List>
       </FriendCard>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TitleLink = styled.a`
+export const SponsorLink = styled.a`
 margin-bottom:12px;
 font-weight: 700;
 font-size: 12px;
@@ -32,8 +32,11 @@ padding: 0;
 cursor:pointer;
 border:none;
 background-color:inherit;
-:hover,
-:focus{
+ &.active {
+    color: ${p => p.theme.colors.accent};
+  }
+:hover:not(.active),
+:focus-visible:not(.active){
   color:${p=>p.theme.colors.accent}
 }
 
@@ -69,7 +72,7 @@ align-items: flex-start;
 margin-bottom:12px;
 `
 
-export const Link = styled.a`
+export const Adress = styled.a`
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;

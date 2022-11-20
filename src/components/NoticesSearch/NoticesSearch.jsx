@@ -18,7 +18,7 @@ const NoticesSearch = ({ children, onSubmit, filter }) => {
       setValue(filter);
     }
   }, [filter]);
-
+  
   const handeInputChange = e => {
     setValue(e.target.value);
   };
