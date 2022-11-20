@@ -125,4 +125,27 @@ display:flex;
 flex-direction:column;
 align-items:flex-start;
 justify-content:center;
+position:relative;
+`
+
+export const TimeList = styled.ul`
+position: absolute;
+top: 25px;
+left: 0;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+background-color: white;
+border:${p => `2px solid ${p.theme.colors.accent}`};
+box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+border-radius: 8px;
+padding:12px;
+margin-bottom:-4px;
+`
+
+export const TimeItem = styled.li`
+margin-bottom:4px;
 `

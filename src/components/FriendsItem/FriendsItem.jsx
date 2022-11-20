@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   TitleLink,
   FriendCard,
@@ -9,7 +10,7 @@ import {
   TextWrapper,
   List,
 } from './FriendsItem.styled';
-// import { TimeTable } from './TimeTable';
+import { TimeTable } from './TimeTable';
 import defaultImage from '../../images/defaultImage.jpg';
 
 export const FriendsItem = ({
@@ -23,25 +24,29 @@ export const FriendsItem = ({
   email,
 }) => {
 
-  // const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  // const newWorkDays = workDays.map((day, index) => day.isOpen && { day: week[index], ...day });
-  
+const [isVisible, setIsVisible] = useState(true);
+
+const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+const newWorkDays =  workDays && workDays.map((day, index) => {
+    return { day: week[index], ...day }
+  });
+      
   return (
     <SponsorItem>
       <TitleLink href={siteUrl}>{title}</TitleLink>
       <FriendCard>
         <Img src={imageUrl ?? defaultImage} alt={title} />
         <List>
-           <TextWrapper>
+          <TextWrapper
+            onClick={() => { setIsVisible(!isVisible) }}
+            onMouseLeave={() => { setIsVisible(true) }}>
+            
           {(workDays === null || workDays === undefined)
             ? <Time>Time: дані відсутні</Time>
-            : <><Time>
-                Time:{workDays[0].from}-{workDays[0].to}
-              </Time>
-                {/* <TimeTable shedule={newWorkDays} /> */}
-              </>
-            }
-            
+            : <>
+            <Time>Time:{workDays[0].from}-{workDays[0].to}</Time>
+            {isVisible || <TimeTable shedule={newWorkDays}/>}
+            </>} 
           </TextWrapper>
           <TextWrapper >
             <Text>Adress:</Text>

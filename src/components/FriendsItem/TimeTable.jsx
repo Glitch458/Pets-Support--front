@@ -1,9 +1,11 @@
+import { TimeList, TimeItem } from "./FriendsItem.styled";
 
-
-export const TimeTable = ({shedule}) => {
-    // console.log({ shedule })
-    // return (<ul>
-    //     {shedule && shedule.map(item => <li>{item.day} : {item.from}-{ item.to}</li>)}
-    //     </ul>
-    // )
+export const TimeTable = ({ shedule }) => {
+    return (<TimeList>
+        {shedule.map(item => <TimeItem>
+            <p>{item.day} : 
+            {item.from}-{item.to}</p>
+        </TimeItem>)}
+        </TimeList>
+    )
 }
