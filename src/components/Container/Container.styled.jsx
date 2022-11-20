@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ContainerDiv = styled.div`
   margin-right: auto;
   margin-left: auto;
-  background-color:${p=>p.theme.colors.background};
 
   @media screen and (max-width: 319px) {
     padding: 0 10px;
