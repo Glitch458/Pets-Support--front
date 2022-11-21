@@ -1,15 +1,17 @@
+import { useState } from 'react';
+
 import {
-  TitleLink,
+  SponsorLink,
   FriendCard,
   Time,
   Text,
-  Link,
+  Adress,
   Img,
   SponsorItem,
   TextWrapper,
   List,
 } from './FriendsItem.styled';
-// import { TimeTable } from './TimeTable';
+import { TimeTable } from './TimeTable';
 import defaultImage from '../../images/defaultImage.jpg';
 
 export const FriendsItem = ({
@@ -23,37 +25,47 @@ export const FriendsItem = ({
   email,
 }) => {
 
-  // const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  // const newWorkDays = workDays.map((day, index) => day.isOpen && { day: week[index], ...day });
-  
+const [isVisible, setIsVisible] = useState(true);
+
+const week = ['MN', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+const newWorkDays =  workDays && workDays.map((day, index) => {
+    return { day: week[index], ...day }
+  });
+      
   return (
     <SponsorItem>
-      <TitleLink href={siteUrl}>{title}</TitleLink>
+      <SponsorLink href={siteUrl}>{title}</SponsorLink>
       <FriendCard>
         <Img src={imageUrl ?? defaultImage} alt={title} />
         <List>
-           <TextWrapper>
+          <TextWrapper
+            onClick={() => { setIsVisible(!isVisible) }}
+            onMouseLeave={() => {setTimeout(()=>{setIsVisible(true)}, 1000)}}>
+            
           {(workDays === null || workDays === undefined)
             ? <Time>Time: дані відсутні</Time>
-            : <><Time>
-                Time:{workDays[0].from}-{workDays[0].to}
-              </Time>
-                {/* <TimeTable shedule={newWorkDays} /> */}
-              </>
-            }
-            
+            : <>
+            <Time>Time:{workDays[0].from}-{workDays[0].to}</Time>
+            {isVisible || <TimeTable shedule={newWorkDays}/>}
+            </>} 
           </TextWrapper>
           <TextWrapper >
             <Text>Adress:</Text>
-            <Link href={mapUrl}>{adress ?? 'дані відсутні'}</Link>
+            {mapUrl
+              ? <Adress href={mapUrl}>{adress}</Adress>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Email:</Text>
-            <Link href={email}>{email ?? 'дані відсутні'}</Link>
+            {email
+              ? <Text>{email}</Text>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Phone:</Text>
-            <Link href={phone}>{phone ?? 'дані відсутні'}</Link>
+            {phone
+              ? <Text>{phone}</Text>
+              : <Text>дані відсутні</Text>}
           </TextWrapper>
         </List>
       </FriendCard>
