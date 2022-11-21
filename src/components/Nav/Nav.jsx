@@ -1,36 +1,61 @@
 import React, { useState } from 'react';
-import burger from 'images/icons/burgerIcon.png';
+import burger from 'images/icons/burger.svg';
 import {
   NavContainer,
   NavLink,
   OpenLinksButton,
   NavExtendedContainer,
   NavLinkExtends,
+  AuthNavExtendedContainer,
 } from './Nav.styled';
+import { AuthNav } from '../AuthNav/AuthNav';
 
 export const Nav = () => {
   const [extendNav, setExtendNav] = useState(false);
 
-  return (
-    <NavContainer extendNav={extendNav}>
-      <NavLink to="/news">News</NavLink>
-      <NavLink to="/notices/sell">Find pet</NavLink>
-      <NavLink to="/friends">Our friend</NavLink>
+  const NavLinkExtendedArray = [
+    { href: '/news', title: 'News' },
+    { href: '/notices/sell', title: 'Find pet' },
+    { href: '/friends', title: 'Our friend' },
+  ];
 
-      <OpenLinksButton
-        onClick={() => {
-          setExtendNav(curr => !curr);
-        }}
-      >
-        {extendNav ? <img src={burger} alt="" /> : <img src={burger} alt="" />}
-      </OpenLinksButton>
-      {extendNav && (
-        <NavExtendedContainer>
-          <NavLinkExtends to="/news">News</NavLinkExtends>
-          <NavLinkExtends to="/notices/sell">Find pet</NavLinkExtends>
-          <NavLinkExtends to="/friends">Our friends</NavLinkExtends>
-        </NavExtendedContainer>
-      )}
-    </NavContainer>
+  return (
+    <>
+      <NavContainer extendNav={extendNav}>
+        <NavLink to="/news">News</NavLink>
+        <NavLink to="/notices/sell">Find pet</NavLink>
+        <NavLink to="/friends">Our friend</NavLink>
+        <OpenLinksButton
+          onClick={() => {
+            setExtendNav(curr => !curr);
+          }}
+        >
+          {extendNav ? (
+            <img src={burger} alt="burger" />
+          ) : (
+            <img src={burger} alt="burger" />
+          )}
+        </OpenLinksButton>
+        {extendNav && (
+          <NavExtendedContainer>
+            <AuthNavExtendedContainer>
+              <AuthNav></AuthNav>
+            </AuthNavExtendedContainer>
+            {NavLinkExtendedArray.map(({ href, title }) => {
+              return (
+                <NavLinkExtends
+                  onClick={() => setExtendNav(false)}
+                  to={href}
+                  key={href}
+                >
+                  {title}
+                </NavLinkExtends>
+              );
+            })}
+          </NavExtendedContainer>
+        )}
+      </NavContainer>
+      {!extendNav && <AuthNav />}
+    </>
   );
 };
