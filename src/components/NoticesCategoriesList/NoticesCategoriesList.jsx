@@ -3,7 +3,7 @@ import ImgCover from 'images/pet-cover.jpg';
 import { ButtonLink } from 'components/Button/Button';
 import { useState } from 'react';
 import { ModalNotice } from '../ModalNotice/ModatNotice';
-import { HeartButton } from '../Button/HeartButton/HeartButton';
+// import { HeartButton } from '../Button/HeartButton/HeartButton';
 
 import {
   NoticesCategoriesContainerList,
@@ -27,7 +27,7 @@ const NoticesCategoriesList = ({ data }) => {
   };
 
   const imgPath = url => {
-    return url ? `https://pets-support.onrender.com/pets/${url}` : ImgCover;
+    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
   };
 
   const age = date => {
