@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HeartButton } from "components/Button/HeartButton/HeartButton";
+import { HeartButton } from 'components/Button/HeartButton/HeartButton';
 
 export const NoticesCategoriesContainerList = styled.ul`
   display: flex;
@@ -14,7 +14,7 @@ export const NoticesCategoriesContainerList = styled.ul`
   }
 `;
 export const NoticesCategoriesItem = styled.li`
-  position: relative;
+  //position: relative;
   margin: 0 0 30px 0;
   padding: 0;
   list-style-type: none;
@@ -67,8 +67,14 @@ export const DetailsItem = styled.li`
   }
 `;
 export const ButtonContainer = styled.div`
-  padding: 0 45px 30px 45px;
+  padding: 0 15px 30px 15px;
   color: ${p => p.theme.colors.accent};
+  @media screen and (min-width: 768px) {
+    padding: 0 45px 30px 45px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding: 0 20px 30px 20px;
+  }
 `;
 export const CategoryName = styled.div`
   position: absolute;

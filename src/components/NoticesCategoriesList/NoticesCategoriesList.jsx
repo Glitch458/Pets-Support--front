@@ -1,8 +1,9 @@
 // import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ImgCover from "images/pet-cover.jpg";
-import { ButtonLink } from "components/Button/Button";
-import { useState } from "react";
-import { ModalNotice } from "../ModalNotice/ModatNotice";
+import ImgCover from 'images/pet-cover.jpg';
+import { ButtonLink } from 'components/Button/Button';
+import { useState } from 'react';
+import { ModalNotice } from '../ModalNotice/ModatNotice';
+// import { HeartButton } from '../Button/HeartButton/HeartButton';
 
 import {
   NoticesCategoriesContainerList,
@@ -14,21 +15,45 @@ import {
   ButtonContainer,
   CategoryName,
   AddToFavorites,
-} from "./NoticesCategoriesList.styled";
+} from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = ({ data }) => {
-  // console.log(category);
   const [detailed, setDetailed] = useState(false);
 
   const toggleModal = () => {
-    setDetailed((prev) => {
+    setDetailed(prev => {
       return !prev;
     });
   };
 
+  const imgPath = url => {
+    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
+  };
+
+  const age = date => {
+    let today = new Date();
+    let birthDate = new Date(date);
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    let m = today.getMonth() - birthDate.getMonth();
+    let d = today.getDay() - birthDate.getDay();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age === 0) {
+      m = 12 + m;
+      if (d < 0 || (d === 0 && today.getDate() < birthDate.getDate())) {
+        m--;
+      }
+    }
+
+    return age ? age : m;
+  };
+
   return (
     <NoticesCategoriesContainerList>
-      {data.map((item) => (
+      {data.map(item => (
         <NoticesCategoriesItem key={item._id}>
           <CategoryName>{item.category}</CategoryName>
           <AddToFavorites type="button">
@@ -40,7 +65,7 @@ const NoticesCategoriesList = ({ data }) => {
               }}
             /> */}
           </AddToFavorites>
-          <Img src={ImgCover} alt="" />
+          <Img src={imgPath(item.photoURL)} alt={item.breed} />
           <Title>{item.title}</Title>
           <DetailsList>
             <DetailsItem key={item.breed}>
@@ -51,14 +76,16 @@ const NoticesCategoriesList = ({ data }) => {
               <span>Place:</span>
               {item.place}
             </DetailsItem>
-            <DetailsItem key={data.birthday}>
+            <DetailsItem key={item.birthday}>
               <span>Age:</span>
-              {data.birthday}
+              {age(item.birthday)}
             </DetailsItem>
-            <DetailsItem key="id4">
-              <span>Price:</span>
-              50$
-            </DetailsItem>
+            {item.category === 'sell' && (
+              <DetailsItem key={item.price}>
+                <span>Price:</span>
+                {item.price ? item.price : '0'}
+              </DetailsItem>
+            )}
           </DetailsList>
           <ButtonContainer>
             <ButtonLink onClick={toggleModal}>Learn more</ButtonLink>
