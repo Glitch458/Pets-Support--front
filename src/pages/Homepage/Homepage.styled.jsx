@@ -16,7 +16,6 @@ export const WelcomeSection = styled.div`
   background-position: bottom;
 
   @media screen and (min-width: 1280px) {
-    background-size: initial;
     background-position: bottom right;
     background-image: url(${bgImgGrlL}), url(${bgImgAbsSmall}),
       url(${bgImgAbsBig});
