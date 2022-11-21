@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Modal from 'components/Modal/Modal';
 import {handleBackdropClick, handleEscClick } from "../../helpers/modalHelpers";
 import { example } from './example';
-
+import { AddToFavorites } from "./ModalNotice.styled";
 
 
 export const ModalNotice = ({toggleModal}) => {
@@ -39,6 +39,7 @@ export const ModalNotice = ({toggleModal}) => {
                         )
                     })}
                 </ul>
+                 <AddToFavorites />
             </div>
         </Modal>
     );
