@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { HeartBtn } from "components/Button/Button.styled";
 import { ReactComponent as IconHeart } from "../../../src/images/icons/smallHeart.svg";
 
