@@ -8,7 +8,7 @@ import bgImgAbsSmall from 'images/Homepage/homepage-abstract-small-desktop.png';
 
 export const WelcomeSection = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 62px);
   background-color: ${p => theme.colors.background};
   background-image: url(${bgImgGrlS}), url(${bgImgAbs});
   background-repeat: no-repeat;
