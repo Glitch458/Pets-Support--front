@@ -7,3 +7,7 @@ export const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const NewsListContainer = styled.div`
+  background-color: ${p => p.theme.colors.background};
+`;
