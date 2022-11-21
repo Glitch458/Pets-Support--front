@@ -1,6 +1,6 @@
-// import { useState, useEffect } from 'react';
-import Follow from 'follow-js';
+import { useState, useEffect } from 'react';
 import {
+  NotFoundWrapper,
   NotFoundBox,
   GhostBox,
   GhostBoxContainer,
@@ -19,61 +19,67 @@ import {
 } from './NotFoundPage.styled';
 
 const NotFoundPage = () => {
-  // let pageX = window.innerWidth;
-  // let pageY = window.innerHeight;
-  // let mouseY = 0;
-  // let mouseX = 0;
-  // let track = {};
-  // const [tracking, setTracking] = useState();
+  let pageX = window.innerWidth;
+  let pageY = window.innerHeight;
+  let mouseY = 0;
+  let mouseX = 0;
+  const [eyePosition, setEyePosition] = useState({});
 
-  // useEffect(() => {}, []);
+  function trackEyes(event) {
+    mouseY = event.pageY;
+    let yAxis = -pageY / 30 + mouseY / 15;
 
-  // document.addEventListener('mousemove', event => {
-  //   mouseY = event.pageY;
-  //   let yAxis = ((pageY / 2 - mouseY) / pageY) * 300;
+    mouseX = event.pageX / -pageX;
 
-  //   mouseX = event.pageX / -pageX;
+    let xAxis = -mouseX * 50 - 25;
+    setEyePosition({
+      transform: `translate(${xAxis}px, ${yAxis}px)`,
+    });
+  }
 
-  //   let xAxis = -mouseX * 100 - 100;
-  //   track = {
-  //     transform: `translate(${xAxis}px, ${yAxis}px)`,
-  //   };
-  // });
+  useEffect(() => {
+    document.addEventListener('mousemove', trackEyes);
+
+    return () => document.removeEventListener('mousemove', trackEyes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eyePosition]);
 
   return (
-    <NotFoundBox>
-      <GhostBox>
-        <GhostBoxSymbol />
-        <GhostBoxSymbol />
-        <GhostBoxSymbol />
-        <GhostBoxSymbol />
-        <GhostBoxSymbol />
-        <GhostBoxSymbol />
-        <GhostBoxContainer>
-          <GhostBoxEyes>
-            <GhostBoxEyesLeft /*style={track}*/ />
-            <GhostBoxEyesRight /*style={track}*/ />
-          </GhostBoxEyes>
-          <GhostBoxBottom>
-            <GhostBoxBottomElement />
-            <GhostBoxBottomElement />
-            <GhostBoxBottomElement />
-            <GhostBoxBottomElement />
-            <GhostBoxBottomElement />
-          </GhostBoxBottom>
-        </GhostBoxContainer>
-        <GhostShadow />
-      </GhostBox>
-      <BoxDescription>
-        <BoxDescriptionContainer>
-          <BoxDescriptionTitle>Whoops!</BoxDescriptionTitle>
-          <BoxDescriptionText>
-            It seems like we couldn't find the page you were looking for
-          </BoxDescriptionText>
-        </BoxDescriptionContainer>
-        <BoxButton href="/homepage">Go back</BoxButton>
-      </BoxDescription>
-    </NotFoundBox>
+    <NotFoundWrapper>
+      <NotFoundBox>
+        <GhostBox>
+          <GhostBoxSymbol />
+          <GhostBoxSymbol />
+          <GhostBoxSymbol />
+          <GhostBoxSymbol />
+          <GhostBoxSymbol />
+          <GhostBoxSymbol />
+          <GhostBoxContainer>
+            <GhostBoxEyes>
+              <GhostBoxEyesLeft style={eyePosition} />
+              <GhostBoxEyesRight style={eyePosition} />
+            </GhostBoxEyes>
+            <GhostBoxBottom>
+              <GhostBoxBottomElement />
+              <GhostBoxBottomElement />
+              <GhostBoxBottomElement />
+              <GhostBoxBottomElement />
+              <GhostBoxBottomElement />
+            </GhostBoxBottom>
+          </GhostBoxContainer>
+          <GhostShadow />
+        </GhostBox>
+        <BoxDescription>
+          <BoxDescriptionContainer>
+            <BoxDescriptionTitle>Whoops!</BoxDescriptionTitle>
+            <BoxDescriptionText>
+              It seems like we couldn't find the page you were looking for
+            </BoxDescriptionText>
+          </BoxDescriptionContainer>
+          <BoxButton href="/homepage">Go back</BoxButton>
+        </BoxDescription>
+      </NotFoundBox>
+    </NotFoundWrapper>
   );
 };
 

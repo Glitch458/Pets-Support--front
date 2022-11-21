@@ -1,18 +1,27 @@
 import styled from 'styled-components';
 import { theme } from 'constants';
 
+export const NotFoundWrapper = styled.section`
+  background-color: ${p => theme.colors.background};
+  height: 100vh;
+  width: 100vw;
+`;
+
 export const NotFoundBox = styled.div`
+  @media screen and (max-width: 380px) {
+    width: 150px;
+    padding: 5px 50px;
+  }
   width: 350px;
   height: 100%;
   max-height: 600px;
   min-height: 450px;
-  background-color: ${p => theme.colors.accent};
+  background-color: ${p => theme.colors.buttonAccent};
   border-radius: 20px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 30px 50px;
 `;
 
 export const GhostBox = styled.div`
@@ -263,7 +272,7 @@ export const BoxDescriptionText = styled.div`
 export const BoxButton = styled.a`
   display: block;
   position: relative;
-  background: ${p => theme.colors.buttonAccent};
+  background: ${p => theme.colors.accent};
   border: 1px solid white;
   border-radius: 50px;
   height: 50px;
