@@ -1,5 +1,5 @@
 import { HeartBtn } from "./HeartButton.styled";
-import IconHeart from "../../../images/icons/Heart.svg";
+import { ReactComponent as IconHeart } from "../../../images/icons/Heart.svg";
 
 export const HeartButton = ({ onClick, className }) => {
     return (
