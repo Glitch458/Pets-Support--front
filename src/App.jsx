@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
+
 const SharedLayout = lazy(() => import('components/SharedLayout/SharedLayout'));
 const Homepage = lazy(() => import('pages/Homepage/Homepage'));
 // const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
@@ -10,6 +11,7 @@ const OurFriendsPage = lazy(() =>
 const NewsPage = lazy(() => import('pages/NewsPage/NewsPage'));
 const NoticesPage = lazy(() => import('pages/NoticesPage/NoticesPage'));
 const UserPage = lazy(() => import('pages/UserPage/UserPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
           <Route path="/notices/:categoryName" element={<NoticesPage />} />
           <Route path="/user" element={<UserPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
