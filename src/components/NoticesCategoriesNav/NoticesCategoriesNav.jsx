@@ -49,7 +49,7 @@ const NoticesCategoriesNav = ({ location }) => {
         </CategoriesList>
       </CategoriesButonContainer>
       <AddButton>
-        {window.innerWidth <= 768 ? (
+        {window.innerWidth < 768 ? (
           <AddButtonCircleLink>Add pet</AddButtonCircleLink>
         ) : (
           <AddButtonLink>Add pet</AddButtonLink>

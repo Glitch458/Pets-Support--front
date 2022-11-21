@@ -27,7 +27,7 @@ export const CategoriesList = styled.div`
 `;
 
 export const AddButton = styled.div`
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
     top: 50%;
     right: 20px;
