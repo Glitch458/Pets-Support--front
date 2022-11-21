@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HeartButton } from "components/Button/HeartButton/HeartButton";
+import { HeartButton } from 'components/Button/HeartButton/HeartButton';
 
 export const NoticesCategoriesContainerList = styled.ul`
   display: flex;
@@ -17,6 +17,7 @@ export const NoticesCategoriesItem = styled.li`
   position: relative;
   margin: 0 0 30px 0;
   padding: 0;
+  width: 100%;
   list-style-type: none;
   border-radius: 0 0 20px 20px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);

@@ -1,8 +1,9 @@
 // import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ImgCover from "images/pet-cover.jpg";
-import { ButtonLink } from "components/Button/Button";
-import { useState } from "react";
-import { ModalNotice } from "../ModalNotice/ModatNotice";
+import ImgCover from 'images/pet-cover.jpg';
+import { ButtonLink } from 'components/Button/Button';
+import { useState } from 'react';
+import { ModalNotice } from '../ModalNotice/ModatNotice';
+import { HeartButton } from '../Button/HeartButton/HeartButton';
 
 import {
   NoticesCategoriesContainerList,
@@ -14,21 +15,21 @@ import {
   ButtonContainer,
   CategoryName,
   AddToFavorites,
-} from "./NoticesCategoriesList.styled";
+} from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = ({ data }) => {
   // console.log(category);
   const [detailed, setDetailed] = useState(false);
 
   const toggleModal = () => {
-    setDetailed((prev) => {
+    setDetailed(prev => {
       return !prev;
     });
   };
 
   return (
     <NoticesCategoriesContainerList>
-      {data.map((item) => (
+      {data.map(item => (
         <NoticesCategoriesItem key={item._id}>
           <CategoryName>{item.category}</CategoryName>
           <AddToFavorites type="button">

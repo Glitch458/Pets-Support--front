@@ -28,12 +28,14 @@ export const CategoriesList = styled.div`
 
 export const AddButton = styled.div`
   @media screen and (max-width: 768px) {
-    position: absolute;
+    position: fixed;
     top: 50%;
-    right: 0;
+    right: 20px;
+    z-index: 999;
   }
   @media screen and (min-width: 768px) {
     display: flex;
+
     flex-shrink: 0;
     align-self: flex-start;
   }
