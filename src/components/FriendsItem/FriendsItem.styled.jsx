@@ -72,7 +72,7 @@ align-items: flex-start;
 margin-bottom:12px;
 `
 
-export const Adress = styled.a`
+export const Link = styled.a`
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;

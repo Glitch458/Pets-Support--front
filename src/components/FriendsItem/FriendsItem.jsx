@@ -5,7 +5,7 @@ import {
   FriendCard,
   Time,
   Text,
-  Adress,
+  Link,
   Img,
   SponsorItem,
   TextWrapper,
@@ -34,7 +34,7 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
       
   return (
     <SponsorItem>
-      <SponsorLink href={siteUrl}>{title}</SponsorLink>
+      <SponsorLink href={siteUrl} target="_blank">{title}</SponsorLink>
       <FriendCard>
         <Img src={imageUrl ?? defaultImage} alt={title} />
         <List>
@@ -52,19 +52,19 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
           <TextWrapper >
             <Text>Adress:</Text>
             {mapUrl
-              ? <Adress href={mapUrl}>{adress}</Adress>
+              ? <Link href={mapUrl}>{adress}</Link>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Email:</Text>
             {email
-              ? <Text>{email}</Text>
+              ? <Link href={email}>{email}</Link>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Phone:</Text>
             {phone
-              ? <Text>{phone}</Text>
+              ? <Link href={phone}>{phone}</Link>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
         </List>
