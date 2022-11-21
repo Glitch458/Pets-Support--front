@@ -1,16 +1,16 @@
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
-import Container from 'components/Container/Container';
 import { NewsList } from 'components/NewsList/NewsList';
-import { NewsListWrapper } from './NewsPage.styled';
+import Container from 'components/Container/Container';
+import { PageWrapper } from './NewsPage.styled';
 
 const NewsPage = () => {
   return (
-    <NewsListWrapper>
+    <PageWrapper>
       <Container>
         <NoticesSearch>News</NoticesSearch>
-        <NewsList></NewsList>
+        <NewsList />
       </Container>
-    </NewsListWrapper>
+    </PageWrapper>
   );
 };
 

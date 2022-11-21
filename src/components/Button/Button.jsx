@@ -10,9 +10,11 @@ const Button = ({ type = 'button', children }) => {
   return <ButtonBasic type={type}>{children}</ButtonBasic>;
 };
 
-const ButtonLink = ({ name = '', href = '', children }) => {
+const ButtonLink = ({ onClick, name = '', href = '', children }) => {
   return (
-    <LinkBasic href={href} name={name}>
+    <LinkBasic onClick={onClick}
+      // href={href} name={name}
+    >
       {children}
     </LinkBasic>
   );

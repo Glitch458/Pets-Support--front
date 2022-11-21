@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { HeartButton } from 'components/Button/HeartButton/HeartButton';
 
-export const NoticesCategoriesListContainer = styled.ul`
+export const NoticesCategoriesContainerList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -12,8 +13,8 @@ export const NoticesCategoriesListContainer = styled.ul`
     margin: -8px;
   }
 `;
-export const NoticesCategoriesListCard = styled.li`
-  position: relative;
+export const NoticesCategoriesItem = styled.li`
+  //position: relative;
   margin: 0 0 30px 0;
   padding: 0;
   list-style-type: none;
@@ -66,8 +67,14 @@ export const DetailsItem = styled.li`
   }
 `;
 export const ButtonContainer = styled.div`
-  padding: 0 45px 30px 45px;
+  padding: 0 15px 30px 15px;
   color: ${p => p.theme.colors.accent};
+  @media screen and (min-width: 768px) {
+    padding: 0 45px 30px 45px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding: 0 20px 30px 20px;
+  }
 `;
 export const CategoryName = styled.div`
   position: absolute;
@@ -84,16 +91,8 @@ export const CategoryName = styled.div`
   line-height: 1.25;
   letter-spacing: 0.04em;
 `;
-export const ButtonLike = styled.button`
+export const AddToFavorites = styled(HeartButton)`
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 15px;
-  top: 15px;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
+  top: 12px;
+  right: 12px;
 `;

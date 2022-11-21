@@ -10,6 +10,8 @@ export const ButtonStyles = `display: flex;
   border: 2px solid #f59256;
   border-radius: 40px;
   cursor: pointer;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
    `;
 //Button
 
@@ -22,6 +24,8 @@ export const ButtonBasic = styled.button`
   :focus-visible:not(.active) {
     background-color: ${p => p.theme.colors.accent};
     color: ${p => p.theme.colors.white};
+    transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
   &.active {
     background-color: ${p => p.theme.colors.accent};
@@ -39,6 +43,8 @@ export const LinkBasic = styled.a`
   :focus-visible:not(.active) {
     background-color: ${p => p.theme.colors.accent};
     color: ${p => p.theme.colors.white};
+    transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
   &.active {
     background-color: ${p => p.theme.colors.accent};
@@ -63,10 +69,12 @@ export const AddLinkCircle = styled.a`
   font-size: 12px;
   line-height: 1.3;
   color: ${p => p.theme.colors.white};
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   :hover,
   :focus-visible {
     background-color: ${p => p.theme.colors.buttonAccent};
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;
 export const AddLinkBasic = styled.a`
@@ -84,6 +92,7 @@ export const AddLinkBasic = styled.a`
   :focus-visible {
     div {
       background-color: ${p => p.theme.colors.buttonAccent};
+      transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
   div {
@@ -95,5 +104,29 @@ export const AddLinkBasic = styled.a`
     width: 40px;
     height: 40px;
     background-color: ${p => p.theme.colors.accent};
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
+`;
+
+export const HeartBtn = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 240px;
+  height: 40px;
+  padding: 9px 41px;
+  background: #ffffff;
+  border: '2px solid #f59256';
+  border-radius: 40px;
+  cursor: pointer;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: ${p => p.theme.colors.black};
+  fill: ${p => p.theme.colors.accent};
+  stroke: ${p => p.theme.colors.accent};
 `;

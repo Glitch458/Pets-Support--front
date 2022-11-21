@@ -1,4 +1,13 @@
-import { Item, Image, PetsInfo } from './PetsList.styled';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  Item,
+  Image,
+  PetsInfo,
+  InfoContainer,
+  TitlePetsInfo,
+  Box,
+} from './PetsList.styled';
 
 export const PetsList = ({ data }) => {
   console.log(data);
@@ -7,10 +16,25 @@ export const PetsList = ({ data }) => {
       {data.map(({ name, url, date, breed, comments }) => (
         <Item key={name}>
           <Image src={url} alt={name} />
-          <PetsInfo>NamePets: {name}</PetsInfo>
-          <PetsInfo>Date of birth: {date}</PetsInfo>
-          <PetsInfo>Breed: {breed}</PetsInfo>
-          <PetsInfo>Comments: {comments}</PetsInfo>
+          <InfoContainer>
+            <PetsInfo>
+              <TitlePetsInfo>NamePets:</TitlePetsInfo> {name}
+            </PetsInfo>
+            <PetsInfo>
+              <TitlePetsInfo>Date of birth:</TitlePetsInfo> {date}
+            </PetsInfo>
+            <PetsInfo>
+              <TitlePetsInfo>Breed:</TitlePetsInfo> {breed}
+            </PetsInfo>
+            <PetsInfo>
+              <TitlePetsInfo>Comments:</TitlePetsInfo> {comments}
+            </PetsInfo>
+            <Box>
+              <IconButton aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          </InfoContainer>
         </Item>
       ))}
     </ul>

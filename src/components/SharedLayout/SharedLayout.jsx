@@ -6,6 +6,8 @@ import Logo from 'components/Logo/Logo';
 import Container from 'components/Container/Container';
 import Header from 'components/Header/Header';
 import { NavInnerContainer } from 'components/NavInnerContainer/NavInnerContainer';
+import Spinner from 'components/Spinner/Spinner';
+
 
 const SharedLayout = () => {
   return (
@@ -18,7 +20,7 @@ const SharedLayout = () => {
           </NavInnerContainer>
         </Container>
       </Header>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Outlet />
       </Suspense>
     </>

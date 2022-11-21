@@ -17,7 +17,7 @@ export const PetsData = () => {
 
         <AddButton>
           <Text>Add pet</Text>
-          <AddButtonCircleLink />
+          <AddButtonCircleLink type="button" />
         </AddButton>
       </HeadPetsData>
       <PetsList data={myPets} />

@@ -8,17 +8,17 @@ import {
 } from './NoticesCategoriesNav.styled';
 import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
 
-const NoticesCategoriesNav = () => {
+const NoticesCategoriesNav = ({ location }) => {
   //const { token } = useSelector(state => state.user);
 
   const publicCategories = [
     { sell: 'sell' },
     { 'lost/found': 'lost-found' },
-    { 'in godod hands': 'for-free' },
+    { 'in good hands': 'for-free' },
   ];
   const privateCategories = [
     { 'Favorite ads': 'favorite' },
-    { 'My adds': 'own' },
+    { 'My ads': 'own' },
   ];
   const token = 'token';
 
@@ -28,7 +28,8 @@ const NoticesCategoriesNav = () => {
         <CategoriesList>
           {publicCategories.map(item => (
             <NavLinkStyled
-              to={`/notices/${Object.values(item)}`}
+              to={`/notices/${Object.values(item)}${location.search}`}
+              state
               key={Object.keys(item)}
             >
               {Object.keys(item)}
@@ -39,7 +40,7 @@ const NoticesCategoriesNav = () => {
           {token &&
             privateCategories.map(item => (
               <NavLinkStyled
-                to={`/notices/${Object.values(item)}`}
+                to={`/notices/${Object.values(item)}${location.search}`}
                 key={Object.keys(item)}
               >
                 {Object.keys(item)}
@@ -48,7 +49,7 @@ const NoticesCategoriesNav = () => {
         </CategoriesList>
       </CategoriesButonContainer>
       <AddButton>
-        {window.innerWidth <= 768 ? (
+        {window.innerWidth < 768 ? (
           <AddButtonCircleLink>Add pet</AddButtonCircleLink>
         ) : (
           <AddButtonLink>Add pet</AddButtonLink>
