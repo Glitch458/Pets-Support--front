@@ -19,7 +19,7 @@ const App = () => {
       {/* <SharedLayout path="/"></SharedLayout> */}
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/" exact element={<Homepage />} />
           {/* <Route path="/register" element={<RegisterPage />} /> */}
           {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/friends" element={<OurFriendsPage />} />
