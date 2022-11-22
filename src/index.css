@@ -60,10 +60,5 @@ button {
 
 /* Компенсация фиксации хедера */
 body {
-  padding-top: 73px;
-}
-@media screen and (min-width: 768px) {
-  body {
-    padding-top: 90px;
-  }
+  padding-top: 62px;
 }
