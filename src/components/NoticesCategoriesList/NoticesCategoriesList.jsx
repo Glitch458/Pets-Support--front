@@ -25,7 +25,6 @@ const NoticesCategoriesList = ({ data }) => {
       return !prev;
     });
   };
-
   const imgPath = url => {
     return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
   };
@@ -65,7 +64,12 @@ const NoticesCategoriesList = ({ data }) => {
               }}
             /> */}
           </AddToFavorites>
-          <Img src={imgPath(item.photoURL)} alt={item.breed} />
+          <Img
+            src={imgPath(item.photoURL)}
+            alt={item.breed}
+            height={328}
+            widht={328}
+          />
           <Title>{item.title}</Title>
           <DetailsList>
             <DetailsItem key={item.breed}>

@@ -14,7 +14,9 @@ export const NoticesCategoriesContainerList = styled.ul`
   }
 `;
 export const NoticesCategoriesItem = styled.li`
-  //position: relative;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 0 30px 0;
   padding: 0;
   list-style-type: none;
@@ -37,11 +39,12 @@ export const NoticesCategoriesItem = styled.li`
 `;
 export const Img = styled.img`
   width: 100%;
-  height: 288px;
+  height: auto;
   object-fit: cover;
   margin-bottom: 20px;
 `;
 export const Title = styled.p`
+  width: 100%;
   margin: 0 20px 20px 20px;
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.bold};
@@ -67,6 +70,8 @@ export const DetailsItem = styled.li`
   }
 `;
 export const ButtonContainer = styled.div`
+  flex-grow: 1;
+  align-self: flex-end;
   padding: 0 15px 30px 15px;
   color: ${p => p.theme.colors.accent};
   @media screen and (min-width: 768px) {
