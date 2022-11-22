@@ -2,18 +2,34 @@ import styled from 'styled-components';
 
 export const User = styled.div`
   box-sizing: border-box;
-  max-width: 411px;
-  padding: 20px 16px;
+  width: 100%;
+  padding: 20px 12px 20px 16px;
   background-color: #fff;
-  border-top-right-radius: 7%;
-  border-bottom-right-radius: 7%;
+  border-radius: 7%;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 24px 40px 24px 80px;
+    width: 110%;
+    margin-left: -80px;
+  }
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px 24px 180px;
+    margin-left: -180px;
+    width: 570px;
+  }
 `;
 
 export const Title = styled.h2`
-  padding: 24px 17px;
+  font-family: 'Manrope';
+  padding-bottom: 18px;
+  padding-top: 60px;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 135%;
   color: #111111;
 `;
@@ -21,6 +37,7 @@ export const Title = styled.h2`
 export const UserPhoto = styled.div`
   display: flex;
   position: relative;
+  padding: 10px;
 `;
 
 export const Photo = styled.img`
@@ -34,38 +51,66 @@ export const Photo = styled.img`
 `;
 
 export const InfoItems = styled.div`
-  padding-top: 36px;
+  padding-top: 70px;
   width: 100%;
-  font-size: 18px;
-  line-height: 138%;
+  font-size: 12px;
+  line-height: 133%;
   letter-spacing: 0.04em;
+  @media screen and (min-width: 768px) {
+    padding-top: 35px;
+  }
 `;
 
 export const InfoItem = styled.div`
+  font-family: 'Manrope';
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
   align-items: center;
   display: flex;
   height: 100%;
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 138%;
+  }
 `;
 
 export const Property = styled.p`
-  min-width: 120px;
+  min-width: 82px;
   font-weight: 500;
+  @media screen and (min-width: 768px) {
+    min-width: 120px;
+  }
 `;
 
-export const Values = styled.div`
-  font-weight: 400;
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
-export const EditInputBtn = styled.button`
+export const EditInputBtn = styled.span`
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #fdf7f2;
   border-radius: 50%;
   border: none;
-  width: 32px;
-  height: 32px;
-  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  @media screen and (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+    & * {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 export const PhotoEditLabel = styled.label`
@@ -80,6 +125,8 @@ export const PhotoEditLabel = styled.label`
   &:hover {
     cursor: pointer;
   }
+  @media screen and (min-width: 768px) {
+  }
 `;
 
 export const PhotoEdit = styled.input`
@@ -92,7 +139,10 @@ export const PhotoEdit = styled.input`
 `;
 
 export const EditInput = styled.input`
-  font-size: 18px;
+  /* width: 100%; */
+  max-width: 380px;
+  margin-right: 10px;
+  font-size: inherit;
   line-height: 138%;
   align-items: center;
   background: #fdf7f2;
@@ -102,5 +152,36 @@ export const EditInput = styled.input`
   margin-left: -12px;
   &:focus {
     outline: 0;
+  }
+  &:disabled {
+    background-color: #fff;
+    border: none;
+  }
+`;
+
+export const LogOut = styled.div`
+  margin-top: 45px;
+  display: flex;
+  justify-content: end;
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+    font-size: 16px;
+    margin-top: 33px;
+  }
+  & button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 137%;
+    letter-spacing: 0.04em;
+    color: rgba(17, 17, 17, 0.6);
+    & img {
+      margin-right: 8px;
+    }
   }
 `;
