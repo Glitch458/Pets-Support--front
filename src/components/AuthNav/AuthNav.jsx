@@ -1,18 +1,17 @@
-import { List, ListItem } from './AuthNav.styled';
-import { ButtonLink } from '../Button/Button';
+import { List, ListItem, ButtonAuthLink } from './AuthNav.styled';
 
 export const AuthNav = () => {
   return (
     <List>
       <ListItem>
-        <ButtonLink type="button" href="/login">
+        <ButtonAuthLink type="button" href="/login" primary>
           Login
-        </ButtonLink>
+        </ButtonAuthLink>
       </ListItem>
       <ListItem>
-        <ButtonLink type="button" href="/register">
+        <ButtonAuthLink type="button" href="/register">
           Registration
-        </ButtonLink>
+        </ButtonAuthLink>
       </ListItem>
     </List>
   );

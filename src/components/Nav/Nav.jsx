@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import burger from 'images/icons/burger.svg';
 import {
   NavContainer,
@@ -18,6 +19,8 @@ export const Nav = () => {
     { href: '/notices/sell', title: 'Find pet' },
     { href: '/friends', title: 'Our friend' },
   ];
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <>
@@ -39,7 +42,7 @@ export const Nav = () => {
         {extendNav && (
           <NavExtendedContainer>
             <AuthNavExtendedContainer>
-              <AuthNav></AuthNav>
+              {isMobile && <AuthNav />}
             </AuthNavExtendedContainer>
             {NavLinkExtendedArray.map(({ href, title }) => {
               return (
