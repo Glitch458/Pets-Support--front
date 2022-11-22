@@ -7,6 +7,21 @@ export const User = styled.div`
   background-color: #fff;
   border-radius: 7%;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 24px 40px 24px 80px;
+    width: 110%;
+    margin-left: -80px;
+  }
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px 24px 180px;
+    margin-left: -180px;
+    width: 570px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -22,6 +37,7 @@ export const Title = styled.h2`
 export const UserPhoto = styled.div`
   display: flex;
   position: relative;
+  padding: 10px;
 `;
 
 export const Photo = styled.img`
@@ -40,6 +56,9 @@ export const InfoItems = styled.div`
   font-size: 12px;
   line-height: 133%;
   letter-spacing: 0.04em;
+  @media screen and (min-width: 768px) {
+    padding-top: 35px;
+  }
 `;
 
 export const InfoItem = styled.div`
@@ -53,32 +72,51 @@ export const InfoItem = styled.div`
   &:not(:last-child) {
     margin-bottom: 8px;
   }
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 138%;
+  }
 `;
 
 export const Property = styled.p`
   min-width: 82px;
   font-weight: 500;
+  @media screen and (min-width: 768px) {
+    min-width: 120px;
+  }
 `;
 
-export const Values = styled.div``;
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 
-export const EditInputBtn = styled.button`
+export const EditInputBtn = styled.span`
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #fdf7f2;
   border-radius: 50%;
   border: none;
   width: 20px;
   height: 20px;
-  margin-left: auto;
-  padding: 4px;
-  & svg {
-    fill: red;
+  @media screen and (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+    & * {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 
 export const PhotoEditLabel = styled.label`
   position: absolute;
   right: 0;
-  bottom: -25px;
+  bottom: 0;
   display: flex;
   justify-content: center;
   & img {
@@ -86,6 +124,8 @@ export const PhotoEditLabel = styled.label`
   }
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (min-width: 768px) {
   }
 `;
 
@@ -99,6 +139,9 @@ export const PhotoEdit = styled.input`
 `;
 
 export const EditInput = styled.input`
+  /* width: 100%; */
+  max-width: 380px;
+  margin-right: 10px;
   font-size: inherit;
   line-height: 138%;
   align-items: center;
@@ -109,5 +152,36 @@ export const EditInput = styled.input`
   margin-left: -12px;
   &:focus {
     outline: 0;
+  }
+  &:disabled {
+    background-color: #fff;
+    border: none;
+  }
+`;
+
+export const LogOut = styled.div`
+  margin-top: 45px;
+  display: flex;
+  justify-content: end;
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+    font-size: 16px;
+    margin-top: 33px;
+  }
+  & button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 137%;
+    letter-spacing: 0.04em;
+    color: rgba(17, 17, 17, 0.6);
+    & img {
+      margin-right: 8px;
+    }
   }
 `;
