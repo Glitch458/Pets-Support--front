@@ -5,7 +5,7 @@ import {
   FriendCard,
   Time,
   Text,
-  Link,
+  ContactLink,
   Img,
   SponsorItem,
   TextWrapper,
@@ -43,28 +43,29 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
             onMouseLeave={() => {setTimeout(()=>{setIsVisible(true)}, 1000)}}>
             
           {(workDays === null || workDays === undefined)
-            ? <Time>Time: дані відсутні</Time>
-            : <>
-            <Time>Time:{workDays[0].from}-{workDays[0].to}</Time>
+            ? <Time>Time: ------------</Time>
+            : <> {workDays[0].isOpen
+                  ? <Time>Time:{workDays[0].from}-{workDays[0].to}</Time>
+                  : <Time>Time:Closed</Time>}
             {isVisible || <TimeTable shedule={newWorkDays}/>}
             </>} 
           </TextWrapper>
           <TextWrapper >
             <Text>Adress:</Text>
             {mapUrl
-              ? <Link href={mapUrl}>{adress}</Link>
+              ? <ContactLink href={mapUrl}>{adress}</ContactLink>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Email:</Text>
             {email
-              ? <Link href={email}>{email}</Link>
+              ? <ContactLink href={`mailto:${email}`}>{email}</ContactLink>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
           <TextWrapper>
             <Text>Phone:</Text>
             {phone
-              ? <Link href={phone}>{phone}</Link>
+              ? <ContactLink href={`tel:${phone}`}>{phone}</ContactLink>
               : <Text>дані відсутні</Text>}
           </TextWrapper>
         </List>
