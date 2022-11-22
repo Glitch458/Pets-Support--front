@@ -12,10 +12,16 @@ export const WelcomeSection = styled.div`
   background-color: ${p => theme.colors.background};
   background-image: url(${bgImgGrlS}), url(${bgImgAbs});
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
+  background-size: contain, cover;
+  background-position: bottom, center;
+
+  @media screen and (min-width: 768px) {
+    background-size: auto 80%, cover;
+    background-position: right bottom, center;
+  }
 
   @media screen and (min-width: 1280px) {
+    background-size: initial;
     background-position: bottom right;
     background-image: url(${bgImgGrlL}), url(${bgImgAbsSmall}),
       url(${bgImgAbsBig});
@@ -27,7 +33,7 @@ export const WelcomeText = styled.p`
   font-size: 32px;
   line-height: 44px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) and (min-height: 480px) {
     padding-top: 92px;
     font-size: 68px;
     line-height: 100px;
