@@ -8,7 +8,6 @@ import Header from 'components/Header/Header';
 import { NavInnerContainer } from 'components/NavInnerContainer/NavInnerContainer';
 import Spinner from 'components/Spinner/Spinner';
 
-
 const SharedLayout = () => {
   return (
     <>

@@ -4,7 +4,7 @@ export const AuthNav = () => {
   return (
     <List>
       <ListItem>
-        <ButtonAuthLink type="button" href="/login" primary>
+        <ButtonAuthLink type="button" href="/login">
           Login
         </ButtonAuthLink>
       </ListItem>
