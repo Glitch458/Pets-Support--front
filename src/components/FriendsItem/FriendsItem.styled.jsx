@@ -72,7 +72,7 @@ align-items: flex-start;
 margin-bottom:12px;
 `
 
-export const Adress = styled.a`
+export const ContactLink = styled.a`
 font-weight: 500;
 font-size: 12px;
 line-height: 16px;
@@ -138,7 +138,7 @@ left: 0;
 
 display:flex;
 flex-direction:column;
-align-items:center;
+align-items:flex-start;
 justify-content:center;
 
 background-color: white;
