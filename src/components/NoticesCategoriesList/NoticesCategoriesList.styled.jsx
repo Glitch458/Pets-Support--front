@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { HeartButton } from "components/Button/HeartButton/HeartButton";
 
 export const NoticesCategoriesContainerList = styled.ul`
   display: flex;
@@ -84,16 +85,8 @@ export const CategoryName = styled.div`
   line-height: 1.25;
   letter-spacing: 0.04em;
 `;
-export const ButtonLike = styled.button`
+export const AddToFavorites = styled(HeartButton)`
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 15px;
-  top: 15px;
-  width: 44px;
-  height: 44px;
-  border: none;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
+  top: 12px;
+  right: 12px;
 `;

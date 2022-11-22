@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   NotFoundWrapper,
   NotFoundBox,
@@ -16,7 +16,7 @@ import {
   BoxDescriptionText,
   BoxButton,
   GhostBoxSymbol,
-} from './NotFoundPage.styled';
+} from "./NotFoundPage.styled";
 
 const NotFoundPage = () => {
   let pageX = window.innerWidth;
@@ -38,9 +38,9 @@ const NotFoundPage = () => {
   }
 
   useEffect(() => {
-    document.addEventListener('mousemove', trackEyes);
+    document.addEventListener("mousemove", trackEyes);
 
-    return () => document.removeEventListener('mousemove', trackEyes);
+    return () => document.removeEventListener("mousemove", trackEyes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eyePosition]);
 
@@ -76,7 +76,7 @@ const NotFoundPage = () => {
               It seems like we couldn't find the page you were looking for
             </BoxDescriptionText>
           </BoxDescriptionContainer>
-          <BoxButton href="/homepage">Go back</BoxButton>
+          <BoxButton href="/">Go back</BoxButton>
         </BoxDescription>
       </NotFoundBox>
     </NotFoundWrapper>
