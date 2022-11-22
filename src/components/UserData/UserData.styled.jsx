@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
+export const UserContainer = styled.div`
+  padding: 0 20px;
+  @media screen and (min-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
+
 export const User = styled.div`
   box-sizing: border-box;
-  width: 100%;
+  width: auto;
+  justify-content: center;
   padding: 20px 12px 20px 16px;
   background-color: #fff;
   border-radius: 7%;
@@ -11,15 +20,15 @@ export const User = styled.div`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 24px 40px 24px 80px;
-    width: 110%;
-    margin-left: -80px;
+    padding: 24px 40px 24px 40px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
   }
   @media screen and (min-width: 1280px) {
     display: flex;
     flex-direction: column;
-    padding: 24px 40px 24px 180px;
-    margin-left: -180px;
+    justify-content: flex-start;
+    padding: 24px 40px 24px 40px;
     width: 570px;
   }
 `;
@@ -32,12 +41,21 @@ export const Title = styled.h2`
   font-size: 20px;
   line-height: 135%;
   color: #111111;
+  @media screen and (min-width: 768px) {
+    padding: 0 20px 40px 34px;
+    font-size: 28px;
+    line-height: 135%;
+  }
+  @media screen and (min-width: 1280px) {
+    padding: 0 20px 28px 17px;
+    font-size: 28px;
+    line-height: 135%;
+  }
 `;
 
 export const UserPhoto = styled.div`
   display: flex;
   position: relative;
-  padding: 10px;
 `;
 
 export const Photo = styled.img`
@@ -68,7 +86,6 @@ export const InfoItem = styled.div`
   letter-spacing: 0.04em;
   align-items: center;
   display: flex;
-  height: 100%;
   &:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -83,6 +100,8 @@ export const Property = styled.p`
   font-weight: 500;
   @media screen and (min-width: 768px) {
     min-width: 120px;
+    font-size: 18px;
+    line-height: 25px;
   }
 `;
 
@@ -103,6 +122,10 @@ export const EditInputBtn = styled.span`
   border: none;
   width: 20px;
   height: 20px;
+  &:hover {
+    background: #ffdec3;
+    transition: 0.3s;
+  }
   @media screen and (min-width: 768px) {
     width: 32px;
     height: 32px;
@@ -116,7 +139,7 @@ export const EditInputBtn = styled.span`
 export const PhotoEditLabel = styled.label`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -15px;
   display: flex;
   justify-content: center;
   & img {
@@ -126,6 +149,7 @@ export const PhotoEditLabel = styled.label`
     cursor: pointer;
   }
   @media screen and (min-width: 768px) {
+    bottom: 0;
   }
 `;
 
@@ -143,6 +167,7 @@ export const EditInput = styled.input`
   max-width: 380px;
   margin-right: 10px;
   font-size: inherit;
+  font-weight: 400;
   line-height: 138%;
   align-items: center;
   background: #fdf7f2;
@@ -156,6 +181,8 @@ export const EditInput = styled.input`
   &:disabled {
     background-color: #fff;
     border: none;
+  }
+  @media screen and (min-width: 768px) {
   }
 `;
 

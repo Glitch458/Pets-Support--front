@@ -5,12 +5,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   /* width: 100%; */
-  margin: 47px 40px 0 26px;
+  /* margin: 47px 40px 0 26px; */
+  padding: 0 20px 80px 20px;
   @media ${p => p.theme.media.tablet} {
-    margin: 20px 32px 0 32px;
+    padding: 0 32px 100px 32px;
   }
   @media ${p => p.theme.media.desktop} {
-    margin: 0 16px 0 32px;
   }
 `;
 
@@ -18,15 +18,30 @@ export const HeadPetsData = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 40px 20px 25px 20px;
+  @media ${p => p.theme.media.tablet} {
+    padding: 20px 0 24px 0;
+  }
+  @media ${p => p.theme.media.desktop} {
+    padding: 0 0 28px 0;
+  }
 `;
 
 export const AddButton = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  & a {
+    width: 40px;
+    height: 40px;
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
   @media ${p => p.theme.media.tablet} {
     position: absolute;
-    top: 155px;
+    top: 175px;
     right: 0;
     margin-right: 32px;
   }
