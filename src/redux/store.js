@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import { authApi } from './Auth/authApi';
-import authReducer from './Auth/authSlice';
+// import { authApi } from './Auth/authApi';
+import { authReducer } from './Auth/auth-slice';
 import { noticesApi } from './Notices/noticesApi';
 import noticesReducer from './Notices/noticesSlice';
 
@@ -9,7 +8,6 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -17,20 +15,19 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
-const persistAuthConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-};
+// const persistAuthConfig = {
+//   key: 'auth',
+//   storage,
+//   whitelist: ['token'],
+// };
 
-const persistedUserReducer = persistReducer(persistAuthConfig, authReducer);
+// const persistedUserReducer = persistReducer(persistAuthConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedUserReducer,
-    [authApi.reducerPath]: authApi.reducer,
+    auth: authReducer,
     [noticesApi.reducerPath]: noticesApi.reducer,
     notices: noticesReducer,
   },
