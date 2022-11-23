@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import myPets from '../../data/myPets.json';
 import { AddButtonCircleLink } from 'components/Button/Button';
 import PetsList from './PetsList';
@@ -8,20 +9,32 @@ import {
   Title,
   Text,
 } from './PetsData.styled';
+import ModalAddPets from 'components/ModalAddPets/ModalAddPets';
 
 export const PetsData = () => {
-  return (
-    <Container>
-      <HeadPetsData>
-        <Title>My Pets:</Title>
+  const [expanded, setExpanded] = useState(false);
 
-        <AddButton>
-          <Text>Add pet</Text>
-          <AddButtonCircleLink type="button" />
-        </AddButton>
-      </HeadPetsData>
-      <PetsList data={myPets} />
-    </Container>
+  const handleModalToggle = () => {
+    setExpanded(prev => {
+      return !prev;
+    });
+  };
+
+  return (
+    <>
+      <Container>
+        <HeadPetsData>
+          <Title>My Pets:</Title>
+
+          <AddButton onClick={handleModalToggle} type="button">
+            <Text>Add pet</Text>
+            <AddButtonCircleLink />
+          </AddButton>
+        </HeadPetsData>
+        <PetsList data={myPets} />
+      </Container>
+      {expanded && <ModalAddPets handleModalToggle={handleModalToggle} />}
+    </>
   );
 };
 

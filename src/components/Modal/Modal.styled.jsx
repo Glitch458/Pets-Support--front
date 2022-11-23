@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 
 export const ModalWindow = styled.div`
   position: absolute;
-  top: 160px;
+  top: 50%;
   left: 50%;
   margin: 0 auto;
   width: 280px;
@@ -24,7 +24,7 @@ export const ModalWindow = styled.div`
   background-color: ${p => p.theme.colors.white};
 
   @media ${p => p.theme.media.tablet} {
-    top: 267px;
+    /* top: 267px; */
 
     width: 608px;
   }
