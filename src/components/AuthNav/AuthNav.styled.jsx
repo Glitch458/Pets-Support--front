@@ -18,13 +18,13 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
+  height: 35px;
+
   &:not(:first-child) {
-    margin-left: 20px;
+    margin-left: 12px;
   }
-  @media screen and (min-width: 1280px) {
-    font-size: 20px;
-    height: 44px;
-    width: 180px;
+  @media screen and (min-width: 768px) {
+    height: 47px;
   }
 `;
 
