@@ -4,7 +4,7 @@ export const UserContainer = styled.div`
   padding: 0 20px;
   @media screen and (min-width: 768px) {
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 32px;
   }
 `;
 
