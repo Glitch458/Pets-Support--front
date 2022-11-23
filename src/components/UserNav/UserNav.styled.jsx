@@ -12,11 +12,9 @@ export const ListItem = styled.li`
   }
 `;
 
-export const ButtonAuthLink = styled(LinkBasic)`
-  background-color: ${prop =>
-    prop.primary ? prop.theme.colors.accent : prop.theme.colors.white};
-  color: ${prop =>
-    prop.primary ? prop.theme.colors.white : prop.theme.colors.primaryText};
+export const ButtonUserLink = styled(LinkBasic)`
+  background-color: ${p => p.theme.colors.accent};
+  color: ${p => p.theme.colors.white};
 
   @media screen and (min-width: 768px) {
     font-size: 20px;

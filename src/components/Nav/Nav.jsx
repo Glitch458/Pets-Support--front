@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import burger from 'images/icons/burger.svg';
 import {
   NavContainer,
+  NavList,
   NavLink,
   OpenLinksButton,
   NavExtendedContainer,
   NavLinkExtends,
   AuthNavExtendedContainer,
 } from './Nav.styled';
-import { AuthNav } from '../AuthNav/AuthNav';
+import AuthNav from 'components/AuthNav/AuthNav';
+import UserNav from 'components/UserNav/UserNav';
 
 export const Nav = () => {
   const [extendNav, setExtendNav] = useState(false);
+
+  const { token } = useSelector(state => state.auth);
 
   const NavLinkExtendedArray = [
     { href: '/news', title: 'News' },
@@ -42,7 +47,9 @@ export const Nav = () => {
         {extendNav && (
           <NavExtendedContainer>
             <AuthNavExtendedContainer>
-              {isMobile && <AuthNav />}
+              {isMobile && (
+                <NavList>{token ? <UserNav /> : <AuthNav />}</NavList>
+              )}
             </AuthNavExtendedContainer>
             {NavLinkExtendedArray.map(({ href, title }) => {
               return (
@@ -58,7 +65,7 @@ export const Nav = () => {
           </NavExtendedContainer>
         )}
       </NavContainer>
-      {!extendNav && <AuthNav />}
+      {!extendNav && <NavList>{token ? <UserNav /> : <AuthNav />}</NavList>}
     </>
   );
 };
