@@ -15,8 +15,10 @@ export const Item = styled.li`
   width: auto;
   height: 100%;
   padding: 16px 20px;
-  margin-top: 26px;
-  margin-bottom: 20px;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   background: ${p => p.theme.colors.white};
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.medium};

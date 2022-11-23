@@ -5,6 +5,7 @@ import {
   Photo,
   PhotoEditLabel,
   PhotoEdit,
+  UserContainer,
 } from './UserData.styled';
 import UserDataItem from './UserDataItem';
 // временное фото для стилизации
@@ -21,7 +22,7 @@ const data = {
 };
 export default function UserData() {
   return (
-    <div>
+    <UserContainer>
       <Title>My information:</Title>
       <User>
         <UserPhoto>
@@ -36,6 +37,6 @@ export default function UserData() {
         </UserPhoto>
         <UserDataItem data={data} />{' '}
       </User>
-    </div>
+    </UserContainer>
   );
 }
