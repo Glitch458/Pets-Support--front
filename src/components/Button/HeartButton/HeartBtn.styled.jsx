@@ -13,8 +13,12 @@ export const HeartBtn = styled.button`
   color: ${p => p.theme.colors.white};
   stroke: ${p => p.theme.colors.accent};
   transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover,
-  &:focus {
+  &:hover:not(.active),
+  &:focus-visible:not(.active) {
+    color: ${p => p.theme.colors.accent};
+    opacity: 1;
+  }
+  &.active {
     color: ${p => p.theme.colors.accent};
     opacity: 1;
   }

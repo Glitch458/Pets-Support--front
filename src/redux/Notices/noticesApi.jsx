@@ -1,48 +1,68 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const noticesApi = createApi({
-  reducerPath: "noticesApi",
+  reducerPath: 'noticesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pets-support.onrender.com/api",
+    baseUrl: 'https://pets-support.onrender.com/api/notices',
     prepareHeaders: (headers, { getState }) => {
-      const { token = "" } = getState().auth;
+      const { token = '' } = getState().auth;
 
-      headers.set("Authorization", token);
-
+      headers.set('authorization', `Bearer ${token}`);
       return headers;
     },
   }),
-  tagTypes: ["Notices"],
-  endpoints: (builder) => ({
-    // //useGetNoticesQuery
-    // getNotices: builder.query({
-    //   query: () => `/`,
-    //   providesTags: ['Notices'],
-    // }),
+  tagTypes: ['Notices'],
+
+  endpoints: builder => ({
     //useGetNoticesByCategoryQuery
     getNoticesByCategory: builder.query({
-      query: (categoryName) => ({
-        url: `/notices/${categoryName}`,
-        method: "GET",
+      query: (categoryName, userId = '') => ({
+        url: `/${categoryName}`,
+        method: 'GET',
+        // if (
+        //   categoryName === 'sell' ||
+        //   categoryName === 'lost-found' ||
+        //   categoryName === 'for-free'
+        // ) {
+        //   return {
+        //     url: `/${categoryName}`,
+        //     method: 'GET',
+        //   };
+        // }
+        // if (categoryName === 'favorite') {
+        //   return { url: `/ads/${userId}`, method: 'GET' };
+        // }
       }),
-      providesTags: ["Notices"],
+      providesTags: ['Notices'],
     }),
-    //useGetNoticesByIdQuery
-    getNoticesById: builder.query({
-      query: (noticeId) => ({
-        url: `/notices/id/${noticeId}`,
-        method: "GET",
+
+    //useGetNoticeByIdQuery
+    getNoticeById: builder.query({
+      query: noticeId => ({
+        url: `/id/${noticeId}`,
+        method: 'GET',
       }),
-      providesTags: ["Notices"],
+      providesTags: ['Notices'],
     }),
-    //useAddNoticesMutation
-    // addNotices: builder.mutation({
-    //   query: payload => ({
-    //     method: 'POST',
-    //     body: payload,
+
+    //useAddFavoriteNoticeMutation
+    addFavoriteNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/id/${noticeId}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Notices'],
+    }),
+
+    //useGetFavoriteNoticeQuery
+    // getFavoriteNotice: builder.query({
+    //   query: userId => ({
+    //     url: `/ads/${userId}`,
+    //     method: 'GET',
     //   }),
-    //   invalidatesTags: ['Notices'],
+    //   providesTags: ['Notices'],
     // }),
+
     //useDeleteNoticesMutation
     // deleteNotices: builder.mutation({
     //   query: id => ({
@@ -55,8 +75,9 @@ export const noticesApi = createApi({
 });
 export const {
   // useGetNoticesQuery,
-  useGetNoticesByIdQuery,
+  useGetNoticeByIdQuery,
   useGetNoticesByCategoryQuery,
-  //useAddNoticesMutation,
+  useAddFavoriteNoticeMutation,
+  //useGetFavoriteNoticeQuery,
   //useDeleteNoticesMutation,
 } = noticesApi;
