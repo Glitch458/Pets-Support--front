@@ -43,7 +43,7 @@ export const AuthNavExtendedContainer = styled.div`
   justify-content: center;
   background: #fdf7f2;
   margin-bottom: 60px;
-  padding-top: 18px;
+  padding-top: 46px;
 `;
 
 export const NavExtendedContainer = styled.div`
@@ -59,7 +59,7 @@ export const NavExtendedContainer = styled.div`
   background: #fdf7f2;
 
   @media screen and (min-width: 768px) {
-    top: 67px;
+    top: 80px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -95,6 +95,10 @@ export const NavLinkExtends = styled(Link)`
     font-weight: 500;
     letter-spacing: 0.04em;
     line-height: 44px;
+
+    &:not(:last-child) {
+      margin-bottom: 60px;
+    }
   }
   @media screen and (min-width: 1280px) {
     display: none;
@@ -116,4 +120,10 @@ export const OpenLinksButton = styled.button`
   @media screen and (min-width: 1280px) {
     display: none;
   }
+`;
+
+export const Active = styled(Link)`
+  color: #f59256;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
 `;

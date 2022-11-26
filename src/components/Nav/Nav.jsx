@@ -13,14 +13,13 @@ import { AuthNav } from '../AuthNav/AuthNav';
 
 export const Nav = () => {
   const [extendNav, setExtendNav] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const NavLinkExtendedArray = [
     { href: '/news', title: 'News' },
     { href: '/notices/sell', title: 'Find pet' },
     { href: '/friends', title: 'Our friend' },
   ];
-
-  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <>
@@ -44,7 +43,7 @@ export const Nav = () => {
             <AuthNavExtendedContainer>
               {isMobile && <AuthNav />}
             </AuthNavExtendedContainer>
-            {NavLinkExtendedArray.map(({ href, title }) => {
+            {NavLinkExtendedArray.map(({ href, title, isActive }) => {
               return (
                 <NavLinkExtends
                   onClick={() => setExtendNav(false)}
