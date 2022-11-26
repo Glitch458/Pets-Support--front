@@ -22,6 +22,10 @@ export const ListItem = styled.li`
 
   &:not(:first-child) {
     margin-left: 12px;
+
+    @media screen and (min-width: 1280px) {
+      margin-left: 20px;
+    }
   }
   @media screen and (min-width: 768px) {
     height: 47px;
