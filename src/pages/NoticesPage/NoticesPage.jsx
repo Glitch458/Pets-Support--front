@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
+import { renewItems } from 'redux/Notices/noticesSlice';
+
 import Container from 'components/Container/Container';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
@@ -9,9 +12,6 @@ import NoticesCategoriesList from 'components/NoticesCategoriesList/NoticesCateg
 import Spinner from 'components/Spinner/Spinner';
 
 import { NoticesPageMain, NoticePageContainer } from './NoticesPage.styled';
-
-import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { renewItems } from 'redux/Notices/noticesSlice';
 
 const NoticesPage = () => {
   const { categoryName } = useParams();
@@ -26,6 +26,7 @@ const NoticesPage = () => {
   } = useGetNoticesByCategoryQuery(categoryName, {
     skip: categoryName === '',
   });
+
   const noticesItem = useSelector(state => state.notices.items);
   const params = searchParams.get('search') || '';
 
