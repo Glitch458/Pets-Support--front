@@ -26,7 +26,12 @@ export const PetsData = () => {
         <HeadPetsData>
           <Title>My Pets:</Title>
 
-          <AddButton onClick={handleModalToggle} type="button">
+          <AddButton
+            onClick={e => {
+              e.preventDefault();
+              handleModalToggle();
+            }}
+          >
             <Text>Add pet</Text>
             <AddButtonCircleLink />
           </AddButton>

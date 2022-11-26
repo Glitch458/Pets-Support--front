@@ -10,7 +10,6 @@ import {
 } from './PetsList.styled';
 
 export const PetsList = ({ data }) => {
-  console.log(data);
   return (
     <ul>
       {data.map(({ name, url, date, breed, comments }) => (
