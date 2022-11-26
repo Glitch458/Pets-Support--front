@@ -10,6 +10,9 @@ export const noticesSlice = createSlice({
   name: 'noticesReducer',
   initialState,
   reducers: {
+    getFavorite: (state, { payload }) => {
+      state.favoriteNotices = payload;
+    },
     addFavorite: (state, { payload }) => {
       state.favoriteNotices = [...state.favoriteNotices, payload];
     },
@@ -53,6 +56,6 @@ export const noticesSlice = createSlice({
   },
 });
 
-export const { renewItems, addFavorite } = noticesSlice.actions;
+export const { renewItems, getFavorite, addFavorite } = noticesSlice.actions;
 
 export default noticesSlice.reducer;

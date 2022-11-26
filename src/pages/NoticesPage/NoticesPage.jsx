@@ -3,7 +3,7 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { renewItems } from 'redux/Notices/noticesSlice';
+import { renewItems, getFavorite } from 'redux/Notices/noticesSlice';
 
 import Container from 'components/Container/Container';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
@@ -18,6 +18,14 @@ const NoticesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const dispatch = useDispatch();
+  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+
+  const { currentData = [], status } = useGetNoticesByCategoryQuery(
+    'favorite',
+    {
+      skip: favoriteNotices.length !== 0,
+    }
+  );
 
   const {
     data = [],
@@ -34,6 +42,10 @@ const NoticesPage = () => {
   const [normalozeSearchParams, setNormalozeSearchParams] = useState('');
 
   useEffect(() => {
+    if (status === 'fulfilled') {
+      dispatch(getFavorite(currentData));
+    }
+
     if (!isFetching && data) {
       dispatch(renewItems(data));
     }

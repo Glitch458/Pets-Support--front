@@ -36,7 +36,7 @@ const NoticesCategoriesNav = ({ location }) => {
           ))}
         </CategoriesList>
         <CategoriesList>
-          {token !== '' &&
+          {token !== null &&
             privateCategories.map(item => (
               <NavLinkStyled
                 to={`/notices/${Object.values(item)}${location.search}`}

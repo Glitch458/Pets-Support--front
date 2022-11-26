@@ -16,23 +16,22 @@ export const noticesApi = createApi({
   endpoints: builder => ({
     //useGetNoticesByCategoryQuery
     getNoticesByCategory: builder.query({
-      query: (categoryName, userId = '') => ({
-        url: `/${categoryName}`,
-        method: 'GET',
-        // if (
-        //   categoryName === 'sell' ||
-        //   categoryName === 'lost-found' ||
-        //   categoryName === 'for-free'
-        // ) {
-        //   return {
-        //     url: `/${categoryName}`,
-        //     method: 'GET',
-        //   };
-        // }
-        // if (categoryName === 'favorite') {
-        //   return { url: `/ads/${userId}`, method: 'GET' };
-        // }
-      }),
+      query: categoryName => {
+        if (
+          categoryName === 'sell' ||
+          categoryName === 'lost-found' ||
+          categoryName === 'for-free' ||
+          categoryName === 'own'
+        ) {
+          return {
+            url: `/${categoryName}`,
+            method: 'GET',
+          };
+        }
+        if (categoryName === 'favorite') {
+          return { url: `/favorite`, method: 'GET' };
+        }
+      },
       providesTags: ['Notices'],
     }),
 
