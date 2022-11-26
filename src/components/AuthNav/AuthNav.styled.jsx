@@ -1,22 +1,6 @@
 import { LinkBasic } from 'components/Button/Button.styled';
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  display: flex;
-  margin-left: auto;
-
-  @media screen and (min-width: 768px) {
-    display: flex;
-    order: 2;
-  }
-
-  @media screen and (min-width: 1280px) {
-    display: flex;
-    margin-left: 25%;
-    order: 3;
-  }
-`;
-
 export const ListItem = styled.li`
   height: 35px;
 

@@ -10,6 +10,22 @@ export const NavContainer = styled.nav`
   }
 `;
 
+export const NavList = styled.ul`
+  display: flex;
+  margin-left: auto;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    order: 2;
+  }
+
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    margin-left: 25%;
+    order: 3;
+  }
+`;
+
 export const NavLink = styled(Link)`
   display: none;
 

@@ -1,8 +1,8 @@
-import { List, ListItem, ButtonAuthLink } from './AuthNav.styled';
+import { ListItem, ButtonAuthLink } from './AuthNav.styled';
 
-export const AuthNav = () => {
+const AuthNav = () => {
   return (
-    <List>
+    <>
       <ListItem>
         <ButtonAuthLink type="button" href="/login">
           Login
@@ -13,6 +13,8 @@ export const AuthNav = () => {
           Registration
         </ButtonAuthLink>
       </ListItem>
-    </List>
+    </>
   );
 };
+
+export default AuthNav;
