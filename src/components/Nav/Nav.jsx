@@ -5,7 +5,7 @@ import burger from 'images/icons/burger.svg';
 import {
   NavContainer,
   NavList,
-  NavLink,
+  NavItemLink,
   OpenLinksButton,
   NavExtendedContainer,
   NavLinkExtends,
@@ -29,9 +29,9 @@ export const Nav = () => {
   return (
     <>
       <NavContainer extendNav={extendNav}>
-        <NavLink to="/news">News</NavLink>
-        <NavLink to="/notices/sell">Find pet</NavLink>
-        <NavLink to="/friends">Our friend</NavLink>
+        <NavItemLink to="/news">News</NavItemLink>
+        <NavItemLink to="/notices/sell">Find pet</NavItemLink>
+        <NavItemLink to="/friends">Our friend</NavItemLink>
         <OpenLinksButton
           onClick={() => {
             setExtendNav(curr => !curr);
@@ -50,7 +50,7 @@ export const Nav = () => {
                 <NavList>{token ? <UserNav /> : <AuthNav />}</NavList>
               )}
             </AuthNavExtendedContainer>
-            {NavLinkExtendedArray.map(({ href, title, isActive }) => {
+            {NavLinkExtendedArray.map(({ href, title }) => {
               return (
                 <NavLinkExtends
                   onClick={() => setExtendNav(false)}

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const NavContainer = styled.nav`
   order: 3;
@@ -26,7 +26,7 @@ export const NavList = styled.ul`
   }
 `;
 
-export const NavLink = styled(Link)`
+export const NavItemLink = styled(NavLink)`
   display: none;
 
   @media screen and (min-width: 1280px) {
@@ -44,8 +44,13 @@ export const NavLink = styled(Link)`
       margin-left: 80px;
     }
 
-    &:hover,
-    &:focus {
+    &.active {
+      color: #f59256;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    &:hover {
       color: #f59256;
       text-decoration-line: underline;
       text-decoration-thickness: 1px;
@@ -83,7 +88,7 @@ export const NavExtendedContainer = styled.div`
   }
 `;
 
-export const NavLinkExtends = styled(Link)`
+export const NavLinkExtends = styled(NavLink)`
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: 32px;
@@ -98,8 +103,13 @@ export const NavLinkExtends = styled(Link)`
     margin-bottom: 40px;
   }
 
-  &:hover,
-  &:focus {
+  &.active {
+    color: #f59256;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  &:hover {
     color: #f59256;
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
@@ -136,10 +146,4 @@ export const OpenLinksButton = styled.button`
   @media screen and (min-width: 1280px) {
     display: none;
   }
-`;
-
-export const Active = styled(Link)`
-  color: #f59256;
-  text-decoration-line: underline;
-  text-decoration-thickness: 1px;
 `;
