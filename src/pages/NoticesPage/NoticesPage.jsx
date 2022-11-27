@@ -18,12 +18,13 @@ const NoticesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
   const { currentData = [], status } = useGetNoticesByCategoryQuery(
     'favorite',
     {
-      skip: favoriteNotices.length !== 0,
+      skip: favoriteNotices.length !== 0 && token !== null,
     }
   );
 

@@ -45,6 +45,15 @@ export const noticesSlice = createSlice({
         state.favoriteNotices = [...state.favoriteNotices, payload];
       }
     );
+    //deleteFavoriteNotices
+    builder.addMatcher(
+      noticesApi.endpoints.deleteFavoriteNotice.matchRejected,
+      (state, { payload }) => {
+        state.favoriteNotices = state.favoriteNotices.filter(
+          item => item !== payload
+        );
+      }
+    );
 
     //addNotices
     // builder.addMatcher(

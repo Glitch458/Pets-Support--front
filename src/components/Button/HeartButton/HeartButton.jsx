@@ -1,6 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useAddFavoriteNoticeMutation } from 'redux/Notices/noticesApi';
+import {
+  useAddFavoriteNoticeMutation,
+  useDeleteFavoriteNoticeMutation,
+} from 'redux/Notices/noticesApi';
 import { addFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
@@ -19,6 +22,7 @@ export const HeartButton = ({
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
   const [addNotices] = useAddFavoriteNoticeMutation();
+  const [deleteNotices] = useDeleteFavoriteNoticeMutation();
 
   const handleClick = e => {
     e.preventDefault();
@@ -29,6 +33,9 @@ export const HeartButton = ({
         if (!favoriteId) {
           addNotices(noticesId);
           dispatch(addFavorite(noticesId));
+        }
+        if (favoriteId) {
+          deleteNotices(noticesId);
         }
       }
     }
