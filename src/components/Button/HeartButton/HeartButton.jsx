@@ -28,16 +28,14 @@ export const HeartButton = ({
     e.preventDefault();
 
     if (token && token !== null) {
-      if (favoriteNotices.length > 0) {
-        const favoriteId = favoriteNotices.find(elem => elem === noticesId);
-        if (!favoriteId) {
-          addNotices(noticesId);
-          dispatch(addFavorite(noticesId));
-        }
-        if (favoriteId) {
-          deleteNotices(noticesId);
-          dispatch(deleteFavorite(noticesId));
-        }
+      const favoriteId = favoriteNotices.find(elem => elem === noticesId);
+      if (!favoriteId) {
+        addNotices(noticesId);
+        dispatch(addFavorite(noticesId));
+      }
+      if (favoriteId) {
+        deleteNotices(noticesId);
+        dispatch(deleteFavorite(noticesId));
       }
     }
     if (!token || token === null) {
