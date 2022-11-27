@@ -3,7 +3,7 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { renewItems } from 'redux/Notices/noticesSlice';
+import { renewItems, getFavorite } from 'redux/Notices/noticesSlice';
 
 import Container from 'components/Container/Container';
 import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
@@ -18,6 +18,15 @@ const NoticesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
+  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+
+  const { currentData = [], status } = useGetNoticesByCategoryQuery(
+    'favorite',
+    {
+      skip: favoriteNotices.length !== 0 && token !== null,
+    }
+  );
 
   const {
     data = [],
@@ -34,6 +43,10 @@ const NoticesPage = () => {
   const [normalozeSearchParams, setNormalozeSearchParams] = useState('');
 
   useEffect(() => {
+    if (status === 'fulfilled') {
+      dispatch(getFavorite(currentData));
+    }
+
     if (!isFetching && data) {
       dispatch(renewItems(data));
     }
@@ -53,6 +66,7 @@ const NoticesPage = () => {
       });
       setVisibilityItems(searchNoticesItem);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noticesItem, isFetching, data, dispatch, params]);
 
   const handleSearch = value => {

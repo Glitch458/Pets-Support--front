@@ -1,13 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useAddFavoriteNoticeMutation } from 'redux/Notices/noticesApi';
+import {
+  useAddFavoriteNoticeMutation,
+  useDeleteFavoriteNoticeMutation,
+} from 'redux/Notices/noticesApi';
 import { addFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
 
 export const HeartButton = ({
-  onClick,
+  //onClick,
   className,
   children = '',
   text = '',
@@ -16,15 +19,25 @@ export const HeartButton = ({
   const token = useSelector(state => state.auth.token);
   const navigete = useNavigate();
   const dispatch = useDispatch();
+  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
   const [addNotices] = useAddFavoriteNoticeMutation();
+  const [deleteNotices] = useDeleteFavoriteNoticeMutation();
 
   const handleClick = e => {
     e.preventDefault();
 
     if (token && token !== null) {
-      addNotices(noticesId);
-      dispatch(addFavorite(noticesId));
+      if (favoriteNotices.length > 0) {
+        const favoriteId = favoriteNotices.find(elem => elem._id === noticesId);
+        if (!favoriteId) {
+          addNotices(noticesId);
+          dispatch(addFavorite(noticesId));
+        }
+        if (favoriteId) {
+          deleteNotices(noticesId);
+        }
+      }
     }
     if (!token || token === null) {
       navigete('/login');
