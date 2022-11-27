@@ -33,7 +33,7 @@ const NoticesCategoriesList = ({ data }) => {
   const isFavorite = item => {
     let res = false;
     if (favoriteNotices.length > 0) {
-      res = favoriteNotices.find(elem => elem._id === item) ? true : false;
+      res = favoriteNotices.find(elem => elem === item) ? true : false;
     }
     return res;
   };
