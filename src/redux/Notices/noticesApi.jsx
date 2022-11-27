@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const noticesApi = createApi({
   reducerPath: 'noticesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pets-support.onrender.com/api',
+    baseUrl: 'https://pets-support.onrender.com/api/notices',
     prepareHeaders: (headers, { getState }) => {
       const { token = '' } = getState().auth;
 
@@ -24,7 +24,7 @@ export const noticesApi = createApi({
           categoryName === 'own'
         ) {
           return {
-            url: `/notices/${categoryName}`,
+            url: `/${categoryName}`,
             method: 'GET',
           };
         }
@@ -38,7 +38,7 @@ export const noticesApi = createApi({
     //useGetNoticeByIdQuery
     getNoticeById: builder.query({
       query: noticeId => ({
-        url: `/notices/id/${noticeId}`,
+        url: `/id/${noticeId}`,
         method: 'GET',
       }),
       providesTags: ['Notices'],
@@ -47,7 +47,7 @@ export const noticesApi = createApi({
     //useAddFavoriteNoticeMutation
     addFavoriteNotice: builder.mutation({
       query: noticeId => ({
-        url: `/user/favorite/${noticeId}`,
+        url: `/favorite/${noticeId}`,
         method: 'POST',
       }),
       invalidatesTags: ['Notices'],
@@ -56,7 +56,7 @@ export const noticesApi = createApi({
     //useDeleteNoticesMutation
     deleteFavoriteNotice: builder.mutation({
       query: noticeId => ({
-        url: `/user/favorite/${noticeId}`,
+        url: `/favorite/${noticeId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Notices'],
