@@ -29,7 +29,7 @@ export const noticesApi = createApi({
           };
         }
         if (categoryName === 'favorite') {
-          return { url: `/user/favorite`, method: 'GET' };
+          return { url: `/favorite`, method: 'GET' };
         }
       },
       providesTags: ['Notices'],
