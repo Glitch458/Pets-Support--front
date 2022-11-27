@@ -66,6 +66,7 @@ const NoticesPage = () => {
       });
       setVisibilityItems(searchNoticesItem);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noticesItem, isFetching, data, dispatch, params]);
 
   const handleSearch = value => {
