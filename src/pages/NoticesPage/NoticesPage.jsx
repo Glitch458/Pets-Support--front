@@ -44,7 +44,10 @@ const NoticesPage = () => {
 
   useEffect(() => {
     if (status === 'fulfilled') {
-      dispatch(getFavorite(currentData));
+      const favoriteIds = currentData.map(item => {
+        return item._id;
+      });
+      dispatch(getFavorite(favoriteIds));
     }
 
     if (!isFetching && data) {

@@ -4,7 +4,7 @@ import {
   useAddFavoriteNoticeMutation,
   useDeleteFavoriteNoticeMutation,
 } from 'redux/Notices/noticesApi';
-import { addFavorite } from 'redux/Notices/noticesSlice';
+import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
 import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
@@ -29,13 +29,14 @@ export const HeartButton = ({
 
     if (token && token !== null) {
       if (favoriteNotices.length > 0) {
-        const favoriteId = favoriteNotices.find(elem => elem._id === noticesId);
+        const favoriteId = favoriteNotices.find(elem => elem === noticesId);
         if (!favoriteId) {
           addNotices(noticesId);
           dispatch(addFavorite(noticesId));
         }
         if (favoriteId) {
           deleteNotices(noticesId);
+          dispatch(deleteFavorite(noticesId));
         }
       }
     }

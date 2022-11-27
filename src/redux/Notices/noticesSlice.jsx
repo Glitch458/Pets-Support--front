@@ -16,6 +16,11 @@ export const noticesSlice = createSlice({
     addFavorite: (state, { payload }) => {
       state.favoriteNotices = [...state.favoriteNotices, payload];
     },
+    deleteFavorite: (state, { payload }) => {
+      state.favoriteNotices = state.favoriteNotices.filter(
+        item => item !== payload
+      );
+    },
     renewItems: (state, { payload }) => {
       state.items = payload;
     },
@@ -32,27 +37,18 @@ export const noticesSlice = createSlice({
 
     //getNoticesById
     builder.addMatcher(
-      noticesApi.endpoints.getNoticeById.matchFulfilled,
-      (state, { payload }) => {
-        state.items = payload;
-      }
+      noticesApi.endpoints.getNoticeById.matchFulfilled
+      // (state, { payload }) => {
+      //   state.items = payload;
+      // }
     );
 
     //addFavoriteNotice
-    builder.addMatcher(
-      noticesApi.endpoints.addFavoriteNotice.matchRejected,
-      (state, { payload }) => {
-        state.favoriteNotices = [...state.favoriteNotices, payload];
-      }
-    );
+    builder.addMatcher(noticesApi.endpoints.addFavoriteNotice.matchFulfilled);
+
     //deleteFavoriteNotices
     builder.addMatcher(
-      noticesApi.endpoints.deleteFavoriteNotice.matchRejected,
-      (state, { payload }) => {
-        state.favoriteNotices = state.favoriteNotices.filter(
-          item => item !== payload
-        );
-      }
+      noticesApi.endpoints.deleteFavoriteNotice.matchFulfilled
     );
 
     //addNotices
@@ -65,6 +61,7 @@ export const noticesSlice = createSlice({
   },
 });
 
-export const { renewItems, getFavorite, addFavorite } = noticesSlice.actions;
+export const { renewItems, getFavorite, addFavorite, deleteFavorite } =
+  noticesSlice.actions;
 
 export default noticesSlice.reducer;
