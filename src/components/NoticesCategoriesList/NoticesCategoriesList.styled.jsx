@@ -87,10 +87,10 @@ export const CategoryName = styled.div`
   left: 0;
   min-width: 155px;
   padding: 5px 20px;
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 40px 40px 0;
   background-color: rgba(255, 255, 255, 0.6);
   color: ${p => p.theme.colors.primaryText};
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(2px);
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
