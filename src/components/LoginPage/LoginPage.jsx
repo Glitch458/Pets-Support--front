@@ -6,10 +6,11 @@ import { toast } from 'react-toastify';
 import {
     FormContainer,
     FormInput,
-    LoginButton,
+    AuthButton,
     LoginHeader,
     RegisterLink,
     FormText,
+    InputError
 } from './LoginPage.styled'
 
 
@@ -56,10 +57,11 @@ export default function LoginPage() {
                     fullWidth
                     id="email"
                     name="email"
+                    placeholder='Email'
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    placeholder='Email'
                 />
+                {formik.values.email !== '' || formik.errors.email || formik.touched.email ? <InputError>{formik.errors.email}</InputError> : null}
                 <FormInput
                     fullWidth
                     id="password"
@@ -70,9 +72,10 @@ export default function LoginPage() {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                 />
-                <LoginButton variant="contained" fullWidth type="submit">
+                {formik.values.password !== '' || formik.errors.password || formik.touched.password ? <InputError>{formik.errors.password}</InputError> : null}
+                <AuthButton variant="contained" fullWidth type="submit">
                     LOGIN
-                </LoginButton>
+                </AuthButton>
             </form>
             <FormText>Don't have an account?
                 <RegisterLink href="http://localhost:3000/register">Register</RegisterLink>

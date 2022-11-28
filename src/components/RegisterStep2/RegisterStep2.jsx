@@ -3,8 +3,19 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/Auth/auth-operations';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
+import {
+    FormContainer,
+    RegisterHeader,
+    FormInput,
+    AuthButton,
+    BackButton,
+    RegisterLink,
+    FormText,
+    NameError,
+    CityError,
+    PhoneError
+} from './RegisterStep2.styled'
 
 
 const validationSchema = Yup.object({
@@ -53,48 +64,45 @@ export default function SignUpStep1({ data, onSubmit }) {
     });
 
     return (
-        <div>
-            <h2>Registration</h2>
+        <FormContainer>
+            <RegisterHeader>Registration</RegisterHeader>
             <form onSubmit={formik.handleSubmit}>
-                <TextField
-                    fullWidth
+                <FormInput
                     id="name"
                     name="name"
-                    label="Name"
+                    placeholder='Name'
                     value={formik.values.name}
                     onChange={formik.handleChange}
-                    error={formik.touched.name && Boolean(formik.errors.name)}
-                    helperText={formik.touched.name && formik.errors.name}
                 />
-                <TextField
-                    fullWidth
+                {formik.values.name !== '' || formik.errors.name ? <NameError>{formik.errors.name}</NameError> : null}
+                <FormInput
                     id="city"
                     name="city"
-                    label="City, region"
+                    placeholder='City, region'
                     value={formik.values.city}
                     onChange={formik.handleChange}
-                    error={formik.touched.city && Boolean(formik.errors.city)}
-                    helperText={formik.touched.city && formik.errors.city}
                 />
-                <TextField
-                    fullWidth
+                {formik.values.city !== '' || formik.errors.city ? <CityError>{formik.errors.city}</CityError> : null}
+                <FormInput
                     id="phone"
                     name="phone"
-                    label="Phone"
                     type="phone"
                     autoComplete='phone'
+                    placeholder='Phone'
                     value={formik.values.phone}
                     onChange={formik.handleChange}
-                    error={formik.touched.phone && Boolean(formik.errors.phone)}
-                    helperText={formik.touched.phone && formik.errors.phone}
                 />
-                <Button color="primary" variant="contained" fullWidth type="submit">
+                {formik.values.phone !== '' || formik.errors.phone ? <PhoneError>{formik.errors.phone}</PhoneError> : null}
+                <AuthButton color="primary" variant="contained" fullWidth type="submit">
                     Register
-                </Button>
-                <Button color="primary" variant="contained" fullWidth type="button" onClick={onSubmit}>
+                </AuthButton>
+                <BackButton color="primary" variant="contained" fullWidth type="button" onClick={onSubmit}>
                     Back
-                </Button>
+                </BackButton>
             </form>
-        </div>
+            <FormText>Don't have an account?
+                <RegisterLink href="http://localhost:3000/login">Register</RegisterLink>
+            </FormText>
+        </FormContainer>
     );
 }

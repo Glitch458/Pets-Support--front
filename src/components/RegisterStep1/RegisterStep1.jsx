@@ -1,7 +1,16 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {
+    FormContainer,
+    FormInput,
+    AuthButton,
+    RegisterHeader,
+    RegisterLink,
+    FormText,
+    EmailError,
+    PasswordError,
+    ConfirmPasswordError
+} from './RegisterStep1.styled'
 
 
 const validationSchema = Yup.object({
@@ -33,7 +42,7 @@ export default function SignUpStep1({ onSubmit }) {
                     email: values.email,
                     password: values.password
                 })
-                formik.resetForm();
+                // formik.resetForm();
             } else {
                 alert('No password')
             }
@@ -41,33 +50,28 @@ export default function SignUpStep1({ onSubmit }) {
     });
 
     return (
-        <div>
-            <h2>Registration</h2>
+        <FormContainer>
+            <RegisterHeader>Registration</RegisterHeader>
             <form onSubmit={formik.handleSubmit}>
-                <TextField
-                    fullWidth
+                <FormInput
                     id="email"
                     name="email"
-                    label="Email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
+                    placeholder='Email'
                 />
-                <TextField
-                    fullWidth
+                {formik.values.email !== '' || formik.errors.email ? <EmailError>{formik.errors.email}</EmailError> : null}
+                <FormInput
                     id="password"
                     name="password"
-                    label="Password"
                     type="password"
                     autoComplete="password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
+                    placeholder='Password'
                 />
-                <TextField
-                    fullWidth
+                {formik.values.password !== '' || formik.errors.password || formik.touched.password ? <PasswordError>{formik.errors.password}</PasswordError> : null}
+                <FormInput
                     id="confirmPassword"
                     name="confirmPassword"
                     label="Confirm Password"
@@ -75,13 +79,16 @@ export default function SignUpStep1({ onSubmit }) {
                     autoComplete='password'
                     value={formik.values.confirmPassword}
                     onChange={formik.handleChange}
-                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                    placeholder='Confirm Password'
                 />
-                <Button color="primary" variant="contained" fullWidth type="submit">
+                {formik.values.confirmPassword !== '' || formik.errors.confirmPassword || formik.touched.confirmPassword ? <ConfirmPasswordError>{formik.errors.confirmPassword}</ConfirmPasswordError> : null}
+                <AuthButton variant="contained" fullWidth type="submit">
                     Next
-                </Button>
+                </AuthButton>
             </form>
-        </div>
+            <FormText>Don't have an account?
+                <RegisterLink href="http://localhost:3000/login">Register</RegisterLink>
+            </FormText>
+        </FormContainer>
     );
 }
