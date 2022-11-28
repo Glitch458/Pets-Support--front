@@ -38,9 +38,11 @@ const NoticesCategoriesList = ({ data }) => {
     return res;
   };
 
-  const age = date => {
+  const age = (date = '') => {
+    let dateArray = date.split('.');
+    const normalizeDate = `${dateArray[1]}.${dateArray[0]}.${dateArray[2]}`;
     let today = new Date();
-    let birthDate = new Date(date);
+    let birthDate = new Date(normalizeDate);
     let age = today.getFullYear() - birthDate.getFullYear();
 
     let m = today.getMonth() - birthDate.getMonth();
@@ -56,7 +58,19 @@ const NoticesCategoriesList = ({ data }) => {
       }
     }
 
-    return age ? age : m;
+    let resultAge = '';
+
+    if (age === 1) {
+      resultAge = 'one year';
+    }
+    if (age > 1) {
+      resultAge = `${age} years`;
+    }
+    if (age < 1) {
+      const months = today.getMonth() - birthDate.getMonth();
+      resultAge = `${months} months`;
+    }
+    return resultAge;
   };
 
   return (
@@ -85,18 +99,24 @@ const NoticesCategoriesList = ({ data }) => {
           />
           <Title>{item.title}</Title>
           <DetailsList>
-            <DetailsItem key={item.breed}>
-              <span>Breed:</span>
-              {item.breed}
-            </DetailsItem>
-            <DetailsItem key={item.place}>
-              <span>Place:</span>
-              {item.place}
-            </DetailsItem>
-            <DetailsItem key={item.birthday}>
-              <span>Age:</span>
-              {age(item.birthday)}
-            </DetailsItem>
+            {item.breed && (
+              <DetailsItem key={item.breed}>
+                <span>Breed:</span>
+                {item.breed}
+              </DetailsItem>
+            )}
+            {item.place && (
+              <DetailsItem key={item.place}>
+                <span>Place:</span>
+                {item.place}
+              </DetailsItem>
+            )}
+            {item.birthday && (
+              <DetailsItem key={item.birthday}>
+                <span>Age:</span>
+                {age(item.birthday)}
+              </DetailsItem>
+            )}
             {item.category === 'sell' && (
               <DetailsItem key={item.price}>
                 <span>Price:</span>
