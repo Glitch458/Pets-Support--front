@@ -16,7 +16,7 @@ export const NewsItem = ({ title, date, description, url }) => {
       <NewsTitle>{title}</NewsTitle>
       <NewsText>{description}</NewsText>
       <Wrapper>
-        <Time>{format(new Date(date), 'MM/dd/yyyy')}</Time>
+        {date ? <Time>{format(new Date(date), 'MM/dd/yyyy')}</Time>:<p></p>}
         <ReadMoreLink href={url} target="_blank">
           Read more
         </ReadMoreLink>
