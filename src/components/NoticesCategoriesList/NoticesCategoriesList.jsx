@@ -38,7 +38,7 @@ const NoticesCategoriesList = ({ data }) => {
     return res;
   };
 
-  const age = date => {
+  const age = (date = '') => {
     let dateArray = date.split('.');
     const normalizeDate = `${dateArray[1]}.${dateArray[0]}.${dateArray[2]}`;
     let today = new Date();
@@ -99,18 +99,24 @@ const NoticesCategoriesList = ({ data }) => {
           />
           <Title>{item.title}</Title>
           <DetailsList>
-            <DetailsItem key={item.breed}>
-              <span>Breed:</span>
-              {item.breed}
-            </DetailsItem>
-            <DetailsItem key={item.place}>
-              <span>Place:</span>
-              {item.place}
-            </DetailsItem>
-            <DetailsItem key={item.birthday}>
-              <span>Age:</span>
-              {age(item.birthday)}
-            </DetailsItem>
+            {item.breed && (
+              <DetailsItem key={item.breed}>
+                <span>Breed:</span>
+                {item.breed}
+              </DetailsItem>
+            )}
+            {item.place && (
+              <DetailsItem key={item.place}>
+                <span>Place:</span>
+                {item.place}
+              </DetailsItem>
+            )}
+            {item.birthday && (
+              <DetailsItem key={item.birthday}>
+                <span>Age:</span>
+                {age(item.birthday)}
+              </DetailsItem>
+            )}
             {item.category === 'sell' && (
               <DetailsItem key={item.price}>
                 <span>Price:</span>
