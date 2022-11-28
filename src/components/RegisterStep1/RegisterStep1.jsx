@@ -1,5 +1,5 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import {
   FormContainer,
   FormInput,
@@ -10,31 +10,31 @@ import {
   EmailError,
   PasswordError,
   ConfirmPasswordError,
-} from "./RegisterStep1.styled";
+} from './RegisterStep1.styled';
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Неправильний поштовий адрес")
-    .required("Це поле не може бути порожнім"),
+    .email('Неправильний поштовий адрес')
+    .required('Це поле не може бути порожнім'),
   password: Yup.string()
     .trim()
-    .required("Це поле не може бути порожнім")
-    .min(7, "Пароль містить мінімум 7 символів")
-    .max(32, "Пароль містить максимум 32 символи"),
+    .required('Це поле не може бути порожнім')
+    .min(7, 'Пароль містить мінімум 7 символів')
+    .max(32, 'Пароль містить максимум 32 символи'),
   confirmPassword: Yup.string()
-    .required("Це поле не може бути порожнім")
-    .oneOf([Yup.ref("password"), null], "Пароль не співпадає"),
+    .required('Це поле не може бути порожнім')
+    .oneOf([Yup.ref('password'), null], 'Пароль не співпадає'),
 });
 
 export default function SignUpStep1({ onSubmit }) {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       if (values.password === values.confirmPassword) {
         onSubmit({
           email: values.email,
@@ -42,7 +42,7 @@ export default function SignUpStep1({ onSubmit }) {
         });
         // formik.resetForm();
       } else {
-        alert("No password");
+        alert('No password');
       }
     },
   });
@@ -58,7 +58,7 @@ export default function SignUpStep1({ onSubmit }) {
           onChange={formik.handleChange}
           placeholder="Email"
         />
-        {formik.values.email !== "" || formik.errors.email ? (
+        {formik.values.email !== '' || formik.errors.email ? (
           <EmailError>{formik.errors.email}</EmailError>
         ) : null}
         <FormInput
@@ -70,7 +70,7 @@ export default function SignUpStep1({ onSubmit }) {
           onChange={formik.handleChange}
           placeholder="Password"
         />
-        {formik.values.password !== "" ||
+        {formik.values.password !== '' ||
         formik.errors.password ||
         formik.touched.password ? (
           <PasswordError>{formik.errors.password}</PasswordError>
@@ -85,7 +85,7 @@ export default function SignUpStep1({ onSubmit }) {
           onChange={formik.handleChange}
           placeholder="Confirm Password"
         />
-        {formik.values.confirmPassword !== "" ||
+        {formik.values.confirmPassword !== '' ||
         formik.errors.confirmPassword ||
         formik.touched.confirmPassword ? (
           <ConfirmPasswordError>
@@ -98,7 +98,7 @@ export default function SignUpStep1({ onSubmit }) {
       </form>
       <FormText>
         Already have an account?
-        <RegisterLink to="login">Login</RegisterLink>
+        <RegisterLink to="/login">Login</RegisterLink>
       </FormText>
     </FormContainer>
   );

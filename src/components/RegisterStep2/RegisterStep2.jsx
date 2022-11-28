@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import authOperations from "redux/Auth/auth-operations";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/Auth/auth-operations';
 // import Button from '@mui/material/Button';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import {
   FormContainer,
   RegisterHeader,
@@ -15,18 +15,18 @@ import {
   NameError,
   CityError,
   PhoneError,
-} from "./RegisterStep2.styled";
+} from './RegisterStep2.styled';
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .required("Це поле не може бути порожнім")
-    .matches(/^[а-яА-ЯїЇіІЁёa-zA-Z]+$/, "Тільки літери"),
+    .required('Це поле не може бути порожнім')
+    .matches(/^[а-яА-ЯїЇіІЁёa-zA-Z]+$/, 'Тільки літери'),
   city: Yup.string()
-    .required("Це поле не може бути порожнім")
-    .matches(/[A-Z][a-z]+, [A-Z][a-z]*/, "Введіть в форматі: місто, область"),
+    .required('Це поле не може бути порожнім')
+    .matches(/[A-Z][a-z]+, [A-Z][a-z]*/, 'Введіть в форматі: місто, область'),
   phone: Yup.string()
-    .required("Це поле не може бути порожнім")
-    .matches(/^\+380\d{9}$/, "Неправильний номер телефону"),
+    .required('Це поле не може бути порожнім')
+    .matches(/^\+380\d{9}$/, 'Неправильний номер телефону'),
 });
 
 export default function SignUpStep1({ data, onSubmit }) {
@@ -35,12 +35,12 @@ export default function SignUpStep1({ data, onSubmit }) {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      city: "",
-      phone: "",
+      name: '',
+      city: '',
+      phone: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await dispatch(
           authOperations.register({
@@ -53,7 +53,7 @@ export default function SignUpStep1({ data, onSubmit }) {
         );
       } catch (error) {
         toast.error(
-          "Щось пішло не так. Можливо користувач з такою електронною поштою вже існує."
+          'Щось пішло не так. Можливо користувач з такою електронною поштою вже існує.'
         );
       }
       formik.resetForm();
@@ -71,7 +71,7 @@ export default function SignUpStep1({ data, onSubmit }) {
           value={formik.values.name}
           onChange={formik.handleChange}
         />
-        {formik.values.name !== "" || formik.errors.name ? (
+        {formik.values.name !== '' || formik.errors.name ? (
           <NameError>{formik.errors.name}</NameError>
         ) : null}
         <FormInput
@@ -81,7 +81,7 @@ export default function SignUpStep1({ data, onSubmit }) {
           value={formik.values.city}
           onChange={formik.handleChange}
         />
-        {formik.values.city !== "" || formik.errors.city ? (
+        {formik.values.city !== '' || formik.errors.city ? (
           <CityError>{formik.errors.city}</CityError>
         ) : null}
         <FormInput
@@ -93,7 +93,7 @@ export default function SignUpStep1({ data, onSubmit }) {
           value={formik.values.phone}
           onChange={formik.handleChange}
         />
-        {formik.values.phone !== "" || formik.errors.phone ? (
+        {formik.values.phone !== '' || formik.errors.phone ? (
           <PhoneError>{formik.errors.phone}</PhoneError>
         ) : null}
         <AuthButton color="primary" variant="contained" fullWidth type="submit">
@@ -104,13 +104,14 @@ export default function SignUpStep1({ data, onSubmit }) {
           variant="contained"
           fullWidth
           type="button"
-          onClick={onSubmit}>
+          onClick={onSubmit}
+        >
           Back
         </BackButton>
       </form>
       <FormText>
         Already have an account?
-        <RegisterLink to="login">Login</RegisterLink>
+        <RegisterLink to="/login">Login</RegisterLink>
       </FormText>
     </FormContainer>
   );
