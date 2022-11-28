@@ -1,89 +1,87 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme();
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email('Неправильний поштовий адрес')
+        .required('Це поле не може бути порожнім'),
+    password: Yup.string()
+        .trim()
+        .required('Це поле не може бути порожнім')
+        .min(7, 'Пароль містить мінімум 7 символів')
+        .max(32, 'Пароль містить максимум 32 символи'),
+    confirmPassword: Yup.string()
+        .required('Це поле не може бути порожнім')
+        .oneOf([Yup.ref('password'), null], 'Пароль не співпадає'),
+});
 
 export default function SignUpStep1({ onSubmit }) {
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const step1 = {
-            email: data.get('email'),
-            password: data.get('password'),
-        }
-        onSubmit(step1);
-    };
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            confirmPassword: ''
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            if (values.password === values.confirmPassword) {
+                onSubmit({
+                    email: values.email,
+                    password: values.password
+                })
+                formik.resetForm();
+            } else {
+                alert('No password')
+            }
+        },
+    });
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="confirmPassword"
-                            label="Confirm Password"
-                            type="confirmPassword"
-                            id="confirmPassword"
-                            autoComplete="current-password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Next
-                        </Button>
-                    </Box>
-                </Box>
-                Already have an account? <span><a href="http://localhost:3000/login">Login</a></span>
-            </Container>
-        </ThemeProvider>
+        <div>
+            <h2>Registration</h2>
+            <form onSubmit={formik.handleSubmit}>
+                <TextField
+                    fullWidth
+                    id="email"
+                    name="email"
+                    label="Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                />
+                <TextField
+                    fullWidth
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    autoComplete="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
+                />
+                <TextField
+                    fullWidth
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    autoComplete='password'
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                />
+                <Button color="primary" variant="contained" fullWidth type="submit">
+                    Next
+                </Button>
+            </form>
+        </div>
     );
 }

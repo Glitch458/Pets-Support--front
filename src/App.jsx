@@ -1,9 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import authOperations from 'redux/Auth/auth-operations';
 import PublicRoute from 'components/PublicRoute';
 import PrivateRoutes from 'components/PrivateRoute';
+import toastOptions from './helpers/toastOptions';
 
 const SharedLayout = lazy(() => import('components/SharedLayout/SharedLayout'));
 const Homepage = lazy(() => import('pages/Homepage/Homepage'));
@@ -46,6 +49,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer {...toastOptions} />
     </>
   );
 };
