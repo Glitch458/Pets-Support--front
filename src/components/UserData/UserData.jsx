@@ -13,14 +13,7 @@ import photo from './Ellipse 45.jpg';
 // import EditIcon from './icons/editValue.svg';
 import EditPhotoIcon from './icons/editPhoto.svg';
 
-const data = {
-  name: 'anna',
-  email: 'anna00@gmail.com',
-  birthday: '00.00.0000',
-  phone: '+38000000000',
-  city: 'Kiev',
-};
-export default function UserData() {
+const UserData = () => {
   return (
     <UserContainer>
       <Title>My information:</Title>
@@ -35,8 +28,10 @@ export default function UserData() {
             </PhotoEditLabel>
           </form>
         </UserPhoto>
-        <UserDataItem data={data} />{' '}
+        <UserDataItem />
       </User>
     </UserContainer>
   );
-}
+};
+
+export default UserData;

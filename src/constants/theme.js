@@ -4,7 +4,7 @@ export const theme = {
     logo: 'Poppins, sans-serif',
   },
 
-  fontSizes: [12, 14, 16, 18, 20, 24, 28, 32, 48, 64],
+  fontSizes: [12, 14, 16, 18, 20, 24, 28, 32, 36, 48, 64],
 
   fontWeights: {
     regular: 400,

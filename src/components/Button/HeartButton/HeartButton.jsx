@@ -7,7 +7,7 @@ import {
 import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
-import { ReactComponent as IconHeart } from '../../../images/icons/heart.svg';
+import { ReactComponent as IconHeart } from 'images/icons/heart.svg';
 
 export const HeartButton = ({
   //onClick,
