@@ -1,7 +1,7 @@
 import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useEffect } from 'react';
 import {
   Container,
