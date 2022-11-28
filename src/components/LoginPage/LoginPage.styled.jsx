@@ -1,9 +1,8 @@
-import styled from "styled-components";
-// import { theme } from 'constants';
-
-import { /*TextField,*/ Button } from "@mui/material";
+import styled from 'styled-components';
+//import { Button } from '@mui/material';
 
 export const FormContainer = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +49,7 @@ export const FormInput = styled.input`
 }
 `;
 
-export const LoginButton = styled(Button)`
+export const AuthButton = styled(Button)`
     && {
         margin-top: 40px;
         margin-bottom: 40px;
@@ -84,5 +83,17 @@ export const FormText = styled.p`
 export const RegisterLink = styled.a`
     display: inline-block;
     margin-left: 2px;
-    color: ${(p) => p.theme.colors.blue};
+    color: ${p => p.theme.colors.blue};
+`
+
+export const InputError = styled.p`
+    padding: 5px;
+    background-color: white;
+    position: absolute;
+    color: red;
+    margin-bottom: 16px;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
 `;
