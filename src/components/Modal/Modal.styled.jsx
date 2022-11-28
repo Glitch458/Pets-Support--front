@@ -10,6 +10,7 @@ export const Backdrop = styled.div`
   backdrop-filter: blur(5px);
   padding: 0 20px;
   overflow: scroll;
+  z-index: 999999;
 `;
 
 export const ModalWindow = styled.div`
@@ -18,6 +19,7 @@ export const ModalWindow = styled.div`
   left: 50%;
   margin: 0 auto;
   width: 280px;
+  height: auto;
   transform: translate(-50%, -50%);
   border-radius: ${p => p.theme.radii.normal};
   padding: 40px 20px;

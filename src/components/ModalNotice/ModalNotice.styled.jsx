@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { HeartBtn } from 'components/Button/Button.styled';
+//import { HeartBtn } from 'components/Button/Button.styled';
 import { ReactComponent as IconHeart } from '../../../src/images/icons/smallHeart.svg';
 
 import { TrashButton } from 'components/Button/TrashButton/TrashButton';
@@ -58,9 +58,6 @@ const CategoryLabel = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(50px);
   border-radius: 0 20px 20px 0;
-  font-size: ${p => p.theme.fontSizes.xs};
-  font-weight: ${p => p.theme.fontWeights.heading};
-  line-height: ${p => p.theme.lineHeights.body};
 `;
 
 export const ImageThumb = ({ src, alt = '', category }) => (
@@ -172,9 +169,9 @@ export const ModalButton = styled(ModalBtn)`
   }
 `;
 
-export const AddToFavorites = ({ authorized, onClick }) => (
+export const AddToFavorites = ({ authorized, onClick, favoriteId }) => (
   <ModalButton authorized={authorized} onClick={onClick}>
-    Add to
+    {!favoriteId ? 'Add to' : 'Delete'}
     <IconHeart />
   </ModalButton>
 );
