@@ -43,10 +43,13 @@ const newWorkDays =  workDays && workDays.map((day, index) => {
             onMouseLeave={() => {setTimeout(()=>{setIsVisible(true)}, 1000)}}>
             
           {(workDays === null || workDays === undefined)
-            ? <Time>Time: ------------</Time>
+              ? <><Text>Time: </Text>
+                <Text>------------</Text></>
             : <> {workDays[0].isOpen
-                  ? <Time>Time:{workDays[0].from}-{workDays[0].to}</Time>
-                  : <Time>Time:Closed</Time>}
+                ? <><Text>Time:</Text>
+                  <Time>{workDays[0].from}-{workDays[0].to}</Time></>
+                : <><Text>Time:</Text>
+                  <Time>Closed</Time></>}
             {isVisible || <TimeTable shedule={newWorkDays}/>}
             </>} 
           </TextWrapper>
