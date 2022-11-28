@@ -53,12 +53,12 @@ const fetchCurrentUser = createAsyncThunk(
     }
 
     token.set(persistedToken);
-    // try {
-    //   const { data } = await axios.get('/current');
-    //   return data;
-    // } catch (error) {
-    //   throw error;
-    // }
+    try {
+      const { data } = await axios.get('/current');
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
