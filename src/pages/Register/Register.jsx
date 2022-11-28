@@ -7,14 +7,17 @@ export default function SignUp() {
     const [step1, setStep1] = useState({})
 
     const register = (data) => {
-        console.log(data);
-        setIsNext(false)
-        setStep1(data)
+        if (data.email !== '' && data.password !== '') {
+            setIsNext(false)
+            setStep1(data)
+        } else {
+            alert('Not')
+        }
     }
 
     return (
         <>
-            {isNext ? <SignUpStep1 onSubmit={register} /> : <SignUpStep2 data={step1} />}
+            {isNext ? <SignUpStep1 onSubmit={register} /> : <SignUpStep2 data={step1} onSubmit={() => setIsNext(true)} />}
         </>
     )
 

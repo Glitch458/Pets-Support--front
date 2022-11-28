@@ -1,99 +1,99 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/Auth/auth-operations';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { toast } from 'react-toastify';
 
-const theme = createTheme();
 
-export default function SignUpStep2({ data }) {
+const validationSchema = Yup.object({
+    name: Yup.string()
+        .required('Це поле не може бути порожнім')
+        .matches(/^[а-яА-ЯїЇіІЁёa-zA-Z]+$/, 'Тільки літери'),
+    city: Yup.string()
+        .required('Це поле не може бути порожнім')
+        .matches(
+            /[A-Z][a-z]+, [A-Z][a-z]*/,
+            'Введіть в форматі: місто, область'
+        ),
+    phone: Yup.string()
+        .required('Це поле не може бути порожнім')
+        .matches(/^\+380\d{9}$/, 'Неправильний номер телефону')
+});
+
+export default function SignUpStep1({ data, onSubmit }) {
 
     const { email, password } = data;
-
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        dispatch(
-            authOperations.register({
-                email,
-                password,
-                name: data.get('name'),
-                city: data.get('city'),
-                phone: data.get('phone'),
-            })
-        );
-    }
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            city: '',
+            phone: ''
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            try {
+                await dispatch(
+                    authOperations.register({
+                        email,
+                        password,
+                        name: values.name,
+                        city: values.city,
+                        phone: values.phone,
+                    })
+                );
+            } catch (error) {
+                toast.error('Щось пішло не так. Можливо користувач з такою електронною поштою вже існує.');
+            }
+            formik.resetForm();
+        },
+    });
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="name"
-                            label="Name"
-                            name="name"
-                            autoComplete="name"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="city"
-                            label="City, Region"
-                            type="city"
-                            id="city"
-                            autoComplete="city"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="phone"
-                            label="Mobile Phone"
-                            type="phone"
-                            id="phone"
-                            autoComplete="phone"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Register
-                        </Button>
-                    </Box>
-                </Box>
-                Already have an account? <span><a href="http://localhost:3000/login">Login</a></span>
-            </Container>
-        </ThemeProvider>
+        <div>
+            <form onSubmit={formik.handleSubmit}>
+                <TextField
+                    fullWidth
+                    id="name"
+                    name="name"
+                    label="Name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
+                />
+                <TextField
+                    fullWidth
+                    id="city"
+                    name="city"
+                    label="City, region"
+                    value={formik.values.city}
+                    onChange={formik.handleChange}
+                    error={formik.touched.city && Boolean(formik.errors.city)}
+                    helperText={formik.touched.city && formik.errors.city}
+                />
+                <TextField
+                    fullWidth
+                    id="phone"
+                    name="phone"
+                    label="Phone"
+                    type="phone"
+                    autoComplete='phone'
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    helperText={formik.touched.phone && formik.errors.phone}
+                />
+                <Button color="primary" variant="contained" fullWidth type="submit">
+                    Register
+                </Button>
+                <Button color="primary" variant="contained" fullWidth type="button" onClick={onSubmit}>
+                    Back
+                </Button>
+            </form>
+        </div>
     );
 }

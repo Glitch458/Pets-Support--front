@@ -35,7 +35,7 @@ const logIn = createAsyncThunk('auth/login', async creditals => {
 
 const logOut = createAsyncThunk('auth/logout', async () => {
   try {
-    await axios.post('/logout');
+    await axios.get('/logout');
     token.unset();
   } catch (error) {
     console.log(error);
@@ -53,12 +53,12 @@ const fetchCurrentUser = createAsyncThunk(
     }
 
     token.set(persistedToken);
-    // try {
-    //   const { data } = await axios.get('/current');
-    //   return data;
-    // } catch (error) {
-    //   throw error;
-    // }
+    try {
+      const { data } = await axios.get('/current');
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
