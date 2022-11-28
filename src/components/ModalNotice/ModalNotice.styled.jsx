@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { HeartBtn } from "components/Button/Button.styled";
-import { ReactComponent as IconHeart } from "../../../src/images/icons/smallHeart.svg";
+// import { HeartBtn } from 'components/Button/Button.styled';
+import { ReactComponent as IconHeart } from '../../../src/images/icons/smallHeart.svg';
 
-import { TrashButton } from "components/Button/TrashButton/TrashButton";
-import { CloseButton } from "components/Button/CloseButton/CloseButton";
-import { ModalBtn } from "components/Button/ModalBtn/ModalBtn.styled";
+import { TrashButton } from 'components/Button/TrashButton/TrashButton';
+import { CloseButton } from 'components/Button/CloseButton/CloseButton';
+import { ModalBtn } from 'components/Button/ModalBtn/ModalBtn.styled';
 
 export const Container = styled.div`
   position: relative;
@@ -63,7 +63,7 @@ const CategoryLabel = styled.div`
   line-height: ${p => p.theme.lineHeights.body};
 `;
 
-export const ImageThumb = ({ src, alt = "", category }) => (
+export const ImageThumb = ({ src, alt = '', category }) => (
   <ImageWrapper>
     <img src={src} alt={alt} />
     {category && <CategoryLabel>{category}</CategoryLabel>}
@@ -163,16 +163,16 @@ export const Description = ({ text }) => (
 
 export const ModalButton = styled(ModalBtn)`
   color: ${({ authorized, primary }) => {
-    if (!authorized && !primary) return "rgba(17, 17, 17, 0.1)";
-    if (primary) return "white";
-    return "#f59256";
+    if (!authorized && !primary) return 'rgba(17, 17, 17, 0.1)';
+    if (primary) return 'white';
+    return '#f59256';
   }};
   @media ${props => props.theme.media.tabletDesktop} {
     width: 160px;
   }
 `;
 
-export const AddToFavorites = ({authorized, onClick}) => (
+export const AddToFavorites = ({ authorized, onClick }) => (
   <ModalButton authorized={authorized} onClick={onClick}>
     Add to
     <IconHeart />
