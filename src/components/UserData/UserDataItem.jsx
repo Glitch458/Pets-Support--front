@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import authOperations from 'redux/Auth/auth-operations';
+import { useDispatch } from 'react-redux';
+import { useGetCurrentUserQuery } from 'redux/User/userApi';
+
 import {
   InfoItems,
   InfoItem,
@@ -12,13 +16,18 @@ import { ReactComponent as Icon } from './icons/editValue.svg';
 import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
-export default function UserDataItem({ data }) {
-  const [isNamelDisabled, setIsNameDisabled] = useState(true);
+export default function UserDataItem() {
+  const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
   const [isPhoneDisabled, setPhoneDisabled] = useState(true);
   const [isCityDisabled, setCityDisabled] = useState(true);
   const [iconColor, setIconColor] = useState('#f59256');
+
+  const dispatch = useDispatch();
+  const { data = {} } = useGetCurrentUserQuery();
+  const initialUserInfo = data;
+  const [user, setUser] = useState(initialUserInfo);
 
   const handleClickPencil = (isDisabled, setIsDisabled) => {
     if (isDisabled) {
@@ -30,6 +39,10 @@ export default function UserDataItem({ data }) {
     }
   };
 
+  const handleLogout = () => {
+    dispatch(authOperations.logOut());
+  };
+
   return (
     <div>
       <InfoItems>
@@ -38,22 +51,22 @@ export default function UserDataItem({ data }) {
           <Form>
             <EditInput
               type="text"
-              disabled={isNamelDisabled}
-              value={data.name}
+              disabled={isNameDisabled}
+              value={user.name}
             />
             <EditInputBtn
               name="name"
               type="submit"
               onClick={() =>
                 handleClickPencil(
-                  isNamelDisabled,
+                  isNameDisabled,
                   setIsNameDisabled,
                   'name',
-                  data.email
+                  user.name
                 )
               }
             >
-              {isNamelDisabled ? (
+              {isNameDisabled ? (
                 <Icon fill={iconColor} width="9.5" height="9.5" />
               ) : (
                 <Stroke width="9.5" height="9.5" />
@@ -67,7 +80,7 @@ export default function UserDataItem({ data }) {
             <EditInput
               type="text"
               disabled={isEmaillDisabled}
-              value={data.name}
+              value={user.email}
             />
             <EditInputBtn
               name="name"
@@ -77,7 +90,7 @@ export default function UserDataItem({ data }) {
                   isEmaillDisabled,
                   setIsEmailDisabled,
                   'name',
-                  data.email
+                  user.email
                 )
               }
             >
@@ -95,7 +108,7 @@ export default function UserDataItem({ data }) {
             <EditInput
               type="text"
               disabled={isbirthdayDisabled}
-              value={data.birthday}
+              value={user.birthday}
             />
             <EditInputBtn
               name="birthday"
@@ -105,7 +118,7 @@ export default function UserDataItem({ data }) {
                   isbirthdayDisabled,
                   setIsbirthdayDisabled,
                   'name',
-                  data.birthday
+                  user.birthday
                 )
               }
             >
@@ -123,7 +136,7 @@ export default function UserDataItem({ data }) {
             <EditInput
               type="text"
               disabled={isPhoneDisabled}
-              value={data.phone}
+              value={user.phone}
             />
             <EditInputBtn
               name="phone"
@@ -133,7 +146,7 @@ export default function UserDataItem({ data }) {
                   isPhoneDisabled,
                   setPhoneDisabled,
                   'name',
-                  data.phone
+                  user.phone
                 )
               }
             >
@@ -151,7 +164,7 @@ export default function UserDataItem({ data }) {
             <EditInput
               type="text"
               disabled={isCityDisabled}
-              value={data.city}
+              value={user.city}
             />
             <EditInputBtn
               name="city"
@@ -161,7 +174,7 @@ export default function UserDataItem({ data }) {
                   isCityDisabled,
                   setCityDisabled,
                   'name',
-                  data.city
+                  user.city
                 )
               }
             >
@@ -174,7 +187,7 @@ export default function UserDataItem({ data }) {
           </Form>
         </InfoItem>
         <LogOut>
-          <button type="button">
+          <button type="button" onClick={handleLogout}>
             <img src={LogOutIcon} alt="log out" />
             Log Out
           </button>

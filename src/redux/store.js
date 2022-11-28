@@ -5,6 +5,8 @@ import { noticesApi } from './Notices/noticesApi';
 import noticesReducer from './Notices/noticesSlice';
 import { newsApi } from './News/newsApi';
 import newsReducer from './News/newsSlice';
+import { userApi } from './User/userApi';
+import userReducer from './User/userSlice';
 
 import { setupListeners } from '@reduxjs/toolkit/query';
 
@@ -32,8 +34,10 @@ export const store = configureStore({
     auth: authReducer,
     [noticesApi.reducerPath]: noticesApi.reducer,
     [newsApi.reducerPath]: newsApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
     notices: noticesReducer,
     news: newsReducer,
+    user: userReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -42,7 +46,8 @@ export const store = configureStore({
       },
     })
       .concat(noticesApi.middleware)
-      .concat(newsApi.middleware),
+      .concat(newsApi.middleware)
+      .concat(userApi.middleware),
 });
 
 export const persistor = persistStore(store);
