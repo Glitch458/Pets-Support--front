@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import authOperations from 'redux/Auth/auth-operations';
 import { useDispatch } from 'react-redux';
 import { useGetCurrentUserQuery } from 'redux/User/userApi';
@@ -26,8 +26,12 @@ export default function UserDataItem() {
 
   const dispatch = useDispatch();
   const { data = {} } = useGetCurrentUserQuery();
-  const initialUserInfo = data;
-  const [user /*setUser*/] = useState(initialUserInfo);
+  const [user, setUser] = useState('');
+  useEffect(() => {
+    if (data.length !== 0) {
+      setUser(data);
+    }
+  }, [data]);
 
   const handleClickPencil = (isDisabled, setIsDisabled) => {
     if (isDisabled) {
@@ -42,7 +46,6 @@ export default function UserDataItem() {
   const handleLogout = () => {
     dispatch(authOperations.logOut());
   };
-
   return (
     <div>
       <InfoItems>
@@ -52,7 +55,7 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isNameDisabled}
-              value={user.name}
+              value={user.name || ''}
             />
             <EditInputBtn
               name="name"
@@ -80,7 +83,7 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isEmaillDisabled}
-              value={user.email}
+              value={user.email || ''}
             />
             <EditInputBtn
               name="name"
@@ -108,7 +111,7 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isbirthdayDisabled}
-              value={user.birthday}
+              value={user.birthday || ''}
             />
             <EditInputBtn
               name="birthday"
@@ -136,7 +139,7 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isPhoneDisabled}
-              value={user.phone}
+              value={user.phone || ''}
             />
             <EditInputBtn
               name="phone"
@@ -164,7 +167,7 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isCityDisabled}
-              value={user.city}
+              value={user.city || ''}
             />
             <EditInputBtn
               name="city"
