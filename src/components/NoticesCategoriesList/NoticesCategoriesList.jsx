@@ -20,6 +20,7 @@ import {
 const NoticesCategoriesList = ({ data }) => {
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const [detailed, setDetailed] = useState(false);
+  const [noticesId, setNoticesId] = useState('');
 
   const toggleModal = () => {
     setDetailed(prev => {
@@ -125,11 +126,23 @@ const NoticesCategoriesList = ({ data }) => {
             )}
           </DetailsList>
           <ButtonContainer>
-            <ButtonLink onClick={toggleModal}>Learn more</ButtonLink>
+            <ButtonLink
+              onClick={() => {
+                setNoticesId(item._id);
+                toggleModal();
+              }}
+            >
+              Learn more
+            </ButtonLink>
           </ButtonContainer>
         </NoticesCategoriesItem>
       ))}
-      {detailed && <ModalNotice toggleModal={toggleModal}></ModalNotice>}
+      {detailed && (
+        <ModalNotice
+          id={noticesId || ''}
+          toggleModal={toggleModal}
+        ></ModalNotice>
+      )}
     </NoticesCategoriesContainerList>
   );
 };

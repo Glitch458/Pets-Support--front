@@ -70,6 +70,7 @@ export const DetailsItem = styled.li`
   }
 `;
 export const ButtonContainer = styled.div`
+  width: 100%;
   flex-grow: 1;
   align-self: flex-end;
   padding: 0 15px 30px 15px;

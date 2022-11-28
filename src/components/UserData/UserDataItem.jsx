@@ -17,6 +17,12 @@ import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
 export default function UserDataItem() {
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [birthday, setBirthday] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [city, setCity] = useState('');
+
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
@@ -25,9 +31,15 @@ export default function UserDataItem() {
   const [iconColor, setIconColor] = useState('#f59256');
 
   const dispatch = useDispatch();
-  const { data = {} } = useGetCurrentUserQuery();
-  const initialUserInfo = data;
-  const [user, setUser] = useState(initialUserInfo);
+  const { data = [] } = useGetCurrentUserQuery();
+  const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
+
+  // const [user, setUser] = useState();
+  // useEffect(() => {
+  //   if (!isFetching && data.length !== 0) {
+  //     setUser(data);
+  //   }
+  // }, [data, isFetching]);
 
   const handleClickPencil = (isDisabled, setIsDisabled) => {
     if (isDisabled) {
@@ -38,6 +50,8 @@ export default function UserDataItem() {
       setIconColor('#f59256');
     }
   };
+
+  const handleInput = e => {};
 
   const handleLogout = () => {
     dispatch(authOperations.logOut());
@@ -52,7 +66,8 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isNameDisabled}
-              value={user.name}
+              onChange={handleInput}
+              value={name}
             />
             <EditInputBtn
               name="name"
@@ -62,7 +77,7 @@ export default function UserDataItem() {
                   isNameDisabled,
                   setIsNameDisabled,
                   'name',
-                  user.name
+                  name
                 )
               }
             >
@@ -80,7 +95,8 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isEmaillDisabled}
-              value={user.email}
+              onChange={handleInput}
+              value={email}
             />
             <EditInputBtn
               name="name"
@@ -90,7 +106,7 @@ export default function UserDataItem() {
                   isEmaillDisabled,
                   setIsEmailDisabled,
                   'name',
-                  user.email
+                  email
                 )
               }
             >
@@ -108,7 +124,8 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isbirthdayDisabled}
-              value={user.birthday}
+              onChange={handleInput}
+              value={birthday}
             />
             <EditInputBtn
               name="birthday"
@@ -118,7 +135,7 @@ export default function UserDataItem() {
                   isbirthdayDisabled,
                   setIsbirthdayDisabled,
                   'name',
-                  user.birthday
+                  birthday
                 )
               }
             >
@@ -136,7 +153,8 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isPhoneDisabled}
-              value={user.phone}
+              onChange={handleInput}
+              value={phone}
             />
             <EditInputBtn
               name="phone"
@@ -146,7 +164,7 @@ export default function UserDataItem() {
                   isPhoneDisabled,
                   setPhoneDisabled,
                   'name',
-                  user.phone
+                  phone
                 )
               }
             >
@@ -164,18 +182,14 @@ export default function UserDataItem() {
             <EditInput
               type="text"
               disabled={isCityDisabled}
-              value={user.city}
+              onChange={handleInput}
+              value={city}
             />
             <EditInputBtn
               name="city"
               type="submit"
               onClick={() =>
-                handleClickPencil(
-                  isCityDisabled,
-                  setCityDisabled,
-                  'name',
-                  user.city
-                )
+                handleClickPencil(isCityDisabled, setCityDisabled, 'name', city)
               }
             >
               {isCityDisabled ? (

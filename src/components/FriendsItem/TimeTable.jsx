@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid'
-import { TimeList, TimeItem } from "./FriendsItem.styled";
+import { TimeList, TimeItem, Text } from "./FriendsItem.styled";
 
 export const TimeTable = ({ shedule }) => {
     return (<TimeList>
         {shedule.map(item => <TimeItem key={nanoid()}>
             {(item.isOpen)
-            ? <p>{item.day}:{item.from}-{item.to}</p>
-            : <p>{item.day}:Closed</p>}
+            ? <Text>{item.day}:{item.from}-{item.to}</Text>
+            : <Text>{item.day}:Closed</Text>}
         </TimeItem>)}
         </TimeList>
     )

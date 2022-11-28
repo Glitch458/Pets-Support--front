@@ -109,6 +109,7 @@ export const SponsorItem = styled.li`
   flex-direction: column;
   align-items: center;
   margin-bottom: 12px;
+  padding:12px;
   background-color: ${p => p.theme.colors.white};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 20px;
@@ -116,6 +117,7 @@ export const SponsorItem = styled.li`
   @media screen and (min-width: 768px) {
     margin-right: 32px;
     margin-bottom: 32px;
+     padding:16px;
     border-radius: 40px;
   }
   @media screen and (min-width: 1280px) {
@@ -151,4 +153,8 @@ export const TimeList = styled.ul`
 
 export const TimeItem = styled.li`
   margin-bottom: 4px;
+  width:100px;
+  @media screen and (min-width: 768px) {
+    width:120px;
+  }
 `;
