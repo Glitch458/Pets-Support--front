@@ -1,48 +1,49 @@
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import authOperations from 'redux/Auth/auth-operations';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { toast } from 'react-toastify';
 
 
 const validationSchema = Yup.object({
     email: Yup.string()
-        .email('Неправильний поштовий адрес')
+        .email('Email містить помилки')
         .required('Це поле не може бути порожнім'),
     password: Yup.string()
-        .trim()
         .required('Це поле не може бути порожнім')
         .min(7, 'Пароль містить мінімум 7 символів')
         .max(32, 'Пароль містить максимум 32 символи'),
-    confirmPassword: Yup.string()
-        .required('Це поле не може бути порожнім')
-        .oneOf([Yup.ref('password'), null], 'Пароль не співпадає'),
 });
 
-export default function SignUpStep1({ onSubmit }) {
+export default function LoginPage() {
+
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            confirmPassword: ''
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-            if (values.password === values.confirmPassword) {
-                onSubmit({
-                    email: values.email,
-                    password: values.password
-                })
-                formik.resetForm();
-            } else {
-                alert('No password')
+        onSubmit: async (values) => {
+            try {
+                await dispatch(
+                    authOperations.logIn({
+                        email: values.email,
+                        password: values.password
+                    })
+                );
+            } catch (error) {
+                toast.error('Невірна електронна пошта або пароль.');
             }
+            formik.resetForm();
         },
     });
 
     return (
         <div>
-            <h2>Registration</h2>
             <form onSubmit={formik.handleSubmit}>
                 <TextField
                     fullWidth
@@ -66,20 +67,8 @@ export default function SignUpStep1({ onSubmit }) {
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                 />
-                <TextField
-                    fullWidth
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    type="password"
-                    autoComplete='password'
-                    value={formik.values.confirmPassword}
-                    onChange={formik.handleChange}
-                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                />
                 <Button color="primary" variant="contained" fullWidth type="submit">
-                    Next
+                    LOGIN
                 </Button>
             </form>
         </div>

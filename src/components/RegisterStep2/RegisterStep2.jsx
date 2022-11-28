@@ -54,6 +54,7 @@ export default function SignUpStep1({ data, onSubmit }) {
 
     return (
         <div>
+            <h2>Registration</h2>
             <form onSubmit={formik.handleSubmit}>
                 <TextField
                     fullWidth
