@@ -25,7 +25,7 @@ export default function UserDataItem() {
   const [iconColor, setIconColor] = useState('#f59256');
 
   const dispatch = useDispatch();
-  const { data = {} } = useGetCurrentUserQuery();
+  const { data = [] } = useGetCurrentUserQuery();
   const [user, setUser] = useState('');
   useEffect(() => {
     if (data.length !== 0) {
@@ -46,6 +46,7 @@ export default function UserDataItem() {
   const handleLogout = () => {
     dispatch(authOperations.logOut());
   };
+  console.log('REFRESH');
   return (
     <div>
       <InfoItems>
