@@ -111,7 +111,7 @@ export default function SignUpStep1({ data, onSubmit }) {
       </form>
       <FormText>
         Don't have an account?
-        <RegisterLink href="http://localhost:3000/login">Register</RegisterLink>
+        <RegisterLink to="login">Login</RegisterLink>
       </FormText>
     </FormContainer>
   );
