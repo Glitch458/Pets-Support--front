@@ -1,10 +1,16 @@
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 import authOperations from 'redux/Auth/auth-operations';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
+import {
+    FormContainer,
+    FormInput,
+    LoginButton,
+    LoginHeader,
+    RegisterLink,
+    FormText,
+} from './LoginPage.styled'
 
 
 const validationSchema = Yup.object({
@@ -43,34 +49,34 @@ export default function LoginPage() {
     });
 
     return (
-        <div>
+        <FormContainer>
+            <LoginHeader>Login</LoginHeader>
             <form onSubmit={formik.handleSubmit}>
-                <TextField
+                <FormInput
                     fullWidth
                     id="email"
                     name="email"
-                    label="Email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
+                    placeholder='Email'
                 />
-                <TextField
+                <FormInput
                     fullWidth
                     id="password"
                     name="password"
-                    label="Password"
                     type="password"
                     autoComplete="password"
+                    placeholder='Password'
                     value={formik.values.password}
                     onChange={formik.handleChange}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
                 />
-                <Button color="primary" variant="contained" fullWidth type="submit">
+                <LoginButton variant="contained" fullWidth type="submit">
                     LOGIN
-                </Button>
+                </LoginButton>
             </form>
-        </div>
+            <FormText>Don't have an account?
+                <RegisterLink href="http://localhost:3000/register">Register</RegisterLink>
+            </FormText>
+        </FormContainer>
     );
 }

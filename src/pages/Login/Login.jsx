@@ -1,8 +1,11 @@
 import LoginPage from 'components/LoginPage/LoginPage';
+import Container from 'components/Container/Container';
 
 const Login = () => {
     return (
-        <LoginPage />
+        <Container>
+            <LoginPage />
+        </Container>
     )
 };
 
