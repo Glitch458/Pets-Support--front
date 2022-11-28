@@ -27,7 +27,7 @@ export default function UserDataItem() {
   const dispatch = useDispatch();
   const { data = {} } = useGetCurrentUserQuery();
   const initialUserInfo = data;
-  const [user, setUser] = useState(initialUserInfo);
+  const [user /*setUser*/] = useState(initialUserInfo);
 
   const handleClickPencil = (isDisabled, setIsDisabled) => {
     if (isDisabled) {
