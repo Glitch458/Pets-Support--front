@@ -13,7 +13,7 @@ import {
   CloseButton,
 } from './ModalAddPets.styled';
 
-export const ModalAddPets = ({ handleModalToggle }) => {
+const ModalAddPets = ({ handleModalToggle }) => {
   // const [upload, setUpload] = useState();
   // const [uploadUrl, setUploadUrl] = useState([]);
 

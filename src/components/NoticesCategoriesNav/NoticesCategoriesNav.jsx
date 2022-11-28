@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   NoticesCategoriesNavContainer,
@@ -7,6 +8,7 @@ import {
   NavLinkStyled,
 } from './NoticesCategoriesNav.styled';
 import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
+import ModalAddPets from 'components/ModalAddPets/ModalAddPets';
 
 const NoticesCategoriesNav = ({ location }) => {
   const { token } = useSelector(state => state.auth);
@@ -20,6 +22,13 @@ const NoticesCategoriesNav = ({ location }) => {
     { 'Favorite ads': 'favorite' },
     { 'My ads': 'own' },
   ];
+
+  const [expanded, setExpanded] = useState(false);
+  const handleModalToggle = () => {
+    setExpanded(prev => {
+      return !prev;
+    });
+  };
 
   return (
     <NoticesCategoriesNavContainer>
@@ -47,13 +56,19 @@ const NoticesCategoriesNav = ({ location }) => {
             ))}
         </CategoriesList>
       </CategoriesButonContainer>
-      <AddButton>
+      <AddButton
+        onClick={e => {
+          e.preventDefault();
+          handleModalToggle();
+        }}
+      >
         {window.innerWidth < 768 ? (
           <AddButtonCircleLink>Add pet</AddButtonCircleLink>
         ) : (
           <AddButtonLink>Add pet</AddButtonLink>
         )}
       </AddButton>
+      {expanded && <ModalAddPets handleModalToggle={handleModalToggle} />}
     </NoticesCategoriesNavContainer>
   );
 };
