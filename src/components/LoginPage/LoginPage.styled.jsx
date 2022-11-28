@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import { Button } from '@mui/material';
+import styled from "styled-components";
+import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export const FormContainer = styled.div`
   position: relative;
@@ -13,7 +14,7 @@ export const FormContainer = styled.div`
   padding: 60px 0;
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
-  background-color: ${p => p.theme.colors.white};
+  background-color: ${(p) => p.theme.colors.white};
 `;
 
 export const LoginHeader = styled.h2`
@@ -21,8 +22,8 @@ export const LoginHeader = styled.h2`
   letter-spacing: 0.04em;
   line-height: 49px;
   font-size: 36px;
-  font-family: ${p => p.theme.fonts.body};
-  font-weight: ${p => p.theme.fontWeights.medium};
+  font-family: ${(p) => p.theme.fonts.body};
+  font-weight: ${(p) => p.theme.fontWeights.medium};
 `;
 
 export const FormInput = styled.input`
@@ -32,7 +33,7 @@ export const FormInput = styled.input`
   border-radius: 40px;
   padding: 14px 32px;
   font-size: 18px;
-  background-color: ${p => p.theme.colors.background};
+  background-color: ${(p) => p.theme.colors.background};
   &:focus-visible {
     border: 1px solid rgba(245, 146, 86, 0.5);
   }
@@ -40,8 +41,8 @@ export const FormInput = styled.input`
     font-size: 18px;
     letter-spacing: 0.04em;
     line-height: 25px;
-    font-weight: ${p => p.theme.fontWeights.regular};
-    font-family: ${p => p.theme.fonts.body};
+    font-weight: ${(p) => p.theme.fontWeights.regular};
+    font-family: ${(p) => p.theme.fonts.body};
   }
   &:first-child {
     margin-bottom: 16px;
@@ -59,30 +60,30 @@ export const AuthButton = styled(Button)`
     font-size: 20px;
     border: 2px solid rgba(245, 146, 86, 0.5);
     box-shadow: none;
-    background-color: ${p => p.theme.colors.accent};
-    font-family: ${p => p.theme.fonts.body};
-    font-weight: ${p => p.theme.fontWeights.medium};
+    background-color: ${(p) => p.theme.colors.accent};
+    font-family: ${(p) => p.theme.fonts.body};
+    font-weight: ${(p) => p.theme.fontWeights.medium};
   }
   &.css-1fu7jd5-MuiButtonBase-root-MuiButton-root:hover {
     color: black;
     box-shadow: none;
     border: 2px solid rgba(245, 146, 86, 0.5);
-    background-color: ${p => p.theme.colors.white};
+    background-color: ${(p) => p.theme.colors.white};
   }
 `;
 export const FormText = styled.p`
-  font-family: ${p => p.theme.fonts.body};
-  font-weight: ${p => p.theme.fontWeights.regular};
+  font-family: ${(p) => p.theme.fonts.body};
+  font-weight: ${(p) => p.theme.fontWeights.regular};
   font-size: 12px;
   letter-spacing: 0.04em;
   line-height: 16px;
   color: rgba(17, 17, 17, 0.6);
 `;
 
-export const RegisterLink = styled.a`
+export const RegisterLink = styled(NavLink)`
   display: inline-block;
   margin-left: 2px;
-  color: ${p => p.theme.colors.blue};
+  color: ${(p) => p.theme.colors.blue};
 `;
 
 export const InputError = styled.p`
