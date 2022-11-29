@@ -8,6 +8,7 @@ import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
 import { ReactComponent as IconHeart } from 'images/icons/heart.svg';
+import { useEffect } from 'react';
 
 export const HeartButton = ({
   //onClick,
@@ -21,8 +22,19 @@ export const HeartButton = ({
   const dispatch = useDispatch();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
-  const [addNotices] = useAddFavoriteNoticeMutation();
-  const [deleteNotices] = useDeleteFavoriteNoticeMutation();
+  const [addNotices, { isError: errorAdd, isLoading: loadingAdd }] =
+    useAddFavoriteNoticeMutation();
+  const [deleteNotices, { isError: errorDelete, isLoading: loadingDelete }] =
+    useDeleteFavoriteNoticeMutation();
+
+  useEffect(() => {
+    if (!errorAdd && loadingAdd) {
+      dispatch(addFavorite(noticesId));
+    }
+    if (!errorDelete && loadingDelete) {
+      dispatch(deleteFavorite(noticesId));
+    }
+  }, [errorAdd, loadingAdd, errorDelete, loadingDelete, noticesId, dispatch]);
 
   const handleClick = e => {
     e.preventDefault();
@@ -31,11 +43,11 @@ export const HeartButton = ({
       const favoriteId = favoriteNotices.find(elem => elem === noticesId);
       if (!favoriteId) {
         addNotices(noticesId);
-        dispatch(addFavorite(noticesId));
+        //dispatch(addFavorite(noticesId));
       }
       if (favoriteId) {
         deleteNotices(noticesId);
-        dispatch(deleteFavorite(noticesId));
+        // dispatch(deleteFavorite(noticesId));
       }
     }
     if (!token || token === null) {

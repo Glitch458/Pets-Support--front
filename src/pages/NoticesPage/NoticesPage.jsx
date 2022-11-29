@@ -19,12 +19,13 @@ const NoticesPage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const token = useSelector(state => state.auth.token);
-  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+  //const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+  const items = useSelector(state => state.notices.items);
 
   const { currentData = [], isSuccess } = useGetNoticesByCategoryQuery(
     'favorite',
     {
-      skip: favoriteNotices.length !== 0 && token !== null,
+      skip: items.length !== 0 && token !== null,
     }
   );
 
@@ -54,9 +55,9 @@ const NoticesPage = () => {
       dispatch(renewItems(data));
     }
 
-    if (noticesItem.length !== 0) {
-      setVisibilityItems(noticesItem);
-    }
+    //if (noticesItem.length !== 0) {
+    setVisibilityItems(noticesItem);
+    //}
 
     if (params !== '') {
       setNormalozeSearchParams(params.replace('-', ' '));
