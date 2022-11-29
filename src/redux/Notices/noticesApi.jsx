@@ -49,6 +49,16 @@ export const noticesApi = createApi({
       }),
       invalidatesTags: ['Notices'],
     }),
+
+    //useAddNoticeMutation
+    addNotice: builder.mutation({
+      query: payload => ({
+        url: `/`,
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['Notices'],
+    }),
   }),
 });
 export const {
@@ -56,4 +66,5 @@ export const {
   useGetNoticesByCategoryQuery,
   useAddFavoriteNoticeMutation,
   useDeleteFavoriteNoticeMutation,
+  useAddNoticeMutation,
 } = noticesApi;

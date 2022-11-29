@@ -52,12 +52,12 @@ export const noticesSlice = createSlice({
     );
 
     //addNotices
-    // builder.addMatcher(
-    //   noticesApi.endpoints.addNotices.matchFulfilled,
-    //   (state, { payload }) => {
-    //     state.items = [...state.items, payload];
-    //   }
-    // );
+    builder.addMatcher(
+      noticesApi.endpoints.addNotice.matchFulfilled
+      // (state, { payload }) => {
+      //   state.items = [...state.items, payload];
+      // }
+    );
   },
 });
 
