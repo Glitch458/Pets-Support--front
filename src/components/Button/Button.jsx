@@ -6,8 +6,8 @@ import {
   AddLinkBasic,
 } from './Button.styled';
 
-const Button = ({ type = 'button', children }) => {
-  return <ButtonBasic type={type}>{children}</ButtonBasic>;
+const Button = ({ onClick, type = 'button', children }) => {
+  return <ButtonBasic onClick={onClick} type={type}>{children}</ButtonBasic>;
 };
 
 const ButtonLink = ({ onClick, name = '', href = '', children }) => {

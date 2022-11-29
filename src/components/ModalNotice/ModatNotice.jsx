@@ -35,7 +35,7 @@ import modalImage from 'images/pet-cover.jpg';
 
 export const ModalNotice = ({
   id,
-  toggleModal,
+  handleModalToggle,
   handleAddToFavoritesClick,
   favorite,
 }) => {
@@ -67,9 +67,9 @@ export const ModalNotice = ({
   }, [notices, isSuccess]);
 
   useEffect(() => {
-    const clear = handleEscClick(toggleModal);
+    const clear = handleEscClick(handleModalToggle);
     return () => clear();
-  }, [toggleModal]);
+  }, [handleModalToggle]);
 
   // const handleDeleteClick = async () => {
   //   try {
@@ -110,7 +110,7 @@ export const ModalNotice = ({
   };
 
   return (
-    <Modal onCLick={e => handleBackdropClick(e, toggleModal)}>
+    <Modal onCLick={e => handleBackdropClick(e, handleModalToggle)}>
       {/* {console.log(currentUserEmail)} */}
       {/* <Container> */}
       <InfoWrapper>
@@ -140,7 +140,7 @@ export const ModalNotice = ({
         </div>
       </InfoWrapper>
       <Description text={petData.comments} />
-      <Close onClick={toggleModal} />
+      <Close onClick={handleModalToggle} />
       {ownPet /*&& <DeleteButton onClick={handleDeleteClick} ->*/}
       <ActionButtons>
         <AddToFavorites

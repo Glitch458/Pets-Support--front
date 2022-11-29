@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as IconHeart } from '../../../src/images/icons/smallHeart.svg';
 
 import { TrashButton } from 'components/Button/TrashButton/TrashButton';
-import { CloseButton } from 'components/Button/CloseButton/CloseButton';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
 import { ModalBtn } from 'components/Button/ModalBtn/ModalBtn.styled';
 
 export const Container = styled.div`
@@ -195,7 +195,7 @@ export const DeleteButton = styled(TrashButton)`
   right: 20px;
 `;
 
-export const Close = styled(CloseButton)`
+export const Close = styled(CloseBtnn)`
   position: absolute;
   top: 12px;
   right: 20px;
