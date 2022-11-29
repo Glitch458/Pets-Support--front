@@ -71,8 +71,8 @@ export default function SignUpStep1({ onSubmit }) {
           placeholder="Password"
         />
         {formik.values.password !== '' ||
-        formik.errors.password ||
-        formik.touched.password ? (
+          formik.errors.password ||
+          formik.touched.password ? (
           <PasswordError>{formik.errors.password}</PasswordError>
         ) : null}
         <FormInput
@@ -86,13 +86,13 @@ export default function SignUpStep1({ onSubmit }) {
           placeholder="Confirm Password"
         />
         {formik.values.confirmPassword !== '' ||
-        formik.errors.confirmPassword ||
-        formik.touched.confirmPassword ? (
+          formik.errors.confirmPassword ||
+          formik.touched.confirmPassword ? (
           <ConfirmPasswordError>
             {formik.errors.confirmPassword}
           </ConfirmPasswordError>
         ) : null}
-        <AuthButton variant="contained" fullWidth type="submit">
+        <AuthButton type="submit">
           Next
         </AuthButton>
       </form>
