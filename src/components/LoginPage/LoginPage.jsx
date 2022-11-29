@@ -60,8 +60,8 @@ export default function LoginPage() {
           onChange={formik.handleChange}
         />
         {formik.values.email !== "" ||
-        formik.errors.email ||
-        formik.touched.email ? (
+          formik.errors.email ||
+          formik.touched.email ? (
           <InputError>{formik.errors.email}</InputError>
         ) : null}
         <FormInput
@@ -75,11 +75,11 @@ export default function LoginPage() {
           onChange={formik.handleChange}
         />
         {formik.values.password !== "" ||
-        formik.errors.password ||
-        formik.touched.password ? (
+          formik.errors.password ||
+          formik.touched.password ? (
           <InputError>{formik.errors.password}</InputError>
         ) : null}
-        <AuthButton variant="contained" fullWidth type="submit">
+        <AuthButton type="submit">
           LOGIN
         </AuthButton>
       </form>

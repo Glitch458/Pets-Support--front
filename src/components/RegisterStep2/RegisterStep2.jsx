@@ -96,16 +96,10 @@ export default function SignUpStep1({ data, onSubmit }) {
         {formik.values.phone !== '' || formik.errors.phone ? (
           <PhoneError>{formik.errors.phone}</PhoneError>
         ) : null}
-        <AuthButton color="primary" variant="contained" fullWidth type="submit">
+        <AuthButton type="submit">
           Register
         </AuthButton>
-        <BackButton
-          color="primary"
-          variant="contained"
-          fullWidth
-          type="button"
-          onClick={onSubmit}
-        >
+        <BackButton type="button" onClick={onSubmit}>
           Back
         </BackButton>
       </form>
