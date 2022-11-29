@@ -21,7 +21,7 @@ const NoticesPage = () => {
   const token = useSelector(state => state.auth.token);
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
-  const { currentData = [], status } = useGetNoticesByCategoryQuery(
+  const { currentData = [], isSuccess } = useGetNoticesByCategoryQuery(
     'favorite',
     {
       skip: favoriteNotices.length !== 0 && token !== null,
@@ -43,7 +43,7 @@ const NoticesPage = () => {
   const [normalozeSearchParams, setNormalozeSearchParams] = useState('');
 
   useEffect(() => {
-    if (status === 'fulfilled') {
+    if (isSuccess && currentData.length !== 0) {
       const favoriteIds = currentData.map(item => {
         return item._id;
       });
@@ -54,7 +54,9 @@ const NoticesPage = () => {
       dispatch(renewItems(data));
     }
 
-    setVisibilityItems(noticesItem);
+    if (noticesItem.length !== 0) {
+      setVisibilityItems(noticesItem);
+    }
 
     if (params !== '') {
       setNormalozeSearchParams(params.replace('-', ' '));
