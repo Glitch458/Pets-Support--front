@@ -2,7 +2,7 @@ import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 // import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Container,
   Title,
@@ -16,6 +16,13 @@ import {
 const ModalAddPets = ({ handleModalToggle }) => {
   // const [upload, setUpload] = useState();
   // const [uploadUrl, setUploadUrl] = useState([]);
+  const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
+
+  const moveNextRegistration = () => {
+    isFirstRegisterStep
+      ? setIsFirstRegisterStep(false)
+      : setIsFirstRegisterStep(true);
+  };
 
   // const initialValues = {
   //   title: '',
@@ -70,8 +77,8 @@ const ModalAddPets = ({ handleModalToggle }) => {
         </InputCont>
 
         <ActionButtons>
-          <Button>Next</Button>
-          <Button>Cancel</Button>
+          <Button onClick={moveNextRegistration}>Next</Button>
+          <Button onClick={handleModalToggle}>Cancel</Button>
         </ActionButtons>
         <CloseButton onClick={handleModalToggle}>X</CloseButton>
       </Container>
