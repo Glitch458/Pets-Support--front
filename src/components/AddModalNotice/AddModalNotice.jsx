@@ -109,7 +109,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </InputCont>
             </>
           )}
-          {!isFirstRegisterStep && <></>}
+          {!isFirstRegisterStep && <>{/* ВЕРСТКА ВТОРОГО ЭТАПА */}</>}
 
           <ActionButtons>
             {isFirstRegisterStep ? (
