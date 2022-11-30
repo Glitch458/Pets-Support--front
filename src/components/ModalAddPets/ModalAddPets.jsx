@@ -13,6 +13,12 @@ import {
   CloseButton,
 } from './ModalAddPets.styled';
 
+const publicCategories = [
+  { sell: 'sell' },
+  { 'lost/found': 'lost-found' },
+  { 'in good hands': 'for-free' },
+];
+
 const ModalAddPets = ({ handleModalToggle }) => {
   // const [upload, setUpload] = useState();
   // const [uploadUrl, setUploadUrl] = useState([]);
@@ -31,6 +37,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
   //   breed: '',
   //   comments: '',
   // };
+  const handleFormSubmit = e => {};
 
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
@@ -41,44 +48,62 @@ const ModalAddPets = ({ handleModalToggle }) => {
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <Container>
         <Title>Add pet</Title>
-        <InputCont>
-          <TextLabel>Name pet</TextLabel>
-          <TextInput
-            id="name"
-            name="name"
-            placeholder="Type name pet"
-            required
-            minLength="2"
-            maxLength="48"
-            title="Length of title should be 2-16 letters"
-          />
-        </InputCont>
-        <InputCont>
-          <TextLabel>Date of birth</TextLabel>
-          <TextInput
-            id="birthday"
-            name="birthday"
-            placeholder="Type date of birth"
-            required
-            pattern="^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$"
-            title="Birthday should be in format dd.mm.yyyy"
-          />
-        </InputCont>
-        <InputCont>
-          <TextLabel>Breed</TextLabel>
-          <TextInput
-            id="breed"
-            name="breed"
-            placeholder="Type breed"
-            required
-            minLength="2"
-            maxLength="24"
-          />
-        </InputCont>
+        <form onSubmit={handleFormSubmit}>
+          {isFirstRegisterStep && (
+            <>
+              <InputCont></InputCont>
+              <InputCont>
+                <TextLabel>Name pet</TextLabel>
+                <TextInput
+                  id="name"
+                  name="name"
+                  placeholder="Type name pet"
+                  required
+                  minLength="2"
+                  maxLength="48"
+                  title="Length of title should be 2-16 letters"
+                />
+              </InputCont>
+              <InputCont>
+                <TextLabel>Date of birth</TextLabel>
+                <TextInput
+                  id="birthday"
+                  name="birthday"
+                  placeholder="Type date of birth"
+                  required
+                  pattern="^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$"
+                  title="Birthday should be in format dd.mm.yyyy"
+                />
+              </InputCont>
+              <InputCont>
+                <TextLabel>Breed</TextLabel>
+                <TextInput
+                  id="breed"
+                  name="breed"
+                  placeholder="Type breed"
+                  required
+                  minLength="2"
+                  maxLength="24"
+                />
+              </InputCont>
+            </>
+          )}
+          {!isFirstRegisterStep && (
+            <>{publicCategories.map(item => console.log(item))}</>
+          )}
+        </form>
 
         <ActionButtons>
-          <Button onClick={moveNextRegistration}>Next</Button>
-          <Button onClick={handleModalToggle}>Cancel</Button>
+          {isFirstRegisterStep ? (
+            <Button onClick={handleModalToggle}>Cancel</Button>
+          ) : (
+            <Button onClick={moveNextRegistration}>Back</Button>
+          )}
+          {isFirstRegisterStep ? (
+            <Button onClick={moveNextRegistration}>Next</Button>
+          ) : (
+            <Button type="submit">Done</Button>
+          )}
         </ActionButtons>
         <CloseButton onClick={handleModalToggle}>X</CloseButton>
       </Container>
