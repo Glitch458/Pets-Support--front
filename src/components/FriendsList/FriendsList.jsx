@@ -1,13 +1,12 @@
-import sponsors from '../../data/sponsors.json';
 import { FriendsItem } from 'components/FriendsItem/FriendsItem';
 import { List, Title } from './FriendsList.styled';
 
-const FriendsList = () => {
+const FriendsList = ({ friends }) => {
   return (
     <>
       <Title>Our Friends</Title>
       <List>
-        {sponsors.map(
+        {friends.map(
           ({
             title,
             url,

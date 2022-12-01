@@ -7,6 +7,8 @@ import { newsApi } from './News/newsApi';
 import newsReducer from './News/newsSlice';
 import { userApi } from './User/userApi';
 import userReducer from './User/userSlice';
+import { friendsApi } from './Friends/friendsApi';
+import friendsReducer from './Friends/friendsSlice';
 
 import { setupListeners } from '@reduxjs/toolkit/query';
 
@@ -31,13 +33,15 @@ import {
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
     [noticesApi.reducerPath]: noticesApi.reducer,
     [newsApi.reducerPath]: newsApi.reducer,
+    [friendsApi.reducerPath]: friendsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    auth: authReducer,
     notices: noticesReducer,
     news: newsReducer,
     user: userReducer,
+    friends: friendsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -47,7 +51,8 @@ export const store = configureStore({
     })
       .concat(noticesApi.middleware)
       .concat(newsApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(friendsApi.middleware),
 });
 
 export const persistor = persistStore(store);
