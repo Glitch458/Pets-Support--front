@@ -46,6 +46,7 @@ const NoticesCategoriesList = () => {
       });
       dispatch(getFavorite(favoriteIds));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
