@@ -1,13 +1,12 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState /*useMemo*/ } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { Button } from 'components/Button/Button';
+//import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import ImgCover from 'images/pet-cover.jpg';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import {
-  //notifySuccess,
-  /*notifyError,*/ notifyWarning,
+  /*notifySuccess, notifyError,*/ notifyWarning,
 } from 'helpers/toastNotify';
 import {
   useGetNoticeByIdQuery,
@@ -49,27 +48,22 @@ export const ModalNotice = ({
   const [addNotices] = useAddFavoriteNoticeMutation();
   const [deleteNotices] = useDeleteFavoriteNoticeMutation();
 
-  const { data: currentUser /*, isFetching, isError */ } =
+  const { data: currentUser /*, isFetching , isError */ } =
     useGetCurrentUserQuery();
-  const [currentUserEmail, setCurrentUserEmail] = useState('');
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log(currentUser.email);
-      console.log(currentUser.phone);
-      setCurrentUserEmail(currentUser.email);
-    }
-  }, [currentUser]);
-
-  const ownPet = useMemo(
-    () => petData?.owner?.email === currentUserEmail,
-    [currentUserEmail, petData?.owner?.email]
-  );
+  // const ownPet = useMemo(
+  //   () => petData?.email === currentUserEmail,
+  //   [currentUserEmail, petData?.email]
+  // );
 
   useEffect(() => {
     if (!isSuccess) return;
-    setPetData(notices);
-  }, [notices, isSuccess]);
+    if (currentUser) {
+      const email = currentUser.email;
+      const phone = currentUser.phone;
+      setPetData(prevState => ({ ...prevState, ...notices, email, phone }));
+    }
+  }, [notices, isSuccess, currentUser]);
 
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
@@ -78,18 +72,18 @@ export const ModalNotice = ({
 
   // const handleDeleteClick = async () => {
   //   try {
-  //     await deleteNotice(id);
+  //     await deleteNotices(id);
   //     notifySuccess('Deleted!');
-  //     toggleModal();
+  //     //toggleModal();
   //   } catch ({ response: { data } }) {
   //     notifyError(data.message);
   //   }
   // };
 
   const handleContactClick = () => {
-    if (!petData?.owner?.phone)
+    if (!petData?.phone)
       return notifyWarning("Owner hasn't provided phone number");
-    window.open(`tel:${petData.owner.phone}`);
+    window.open(`tel:${petData.phone}`);
   };
 
   handleAddToFavoritesClick = () => {
@@ -124,26 +118,22 @@ export const ModalNotice = ({
         <div>
           <Title>{petData.title}</Title>
           <ul>
-            {PET_MODAL_KEYS.map(({ label, key, nested, values, category }) => {
-              if (nested) {
-                return values.map(({ field, label }) => (
-                  <InfoItem
-                    key={field}
-                    label={label}
-                    //data={petData[key] && petData[key][field]}
-                  />
-                ));
-              }
-              if (category && category !== petData.category) return null;
-
-              return <InfoItem key={key} label={label} data={petData[key]} />;
-            })}
+            {petData &&
+              PET_MODAL_KEYS.map(({ label, key, nested, values, category }) => {
+                if (nested) {
+                  return values.map(({ field, label }) => (
+                    <InfoItem key={field} label={label} data />
+                  ));
+                }
+                if (category && category !== petData.category) return null;
+                return <InfoItem key={key} label={label} data={petData[key]} />;
+              })}
           </ul>
         </div>
       </InfoWrapper>
       <Description text={petData.comments} />
       <Close onClick={handleModalToggle} />
-      {ownPet /*&& <DeleteButton onClick={handleDeleteClick} ->*/}
+      {/* {ownPet && <DeleteButton onClick={handleDeleteClick} />} */}
       <ActionButtons>
         <AddToFavorites
           authorized={!favorite}

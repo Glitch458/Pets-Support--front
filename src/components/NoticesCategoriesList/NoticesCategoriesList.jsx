@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import NoticesCategoriesItem from 'components/NoticesCategoriesItem/NoticesCategoriesItem';
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
 import { getFavorite } from 'redux/Notices/noticesSlice';
-import { renewItems } from 'redux/Notices/noticesSlice';
+//import { renewItems } from 'redux/Notices/noticesSlice';
 import Spinner from 'components/Spinner/Spinner';
 import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
@@ -12,9 +12,10 @@ const NoticesCategoriesList = () => {
   const [searchParams /*setSearchParams*/] = useSearchParams();
   const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const noticesItem = useSelector(state => state.notices.items);
+  //const noticesItem = useSelector(state => state.notices.items);
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
+  const [items, setItems] = useState([]);
   const [visibilityItems, setVisibilityItems] = useState([]);
 
   //get serch params
@@ -50,14 +51,16 @@ const NoticesCategoriesList = () => {
 
   useEffect(() => {
     if (!isFetching && data) {
-      dispatch(renewItems(data));
+      setItems(data);
     }
+  }, [data]);
 
-    setVisibilityItems(noticesItem);
+  useEffect(() => {
+    setVisibilityItems(items);
 
     if (params !== '') {
       const arrayOfParams = params.toLowerCase().split('-');
-      const searchNoticesItem = noticesItem.filter(item => {
+      const searchNoticesItem = items.filter(item => {
         const arr = arrayOfParams.filter(arrayOfParamsItem => {
           return item.title.toLowerCase().includes(arrayOfParamsItem);
         });
@@ -66,11 +69,11 @@ const NoticesCategoriesList = () => {
       setVisibilityItems(searchNoticesItem);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [noticesItem, params, data]);
+  }, [items, params]);
 
   return (
     <NoticesCategoriesContainerList>
-      {console.log('list')}
+      {/* {console.log('list')} */}
       {isFetching && visibilityItems.length === 0 && <Spinner />}
 
       {!isFetching && visibilityItems.length === 0 && (

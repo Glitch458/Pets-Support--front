@@ -20,19 +20,27 @@ export const PET_MODAL_KEYS = [
     key: 'sex',
   },
   {
-    key: 'owner',
-    nested: true,
-    values: [
-      {
-        label: 'Email:',
-        field: 'email',
-      },
-      {
-        label: 'Phone:',
-        field: 'phone',
-      },
-    ],
+    label: 'Email:',
+    key: 'email',
   },
+  {
+    label: 'Phone:',
+    key: 'phone',
+  },
+  // {
+  //   key: 'owner',
+  //   nested: true,
+  //   values: [
+  //     {
+  //       label: 'Email:',
+  //       field: 'email',
+  //     },
+  //     {
+  //       label: 'Phone:',
+  //       field: 'phone',
+  //     },
+  //   ],
+  // },
   {
     label: 'Sell:',
     key: 'price',
