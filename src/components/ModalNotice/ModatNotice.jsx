@@ -110,7 +110,7 @@ export const ModalNotice = ({
   };
 
   return (
-    <Modal onCLick={e => handleBackdropClick(e, handleModalToggle)}>
+    <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       {/* {console.log(currentUserEmail)} */}
       {/* <Container> */}
       <InfoWrapper>
