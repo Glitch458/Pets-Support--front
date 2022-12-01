@@ -4,12 +4,14 @@ import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useEffect, useState } from 'react';
 import {
   Container,
+  WrapForm,
   Title,
   InputCont,
   TextLabel,
   TextInput,
   ActionButtons,
-  CloseButton,
+  CloseBtn,
+  ModalBtn,
 } from './ModalAddPets.styled';
 
 const ModalAddPets = ({ handleModalToggle }) => {
@@ -40,11 +42,11 @@ const ModalAddPets = ({ handleModalToggle }) => {
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <Container>
+        <CloseBtn onClick={handleModalToggle} />
         <Title>Add pet</Title>
-        <form onSubmit={handleFormSubmit}>
+        <WrapForm onSubmit={handleFormSubmit}>
           {isFirstRegisterStep && (
             <>
-              <InputCont></InputCont>
               <InputCont>
                 <TextLabel>Name pet</TextLabel>
                 <TextInput
@@ -82,21 +84,20 @@ const ModalAddPets = ({ handleModalToggle }) => {
             </>
           )}
           {!isFirstRegisterStep && <></>}
-        </form>
+        </WrapForm>
 
         <ActionButtons>
           {isFirstRegisterStep ? (
-            <Button onClick={handleModalToggle}>Cancel</Button>
+            <ModalBtn onClick={handleModalToggle}>Cancel</ModalBtn>
           ) : (
-            <Button onClick={moveNextRegistration}>Back</Button>
+            <ModalBtn onClick={moveNextRegistration}>Back</ModalBtn>
           )}
           {isFirstRegisterStep ? (
-            <Button onClick={moveNextRegistration}>Next</Button>
+            <ModalBtn onClick={moveNextRegistration}>Next</ModalBtn>
           ) : (
-            <Button type="submit">Done</Button>
+            <ModalBtn type="submit">Done</ModalBtn>
           )}
         </ActionButtons>
-        <CloseButton onClick={handleModalToggle}>X</CloseButton>
       </Container>
     </Modal>
   );
