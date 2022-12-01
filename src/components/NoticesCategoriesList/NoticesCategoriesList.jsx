@@ -9,7 +9,7 @@ import Spinner from 'components/Spinner/Spinner';
 import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams /*setSearchParams*/] = useSearchParams();
   const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const noticesItem = useSelector(state => state.notices.items);
@@ -63,6 +63,7 @@ const NoticesCategoriesList = () => {
       });
       setVisibilityItems(searchNoticesItem);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noticesItem, params, data]);
 
   return (
