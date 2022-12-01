@@ -10,10 +10,11 @@ export const Backdrop = styled.div`
   backdrop-filter: blur(5px);
   padding: 0 20px;
   overflow: scroll;
-  z-index: 999999;
+  z-index: 999;
 `;
 
 export const ModalWindow = styled.div`
+box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
