@@ -1,23 +1,13 @@
 import styled from 'styled-components';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
 
 export const Container = styled.div`
-  /* text-align: center; */
-  /* display: inline-block;
-  width: 100px;
-  height: 100px; */
+  padding: 40px 20px;
 
-  /* padding: 60px 20px 40px 20px; */
-
-  @media (max-width: 767px) {
-    max-width: 500px;
-  }
   @media ${p => p.theme.media.tablet} {
-    padding: 32px 20px;
-    /* width: 704px; */
-  }
-  @media ${p => p.theme.media.desktop} {
-    padding: 32px 20px;
-    /* width: 704px; */
+    max-width: 500px;
+    padding: 40px 80px;
   }
 `;
 
@@ -34,11 +24,23 @@ export const Title = styled.h3`
   }
 `;
 
-export const CloseButton = styled.button`
+export const CloseBtn = styled(CloseBtnn)`
   position: absolute;
-  top: 18px;
+  top: 20px;
   right: 20px;
-  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  @media ${p => p.theme.media.desktop} {
+    top: 24px;
+    right: 24px;
+  }
+`;
+
+export const WrapForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const InputCont = styled.div`
@@ -63,18 +65,13 @@ export const TextLabel = styled.label`
     font-size: 24px;
     line-height: 1.4;
   }
-  @media ${p => p.theme.media.desktop} {
-    margin-bottom: 12px;
-    font-size: 24px;
-    line-height: 1.4;
-  }
 `;
 
 export const TextInput = styled.input`
   display: block;
   padding-left: 14px;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  width: 240px;
+  width: 222px;
   height: 40px;
   border-radius: ${p => p.theme.radii.normal};
   ::placeholder {
@@ -87,7 +84,7 @@ export const TextInput = styled.input`
   }
 
   @media ${p => p.theme.media.tablet} {
-    width: 448px;
+    width: 430px;
     height: 48px;
     ::placeholder {
       font-size: ${p => p.theme.fontSizes[2]}px;
@@ -95,21 +92,20 @@ export const TextInput = styled.input`
   }
 `;
 
-// export const ModalButton = styled(ModalBtn)`
-//   @media ${props => props.theme.media.tabletDesktop} {
-//     width: 160px;
-//   }
-// `;
-
 export const ActionButtons = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
   gap: 12px;
   @media ${p => p.theme.media.tablet} {
-    width: 332px;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: center;
     gap: 8px;
-    margin-left: auto;
   }
+`;
+
+export const ModalBtn = styled(ModalButton)`
+  max-width: 240px;
+  width: 240px;
 `;
