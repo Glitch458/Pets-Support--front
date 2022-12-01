@@ -71,7 +71,6 @@ const NoticesCategoriesList = () => {
 
   return (
     <NoticesCategoriesContainerList>
-      {console.log('list')}
       {isFetching && visibilityItems.length === 0 && <Spinner />}
 
       {!isFetching && visibilityItems.length === 0 && (

@@ -95,6 +95,49 @@ export const TextInput = styled.input`
   }
 `;
 
+export const RadioGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
+
+export const RadioLabel = styled.label`
+  margin-bottom: 16px;
+`;
+
+export const RadioInput = styled.input`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  &:checked + div {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
+  }
+`;
+
+export const RadioButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  border: 2px solid #f59256;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
 // export const ModalButton = styled(ModalBtn)`
 //   @media ${props => props.theme.media.tabletDesktop} {
 //     width: 160px;
