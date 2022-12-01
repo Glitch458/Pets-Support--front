@@ -6,21 +6,21 @@ const initialState = {
 };
 
 export const friendsSlice = createSlice({
-    name: 'friendsReducer',
-    initialState,
-    reducers: {
-        newItems: (state, { payload }) => {
-            state.items = payload;
-        }
+  name: 'friendsReducer',
+  initialState,
+  reducers: {
+    newItems: (state, { payload }) => {
+      state.items = payload;
     },
-    extraReducers: builder => {
-        builder.addMatcher(
-            friendsApi.endpoints.getFriends.matchFulfilled,
-            (state, { payload }) => {
-               state.items=payload
-           }
-       ) 
-    }
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      friendsApi.endpoints.getFriends.matchFulfilled,
+      (state, { payload }) => {
+        state.items = payload;
+      }
+    );
+  },
 });
 
 export const { newItems } = friendsSlice.actions;
