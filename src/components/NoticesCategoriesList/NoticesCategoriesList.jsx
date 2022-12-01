@@ -1,148 +1,89 @@
-// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import ImgCover from 'images/pet-cover.jpg';
-import { ButtonLink } from 'components/Button/Button';
-import { ModalNotice } from '../ModalNotice/ModatNotice';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useSearchParams } from 'react-router-dom';
+import NoticesCategoriesItem from 'components/NoticesCategoriesItem/NoticesCategoriesItem';
+import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
+import { getFavorite } from 'redux/Notices/noticesSlice';
+import { renewItems } from 'redux/Notices/noticesSlice';
+import Spinner from 'components/Spinner/Spinner';
+import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
-import {
-  NoticesCategoriesContainerList,
-  NoticesCategoriesItem,
-  Img,
-  Title,
-  DetailsList,
-  DetailsItem,
-  ButtonContainer,
-  CategoryName,
-  AddToFavorites,
-} from './NoticesCategoriesList.styled';
-
-const NoticesCategoriesList = ({ data }) => {
+const NoticesCategoriesList = () => {
+  const [searchParams /*setSearchParams*/] = useSearchParams();
+  const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const [detailed, setDetailed] = useState(false);
-  const [noticesId, setNoticesId] = useState('');
+  const noticesItem = useSelector(state => state.notices.items);
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  const [visibilityItems, setVisibilityItems] = useState([]);
 
-  const toggleModal = () => {
-    setDetailed(prev => {
-      return !prev;
-    });
-  };
-  const imgPath = url => {
-    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
-  };
+  //get serch params
+  const params = searchParams.get('search') || '';
+  //const params = 'cat';
 
-  const isFavorite = item => {
-    let res = false;
-    if (favoriteNotices.length > 0) {
-      res = favoriteNotices.find(elem => elem === item) ? true : false;
+  // Get favotite Notices
+  const favoriteCondition = favoriteNotices.length !== 0 || token === null;
+  const { data: favoriteData = [], isSuccess } = useGetNoticesByCategoryQuery(
+    'favorite',
+    {
+      skip: favoriteCondition === true,
     }
-    return res;
-  };
+  );
 
-  const age = (date = '') => {
-    let dateArray = date.split('.');
-    const normalizeDate = `${dateArray[1]}.${dateArray[0]}.${dateArray[2]}`;
-    let today = new Date();
-    let birthDate = new Date(normalizeDate);
-    let age = today.getFullYear() - birthDate.getFullYear();
+  //Get notices for category
+  const {
+    data = [],
+    isFetching,
+    isError,
+  } = useGetNoticesByCategoryQuery(categoryName, {
+    skip: categoryName === '',
+  });
 
-    let m = today.getMonth() - birthDate.getMonth();
-    let d = today.getDay() - birthDate.getDay();
-
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    if (age === 0) {
-      m = 12 + m;
-      if (d < 0 || (d === 0 && today.getDate() < birthDate.getDate())) {
-        m--;
-      }
+  useEffect(() => {
+    if (isSuccess && favoriteData.length !== 0) {
+      const favoriteIds = favoriteData.map(item => {
+        return item._id;
+      });
+      dispatch(getFavorite(favoriteIds));
     }
 
-    let resultAge = '';
+    if (!isFetching && data) {
+      dispatch(renewItems(data));
+    }
 
-    if (age === 1) {
-      resultAge = 'one year';
+    setVisibilityItems(noticesItem);
+
+    if (params !== '') {
+      const arrayOfParams = params.toLowerCase().split('-');
+      const searchNoticesItem = noticesItem.filter(item => {
+        const arr = arrayOfParams.filter(arrayOfParamsItem => {
+          return item.title.toLowerCase().includes(arrayOfParamsItem);
+        });
+        return arr.length > 0 ? item : NaN;
+      });
+      setVisibilityItems(searchNoticesItem);
     }
-    if (age > 1) {
-      resultAge = `${age} years`;
-    }
-    if (age < 1) {
-      const months = today.getMonth() - birthDate.getMonth();
-      resultAge = `${months} months`;
-    }
-    return resultAge;
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [noticesItem, params, data]);
 
   return (
     <NoticesCategoriesContainerList>
-      {data.map(item => (
-        <NoticesCategoriesItem key={item._id}>
-          <CategoryName>{item.category}</CategoryName>
-          <AddToFavorites
-            type="button"
-            noticesId={item._id}
-            className={isFavorite(item._id) ? 'active' : ''}
-          >
-            {/* <FavoriteBorderIcon
-              sx={{
-                width: 28,
-                height: 28,
-                color: "#F59256",
-              }}
-            /> */}
-          </AddToFavorites>
-          <Img
-            src={imgPath(item.photoURL)}
-            alt={item.breed}
-            height={328}
-            widht={328}
-          />
-          <Title>{item.title}</Title>
-          <DetailsList>
-            {item.breed && (
-              <DetailsItem key={item.breed}>
-                <span>Breed:</span>
-                {item.breed}
-              </DetailsItem>
-            )}
-            {item.place && (
-              <DetailsItem key={item.place}>
-                <span>Place:</span>
-                {item.place}
-              </DetailsItem>
-            )}
-            {item.birthday && (
-              <DetailsItem key={item.birthday}>
-                <span>Age:</span>
-                {age(item.birthday)}
-              </DetailsItem>
-            )}
-            {item.category === 'sell' && (
-              <DetailsItem key={item.price}>
-                <span>Price:</span>
-                {item.price ? item.price : '0'}
-              </DetailsItem>
-            )}
-          </DetailsList>
-          <ButtonContainer>
-            <ButtonLink
-              onClick={() => {
-                setNoticesId(item._id);
-                toggleModal();
-              }}
-            >
-              Learn more
-            </ButtonLink>
-          </ButtonContainer>
-        </NoticesCategoriesItem>
-      ))}
-      {detailed && (
-        <ModalNotice
-          id={noticesId || ''}
-          toggleModal={toggleModal}
-        ></ModalNotice>
+      {isFetching && visibilityItems.length === 0 && <Spinner />}
+
+      {!isFetching && visibilityItems.length === 0 && (
+        <h2>Category {categoryName} is empty </h2>
       )}
+
+      {!isFetching && isError && (
+        <h2>Sorry, there is no information on your request</h2>
+      )}
+
+      {visibilityItems &&
+        !isFetching &&
+        !isError &&
+        visibilityItems.map(item => (
+          <NoticesCategoriesItem key={item._id} item={item} />
+        ))}
     </NoticesCategoriesContainerList>
   );
 };

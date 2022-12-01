@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import {
   SearchContainer,
@@ -10,14 +11,17 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const NoticesSearch = ({ children, onSubmit, search }) => {
+const NoticesSearch = ({ children }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = searchParams.get('search') || '';
+
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    if (search) {
-      setValue(search);
+    if (params !== '') {
+      setValue(params.split('-').join(' '));
     }
-  }, [search]);
+  }, [params]);
 
   const handeInputChange = e => {
     setValue(e.target.value);
@@ -25,7 +29,8 @@ const NoticesSearch = ({ children, onSubmit, search }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(value);
+    const normalizeValue = value.trim().split(' ').join('-');
+    setSearchParams(value !== '' ? { search: normalizeValue } : {});
   };
 
   return (
