@@ -1,7 +1,6 @@
 import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
-// import { useState } from 'react';
 import { useEffect, useState } from 'react';
 import {
   Container,
@@ -12,12 +11,6 @@ import {
   ActionButtons,
   CloseButton,
 } from './ModalAddPets.styled';
-
-const publicCategories = [
-  { sell: 'sell' },
-  { 'lost/found': 'lost-found' },
-  { 'in good hands': 'for-free' },
-];
 
 const ModalAddPets = ({ handleModalToggle }) => {
   // const [upload, setUpload] = useState();
@@ -88,9 +81,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
               </InputCont>
             </>
           )}
-          {!isFirstRegisterStep && (
-            <>{publicCategories.map(item => console.log(item))}</>
-          )}
+          {!isFirstRegisterStep && <></>}
         </form>
 
         <ActionButtons>

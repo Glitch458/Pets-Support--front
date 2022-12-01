@@ -8,7 +8,7 @@ import {
   NavLinkStyled,
 } from './NoticesCategoriesNav.styled';
 import { AddButtonCircleLink, AddButtonLink } from '../Button/Button';
-import ModalAddPets from 'components/ModalAddPets/ModalAddPets';
+import AddModalNotice from 'components/AddModalNotice/AddModalNotice';
 
 const NoticesCategoriesNav = ({ location }) => {
   const { token } = useSelector(state => state.auth);
@@ -68,7 +68,7 @@ const NoticesCategoriesNav = ({ location }) => {
           <AddButtonLink>Add pet</AddButtonLink>
         )}
       </AddButton>
-      {expanded && <ModalAddPets handleModalToggle={handleModalToggle} />}
+      {expanded && <AddModalNotice handleModalToggle={handleModalToggle} />}
     </NoticesCategoriesNavContainer>
   );
 };
