@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import authSelectors from 'redux/Auth/auth-selectors';
 // import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
+import ImgCover from 'images/pet-cover.jpg';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import {
-  notifySuccess,
+  //notifySuccess,
   /*notifyError,*/ notifyWarning,
 } from 'helpers/toastNotify';
 import {
@@ -14,7 +14,7 @@ import {
   useDeleteFavoriteNoticeMutation,
   useAddFavoriteNoticeMutation,
 } from 'redux/Notices/noticesApi';
-//import { useGetCurrentUserQuery } from 'redux/User/userApi';
+import { useGetCurrentUserQuery } from 'redux/User/userApi';
 import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 import { PET_MODAL_KEYS, NOTICE_CATEGORY_LABELS } from 'constants/petInfoKeys';
 import {
@@ -30,8 +30,6 @@ import {
   //DeleteButton,
   ActionButtons,
 } from './ModalNotice.styled';
-
-import modalImage from 'images/pet-cover.jpg';
 
 export const ModalNotice = ({
   id,
@@ -51,10 +49,17 @@ export const ModalNotice = ({
   const [addNotices] = useAddFavoriteNoticeMutation();
   const [deleteNotices] = useDeleteFavoriteNoticeMutation();
 
-  // const { data: currentUser } = useGetCurrentUserQuery({
-  //   skip: token === null,
-  // });
-  const currentUserEmail = useSelector(authSelectors.getUserEmail);
+  const { data: currentUser /*, isFetching, isError */ } =
+    useGetCurrentUserQuery();
+  const [currentUserEmail, setCurrentUserEmail] = useState('');
+
+  useEffect(() => {
+    if (currentUser) {
+      console.log(currentUser.email);
+      console.log(currentUser.phone);
+      setCurrentUserEmail(currentUser.email);
+    }
+  }, [currentUser]);
 
   const ownPet = useMemo(
     () => petData?.owner?.email === currentUserEmail,
@@ -67,8 +72,8 @@ export const ModalNotice = ({
   }, [notices, isSuccess]);
 
   useEffect(() => {
-    const clear = handleEscClick(handleModalToggle);
-    return () => clear();
+    const ecsClose = handleEscClick(handleModalToggle);
+    return () => ecsClose();
   }, [handleModalToggle]);
 
   // const handleDeleteClick = async () => {
@@ -89,7 +94,6 @@ export const ModalNotice = ({
 
   handleAddToFavoritesClick = () => {
     if (token && token !== null) {
-      //const favoriteId = favoriteNotices.find(elem => elem === id);
       if (!favoriteId) {
         addNotices(id);
         dispatch(addFavorite(id));
@@ -104,21 +108,19 @@ export const ModalNotice = ({
     }
   };
 
-  const handleAddToFavorites = async () => {
-    await handleAddToFavoritesClick();
-    notifySuccess('Added to favorites!');
+  const imgPath = url => {
+    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
   };
 
   return (
-    <Modal onCLick={e => handleBackdropClick(e, handleModalToggle)}>
-      {/* {console.log(currentUserEmail)} */}
-      {/* <Container> */}
+    <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <InfoWrapper>
         <ImageThumb
-          src={petData.photoURL || modalImage}
+          src={imgPath(petData.photoURL)}
           alt={petData.name}
           category={NOTICE_CATEGORY_LABELS[petData.category]}
         />
+
         <div>
           <Title>{petData.title}</Title>
           <ul>
@@ -128,7 +130,7 @@ export const ModalNotice = ({
                   <InfoItem
                     key={field}
                     label={label}
-                    data={petData[key] && petData[key][field]}
+                    //data={petData[key] && petData[key][field]}
                   />
                 ));
               }
@@ -145,14 +147,16 @@ export const ModalNotice = ({
       <ActionButtons>
         <AddToFavorites
           authorized={!favorite}
-          onClick={handleAddToFavorites}
+          onClick={e => {
+            e.preventDefault();
+            handleAddToFavoritesClick();
+          }}
           favoriteId={favoriteId}
         />
         <ModalButton primary onClick={handleContactClick}>
           Contact
         </ModalButton>
       </ActionButtons>
-      {/* </Container> */}
     </Modal>
   );
 };

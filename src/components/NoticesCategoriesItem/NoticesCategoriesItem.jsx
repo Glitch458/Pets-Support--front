@@ -1,4 +1,3 @@
-// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ImgCover from 'images/pet-cover.jpg';
@@ -22,7 +21,6 @@ import {
 const NoticesCategoriesItem = ({ item }) => {
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   const token = useSelector(state => state.auth.token);
-  const [detailed, setDetailed] = useState(false);
   const [noticesId, setNoticesId] = useState('');
   const dispatch = useDispatch();
 
@@ -32,11 +30,13 @@ const NoticesCategoriesItem = ({ item }) => {
       skip: favoriteCondition === true,
     });
 
-  const toggleModal = () => {
-    setDetailed(prev => {
+  const [expanded, setExpanded] = useState(false);
+  const handleModalToggle = () => {
+    setExpanded(prev => {
       return !prev;
     });
   };
+
   const imgPath = url => {
     return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
   };
@@ -100,15 +100,7 @@ const NoticesCategoriesItem = ({ item }) => {
         type="button"
         noticesId={item._id}
         className={isFavorite(item._id) ? 'active' : ''}
-      >
-        {/* <FavoriteBorderIcon
-              sx={{
-                width: 28,
-                height: 28,
-                color: "#F59256",
-              }}
-            /> */}
-      </AddToFavorites>
+      ></AddToFavorites>
       <Img
         src={imgPath(item.photoURL)}
         alt={item.breed}
@@ -144,18 +136,19 @@ const NoticesCategoriesItem = ({ item }) => {
       </DetailsList>
       <ButtonContainer>
         <ButtonLink
-          onClick={() => {
+          onClick={e => {
+            e.preventDefault();
             setNoticesId(item._id);
-            toggleModal();
+            handleModalToggle();
           }}
         >
           Learn more
         </ButtonLink>
       </ButtonContainer>
-      {detailed && (
+      {expanded && (
         <ModalNotice
           id={noticesId || ''}
-          toggleModal={toggleModal}
+          handleModalToggle={handleModalToggle}
         ></ModalNotice>
       )}
     </NoticesItem>
