@@ -1,11 +1,14 @@
-import { Button } from 'components/Button/Button';
-import Modal from 'components/Modal/Modal';
-import { useFormik } from 'formik';
-import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 // import { toast } from 'react-toastify';
+
+import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
+import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
+import { Button } from 'components/Button/Button';
+import Modal from 'components/Modal/Modal';
 import {
   Container,
   Title,
@@ -14,34 +17,61 @@ import {
   TextInput,
   ActionButtons,
   CloseButton,
+  RadioGroup,
+  RadioLabel,
+  RadioInput,
+  RadioButton,
 } from './AddModalNotice.styled';
 
-// const initialState = {
-//   category: '',
-//   title: '',
-//   name: '',
-//   birthday: '',
-//   breed: '',
-//   sex: '',
-//   place: '',
-//   price: '',
-//   photoURL: '',
-//   comments: '',
-//   owner: '',
-// };
-
-// const publicCategories = [
-//   { sell: 'sell' },
-//   { 'lost/found': 'lost-found' },
-//   { 'in good hands': 'for-free' },
-// ];
+const validationSchema = Yup.object().shape({
+  category: Yup.string().required('Оберіть категорію'),
+  title: Yup.string()
+    .required('Введіть заголовок')
+    .min(2, 'Мінімум 2 символи')
+    .matches(
+      /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
+      'Заголовок містить лише літери і пробіли'
+    )
+    .trim()
+    .max(48, 'Максимум 48 символів'),
+  name: Yup.string()
+    .trim()
+    .min(2, 'Мінімум 2 символи')
+    .required("Введіть ім'я тварини")
+    .matches(
+      /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
+      'Ім’я містить лише літери і пробіли'
+    )
+    .max(16, 'Максимум 16 символів'),
+  birthday: Yup.date()
+    .required('Оберіть дату народження')
+    .max(new Date(), 'Дата має бути в минулому'),
+  breed: Yup.string()
+    .required('Введіть породу')
+    .min(2, 'Мінімум 2 символи')
+    .matches(/^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/, 'only letters')
+    .trim()
+    .max(24, 'Максимум 24 символи'),
+  location: Yup.string().required('Введіть місце знаходження'),
+  sex: Yup.string().required('Оберіть стать'),
+  price: Yup.string().when('category', {
+    is: category => category === 'sell',
+    then: Yup.string()
+      .required('Введіть ціну')
+      .matches(/^[0-9][0-9]*$/, 'Тільки цифри'),
+  }),
+  comments: Yup.string()
+    .trim()
+    .required('Введіть опис')
+    .min(8, 'Мінімум 8 символів')
+    .max(120, 'Максимум 120 символів'),
+});
 
 const AddModalNotice = ({ handleModalToggle }) => {
-  // const [pet, setPet] = useState(initialState);
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const { pathname } = useLocation();
   const [imagePreview, setImagePreview] = useState(null);
-  
+  const [addNotices] = useAddNoticeMutation();
 
   const moveNextRegistration = () => {
     isFirstRegisterStep
@@ -49,16 +79,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       : setIsFirstRegisterStep(true);
   };
 
-  const handleInputChange = e => {
-    console.log(e.target.value);
-    // console.log(name);
-    // switch (name) {
-    //   case 'category':
-    //     setPet(value)
-    // }
-  };
-
-   const onImageChange = e => {
+  const onImageChange = e => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
       setImagePreview(URL.createObjectURL(e.target.files[0]));
       formik.setFieldValue('image', e.currentTarget.files[0]);
@@ -70,7 +91,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
     return enterPoint === 'notices' ? 'sell' : enterPoint;
   };
 
-    const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       category: categorySetByDefault(),
       title: '',
@@ -83,66 +104,21 @@ const AddModalNotice = ({ handleModalToggle }) => {
       image: '',
       comments: '',
     },
-    validationSchema: Yup.object().shape({
-      category: Yup.string().required('Оберіть категорію'),
-      title: Yup.string()
-        .required('Введіть заголовок')
-        .min(2, 'Мінімум 2 символи')
-        .matches(
-          /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
-          'Заголовок містить лише літери і пробіли'
-        )
-        .trim()
-        .max(48, 'Максимум 48 символів'),
-      name: Yup.string()
-        .trim()
-        .min(2, 'Мінімум 2 символи')
-        .required("Введіть ім'я тварини")
-        .matches(
-          /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
-          'Ім’я містить лише літери і пробіли'
-        )
-        .max(16, 'Максимум 16 символів'),
-      birthday: Yup.date()
-        .required('Оберіть дату народження')
-        .max(new Date(), 'Дата має бути в минулому'),
-      breed: Yup.string()
-        .required('Введіть породу')
-        .min(2, 'Мінімум 2 символи')
-        .matches(/^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/, 'only letters')
-        .trim()
-        .max(24, 'Максимум 24 символи'),
-      location: Yup.string().required('Введіть місце знаходження'),
-      sex: Yup.string().required('Оберіть стать'),
-      price: Yup.string().when('category', {
-        is: category => category === 'sell',
-        then: Yup.string()
-          .required('Введіть ціну')
-          .matches(/^[0-9][0-9]*$/, 'Тільки цифри'),
-      }),
-      comments: Yup.string()
-        .trim()
-        .required('Введіть опис')
-        .min(8, 'Мінімум 8 символів')
-        .max(120, 'Максимум 120 символів'),
-    }),
-    // onSubmit: async () => {
-    //   await createNotice(formDataAppender(formik.values))
-    //     .unwrap()
-    //     .then(() => {
-    //       toast.success('Ви успішно створили оголошення.');
-    //     })
-    //     .catch(() => {
-    //       toast.error('Не вдалось створити оголошення.');
-    //     });
-    //   formik.resetForm();
-    //   closeButton();
-    // },
+    validationSchema: validationSchema,
+    onSubmit: values => {
+      addNotices(values);
+      handleModalToggle();
+    },
   });
 
-  const handleFormSubmit = e => {
-    handleModalToggle();
-  };
+  // const handleFormSubmit = e => {
+  //   e.preventDefault();
+  //   if (isFirstRegisterStep) {
+  //     moveNextRegistration();
+  //     return;
+  //   }
+  //   await addNotices(formik.values);
+  // };
 
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
@@ -153,14 +129,64 @@ const AddModalNotice = ({ handleModalToggle }) => {
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <Container>
         <Title>Add pet</Title>
-        <form onSubmit={handleFormSubmit}>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            formik.handleSubmit();
+            console.log(formik.handleSubmit);
+          }}
+        >
           {isFirstRegisterStep && (
             <>
+              <RadioGroup>
+                <RadioLabel>
+                  <RadioInput
+                    type="radio"
+                    name="category"
+                    value="lost/found"
+                    id="lost/found"
+                  />
+                  <RadioButton>lost/found</RadioButton>
+                </RadioLabel>
+                <RadioLabel>
+                  <RadioInput
+                    type="radio"
+                    name="category"
+                    value="in good hands"
+                    id="in good hands"
+                  />
+                  <RadioButton>in good hands</RadioButton>
+                </RadioLabel>
+                <RadioLabel>
+                  <RadioInput
+                    type="radio"
+                    name="category"
+                    value="sell"
+                    id="sell"
+                  />
+                  <RadioButton>sell</RadioButton>
+                </RadioLabel>
+              </RadioGroup>
+              <InputCont>
+                <TextLabel>
+                  Title of ad
+                  <TextInput
+                    onChange={formik.handleChange}
+                    name="title"
+                    placeholder="Type name"
+                    required
+                    minLength="2"
+                    maxLength="48"
+                    title="Length of title should be 2-16 letters"
+                  />
+                </TextLabel>
+              </InputCont>
               <InputCont>
                 <TextLabel>
                   Name pet
                   <TextInput
-                    onChange={handleInputChange}
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
                     name="name"
                     placeholder="Type name pet"
                     required
@@ -174,7 +200,8 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 <TextLabel>
                   Date of birth
                   <TextInput
-                    onChange={handleInputChange}
+                    value={formik.values.birthday}
+                    onChange={formik.handleChange}
                     name="birthday"
                     placeholder="Type date of birth"
                     required
@@ -187,7 +214,8 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 <TextLabel>
                   Breed
                   <TextInput
-                    onChange={handleInputChange}
+                    value={formik.values.breed}
+                    onChange={formik.handleChange}
                     name="breed"
                     placeholder="Type breed"
                     required
@@ -198,145 +226,135 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </InputCont>
             </>
           )}
-          {!isFirstRegisterStep && <>{
+          {!isFirstRegisterStep && (
             <>
-            <fieldset>
-              <legend>
-                The sex<span>*</span>:
-              </legend>
-              <div>
-                <div>
-                  <input
-                    id="malePet"
-                    name="sex"
-                    type="radio"
-                    value="male"
-                    checked={formik.values.sex === 'male'}
-                    onChange={formik.handleChange}
-                  />
+              {
+                <>
+                  <fieldset>
+                    <legend>
+                      The sex<span>*</span>:
+                    </legend>
+                    <div>
+                      <div>
+                        <input
+                          id="malePet"
+                          name="sex"
+                          type="radio"
+                          value="male"
+                          checked={formik.values.sex === 'male'}
+                          onChange={formik.handleChange}
+                        />
 
-                  <label
-                    htmlFor="malePet"
-                  >
-                    Male
-                  </label>
-                </div>
+                        <label htmlFor="malePet">Male</label>
+                      </div>
 
-                <div>
-                  <input
-                  
-                    id="femalePet"
-                    name="sex"
-                    type="radio"
-                    value="female"
-                    checked={formik.values.sex === 'female'}
-                    onChange={formik.handleChange}
-                  />
+                      <div>
+                        <input
+                          id="femalePet"
+                          name="sex"
+                          type="radio"
+                          value="female"
+                          checked={formik.values.sex === 'female'}
+                          onChange={formik.handleChange}
+                        />
 
-                  <label
-                    htmlFor="femalePet"
-                  >
-                    Female
-                  </label>
-                </div>
-              </div>
-              {formik.touched.sex && formik.errors.sex ? (
-                <p >{formik.errors.sex}</p>
-              ) : null}
-            </fieldset>
+                        <label htmlFor="femalePet">Female</label>
+                      </div>
+                    </div>
+                    {formik.touched.sex && formik.errors.sex ? (
+                      <p>{formik.errors.sex}</p>
+                    ) : null}
+                  </fieldset>
 
-            <label htmlFor="locationPet">
-              Місто, Область<span>*</span>:
-              {formik.values.location !== '' && formik.errors.location ? (
-                <p>{formik.errors.location}</p>
-                ) : null}
-                
-                <input
-                 
-                  id="location"
-                  name="location"
-                  type="text"
-                  onChange={formik.handleChange}
-                  placeholder="Введіть місце"
-                />
-            </label>
-
-            {formik.values.category === 'sell' ? (
-              <>
-                <label htmlFor="pricePet">
-                  Price<span>*</span>:
-                  {formik.values.price !== '' && formik.errors.price ? (
-                    <p >{formik.errors.price}</p>
-                  ) : null}
-                </label>
-
-                <input
-                 
-                  id="pricePet"
-                  name="price"
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={formik.values.price}
-                  placeholder="Введіть ціну"
-                />
-              </>
-            ) : null}
-
-            <fieldset >
-              <legend>Load the pet`s image:</legend>
-              {formik.values.image === '' ? (
-                <label htmlFor="image">
-                  <svg
-                    width="51"
-                    height="51"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
-                      stroke="#111"
-                      strokeOpacity=".6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
+                  <TextLabel htmlFor="locationPet">
+                    Місто, Область<span>*</span>:
+                    {formik.values.location !== '' && formik.errors.location ? (
+                      <p>{formik.errors.location}</p>
+                    ) : null}
+                    <input
+                      id="location"
+                      name="location"
+                      type="text"
+                      onChange={formik.handleChange}
+                      placeholder="Введіть місце"
                     />
-                  </svg>
-                  <input
-                    
-                    id="image"
-                    name="image"
-                    type="file"
-                    accept="image/png, image/gif, image/jpeg"
-                    onChange={e => {
-                      formik.handleChange(e);
-                      onImageChange(e);
-                    }}
-                  />
-                </label>
-              ) : (
-                <div >
-                  <img alt="pet" src={imagePreview} />
-                </div>
-              )}
-            </fieldset>
+                  </TextLabel>
 
-            <label  htmlFor="commentsAd">
-              Comments<span >*</span>
-              {formik.values.comments !== '' && formik.errors.comments ? (
-                <p >{formik.errors.comments}</p>
-              ) : null}
-            </label>
-            <textarea
-              
-              id="commentsAd"
-              name="comments"
-              type="text"
-              maxLength="120"
-              rows={5}
-              onChange={formik.handleChange}
-              value={formik.values.comments}
-            />
-          </>
-          }</>}
+                  {formik.values.category === 'sell' ? (
+                    <>
+                      <TextLabel htmlFor="pricePet">
+                        Price<span>*</span>:
+                        {formik.values.price !== '' && formik.errors.price ? (
+                          <p>{formik.errors.price}</p>
+                        ) : null}
+                      </TextLabel>
+
+                      <input
+                        id="pricePet"
+                        name="price"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.price}
+                        placeholder="Введіть ціну"
+                      />
+                    </>
+                  ) : null}
+
+                  <fieldset>
+                    <legend>Load the pet`s image:</legend>
+                    {formik.values.image === '' ? (
+                      <label htmlFor="image">
+                        <svg
+                          width="51"
+                          height="51"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
+                            stroke="#111"
+                            strokeOpacity=".6"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        <input
+                          id="image"
+                          name="image"
+                          type="file"
+                          accept="image/png, image/gif, image/jpeg"
+                          onChange={e => {
+                            formik.handleChange(e);
+                            onImageChange(e);
+                          }}
+                        />
+                      </label>
+                    ) : (
+                      <div>
+                        <img alt="pet" src={imagePreview} />
+                      </div>
+                    )}
+                  </fieldset>
+
+                  <TextLabel htmlFor="commentsAd">
+                    Comments<span>*</span>
+                    {formik.values.comments !== '' && formik.errors.comments ? (
+                      <p>{formik.errors.comments}</p>
+                    ) : null}
+                  </TextLabel>
+                  <textarea
+                    id="commentsAd"
+                    name="comments"
+                    type="text"
+                    maxLength="120"
+                    rows={5}
+                    onChange={formik.handleChange}
+                    value={formik.values.comments}
+                  />
+                </>
+              }
+            </>
+          )}
 
           <ActionButtons>
             {isFirstRegisterStep ? (
@@ -345,9 +363,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
               <Button onClick={moveNextRegistration}>Back</Button>
             )}
             {isFirstRegisterStep ? (
-              <Button onClick={moveNextRegistration}>Next</Button>
+              <Button onClick={moveNextRegistration}> Next</Button>
             ) : (
-              <Button onClick={handleFormSubmit}>Done</Button>
+              <Button type="submit">Done</Button>
             )}
           </ActionButtons>
         </form>

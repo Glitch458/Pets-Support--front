@@ -26,7 +26,6 @@ export const CloseButton = styled.button`
 `;
 
 export const InputCont = styled.div`
-
   &:first-child {
     margin-top: 20px;
   }
@@ -36,12 +35,12 @@ export const InputCont = styled.div`
 `;
 
 export const InputContTextArea = styled.div`
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 
-@media ${p => p.theme.media.tablet} {
-  margin-bottom: 28px;
-}
-`
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 28px;
+  }
+`;
 
 export const TextLabel = styled.label`
   display: inline-block;
@@ -146,13 +145,13 @@ export const DateInput = styled.input`
       font-size: ${p => p.theme.fontSizes[2]}px;
     }
   }
-`
+`;
 
 export const PhotoPetInput = styled.input`
   visibility: hidden;
   width: 0;
   height: 0;
-`
+`;
 
 export const PhotoAddContainer = styled.label`
   box-sizing: border-box;
@@ -165,7 +164,7 @@ export const PhotoAddContainer = styled.label`
   padding: 67px;
   border-radius: 20px;
   background-color: ${p => p.theme.colors.background};
-`
+`;
 
 export const ImageInputWrapper = styled.fieldset`
   display: flex;
@@ -175,7 +174,7 @@ export const ImageInputWrapper = styled.fieldset`
   border: none;
   padding: 0;
   margin: 20px 0 40px 0;
-`
+`;
 
 export const ImageTitle = styled.label`
   text-align: center;
@@ -184,7 +183,7 @@ export const ImageTitle = styled.label`
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.01em;
-`
+`;
 
 export const AddedIamge = styled.div`
   overflow: hidden;
@@ -201,9 +200,9 @@ export const AddedIamge = styled.div`
     min-width: 100%;
     min-height: 100%;
   }
-`
+`;
 export const TextAreaInput = styled.textarea`
-display: block;
+  display: block;
   outline: none;
   box-sizing: border-box;
   resize: none;
@@ -214,7 +213,7 @@ display: block;
   background-color: var(--main-bg-cl);
   border: 1px solid rgba(245, 146, 86, 0.5);
   font-size: 14px;
-`
+`;
 
 export const NameError = styled.p`
   position: absolute;

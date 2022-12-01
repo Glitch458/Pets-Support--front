@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalWindow = styled.div`
-box-sizing: border-box;
+  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;

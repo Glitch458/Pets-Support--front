@@ -53,7 +53,6 @@ const validationSchema = Yup.object({
 });
 
 const ModalAddPets = ({ handleModalToggle }) => {
-
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const [image, setImage] = useState(null);
 
@@ -63,9 +62,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
         ? setIsFirstRegisterStep(false)
         : setIsFirstRegisterStep(true);
     } else {
-      toast.error(
-        'Щось пішло не так. Можливо ви не заповнили усі поля?'
-      );
+      toast.error('Щось пішло не так. Можливо ви не заповнили усі поля?');
     }
   };
 
@@ -81,10 +78,8 @@ const ModalAddPets = ({ handleModalToggle }) => {
     onSubmit: values => {
       if (values.comments) {
         console.log(values);
-        handleModalToggle()
-        toast.success(
-          `Вашого нового питомця ${values.name} успішно додано`
-        );
+        handleModalToggle();
+        toast.success(`Вашого нового питомця ${values.name} успішно додано`);
       }
     },
   });
@@ -99,10 +94,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
     return () => ecsClose();
-
   }, [handleModalToggle]);
-
-
 
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
@@ -129,7 +121,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
                 <DateInput
                   id="birthday"
                   name="birthday"
-                  type='date'
+                  type="date"
                   placeholder="Type date of birth"
                   value={formik.values.birthday}
                   onChange={formik.handleChange}
@@ -153,57 +145,58 @@ const ModalAddPets = ({ handleModalToggle }) => {
               ) : null}
             </>
           )}
-          {!isFirstRegisterStep && <>
-            <ImageInputWrapper>
-              <ImageTitle>
-                Add photo and some comments
-              </ImageTitle>
-              {formik.values.image === '' ? (
-                <PhotoAddContainer htmlFor="imagePet">
-                  <svg
-                    width="51"
-                    height="51"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
-                      stroke="#111"
-                      strokeOpacity=".6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
+          {!isFirstRegisterStep && (
+            <>
+              <ImageInputWrapper>
+                <ImageTitle>Add photo and some comments</ImageTitle>
+                {formik.values.image === '' ? (
+                  <PhotoAddContainer htmlFor="imagePet">
+                    <svg
+                      width="51"
+                      height="51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
+                        stroke="#111"
+                        strokeOpacity=".6"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <PhotoPetInput
+                      id="imagePet"
+                      name="image"
+                      type="file"
+                      accept="image/png, image/gif, image/jpeg"
+                      onChange={e => {
+                        formik.handleChange(e);
+                        onImageChange(e);
+                      }}
                     />
-                  </svg>
-                  <PhotoPetInput
-                    id="imagePet"
-                    name="image"
-                    type="file"
-                    accept="image/png, image/gif, image/jpeg"
-                    onChange={e => {
-                      formik.handleChange(e);
-                      onImageChange(e);
-                    }}
-                  />
-                </PhotoAddContainer>) : (
-                <AddedIamge>
-                  <img alt="pet" src={image} />
-                </AddedIamge>
-              )}
-            </ImageInputWrapper>
-            <InputContTextArea>
-              <TextLabel>Comments</TextLabel>
-              <TextAreaInput
-                id="comments"
-                name="comments"
-                placeholder="Type comments"
-                value={formik.values.comments}
-                onChange={formik.handleChange}
-              />
-            </InputContTextArea>
-            {formik.values.comments !== '' || formik.errors.comments ? (
-              <CommentError>{formik.errors.comments}</CommentError>
-            ) : null}
-          </>}
+                  </PhotoAddContainer>
+                ) : (
+                  <AddedIamge>
+                    <img alt="pet" src={image} />
+                  </AddedIamge>
+                )}
+              </ImageInputWrapper>
+              <InputContTextArea>
+                <TextLabel>Comments</TextLabel>
+                <TextAreaInput
+                  id="comments"
+                  name="comments"
+                  placeholder="Type comments"
+                  value={formik.values.comments}
+                  onChange={formik.handleChange}
+                />
+              </InputContTextArea>
+              {formik.values.comments !== '' || formik.errors.comments ? (
+                <CommentError>{formik.errors.comments}</CommentError>
+              ) : null}
+            </>
+          )}
           <ActionButtons>
             {isFirstRegisterStep ? (
               <Button onClick={handleModalToggle}>Cancel</Button>
