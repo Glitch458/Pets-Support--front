@@ -116,6 +116,8 @@ export const ModalNotice = ({
 
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
+      {/* {console.log(currentUserEmail)} */}
+      {/* <Container> */}
       <InfoWrapper>
         <ImageThumb
           src={imgPath(petData.photoURL)}

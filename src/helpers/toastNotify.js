@@ -7,14 +7,15 @@ const toastConfig = {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: false,
+    zIndex: 9999,
     style: {
         backgroundColor: "#f59256",
         color: "black",
     },
 };
 
-export const notifySuccess = message => toast.success(message, {...toastConfig, toastId: message });
+export const notifySuccess = message => toast.success(message, { ...toastConfig, toastId: message });
 
-export const notifyWarning = message => toast.warning(message, {...toastConfig, toastId: message });
+export const notifyWarning = message => toast.warning(message, { ...toastConfig, toastId: message });
 
-export const notifyError = message => toast.error(message, {...toastConfig, toastId: message });
+export const notifyError = message => toast.error(message, { ...toastConfig, toastId: message });
