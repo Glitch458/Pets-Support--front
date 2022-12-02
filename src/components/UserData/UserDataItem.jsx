@@ -19,7 +19,7 @@ import { ReactComponent as Icon } from './icons/editValue.svg';
 import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
-export default function UserDataItem({ user }) {
+const UserDataItem = () => {
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
@@ -226,4 +226,6 @@ export default function UserDataItem({ user }) {
       </InfoItems>
     </div>
   );
-}
+};
+
+export default UserDataItem;

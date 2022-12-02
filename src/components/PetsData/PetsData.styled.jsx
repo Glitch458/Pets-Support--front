@@ -8,7 +8,7 @@ export const Container = styled.div`
   /* margin: 47px 40px 0 26px; */
   padding: 0 20px 80px 20px;
   @media ${p => p.theme.media.tablet} {
-    padding: 0 32px 100px 32px;
+    padding: 0 32px 32px 32px;
   }
   @media ${p => p.theme.media.desktop} {
   }

@@ -14,6 +14,5 @@ export const UserPageMain = styled.main`
   @media ${p => p.theme.media.desktop} {
     display: flex;
     padding-top: 60px;
-    padding-bottom: 200px;
   }
 `;
