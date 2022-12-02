@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ImgCover from 'images/pet-cover.jpg';
 import { ButtonLink } from 'components/Button/Button';
-import { ModalNotice } from '../ModalNotice/ModatNotice';
+import { ModalNotice } from '../ModalNotice/ModalNotice';
 
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
 import { getFavorite } from 'redux/Notices/noticesSlice';
