@@ -37,7 +37,8 @@ export const ModalNotice = ({
   favorite,
 }) => {
   const { data: notices, isSuccess } = useGetNoticeByIdQuery(id);
-  const { data: currentUser, isFetching, isError } = useGetCurrentUserQuery();
+  const { data: currentUser /*isFetching, isError*/ } =
+    useGetCurrentUserQuery();
   const { data: owner = [] } = useGetNoticeOwnerQuery(id);
 
   const [petData, setPetData] = useState({});

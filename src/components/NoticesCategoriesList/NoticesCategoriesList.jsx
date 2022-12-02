@@ -47,12 +47,14 @@ const NoticesCategoriesList = () => {
       });
       dispatch(getFavorite(favoriteIds));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (!isFetching && data) {
       setItems(data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
