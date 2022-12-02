@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import authOperations from 'redux/Auth/auth-operations';
 import { useDispatch } from 'react-redux';
 import { useGetCurrentUserQuery } from 'redux/User/userApi';
@@ -17,12 +17,6 @@ import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
 export default function UserDataItem() {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [birthday, setBirthday] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [city, setCity] = useState('');
-
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
@@ -34,12 +28,48 @@ export default function UserDataItem() {
   const { data = [] } = useGetCurrentUserQuery();
   const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
 
-  // const [user, setUser] = useState();
-  // useEffect(() => {
-  //   if (!isFetching && data.length !== 0) {
-  //     setUser(data);
-  //   }
-  // }, [data, isFetching]);
+  const [userName, setUserName] = useState('');
+  const [userNmail, setUserEmail] = useState('');
+  const [userNirthday, setUserBirthday] = useState('');
+  const [userNhone, setUserPhone] = useState('');
+  const [userCity, setUserCity] = useState('');
+
+  useEffect(() => {
+    setUserName(name);
+    setUserEmail(email);
+    setUserBirthday(birthday);
+    setUserPhone(phone);
+    setUserCity(city);
+  }, [birthday, city, email, name, phone]);
+
+  const handleChangeValue = evt => {
+    const { name, value } = evt.currentTarget;
+
+    switch (name) {
+      case 'nameUser':
+        setUserName(value);
+        break;
+
+      case 'emailUser':
+        setUserEmail(value);
+        break;
+
+      case 'birthdayUser':
+        setUserBirthday(value);
+        break;
+
+      case 'phoneUser':
+        setUserPhone(value);
+        break;
+
+      case 'cityUser':
+        setUserCity(value);
+        break;
+
+      default:
+        return;
+    }
+  };
 
   const handleClickPencil = (isDisabled, setIsDisabled) => {
     if (isDisabled) {
@@ -50,8 +80,6 @@ export default function UserDataItem() {
       setIconColor('#f59256');
     }
   };
-
-  const handleInput = e => {};
 
   const handleLogout = () => {
     dispatch(authOperations.logOut());
@@ -65,9 +93,10 @@ export default function UserDataItem() {
           <Form>
             <EditInput
               type="text"
+              name="nameUser"
               disabled={isNameDisabled}
-              onChange={handleInput}
-              value={name}
+              onChange={handleChangeValue}
+              value={userName}
             />
             <EditInputBtn
               name="name"
@@ -94,9 +123,10 @@ export default function UserDataItem() {
           <Form>
             <EditInput
               type="text"
+              name="emailUser"
               disabled={isEmaillDisabled}
-              onChange={handleInput}
-              value={email}
+              onChange={handleChangeValue}
+              value={userNmail}
             />
             <EditInputBtn
               name="name"
@@ -123,9 +153,10 @@ export default function UserDataItem() {
           <Form>
             <EditInput
               type="text"
+              name="birthdayUser"
               disabled={isbirthdayDisabled}
-              onChange={handleInput}
-              value={birthday}
+              onChange={handleChangeValue}
+              value={userNirthday}
             />
             <EditInputBtn
               name="birthday"
@@ -152,9 +183,10 @@ export default function UserDataItem() {
           <Form>
             <EditInput
               type="text"
+              name="phoneUser"
               disabled={isPhoneDisabled}
-              onChange={handleInput}
-              value={phone}
+              onChange={handleChangeValue}
+              value={userNhone}
             />
             <EditInputBtn
               name="phone"
@@ -181,9 +213,10 @@ export default function UserDataItem() {
           <Form>
             <EditInput
               type="text"
+              name="cityUser"
               disabled={isCityDisabled}
-              onChange={handleInput}
-              value={city}
+              onChange={handleChangeValue}
+              value={userCity}
             />
             <EditInputBtn
               name="city"
