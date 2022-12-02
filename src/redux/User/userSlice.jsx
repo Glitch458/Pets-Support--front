@@ -13,20 +13,20 @@ export const userSlice = createSlice({
       state.currentUser = payload;
     },
     updateUserInfo: (state, { payload }) => {
-      state.currentUser = [...state.currentUser, payload];
+      state.currentUser = { ...state.currentUser, payload };
     },
   },
   extraReducers: builder => {
     builder.addMatcher(
       userApi.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
-        state.currentUser = [...state.currentUser, payload];
+        state.currentUser = payload;
       }
     );
     builder.addMatcher(
       userApi.endpoints.updateUserInfo.matchFulfilled,
       (state, { payload }) => {
-        state.currentUser = payload;
+        state.currentUser = { ...state.currentUser, payload };
       }
     );
   },
