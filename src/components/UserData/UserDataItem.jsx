@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import authOperations from 'redux/Auth/auth-operations';
 import { useDispatch } from 'react-redux';
-import { useGetCurrentUserQuery } from 'redux/User/userApi';
+import {
+  useGetCurrentUserQuery,
+  useUpdateUserInfoMutation,
+} from 'redux/User/userApi';
 
 import {
   InfoItems,
@@ -16,7 +19,7 @@ import { ReactComponent as Icon } from './icons/editValue.svg';
 import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
-export default function UserDataItem() {
+export default function UserDataItem({ user }) {
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
@@ -26,12 +29,13 @@ export default function UserDataItem() {
 
   const dispatch = useDispatch();
   const { data = [] } = useGetCurrentUserQuery();
+  const { changeData } = useUpdateUserInfoMutation();
   const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
 
   const [userName, setUserName] = useState('');
-  const [userNmail, setUserEmail] = useState('');
-  const [userNirthday, setUserBirthday] = useState('');
-  const [userNhone, setUserPhone] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userBirthday, setUserBirthday] = useState('');
+  const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
   useEffect(() => {
@@ -78,6 +82,7 @@ export default function UserDataItem() {
     } else {
       setIsDisabled(true);
       setIconColor('#f59256');
+      changeData();
     }
   };
 
@@ -126,7 +131,7 @@ export default function UserDataItem() {
               name="emailUser"
               disabled={isEmaillDisabled}
               onChange={handleChangeValue}
-              value={userNmail}
+              value={userEmail}
             />
             <EditInputBtn
               name="name"
@@ -156,7 +161,7 @@ export default function UserDataItem() {
               name="birthdayUser"
               disabled={isbirthdayDisabled}
               onChange={handleChangeValue}
-              value={userNirthday}
+              value={userBirthday}
             />
             <EditInputBtn
               name="birthday"
@@ -186,7 +191,7 @@ export default function UserDataItem() {
               name="phoneUser"
               disabled={isPhoneDisabled}
               onChange={handleChangeValue}
-              value={userNhone}
+              value={userPhone}
             />
             <EditInputBtn
               name="phone"

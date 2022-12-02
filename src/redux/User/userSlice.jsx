@@ -12,11 +12,19 @@ export const userSlice = createSlice({
     getCurrentUser: (state, { payload }) => {
       state.currentUser = payload;
     },
+    updateUserInfo: (state, { payload }) => {
+      state.currentUser = [...state.currentUser, payload];
+    },
   },
   extraReducers: builder => {
-    //getNoticesByCategory
     builder.addMatcher(
       userApi.endpoints.getCurrentUser.matchFulfilled,
+      (state, { payload }) => {
+        state.currentUser = [...state.currentUser, payload];
+      }
+    );
+    builder.addMatcher(
+      userApi.endpoints.updateUserInfo.matchFulfilled,
       (state, { payload }) => {
         state.currentUser = payload;
       }
@@ -24,6 +32,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { getCurrentUser } = userSlice.actions;
+export const { getCurrentUser, updateUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;
