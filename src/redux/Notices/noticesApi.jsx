@@ -49,7 +49,7 @@ export const noticesApi = createApi({
       invalidatesTags: ['Notices'],
     }),
 
-    //useDeleteNoticesMutation
+    //useDeleteFavoriteNoticesMutation
     deleteFavoriteNotice: builder.mutation({
       query: noticeId => ({
         url: `/favorite/${noticeId}`,
@@ -67,6 +67,15 @@ export const noticesApi = createApi({
       }),
       invalidatesTags: ['Notices'],
     }),
+
+    //useDeleteNoticesMutation
+    deleteNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/own/${noticeId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Notices'],
+    }),
   }),
 });
 export const {
@@ -76,4 +85,5 @@ export const {
   useAddFavoriteNoticeMutation,
   useDeleteFavoriteNoticeMutation,
   useAddNoticeMutation,
+  useDeleteNoticeMutation,
 } = noticesApi;

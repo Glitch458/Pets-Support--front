@@ -1,18 +1,17 @@
-import { useEffect, useState /*useMemo*/ } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 //import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import ImgCover from 'images/pet-cover.jpg';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
-import {
-  /*notifySuccess, notifyError,*/ notifyWarning,
-} from 'helpers/toastNotify';
+import { notifySuccess, notifyError, notifyWarning } from 'helpers/toastNotify';
 import {
   useGetNoticeByIdQuery,
   useGetNoticeOwnerQuery,
   useDeleteFavoriteNoticeMutation,
   useAddFavoriteNoticeMutation,
+  useDeleteNoticeMutation,
 } from 'redux/Notices/noticesApi';
 import { useGetCurrentUserQuery } from 'redux/User/userApi';
 import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
@@ -27,7 +26,7 @@ import {
   Close,
   AddToFavorites,
   ModalButton,
-  //DeleteButton,
+  DeleteButton,
   ActionButtons,
 } from './ModalNotice.styled';
 
@@ -39,9 +38,10 @@ export const ModalNotice = ({
 }) => {
   const { data: notices, isSuccess } = useGetNoticeByIdQuery(id);
   const { data: currentUser, isFetching, isError } = useGetCurrentUserQuery();
-  const { data: owner } = useGetNoticeOwnerQuery(id);
+  const { data: owner = [] } = useGetNoticeOwnerQuery(id);
 
   const [petData, setPetData] = useState({});
+  const [currentUserData, setCurrenUsertData] = useState([]);
 
   const token = useSelector(state => state.auth.token);
   const navigete = useNavigate();
@@ -50,36 +50,42 @@ export const ModalNotice = ({
   const favoriteId = favoriteNotices.find(elem => elem === id);
 
   const [addNotices] = useAddFavoriteNoticeMutation();
-  const [deleteNotices] = useDeleteFavoriteNoticeMutation();
+  const [deleteFavoriteNotices] = useDeleteFavoriteNoticeMutation();
+  const [deleteNotices] = useDeleteNoticeMutation();
 
-  // const ownPet = useMemo(
-  //   () => petData?.email === currentUserEmail,
-  //   [currentUserEmail, petData?.email]
-  // );
+  useEffect(() => {
+    if (currentUser) {
+      setCurrenUsertData(currentUser.email);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (!isSuccess) return;
-    if (currentUser) {
-      const email = currentUser.email;
-      const phone = currentUser.phone;
-      setPetData(prevState => ({ ...prevState, ...notices, email, phone }));
+    if (owner) {
+      setPetData(prevState => ({ ...prevState, ...notices, ...owner }));
     }
-  }, [notices, isSuccess, currentUser]);
+  }, [notices, isSuccess, owner]);
 
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
     return () => ecsClose();
   }, [handleModalToggle]);
 
-  // const handleDeleteClick = async () => {
-  //   try {
-  //     await deleteNotices(id);
-  //     notifySuccess('Deleted!');
-  //     //toggleModal();
-  //   } catch ({ response: { data } }) {
-  //     notifyError(data.message);
-  //   }
-  // };
+  const ownPet = useMemo(
+    () => petData?.email === currentUserData,
+    [currentUserData, petData?.email]
+  );
+
+  const handleDeleteClick = async () => {
+    //console.log(id);
+    try {
+      await deleteNotices(id);
+      notifySuccess('Deleted!');
+      handleModalToggle();
+    } catch ({ response: { data } }) {
+      notifyError(data.message);
+    }
+  };
 
   const handleContactClick = () => {
     if (!petData?.phone)
@@ -94,7 +100,7 @@ export const ModalNotice = ({
         dispatch(addFavorite(id));
       }
       if (favoriteId) {
-        deleteNotices(id);
+        deleteFavoriteNotices(id);
         dispatch(deleteFavorite(id));
       }
     }
@@ -134,7 +140,7 @@ export const ModalNotice = ({
       </InfoWrapper>
       <Description text={petData.comments} />
       <Close onClick={handleModalToggle} />
-      {/* {ownPet && <DeleteButton onClick={handleDeleteClick} />} */}
+      {ownPet && <DeleteButton onClick={handleDeleteClick} />}
       <ActionButtons>
         <AddToFavorites
           authorized={!favorite}

@@ -64,6 +64,9 @@ export const noticesSlice = createSlice({
       //   state.items = [...state.items, payload];
       // }
     );
+
+    //deleteNotices
+    builder.addMatcher(noticesApi.endpoints.deleteNotice.matchFulfilled);
   },
 });
 
