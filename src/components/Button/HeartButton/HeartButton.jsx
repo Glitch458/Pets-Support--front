@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 
 export const HeartButton = ({
   //onClick,
-  className,
+  //className,
   children = '',
   text = '',
   noticesId,
@@ -21,6 +21,14 @@ export const HeartButton = ({
   const navigete = useNavigate();
   const dispatch = useDispatch();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+
+  const isFavorite = item => {
+    let res = false;
+    if (favoriteNotices.length > 0) {
+      res = favoriteNotices.find(elem => elem === item) ? true : false;
+    }
+    return res;
+  };
 
   const [addNotices, { isError: errorAdd, isLoading: loadingAdd }] =
     useAddFavoriteNoticeMutation();
@@ -43,11 +51,9 @@ export const HeartButton = ({
       const favoriteId = favoriteNotices.find(elem => elem === noticesId);
       if (!favoriteId) {
         addNotices(noticesId);
-        //dispatch(addFavorite(noticesId));
       }
       if (favoriteId) {
         deleteNotices(noticesId);
-        // dispatch(deleteFavorite(noticesId));
       }
     }
     if (!token || token === null) {
@@ -55,7 +61,10 @@ export const HeartButton = ({
     }
   };
   return (
-    <HeartBtn onClick={handleClick} className={className}>
+    <HeartBtn
+      onClick={handleClick}
+      className={isFavorite(noticesId) ? 'active' : ''}
+    >
       <IconHeart />
       {children}
       {text}

@@ -31,6 +31,14 @@ export const noticesApi = createApi({
       }),
       providesTags: ['Notices'],
     }),
+    //useGetNoticeOwnerQuery
+    getNoticeOwner: builder.query({
+      query: noticeId => ({
+        url: `/id/owner/${noticeId}`,
+        method: 'GET',
+      }),
+      providesTags: ['Notices'],
+    }),
 
     //useAddFavoriteNoticeMutation
     addFavoriteNotice: builder.mutation({
@@ -41,7 +49,7 @@ export const noticesApi = createApi({
       invalidatesTags: ['Notices'],
     }),
 
-    //useDeleteNoticesMutation
+    //useDeleteFavoriteNoticesMutation
     deleteFavoriteNotice: builder.mutation({
       query: noticeId => ({
         url: `/favorite/${noticeId}`,
@@ -59,12 +67,23 @@ export const noticesApi = createApi({
       }),
       invalidatesTags: ['Notices'],
     }),
+
+    //useDeleteNoticesMutation
+    deleteNotice: builder.mutation({
+      query: noticeId => ({
+        url: `/own/${noticeId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Notices'],
+    }),
   }),
 });
 export const {
   useGetNoticeByIdQuery,
+  useGetNoticeOwnerQuery,
   useGetNoticesByCategoryQuery,
   useAddFavoriteNoticeMutation,
   useDeleteFavoriteNoticeMutation,
   useAddNoticeMutation,
+  useDeleteNoticeMutation,
 } = noticesApi;

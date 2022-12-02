@@ -1,13 +1,36 @@
 import styled from 'styled-components';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
+  @media ${p => p.theme.media.tablet} {
+    padding: 40px 80px;
+  }
+`;
+
+export const CloseBtn = styled(CloseBtnn)`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+
+  @media ${p => p.theme.media.desktop} {
+    top: 24px;
+    right: 24px;
+  }
 `;
 
 export const Title = styled.h3`
   text-align: center;
+  margin-bottom: 28px;
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 20px;
+  }
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[5]}px;
@@ -18,24 +41,32 @@ export const Title = styled.h3`
   }
 `;
 
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  border-radius: 50%;
+export const FirstForm = styled.div`
+  margin-top: 28px;
+
+  @media ${p => p.theme.media.tablet} {
+    margin-top: 40px;
+  }
 `;
 
 export const InputCont = styled.div`
-  &:first-child {
-    margin-top: 20px;
-  }
+  margin-bottom: 16px;
+
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 28px;
   }
 `;
 
+export const InputContBreed = styled.div`
+  margin-bottom: 0px;
+
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 0px;
+  }
+`;
+
 export const InputContTextArea = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 28px;
@@ -53,17 +84,14 @@ export const TextLabel = styled.label`
 
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 12px;
-    font-size: 24px;
-    line-height: 1.4;
-  }
-  @media ${p => p.theme.media.desktop} {
-    margin-bottom: 12px;
-    font-size: 24px;
+    font-size: ${p => p.theme.fontSizes[5]}px;
     line-height: 1.4;
   }
 `;
 
 export const TextInput = styled.input`
+  outline: none;
+
   display: block;
   box-sizing: border-box;
   padding-left: 14px;
@@ -89,20 +117,22 @@ export const TextInput = styled.input`
   }
 `;
 
-// export const ModalButton = styled(ModalBtn)`
-//   @media ${props => props.theme.media.tabletDesktop} {
-//     width: 160px;
-//   }
-// `;
+export const ModalBtn = styled(ModalButton)`
+  width: 100%;
+  @media ${p => p.theme.media.tablet} {
+    width: 180px;
+  }
+`;
 
 export const ActionButtons = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
   flex-direction: column;
+  margin-top: 40px;
   gap: 12px;
   @media ${p => p.theme.media.tablet} {
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: center;
     gap: 8px;
     margin-left: auto;
   }
@@ -147,6 +177,12 @@ export const DateInput = styled.input`
   }
 `;
 
+//  second page
+
+export const SecondForm = styled.div`
+  margin-top: 20px;
+`;
+
 export const PhotoPetInput = styled.input`
   visibility: hidden;
   width: 0;
@@ -155,13 +191,22 @@ export const PhotoPetInput = styled.input`
 
 export const PhotoAddContainer = styled.label`
   box-sizing: border-box;
-  width: 182px;
-  height: 182px;
+  width: 208px;
+  height: 208px;
+
+  @media ${p => p.theme.media.tablet} {
+    width: 182px;
+    height: 182px;
+  }
   border-radius: 40px;
   cursor: pointer;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 67px;
+  padding: 80px;
+
+  @media ${p => p.theme.media.tablet} {
+    padding: 67px;
+  }
   border-radius: 20px;
   background-color: ${p => p.theme.colors.background};
 `;
@@ -173,19 +218,23 @@ export const ImageInputWrapper = styled.fieldset`
   box-sizing: border-box;
   border: none;
   padding: 0;
-  margin: 20px 0 40px 0;
+  /* margin: 20px 0 40px 0; */
+  margin-bottom: 20px;
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 40px;
+  }
 `;
 
 export const ImageTitle = styled.label`
   text-align: center;
   margin-bottom: 20px;
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes[2]}px;
   line-height: 24px;
   letter-spacing: -0.01em;
 `;
 
-export const AddedIamge = styled.div`
+export const AddedImage = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -206,8 +255,12 @@ export const TextAreaInput = styled.textarea`
   outline: none;
   box-sizing: border-box;
   resize: none;
-  width: 394px;
-  height: 116px;
+  width: 240px;
+  height: 100px;
+  @media ${p => p.theme.media.tablet} {
+    width: 394px;
+    height: 116px;
+  }
   padding: 12px 5px 12px 14px;
   border-radius: 20px;
   background-color: var(--main-bg-cl);
@@ -218,28 +271,46 @@ export const TextAreaInput = styled.textarea`
 export const NameError = styled.p`
   position: absolute;
   color: red;
-  top: 210px;
-  left: 50%;
+  top: 175px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 210px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const BirthdayError = styled.p`
   position: absolute;
   color: red;
-  top: 330px;
-  left: 50%;
+  top: 265px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 330px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const BreedError = styled.p`
   position: absolute;
   color: red;
-  top: 450px;
-  left: 50%;
+  top: 355px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 450px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const CommentError = styled.p`

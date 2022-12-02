@@ -20,10 +20,10 @@ export const ModalBtn = styled.button`
   // line-height: 1.37;
   transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     border 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: ${props => (props.authorized ? 'black' : 'rgba(17, 17, 17, 0.1)')};
-  fill: ${props => (props.authorized ? '#f59256' : 'rgba(17, 17, 17, 0.1)')};
-  stroke: ${props => (props.authorized ? '#f59256' : 'rgba(17, 17, 17, 0.1)')};
-  @media ${props => props.theme.media.tabletDesktop} {
+  color: ${p => (p.authorized ? 'black' : 'rgba(17, 17, 17, 0.1)')};
+  fill: ${p => (p.authorized ? '#f59256' : 'rgba(17, 17, 17, 0.1)')};
+  stroke: ${p => (p.authorized ? '#f59256' : 'rgba(17, 17, 17, 0.1)')};
+  @media ${p => p.theme.media.tablet} {
     width: 180px;
     height: 44px;
   }

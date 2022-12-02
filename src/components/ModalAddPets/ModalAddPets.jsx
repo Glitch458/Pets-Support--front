@@ -1,5 +1,7 @@
-import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
+// import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
@@ -8,7 +10,10 @@ import { toast } from 'react-toastify';
 import {
   Container,
   Title,
+  FirstForm,
+  SecondForm,
   InputCont,
+  InputContBreed,
   InputContTextArea,
   TextLabel,
   TextInput,
@@ -17,10 +22,11 @@ import {
   PhotoAddContainer,
   ImageInputWrapper,
   ImageTitle,
-  AddedIamge,
+  AddedImage,
   TextAreaInput,
   ActionButtons,
-  CloseButton,
+  CloseBtn,
+  ModalBtn,
   NameError,
   BirthdayError,
   BreedError,
@@ -99,10 +105,11 @@ const ModalAddPets = ({ handleModalToggle }) => {
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <Container>
+        <CloseBtn onClick={handleModalToggle} />
         <Title>Add pet</Title>
         <form onSubmit={formik.handleSubmit}>
           {isFirstRegisterStep && (
-            <>
+            <FirstForm>
               <InputCont>
                 <TextLabel>Name pet</TextLabel>
                 <TextInput
@@ -130,7 +137,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
               {formik.values.birthday !== '' || formik.errors.birthday ? (
                 <BirthdayError>{formik.errors.birthday}</BirthdayError>
               ) : null}
-              <InputCont>
+              <InputContBreed>
                 <TextLabel>Breed</TextLabel>
                 <TextInput
                   id="breed"
@@ -139,14 +146,14 @@ const ModalAddPets = ({ handleModalToggle }) => {
                   value={formik.values.breed}
                   onChange={formik.handleChange}
                 />
-              </InputCont>
+              </InputContBreed>
               {formik.values.breed !== '' || formik.errors.breed ? (
                 <BreedError>{formik.errors.breed}</BreedError>
               ) : null}
-            </>
+            </FirstForm>
           )}
           {!isFirstRegisterStep && (
-            <>
+            <SecondForm>
               <ImageInputWrapper>
                 <ImageTitle>Add photo and some comments</ImageTitle>
                 {formik.values.image === '' ? (
@@ -177,9 +184,9 @@ const ModalAddPets = ({ handleModalToggle }) => {
                     />
                   </PhotoAddContainer>
                 ) : (
-                  <AddedIamge>
+                  <AddedImage>
                     <img alt="pet" src={image} />
-                  </AddedIamge>
+                  </AddedImage>
                 )}
               </ImageInputWrapper>
               <InputContTextArea>
@@ -195,22 +202,22 @@ const ModalAddPets = ({ handleModalToggle }) => {
               {formik.values.comments !== '' || formik.errors.comments ? (
                 <CommentError>{formik.errors.comments}</CommentError>
               ) : null}
-            </>
+            </SecondForm>
           )}
           <ActionButtons>
             {isFirstRegisterStep ? (
-              <Button onClick={handleModalToggle}>Cancel</Button>
+              <ModalBtn onClick={moveNextRegistration}>Next</ModalBtn>
             ) : (
-              <Button onClick={moveNextRegistration}>Back</Button>
+              <ModalBtn type="submit">Done</ModalBtn>
             )}
             {isFirstRegisterStep ? (
-              <Button onClick={moveNextRegistration}>Next</Button>
+              <ModalBtn onClick={handleModalToggle}>Cancel</ModalBtn>
             ) : (
-              <Button type="submit">Done</Button>
+              <ModalBtn onClick={moveNextRegistration}>Back</ModalBtn>
             )}
           </ActionButtons>
         </form>
-        <CloseButton onClick={handleModalToggle}>X</CloseButton>
+        <CloseBtnn onClick={handleModalToggle}></CloseBtnn>
       </Container>
     </Modal>
   );
