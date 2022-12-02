@@ -10,6 +10,7 @@ import {
 } from 'helpers/toastNotify';
 import {
   useGetNoticeByIdQuery,
+  useGetNoticeOwnerQuery,
   useDeleteFavoriteNoticeMutation,
   useAddFavoriteNoticeMutation,
 } from 'redux/Notices/noticesApi';
@@ -37,6 +38,9 @@ export const ModalNotice = ({
   favorite,
 }) => {
   const { data: notices, isSuccess } = useGetNoticeByIdQuery(id);
+  const { data: currentUser, isFetching, isError } = useGetCurrentUserQuery();
+  const { data: owner } = useGetNoticeOwnerQuery(id);
+
   const [petData, setPetData] = useState({});
 
   const token = useSelector(state => state.auth.token);
@@ -47,9 +51,6 @@ export const ModalNotice = ({
 
   const [addNotices] = useAddFavoriteNoticeMutation();
   const [deleteNotices] = useDeleteFavoriteNoticeMutation();
-
-  const { data: currentUser /*, isFetching , isError */ } =
-    useGetCurrentUserQuery();
 
   // const ownPet = useMemo(
   //   () => petData?.email === currentUserEmail,

@@ -31,6 +31,14 @@ export const noticesApi = createApi({
       }),
       providesTags: ['Notices'],
     }),
+    //useGetNoticeOwnerQuery
+    getNoticeOwner: builder.query({
+      query: noticeId => ({
+        url: `/id/owner/${noticeId}`,
+        method: 'GET',
+      }),
+      providesTags: ['Notices'],
+    }),
 
     //useAddFavoriteNoticeMutation
     addFavoriteNotice: builder.mutation({
@@ -63,6 +71,7 @@ export const noticesApi = createApi({
 });
 export const {
   useGetNoticeByIdQuery,
+  useGetNoticeOwnerQuery,
   useGetNoticesByCategoryQuery,
   useAddFavoriteNoticeMutation,
   useDeleteFavoriteNoticeMutation,

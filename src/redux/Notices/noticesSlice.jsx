@@ -42,6 +42,12 @@ export const noticesSlice = createSlice({
       //   state.items = payload;
       // }
     );
+    builder.addMatcher(
+      noticesApi.endpoints.getNoticeOwner.matchFulfilled
+      // (state, { payload }) => {
+      //   state.items = payload;
+      // }
+    );
 
     //addFavoriteNotice
     builder.addMatcher(noticesApi.endpoints.addFavoriteNotice.matchFulfilled);
