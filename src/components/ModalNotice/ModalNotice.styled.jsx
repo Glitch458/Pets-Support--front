@@ -170,7 +170,7 @@ export const ModalButton = styled(ModalBtn)`
 `;
 
 export const AddToFavorites = ({ authorized, onClick, favoriteId }) => (
-  <ModalButton authorized={authorized} onClick={onClick}>
+  <ModalButton authorized={authorized} onClick={onClick} type={'button'}>
     {!favoriteId ? 'Add to' : 'Delete'}
     <IconHeart />
   </ModalButton>

@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import ImgCover from 'images/pet-cover.jpg';
 import { ButtonLink } from 'components/Button/Button';
 import { ModalNotice } from '../ModalNotice/ModalNotice';
-
-import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { getFavorite } from 'redux/Notices/noticesSlice';
 
 import {
   NoticesItem,
@@ -19,16 +15,7 @@ import {
 } from './NoticesCategoriesItem.styled';
 
 const NoticesCategoriesItem = ({ item }) => {
-  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const token = useSelector(state => state.auth.token);
   const [noticesId, setNoticesId] = useState('');
-  const dispatch = useDispatch();
-
-  const favoriteCondition = favoriteNotices.length !== 0 && token !== null;
-  const { data: dataFavoriteNotices = [], isSuccess } =
-    useGetNoticesByCategoryQuery('favorite', {
-      skip: favoriteCondition === true,
-    });
 
   const [expanded, setExpanded] = useState(false);
   const handleModalToggle = () => {
@@ -41,13 +28,13 @@ const NoticesCategoriesItem = ({ item }) => {
     return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
   };
 
-  const isFavorite = item => {
-    let res = false;
-    if (favoriteNotices.length > 0) {
-      res = favoriteNotices.find(elem => elem === item) ? true : false;
-    }
-    return res;
-  };
+  // const isFavorite = item => {
+  //   let res = false;
+  //   if (favoriteNotices.length > 0) {
+  //     res = favoriteNotices.find(elem => elem === item) ? true : false;
+  //   }
+  //   return res;
+  // };
 
   const age = (date = '') => {
     let dateArray = date.split('.');
@@ -84,22 +71,13 @@ const NoticesCategoriesItem = ({ item }) => {
     return resultAge;
   };
 
-  useEffect(() => {
-    if (isSuccess && dataFavoriteNotices.length !== 0) {
-      const favoriteIds = dataFavoriteNotices.map(item => {
-        return item._id;
-      });
-      dispatch(getFavorite(favoriteIds));
-    }
-  }, [dataFavoriteNotices, dispatch, isSuccess]);
-
   return (
     <NoticesItem>
       <CategoryName>{item.category}</CategoryName>
       <AddToFavorites
         type="button"
         noticesId={item._id}
-        className={isFavorite(item._id) ? 'active' : ''}
+        //className={isFavorite(item._id) ? 'active' : ''}
       ></AddToFavorites>
       <Img
         src={imgPath(item.photoURL)}
