@@ -16,6 +16,11 @@ export const PetsList = ({ data }) => {
         <Item key={name}>
           <Image src={url} alt={name} />
           <InfoContainer>
+            <Box>
+              <IconButton aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </Box>
             <PetsInfo>
               <TitlePetsInfo>NamePets:</TitlePetsInfo> {name}
             </PetsInfo>
@@ -28,11 +33,6 @@ export const PetsList = ({ data }) => {
             <PetsInfo>
               <TitlePetsInfo>Comments:</TitlePetsInfo> {comments}
             </PetsInfo>
-            <Box>
-              <IconButton aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            </Box>
           </InfoContainer>
         </Item>
       ))}
