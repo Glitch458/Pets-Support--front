@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
@@ -13,6 +13,8 @@ import {
   Container,
   Title,
   InputCont,
+  InputContTextArea,
+  TextAreaInput,
   TextLabel,
   TextInput,
   ActionButtons,
@@ -21,56 +23,62 @@ import {
   RadioLabel,
   RadioInput,
   RadioButton,
+  DateInput,
+  PhotoPetInput,
+  PhotoAddContainer,
+  ImageInputWrapper,
+  ImageTitle,
+  AddedIamge,
 } from './AddModalNotice.styled';
 
-const validationSchema = Yup.object().shape({
-  category: Yup.string().required('Оберіть категорію'),
+const validationSchema = Yup.object({
+  category: Yup.string().required('Choose category'),
   title: Yup.string()
-    .required('Введіть заголовок')
-    .min(2, 'Мінімум 2 символи')
+    .required('Title is required')
+    .min(2, 'Min 2 characters')
     .matches(
       /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
-      'Заголовок містить лише літери і пробіли'
+      'Must contain only cahracters and spaces'
     )
     .trim()
-    .max(48, 'Максимум 48 символів'),
+    .max(48, '48 characters max'),
   name: Yup.string()
     .trim()
-    .min(2, 'Мінімум 2 символи')
-    .required("Введіть ім'я тварини")
+    .min(2, 'Min 2 characters')
+    .required('Name is required')
     .matches(
       /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
-      'Ім’я містить лише літери і пробіли'
+      'Must contain only cahracters and spaces'
     )
-    .max(16, 'Максимум 16 символів'),
+    .max(16, '16 characters max'),
   birthday: Yup.date()
-    .required('Оберіть дату народження')
-    .max(new Date(), 'Дата має бути в минулому'),
+    .required('Choose date of birth')
+    .max(new Date(), 'Date must be in the past'),
   breed: Yup.string()
-    .required('Введіть породу')
-    .min(2, 'Мінімум 2 символи')
+    .required('Breed is required')
+    .min(2, 'Min 2 characters')
     .matches(/^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/, 'only letters')
     .trim()
-    .max(24, 'Максимум 24 символи'),
-  location: Yup.string().required('Введіть місце знаходження'),
-  sex: Yup.string().required('Оберіть стать'),
+    .max(24, '24 characters max'),
+  location: Yup.string().required('Type the location'),
+  sex: Yup.string().required('Choose sex'),
   price: Yup.string().when('category', {
     is: category => category === 'sell',
     then: Yup.string()
       .required('Введіть ціну')
-      .matches(/^[0-9][0-9]*$/, 'Тільки цифри'),
+      .matches(/^[0-9][0-9]*$/, 'Numbers only'),
   }),
   comments: Yup.string()
     .trim()
-    .required('Введіть опис')
-    .min(8, 'Мінімум 8 символів')
-    .max(120, 'Максимум 120 символів'),
+    .required('Type comments')
+    .min(8, 'Min 8 characters')
+    .max(120, '120 characters max'),
 });
 
 const AddModalNotice = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const { pathname } = useLocation();
-  const [imagePreview, setImagePreview] = useState(null);
+  const [image, setImage] = useState(null);
   const [addNotices] = useAddNoticeMutation();
 
   const moveNextRegistration = () => {
@@ -81,7 +89,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
 
   const onImageChange = e => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
-      setImagePreview(URL.createObjectURL(e.target.files[0]));
+      setImage(URL.createObjectURL(e.target.files[0]));
       formik.setFieldValue('image', e.currentTarget.files[0]);
     }
   };
@@ -96,9 +104,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
       category: categorySetByDefault(),
       title: '',
       name: '',
-      birthday: `${new Date().toISOString().split('T')[0]}`,
+      birthday: '',
       breed: '',
-      sex: 'male',
+      sex: '',
       location: '',
       price: 1,
       image: '',
@@ -108,6 +116,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
     onSubmit: values => {
       addNotices(values);
       handleModalToggle();
+      toast.success(`Your pet ${values.name} has been added to notices`);
     },
   });
 
@@ -133,12 +142,11 @@ const AddModalNotice = ({ handleModalToggle }) => {
           onSubmit={e => {
             e.preventDefault();
             formik.handleSubmit();
-            console.log(formik.handleSubmit);
           }}
         >
           {isFirstRegisterStep && (
             <>
-              <RadioGroup>
+              <RadioGroup required>
                 <RadioLabel>
                   <RadioInput
                     type="radio"
@@ -169,7 +177,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </RadioGroup>
               <InputCont>
                 <TextLabel>
-                  Title of ad
+                  Title of ad<span>*</span>
                   <TextInput
                     onChange={formik.handleChange}
                     name="title"
@@ -199,10 +207,11 @@ const AddModalNotice = ({ handleModalToggle }) => {
               <InputCont>
                 <TextLabel>
                   Date of birth
-                  <TextInput
+                  <DateInput
                     value={formik.values.birthday}
                     onChange={formik.handleChange}
                     name="birthday"
+                    type="date"
                     placeholder="Type date of birth"
                     required
                     pattern="^(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)[0-9]{2}$"
@@ -267,11 +276,11 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   </fieldset>
 
                   <TextLabel htmlFor="locationPet">
-                    Місто, Область<span>*</span>:
+                    City, Region<span>*</span>:
                     {formik.values.location !== '' && formik.errors.location ? (
                       <p>{formik.errors.location}</p>
                     ) : null}
-                    <input
+                    <TextInput
                       id="location"
                       name="location"
                       type="text"
@@ -289,7 +298,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                         ) : null}
                       </TextLabel>
 
-                      <input
+                      <TextInput
                         id="pricePet"
                         name="price"
                         type="text"
@@ -300,10 +309,10 @@ const AddModalNotice = ({ handleModalToggle }) => {
                     </>
                   ) : null}
 
-                  <fieldset>
-                    <legend>Load the pet`s image:</legend>
+                  <ImageInputWrapper>
+                    <ImageTitle>Load the pet`s image:</ImageTitle>
                     {formik.values.image === '' ? (
-                      <label htmlFor="image">
+                      <PhotoAddContainer htmlFor="image">
                         <svg
                           width="51"
                           height="51"
@@ -318,7 +327,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                             strokeLinecap="round"
                           />
                         </svg>
-                        <input
+                        <PhotoPetInput
                           id="image"
                           name="image"
                           type="file"
@@ -328,29 +337,31 @@ const AddModalNotice = ({ handleModalToggle }) => {
                             onImageChange(e);
                           }}
                         />
-                      </label>
+                      </PhotoAddContainer>
                     ) : (
-                      <div>
-                        <img alt="pet" src={imagePreview} />
-                      </div>
+                      <AddedIamge>
+                        <img alt="pet" src={image} />
+                      </AddedIamge>
                     )}
-                  </fieldset>
-
-                  <TextLabel htmlFor="commentsAd">
-                    Comments<span>*</span>
-                    {formik.values.comments !== '' && formik.errors.comments ? (
-                      <p>{formik.errors.comments}</p>
-                    ) : null}
-                  </TextLabel>
-                  <textarea
-                    id="commentsAd"
-                    name="comments"
-                    type="text"
-                    maxLength="120"
-                    rows={5}
-                    onChange={formik.handleChange}
-                    value={formik.values.comments}
-                  />
+                  </ImageInputWrapper>
+                  <InputContTextArea>
+                    <TextLabel htmlFor="commentsAd">
+                      Comments<span>*</span>
+                      {formik.values.comments !== '' &&
+                      formik.errors.comments ? (
+                        <p>{formik.errors.comments}</p>
+                      ) : null}
+                    </TextLabel>
+                    <TextAreaInput
+                      id="commentsAd"
+                      name="comments"
+                      type="text"
+                      maxLength="120"
+                      rows={5}
+                      onChange={formik.handleChange}
+                      value={formik.values.comments}
+                    />
+                  </InputContTextArea>
                 </>
               }
             </>
