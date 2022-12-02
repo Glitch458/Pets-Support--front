@@ -1,4 +1,7 @@
 import Modal from 'components/Modal/Modal';
+// import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
@@ -10,6 +13,7 @@ import {
   FirstForm,
   SecondForm,
   InputCont,
+  InputContBreed,
   InputContTextArea,
   TextLabel,
   TextInput,
@@ -133,7 +137,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
               {formik.values.birthday !== '' || formik.errors.birthday ? (
                 <BirthdayError>{formik.errors.birthday}</BirthdayError>
               ) : null}
-              <InputCont>
+              <InputContBreed>
                 <TextLabel>Breed</TextLabel>
                 <TextInput
                   id="breed"
@@ -142,7 +146,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
                   value={formik.values.breed}
                   onChange={formik.handleChange}
                 />
-              </InputCont>
+              </InputContBreed>
               {formik.values.breed !== '' || formik.errors.breed ? (
                 <BreedError>{formik.errors.breed}</BreedError>
               ) : null}
@@ -213,6 +217,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
             )}
           </ActionButtons>
         </form>
+        <CloseBtnn onClick={handleModalToggle}></CloseBtnn>
       </Container>
     </Modal>
   );

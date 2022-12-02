@@ -27,6 +27,10 @@ export const CloseBtn = styled(CloseBtnn)`
 
 export const Title = styled.h3`
   text-align: center;
+  margin-bottom: 28px;
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 20px;
+  }
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[5]}px;
@@ -53,8 +57,16 @@ export const InputCont = styled.div`
   }
 `;
 
+export const InputContBreed = styled.div`
+  margin-bottom: 0px;
+
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 0px;
+  }
+`;
+
 export const InputContTextArea = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 28px;
@@ -78,6 +90,8 @@ export const TextLabel = styled.label`
 `;
 
 export const TextInput = styled.input`
+  outline: none;
+
   display: block;
   box-sizing: border-box;
   padding-left: 14px;
@@ -169,30 +183,6 @@ export const SecondForm = styled.div`
   margin-top: 20px;
 `;
 
-export const ImageInputWrapper = styled.fieldset`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  border: none;
-  padding: 0;
-  margin: 20px 0 40px 0;
-`;
-
-export const ImageTitle = styled.label`
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.01em;
-
-  @media ${p => p.theme.media.tablet} {
-    font-size: 20px;
-    line-height: 24px;
-  }
-`;
-
 export const PhotoPetInput = styled.input`
   visibility: hidden;
   width: 0;
@@ -201,15 +191,47 @@ export const PhotoPetInput = styled.input`
 
 export const PhotoAddContainer = styled.label`
   box-sizing: border-box;
-  width: 182px;
-  height: 182px;
+  width: 208px;
+  height: 208px;
+
+  @media ${p => p.theme.media.tablet} {
+    width: 182px;
+    height: 182px;
+  }
   border-radius: 40px;
   cursor: pointer;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 67px;
+  padding: 80px;
+
+  @media ${p => p.theme.media.tablet} {
+    padding: 67px;
+  }
   border-radius: 20px;
   background-color: ${p => p.theme.colors.background};
+`;
+
+export const ImageInputWrapper = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  border: none;
+  padding: 0;
+  /* margin: 20px 0 40px 0; */
+  margin-bottom: 20px;
+  @media ${p => p.theme.media.tablet} {
+    margin-bottom: 40px;
+  }
+`;
+
+export const ImageTitle = styled.label`
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes[2]}px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
 `;
 
 export const AddedImage = styled.div`
@@ -233,8 +255,12 @@ export const TextAreaInput = styled.textarea`
   outline: none;
   box-sizing: border-box;
   resize: none;
-  width: 394px;
-  height: 116px;
+  width: 240px;
+  height: 100px;
+  @media ${p => p.theme.media.tablet} {
+    width: 394px;
+    height: 116px;
+  }
   padding: 12px 5px 12px 14px;
   border-radius: 20px;
   background-color: var(--main-bg-cl);
