@@ -4,29 +4,20 @@ import { ReactComponent as IconHeart } from '../../../src/images/icons/smallHear
 
 import { TrashButton } from 'components/Button/TrashButton/TrashButton';
 import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
-import { ModalBtn } from 'components/Button/ModalBtn/ModalBtn.styled';
+import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
 
 export const Container = styled.div`
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  margin-top: 161px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 40px;
+  border-radius: ${p => p.theme.radii.small};
   padding: 60px 20px 40px 20px;
-  margin-bottom: 50px;
   background-color: ${p => p.theme.colors.white};
-  @media (max-width: 767px) {
-    max-width: 500px;
-  }
+
   @media ${p => p.theme.media.tablet} {
-    // margin-top: 262px;
+    border-radius: ${p => p.theme.radii.normal};
     padding: 32px 20px;
-    width: 704px;
-  }
-  @media ${p => p.theme.media.desktop} {
-    // margin-top: 400px;
-    padding: 32px 20px;
-    width: 704px;
+    width: 608px;
   }
 `;
 
@@ -158,19 +149,20 @@ export const Description = ({ text }) => (
   </DescriptionText>
 );
 
-export const ModalButton = styled(ModalBtn)`
+export const ModalBtn = styled(ModalButton)`
   color: ${({ authorized, primary }) => {
     if (!authorized && !primary) return 'rgba(17, 17, 17, 0.1)';
     if (primary) return 'white';
     return '#f59256';
   }};
-  @media ${props => props.theme.media.tabletDesktop} {
+  width: 100%;
+  @media ${p => p.theme.media.tablet} {
     width: 160px;
   }
 `;
 
 export const AddToFavorites = ({ authorized, onClick, favoriteId }) => (
-  <ModalButton authorized={authorized} onClick={onClick} type={'button'}>
+  <ModalButton authorized={authorized} onClick={onClick}>
     {!favoriteId ? 'Add to' : 'Delete'}
     <IconHeart />
   </ModalButton>
@@ -178,10 +170,11 @@ export const AddToFavorites = ({ authorized, onClick, favoriteId }) => (
 
 export const ActionButtons = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
   gap: 12px;
-  @media ${props => props.theme.media.tabletDesktop} {
+  margin-top: 40px;
+  @media ${p => p.theme.media.tablet} {
     width: 332px;
     flex-direction: row;
     gap: 8px;
@@ -199,4 +192,6 @@ export const Close = styled(CloseBtnn)`
   position: absolute;
   top: 12px;
   right: 20px;
+  width: 34px;
+  height: 34px;
 `;

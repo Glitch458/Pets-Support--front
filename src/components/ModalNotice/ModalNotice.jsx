@@ -17,7 +17,7 @@ import { useGetCurrentUserQuery } from 'redux/User/userApi';
 import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 import { PET_MODAL_KEYS, NOTICE_CATEGORY_LABELS } from 'constants/petInfoKeys';
 import {
-  //Container,
+  Container,
   ImageThumb,
   Title,
   InfoWrapper,
@@ -25,7 +25,7 @@ import {
   Description,
   Close,
   AddToFavorites,
-  ModalButton,
+  ModalBtn,
   DeleteButton,
   ActionButtons,
 } from './ModalNotice.styled';
@@ -122,46 +122,51 @@ export const ModalNotice = ({
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       {/* {console.log(currentUserEmail)} */}
-      {/* <Container> */}
-      <InfoWrapper>
-        <ImageThumb
-          src={imgPath(petData.photoURL)}
-          alt={petData.name}
-          category={NOTICE_CATEGORY_LABELS[petData.category]}
-        />
+      <Container>
+        <InfoWrapper>
+          <ImageThumb
+            src={imgPath(petData.photoURL)}
+            alt={petData.name}
+            category={NOTICE_CATEGORY_LABELS[petData.category]}
+          />
 
-        <div>
-          <Title>{petData.title}</Title>
-          <ul>
-            {petData &&
-              PET_MODAL_KEYS.map(({ label, key, nested, values, category }) => {
-                if (nested) {
-                  return values.map(({ field, label }) => (
-                    <InfoItem key={field} label={label} data />
-                  ));
-                }
-                if (category && category !== petData.category) return null;
-                return <InfoItem key={key} label={label} data={petData[key]} />;
-              })}
-          </ul>
-        </div>
-      </InfoWrapper>
-      <Description text={petData.comments} />
-      <Close onClick={handleModalToggle} />
-      {ownPet && <DeleteButton onClick={handleDeleteClick} />}
-      <ActionButtons>
-        <AddToFavorites
-          authorized={!favorite}
-          onClick={e => {
-            e.preventDefault();
-            handleAddToFavoritesClick();
-          }}
-          favoriteId={favoriteId}
-        />
-        <ModalButton primary onClick={handleContactClick}>
-          Contact
-        </ModalButton>
-      </ActionButtons>
+          <div>
+            <Title>{petData.title}</Title>
+            <ul>
+              {petData &&
+                PET_MODAL_KEYS.map(
+                  ({ label, key, nested, values, category }) => {
+                    if (nested) {
+                      return values.map(({ field, label }) => (
+                        <InfoItem key={field} label={label} data />
+                      ));
+                    }
+                    if (category && category !== petData.category) return null;
+                    return (
+                      <InfoItem key={key} label={label} data={petData[key]} />
+                    );
+                  }
+                )}
+            </ul>
+          </div>
+        </InfoWrapper>
+        <Description text={petData.comments} />
+        <Close onClick={handleModalToggle} />
+        {ownPet && <DeleteButton onClick={handleDeleteClick} />}
+        <ActionButtons>
+          <AddToFavorites
+            authorized={!favorite}
+            onClick={e => {
+              e.preventDefault();
+              handleAddToFavoritesClick();
+            }}
+            favoriteId={favoriteId}
+          />
+          <ModalBtn primary onClick={handleContactClick}>
+            Contact
+          </ModalBtn>
+        </ActionButtons>
+      </Container>
     </Modal>
   );
 };
