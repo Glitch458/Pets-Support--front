@@ -1,9 +1,28 @@
 import styled from 'styled-components';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
+  @media ${p => p.theme.media.tablet} {
+    padding: 40px 80px;
+  }
+`;
+
+export const CloseBtn = styled(CloseBtnn)`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+
+  @media ${p => p.theme.media.desktop} {
+    top: 24px;
+    right: 24px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -22,18 +41,17 @@ export const Title = styled.h3`
   }
 `;
 
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  border-radius: 50%;
+export const FirstForm = styled.div`
+  margin-top: 28px;
+
+  @media ${p => p.theme.media.tablet} {
+    margin-top: 40px;
+  }
 `;
 
 export const InputCont = styled.div`
-  /* &:first-child {
-    margin-top: 20px;
-  } */
   margin-bottom: 16px;
+
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 28px;
   }
@@ -66,12 +84,7 @@ export const TextLabel = styled.label`
 
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 12px;
-    font-size: 24px;
-    line-height: 1.4;
-  }
-  @media ${p => p.theme.media.desktop} {
-    margin-bottom: 12px;
-    font-size: 24px;
+    font-size: ${p => p.theme.fontSizes[5]}px;
     line-height: 1.4;
   }
 `;
@@ -104,20 +117,22 @@ export const TextInput = styled.input`
   }
 `;
 
-// export const ModalButton = styled(ModalBtn)`
-//   @media ${props => props.theme.media.tabletDesktop} {
-//     width: 160px;
-//   }
-// `;
+export const ModalBtn = styled(ModalButton)`
+  width: 100%;
+  @media ${p => p.theme.media.tablet} {
+    width: 180px;
+  }
+`;
 
 export const ActionButtons = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
   flex-direction: column;
+  margin-top: 40px;
   gap: 12px;
   @media ${p => p.theme.media.tablet} {
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: center;
     gap: 8px;
     margin-left: auto;
   }
@@ -160,6 +175,12 @@ export const DateInput = styled.input`
       font-size: ${p => p.theme.fontSizes[2]}px;
     }
   }
+`;
+
+//  second page
+
+export const SecondForm = styled.div`
+  margin-top: 20px;
 `;
 
 export const PhotoPetInput = styled.input`
@@ -213,7 +234,7 @@ export const ImageTitle = styled.label`
   letter-spacing: -0.01em;
 `;
 
-export const AddedIamge = styled.div`
+export const AddedImage = styled.div`
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -250,28 +271,46 @@ export const TextAreaInput = styled.textarea`
 export const NameError = styled.p`
   position: absolute;
   color: red;
-  top: 210px;
-  left: 50%;
+  top: 175px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 210px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const BirthdayError = styled.p`
   position: absolute;
   color: red;
-  top: 330px;
-  left: 50%;
+  top: 265px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 330px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const BreedError = styled.p`
   position: absolute;
   color: red;
-  top: 450px;
-  left: 50%;
+  top: 355px;
+  left: 45%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    top: 450px;
+    left: 50%;
+    font-size: 12px;
+  }
 `;
 
 export const CommentError = styled.p`

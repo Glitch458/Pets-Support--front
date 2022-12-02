@@ -78,7 +78,7 @@ const validationSchema = Yup.object({
 const AddModalNotice = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const { pathname } = useLocation();
-  const [image, setImage] = useState(null);
+  const [photoURL, setPhotoURL] = useState(null);
   const [addNotices] = useAddNoticeMutation();
 
   const moveNextRegistration = () => {
@@ -87,10 +87,10 @@ const AddModalNotice = ({ handleModalToggle }) => {
       : setIsFirstRegisterStep(true);
   };
 
-  const onImageChange = e => {
+  const onPhotoURLChange = e => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      formik.setFieldValue('image', e.currentTarget.files[0]);
+      setPhotoURL(URL.createObjectURL(e.target.files[0]));
+      formik.setFieldValue('photoURL', e.currentTarget.files[0]);
     }
   };
 
@@ -109,7 +109,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       sex: '',
       location: '',
       price: 1,
-      image: '',
+      photoURL: '',
       comments: '',
     },
     validationSchema: validationSchema,
@@ -311,8 +311,8 @@ const AddModalNotice = ({ handleModalToggle }) => {
 
                   <ImageInputWrapper>
                     <ImageTitle>Load the pet`s image:</ImageTitle>
-                    {formik.values.image === '' ? (
-                      <PhotoAddContainer htmlFor="image">
+                    {formik.values.photoURL === '' ? (
+                      <PhotoAddContainer htmlFor="photoURL">
                         <svg
                           width="51"
                           height="51"
@@ -328,19 +328,19 @@ const AddModalNotice = ({ handleModalToggle }) => {
                           />
                         </svg>
                         <PhotoPetInput
-                          id="image"
-                          name="image"
+                          id="photoURL"
+                          name="photoURL"
                           type="file"
                           accept="image/png, image/gif, image/jpeg"
                           onChange={e => {
                             formik.handleChange(e);
-                            onImageChange(e);
+                            onPhotoURLChange(e);
                           }}
                         />
                       </PhotoAddContainer>
                     ) : (
                       <AddedIamge>
-                        <img alt="pet" src={image} />
+                        <img alt="pet" src={photoURL} />
                       </AddedIamge>
                     )}
                   </ImageInputWrapper>

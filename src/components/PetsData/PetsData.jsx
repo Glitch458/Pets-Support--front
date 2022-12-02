@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import myPets from '../../data/myPets.json';
+// import { useSelector } from 'react-redux';
+// import { useGetCurrentUserQuery } from 'redux/User/userApi';
+import pets from '../../data/myPets.json';
 import { AddButtonCircleLink } from 'components/Button/Button';
 import PetsList from './PetsList';
 import {
@@ -13,6 +15,16 @@ import ModalAddPets from 'components/ModalAddPets/ModalAddPets';
 
 export const PetsData = () => {
   const [expanded, setExpanded] = useState(false);
+
+  // const token = useSelector(state => state.auth.token);
+
+  // const { data = [], isFetching } = useGetCurrentUserQuery(token, {
+  //   skip: !token,
+  // });
+
+  // if (data) {
+  //   console.log(data.myPets);
+  // }
 
   const handleModalToggle = () => {
     setExpanded(prev => {
@@ -36,7 +48,12 @@ export const PetsData = () => {
             <AddButtonCircleLink />
           </AddButton>
         </HeadPetsData>
-        <PetsList data={myPets} />
+        {pets && <PetsList data={pets} />}
+        {/* {data.myPets.length === 0 && (
+          <div>
+            <p>'You have't added your pet yet'</p>
+          </div>
+        )} */}
       </Container>
       {expanded && <ModalAddPets handleModalToggle={handleModalToggle} />}
     </>
