@@ -55,14 +55,19 @@ export const ModalNotice = ({
 
   useEffect(() => {
     if (currentUser) {
-      setCurrenUsertData(currentUser.email);
+      setCurrenUsertData(currentUser);
     }
   }, [currentUser]);
 
   useEffect(() => {
     if (!isSuccess) return;
     if (owner) {
-      setPetData(prevState => ({ ...prevState, ...notices, ...owner }));
+      setPetData(prevState => ({
+        ...prevState,
+        ...notices,
+        ...{ email: owner.email },
+        ...{ phone: owner.phone },
+      }));
     }
   }, [notices, isSuccess, owner]);
 
@@ -72,7 +77,7 @@ export const ModalNotice = ({
   }, [handleModalToggle]);
 
   const ownPet = useMemo(
-    () => petData?.email === currentUserData,
+    () => petData?.email === currentUserData.email,
     [currentUserData, petData?.email]
   );
 
