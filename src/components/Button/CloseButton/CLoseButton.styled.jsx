@@ -1,8 +1,21 @@
 import styled from 'styled-components';
 
 export const CloseBtn = styled.button`
-  width: 44px;
-  height: 44px;
+  /* width: 44px;
+  height: 44px; */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  @media ${p => p.theme.media.desktop} {
+    top: 24px;
+    right: 24px;
+  }
+  width: 34px;
+  height: 34px;
+  @media ${p => p.theme.media.tablet} {
+    width: 44px;
+    height: 44px;
+  }
   margin: 0;
   padding: 0;
   border: 0;

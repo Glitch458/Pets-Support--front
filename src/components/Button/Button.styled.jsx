@@ -17,6 +17,11 @@ export const ButtonStyles = `display: flex;
 
 export const ButtonBasic = styled.button`
   ${ButtonStyles};
+  @media ${props => props.theme.media.tablet} {
+    margin-right: 20px;
+    width: 180px;
+    height: 44px;
+  }
   font-weight: ${p => p.theme.fontWeights.medium};
   font-family: ${p => p.theme.fonts.body};
   background-color: ${p => p.theme.colors.white};

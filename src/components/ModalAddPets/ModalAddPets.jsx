@@ -1,5 +1,8 @@
 import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
+// import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
@@ -9,6 +12,7 @@ import {
   Container,
   Title,
   InputCont,
+  InputContBreed,
   InputContTextArea,
   TextLabel,
   TextInput,
@@ -20,7 +24,7 @@ import {
   AddedIamge,
   TextAreaInput,
   ActionButtons,
-  CloseButton,
+  // CloseButton,
   NameError,
   BirthdayError,
   BreedError,
@@ -130,7 +134,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
               {formik.values.birthday !== '' || formik.errors.birthday ? (
                 <BirthdayError>{formik.errors.birthday}</BirthdayError>
               ) : null}
-              <InputCont>
+              <InputContBreed>
                 <TextLabel>Breed</TextLabel>
                 <TextInput
                   id="breed"
@@ -139,7 +143,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
                   value={formik.values.breed}
                   onChange={formik.handleChange}
                 />
-              </InputCont>
+              </InputContBreed>
               {formik.values.breed !== '' || formik.errors.breed ? (
                 <BreedError>{formik.errors.breed}</BreedError>
               ) : null}
@@ -209,8 +213,22 @@ const ModalAddPets = ({ handleModalToggle }) => {
               <Button type="submit">Done</Button>
             )}
           </ActionButtons>
+
+          {/* <ActionButtons>
+            {isFirstRegisterStep ? (
+              <ModalButton onClick={moveNextRegistration}>Next</ModalButton>
+            ) : (
+              <ModalButton type="submit">Done</ModalButton>
+            )}
+            {isFirstRegisterStep ? (
+              <ModalButton onClick={handleModalToggle}>Cancel</ModalButton>
+            ) : (
+              <ModalButton onClick={moveNextRegistration}>Back</ModalButton>
+            )}
+          </ActionButtons> */}
         </form>
-        <CloseButton onClick={handleModalToggle}>X</CloseButton>
+        {/* <CloseButton onClick={handleModalToggle}>X</CloseButton> */}
+        <CloseBtnn onClick={handleModalToggle}></CloseBtnn>
       </Container>
     </Modal>
   );
