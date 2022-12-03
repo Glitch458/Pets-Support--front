@@ -139,6 +139,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       <Container>
         <Title>Add pet</Title>
         <form
+          datatype="multipart/form-data"
           onSubmit={e => {
             e.preventDefault();
             formik.handleSubmit();
@@ -237,133 +238,128 @@ const AddModalNotice = ({ handleModalToggle }) => {
           )}
           {!isFirstRegisterStep && (
             <>
-              {
-                <>
-                  <fieldset>
-                    <legend>
-                      The sex<span>*</span>:
-                    </legend>
-                    <div>
-                      <div>
-                        <input
-                          id="malePet"
-                          name="sex"
-                          type="radio"
-                          value="male"
-                          checked={formik.values.sex === 'male'}
-                          onChange={formik.handleChange}
-                        />
-
-                        <label htmlFor="malePet">Male</label>
-                      </div>
-
-                      <div>
-                        <input
-                          id="femalePet"
-                          name="sex"
-                          type="radio"
-                          value="female"
-                          checked={formik.values.sex === 'female'}
-                          onChange={formik.handleChange}
-                        />
-
-                        <label htmlFor="femalePet">Female</label>
-                      </div>
-                    </div>
-                    {formik.touched.sex && formik.errors.sex ? (
-                      <p>{formik.errors.sex}</p>
-                    ) : null}
-                  </fieldset>
-
-                  <TextLabel htmlFor="locationPet">
-                    City, Region<span>*</span>:
-                    {formik.values.location !== '' && formik.errors.location ? (
-                      <p>{formik.errors.location}</p>
-                    ) : null}
-                    <TextInput
-                      id="location"
-                      name="location"
-                      type="text"
+              <fieldset>
+                <legend>
+                  The sex<span>*</span>:
+                </legend>
+                <div>
+                  <div>
+                    <input
+                      id="malePet"
+                      name="sex"
+                      type="radio"
+                      value="male"
+                      checked={formik.values.sex === 'male'}
                       onChange={formik.handleChange}
-                      placeholder="Введіть місце"
                     />
+
+                    <label htmlFor="malePet">Male</label>
+                  </div>
+
+                  <div>
+                    <input
+                      id="femalePet"
+                      name="sex"
+                      type="radio"
+                      value="female"
+                      checked={formik.values.sex === 'female'}
+                      onChange={formik.handleChange}
+                    />
+
+                    <label htmlFor="femalePet">Female</label>
+                  </div>
+                </div>
+                {formik.touched.sex && formik.errors.sex ? (
+                  <p>{formik.errors.sex}</p>
+                ) : null}
+              </fieldset>
+
+              <TextLabel htmlFor="locationPet">
+                City, Region<span>*</span>:
+                {formik.values.location !== '' && formik.errors.location ? (
+                  <p>{formik.errors.location}</p>
+                ) : null}
+                <TextInput
+                  id="location"
+                  name="location"
+                  type="text"
+                  onChange={formik.handleChange}
+                  placeholder="Введіть місце"
+                />
+              </TextLabel>
+
+              {formik.values.category === 'sell' ? (
+                <>
+                  <TextLabel htmlFor="pricePet">
+                    Price<span>*</span>:
+                    {formik.values.price !== '' && formik.errors.price ? (
+                      <p>{formik.errors.price}</p>
+                    ) : null}
                   </TextLabel>
 
-                  {formik.values.category === 'sell' ? (
-                    <>
-                      <TextLabel htmlFor="pricePet">
-                        Price<span>*</span>:
-                        {formik.values.price !== '' && formik.errors.price ? (
-                          <p>{formik.errors.price}</p>
-                        ) : null}
-                      </TextLabel>
-
-                      <TextInput
-                        id="pricePet"
-                        name="price"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.price}
-                        placeholder="Введіть ціну"
-                      />
-                    </>
-                  ) : null}
-
-                  <ImageInputWrapper>
-                    <ImageTitle>Load the pet`s image:</ImageTitle>
-                    {formik.values.photoURL === '' ? (
-                      <PhotoAddContainer htmlFor="photoURL">
-                        <svg
-                          width="51"
-                          height="51"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
-                            stroke="#111"
-                            strokeOpacity=".6"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        <PhotoPetInput
-                          id="photoURL"
-                          name="photoURL"
-                          type="file"
-                          accept="image/png, image/gif, image/jpeg"
-                          onChange={e => {
-                            formik.handleChange(e);
-                            onPhotoURLChange(e);
-                          }}
-                        />
-                      </PhotoAddContainer>
-                    ) : (
-                      <AddedIamge>
-                        <img alt="pet" src={photoURL} />
-                      </AddedIamge>
-                    )}
-                  </ImageInputWrapper>
-                  <InputContTextArea>
-                    <TextLabel htmlFor="commentsAd">
-                      Comments<span>*</span>
-                      {formik.values.comments !== '' &&
-                      formik.errors.comments ? (
-                        <p>{formik.errors.comments}</p>
-                      ) : null}
-                    </TextLabel>
-                    <TextAreaInput
-                      id="commentsAd"
-                      name="comments"
-                      type="text"
-                      maxLength="120"
-                      rows={5}
-                      onChange={formik.handleChange}
-                      value={formik.values.comments}
-                    />
-                  </InputContTextArea>
+                  <TextInput
+                    id="pricePet"
+                    name="price"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.price}
+                    placeholder="Введіть ціну"
+                  />
                 </>
-              }
+              ) : null}
+
+              <ImageInputWrapper>
+                <ImageTitle>Load the pet`s image:</ImageTitle>
+                {formik.values.photoURL === '' ? (
+                  <PhotoAddContainer htmlFor="photoURL">
+                    <svg
+                      width="51"
+                      height="51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M25.5 49.166V25.5m0 0V1.833m0 23.667h23.667m-23.667 0H1.834"
+                        stroke="#111"
+                        strokeOpacity=".6"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <PhotoPetInput
+                      id="photoURL"
+                      name="photoURL"
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={e => {
+                        formik.handleChange(e);
+                        onPhotoURLChange(e);
+                      }}
+                    />
+                  </PhotoAddContainer>
+                ) : (
+                  <AddedIamge>
+                    <img alt="pet" src={photoURL} />
+                  </AddedIamge>
+                )}
+              </ImageInputWrapper>
+              <InputContTextArea>
+                <TextLabel htmlFor="commentsAd">
+                  Comments<span>*</span>
+                  {formik.values.comments !== '' && formik.errors.comments ? (
+                    <p>{formik.errors.comments}</p>
+                  ) : null}
+                </TextLabel>
+                <TextAreaInput
+                  id="commentsAd"
+                  name="comments"
+                  type="text"
+                  maxLength="120"
+                  rows={5}
+                  onChange={formik.handleChange}
+                  value={formik.values.comments}
+                />
+              </InputContTextArea>
             </>
           )}
 
