@@ -19,18 +19,20 @@ const NoticesSearch = ({ children }) => {
 
   useEffect(() => {
     if (params !== '') {
-      setValue(params.split('-').join(' '));
+      setValue(params.split('+').join(' '));
     }
   }, [params]);
 
   const handeInputChange = e => {
-    setValue(e.target.value);
+    const searchvalue = e.target.value;
+    setValue(searchvalue);
+    setSearchParams(searchvalue !== '' ? { search: searchvalue } : {});
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const normalizeValue = value.trim().split(' ').join('-');
-    setSearchParams(value !== '' ? { search: normalizeValue } : {});
+    //const normalizeValue = value.trim().split(' ').join('-');
+    setSearchParams(value !== '' ? { search: value } : {});
   };
 
   return (

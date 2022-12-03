@@ -20,7 +20,6 @@ const NoticesCategoriesList = () => {
 
   //get serch params
   const params = searchParams.get('search') || '';
-  //const params = 'cat';
 
   // Get favotite Notices
   const favoriteCondition = favoriteNotices.length !== 0 || token === null;
@@ -59,7 +58,7 @@ const NoticesCategoriesList = () => {
     setVisibilityItems(items);
 
     if (params !== '') {
-      const arrayOfParams = params.toLowerCase().split('-');
+      const arrayOfParams = params.toLowerCase().split('+');
       const searchNoticesItem = items.filter(item => {
         const arr = arrayOfParams.filter(arrayOfParamsItem => {
           return item.title.toLowerCase().includes(arrayOfParamsItem);
@@ -77,7 +76,7 @@ const NoticesCategoriesList = () => {
       {isFetching && visibilityItems.length === 0 && <Spinner />}
 
       {!isFetching && visibilityItems.length === 0 && (
-        <h2>Category {categoryName} is empty </h2>
+        <h2>No data available</h2>
       )}
 
       {!isFetching && isError && (
