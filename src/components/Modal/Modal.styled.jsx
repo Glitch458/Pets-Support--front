@@ -11,12 +11,12 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: ${p => p.theme.colors.gray};
   backdrop-filter: blur(5px);
-  padding: 20px 0px;
-  overflow-y: scroll;
+  /* overflow: scroll; */
   z-index: 999;
 `;
 
 export const ModalWindow = styled.div`
+  overflow-y: auto;
   box-sizing: border-box;
   position: absolute;
   top: 50%;

@@ -37,15 +37,23 @@ const validationSchema = Yup.object({
   name: Yup.string()
     .trim()
     .required('Це поле не може бути порожнім')
+
+    // .matches(
+    //   /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
+    //   'Тільки літери та пробіли'
+    // )
     .matches(
       /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
-      'Тільки літери та пробіли'
+      'Only letters and spaces'
     )
     .min(2, "Ім'я містить мінімум 2 символи")
     .max(16, "Ім'я містить максимум 16 символів"),
-  birthday: Yup.date().required('Це поле не може бути порожнім'),
+  // birthday: Yup.date().required('Це поле не може бути порожнім'),
+  birthday: Yup.date().required('This field cannot be empty'),
+
   breed: Yup.string()
-    .required('Це поле не може бути порожнім')
+    // .required('Це поле не може бути порожнім')
+    .required('This field cannot be empty')
     .matches(
       /^([А-Яа-яЁёЇїІіЄєҐґ'\s]+|[a-zA-Z\s]+){2,}$/,
       'Тільки літери та пробіли'
@@ -53,9 +61,14 @@ const validationSchema = Yup.object({
     .min(2, 'Порода містить мінімум 2 символи')
     .max(16, 'Порода містить максимум 16 символів'),
   comments: Yup.string()
-    .required('Це поле не може бути порожнім')
-    .min(8, 'Коментар містить мінімум 8 символів')
-    .max(120, 'Коментар містить максимум 120 символів'),
+    // .required('Це поле не може бути порожнім')
+    .required('This field cannot be empty')
+
+    // .min(8, 'Коментар містить мінімум 8 символів')
+    .min(8, 'The comment contains a minimum of 8 characters')
+
+    // .max(120, 'Коментар містить максимум 120 символів'),
+    .max(120, 'A comment contains a maximum of 120 characters'),
 });
 
 const ModalAddPets = ({ handleModalToggle }) => {
