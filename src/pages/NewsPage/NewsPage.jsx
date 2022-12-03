@@ -13,7 +13,7 @@ import { useGetNewsQuery } from 'redux/News/newsApi';
 import { renewItems } from 'redux/News/newsSlice';
 
 const NewsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams /*setSearchParams*/] = useSearchParams();
   const dispatch = useDispatch();
   const { data = [], isFetching, isError } = useGetNewsQuery();
 
@@ -21,7 +21,6 @@ const NewsPage = () => {
   const params = searchParams.get('search') || '';
 
   const [visibileItems, setVisibleItems] = useState([]);
-  const [normalizeSearchParams, setNormalizeSearchParams] = useState('');
 
   useEffect(() => {
     if (!isFetching && data) {
@@ -31,31 +30,27 @@ const NewsPage = () => {
     setVisibleItems(newsItem);
 
     if (params !== '') {
-      setNormalizeSearchParams(params.replace('-', ' '));
+      const newsTitle = newsItem.map(item => item.title);
+      const arrayOfParams = params.toLowerCase().split('+');
 
-      const arrayOfParams = params.toLowerCase().split('-');
-
-      const searchNoticesItem = newsItem.filter(item => {
+      const searchNewsTitle = newsTitle.filter(item => {
         const arr = arrayOfParams.filter(arrayOfParamsItem => {
-          return item.title.toLowerCase().includes(arrayOfParamsItem);
+          return item.toLowerCase().includes(arrayOfParamsItem);
         });
         return arr.length > 0 ? item : NaN;
       });
-      setVisibleItems(searchNoticesItem);
+
+      const serchNewsItem = newsItem.filter(news => {
+        return searchNewsTitle.find(title => title === news.title) ? news : NaN;
+      });
+      setVisibleItems(serchNewsItem);
     }
   }, [newsItem, isFetching, data, dispatch, params]);
-
-  const handleSearch = value => {
-    const normalizeValue = value.trim().replace(' ', '-');
-    setSearchParams(value !== '' ? { search: normalizeValue } : {});
-  };
 
   return (
     <PageWrapper>
       <Container>
-        <NoticesSearch onSubmit={handleSearch} search={normalizeSearchParams}>
-          News
-        </NoticesSearch>
+        <NoticesSearch>News</NoticesSearch>
         <NewsListContainer>
           {isFetching && visibileItems.length === 0 && <Spinner />}
           {!isFetching && visibileItems.length === 0 && (
