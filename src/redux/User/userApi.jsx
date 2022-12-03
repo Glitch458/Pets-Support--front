@@ -21,6 +21,13 @@ export const userApi = createApi({
       }),
       providesTags: ['User'],
     }),
+    updateUserInfo: builder.mutation({
+      query: () => ({
+        url: `/update`,
+        method: 'POST',
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
-export const { useGetCurrentUserQuery } = userApi;
+export const { useGetCurrentUserQuery, useUpdateUserInfoMutation} = userApi;
