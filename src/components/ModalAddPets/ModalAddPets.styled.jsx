@@ -119,8 +119,15 @@ export const TextInput = styled.input`
 
 export const ModalBtn = styled(ModalButton)`
   width: 100%;
+  font-family: ${p => p.theme.fonts.body};
   @media ${p => p.theme.media.tablet} {
     width: 180px;
+    margin-right: 20px;
+  }
+  &:hover,
+  &:focus {
+    background-color: ${p => p.theme.colors.accent};
+    color: ${p => p.theme.colors.white};
   }
 `;
 
@@ -271,13 +278,13 @@ export const TextAreaInput = styled.textarea`
 export const NameError = styled.p`
   position: absolute;
   color: red;
-  top: 175px;
-  left: 45%;
+  top: 152px;
+  left: 43%;
   transform: translateX(-50%);
   font-size: 10px;
 
   @media ${p => p.theme.media.tablet} {
-    top: 210px;
+    top: 215px;
     left: 50%;
     font-size: 12px;
   }
@@ -286,13 +293,13 @@ export const NameError = styled.p`
 export const BirthdayError = styled.p`
   position: absolute;
   color: red;
-  top: 265px;
+  top: 243px;
   left: 45%;
   transform: translateX(-50%);
   font-size: 10px;
 
   @media ${p => p.theme.media.tablet} {
-    top: 330px;
+    top: 335px;
     left: 50%;
     font-size: 12px;
   }
@@ -301,23 +308,31 @@ export const BirthdayError = styled.p`
 export const BreedError = styled.p`
   position: absolute;
   color: red;
-  top: 355px;
+  top: 332px;
   left: 45%;
   transform: translateX(-50%);
   font-size: 10px;
 
   @media ${p => p.theme.media.tablet} {
-    top: 450px;
+    top: 458px;
     left: 50%;
     font-size: 12px;
   }
 `;
 
 export const CommentError = styled.p`
+  width: 230px;
   position: absolute;
   color: red;
-  top: 540px;
-  left: 50%;
+  top: 416px;
+  left: 51%;
   transform: translateX(-50%);
-  font-size: 12px;
+  font-size: 10px;
+
+  @media ${p => p.theme.media.tablet} {
+    width: 300px;
+    top: 429px;
+    left: 47%;
+    font-size: 12px;
+  }
 `;
