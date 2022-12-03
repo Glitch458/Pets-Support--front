@@ -13,7 +13,7 @@ import { useGetNewsQuery } from 'redux/News/newsApi';
 import { renewItems } from 'redux/News/newsSlice';
 
 const NewsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams /*setSearchParams*/] = useSearchParams();
   const dispatch = useDispatch();
   const { data = [], isFetching, isError } = useGetNewsQuery();
 
