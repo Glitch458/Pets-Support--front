@@ -325,13 +325,14 @@ export const CommentError = styled.p`
   position: absolute;
   color: red;
   top: 416px;
-  left: 52%;
+  left: 51%;
   transform: translateX(-50%);
   font-size: 10px;
 
   @media ${p => p.theme.media.tablet} {
-    top: 540px;
-    left: 50%;
+    width: 300px;
+    top: 429px;
+    left: 47%;
     font-size: 12px;
   }
 `;

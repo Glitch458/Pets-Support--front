@@ -11,11 +11,14 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: ${p => p.theme.colors.gray};
   backdrop-filter: blur(5px);
-  /* overflow: scroll; */
+  @media ${p => p.theme.media.tablet} {
+    overflow: scroll;
+  }
   z-index: 999;
 `;
 
 export const ModalWindow = styled.div`
+  overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
   position: absolute;
@@ -28,5 +31,7 @@ export const ModalWindow = styled.div`
 
   @media ${p => p.theme.media.tablet} {
     width: 608px;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 `;
