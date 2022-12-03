@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import authOperations from 'redux/Auth/auth-operations';
 import { useDispatch } from 'react-redux';
-import {
-  useGetCurrentUserQuery,
-  useUpdateUserInfoMutation,
-} from 'redux/User/userApi';
 
 import {
   InfoItems,
@@ -19,7 +15,7 @@ import { ReactComponent as Icon } from './icons/editValue.svg';
 import { ReactComponent as Stroke } from './icons/iconStroke.svg';
 import LogOutIcon from './icons/logOut.svg';
 
-const UserDataItem = () => {
+const UserDataItem = ({ data, changeData }) => {
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isEmaillDisabled, setIsEmailDisabled] = useState(true);
   const [isbirthdayDisabled, setIsbirthdayDisabled] = useState(true);
@@ -27,17 +23,15 @@ const UserDataItem = () => {
   const [isCityDisabled, setCityDisabled] = useState(true);
   const [iconColor, setIconColor] = useState('#f59256');
 
-  const dispatch = useDispatch();
-  const { data = [] } = useGetCurrentUserQuery();
-  const [changeData] = useUpdateUserInfoMutation();
-
-  const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
-
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userBirthday, setUserBirthday] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
+
+  const dispatch = useDispatch();
+
+  const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
 
   useEffect(() => {
     setUserName(name);

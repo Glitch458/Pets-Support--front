@@ -1,4 +1,9 @@
 import {
+  useGetCurrentUserQuery,
+  useUpdateUserInfoMutation,
+} from 'redux/User/userApi';
+
+import {
   User,
   Title,
   UserPhoto,
@@ -14,6 +19,8 @@ import photo from './Ellipse 45.jpg';
 import EditPhotoIcon from './icons/editPhoto.svg';
 
 const UserData = () => {
+  const { data = [] } = useGetCurrentUserQuery();
+  const [changeData] = useUpdateUserInfoMutation();
   return (
     <UserContainer>
       <Title>My information:</Title>
@@ -28,7 +35,7 @@ const UserData = () => {
             </PhotoEditLabel>
           </form>
         </UserPhoto>
-        <UserDataItem />
+        <UserDataItem data={data} changeData={changeData} />
       </User>
     </UserContainer>
   );
