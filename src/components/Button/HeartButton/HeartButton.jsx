@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -8,7 +9,7 @@ import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 
 import { HeartBtn } from './HeartBtn.styled';
 import { ReactComponent as IconHeart } from 'images/icons/heart.svg';
-import { useEffect } from 'react';
+import { notifySuccess } from 'helpers/toastNotify';
 
 export const HeartButton = ({
   //onClick,
@@ -38,9 +39,11 @@ export const HeartButton = ({
   useEffect(() => {
     if (!errorAdd && loadingAdd) {
       dispatch(addFavorite(noticesId));
+      notifySuccess('Notices have add to favorite!');
     }
     if (!errorDelete && loadingDelete) {
       dispatch(deleteFavorite(noticesId));
+      notifySuccess('Notices have delete from favorite!');
     }
   }, [errorAdd, loadingAdd, errorDelete, loadingDelete, noticesId, dispatch]);
 
