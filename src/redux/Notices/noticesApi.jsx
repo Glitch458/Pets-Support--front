@@ -71,7 +71,7 @@ export const noticesApi = createApi({
     //useDeleteNoticesMutation
     deleteNotice: builder.mutation({
       query: noticeId => ({
-        url: `/id/${noticeId}`,
+        url: `/own/${noticeId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Notices'],

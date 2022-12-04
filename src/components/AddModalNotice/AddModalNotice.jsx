@@ -87,13 +87,6 @@ const AddModalNotice = ({ handleModalToggle }) => {
       : setIsFirstRegisterStep(true);
   };
 
-  const onPhotoURLChange = e => {
-    if (e.currentTarget.files && e.currentTarget.files[0]) {
-      setPhotoURL(URL.createObjectURL(e.target.files[0]));
-      formik.setFieldValue('photoURL', e.currentTarget.files[0]);
-    }
-  };
-
   const categorySetByDefault = () => {
     const enterPoint = pathname.split('/').pop();
     return enterPoint === 'notices' ? 'sell' : enterPoint;
@@ -114,20 +107,20 @@ const AddModalNotice = ({ handleModalToggle }) => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
+      console.log(values);
       addNotices(values);
       handleModalToggle();
       toast.success(`Your pet ${values.name} has been added to notices`);
     },
   });
 
-  // const handleFormSubmit = e => {
-  //   e.preventDefault();
-  //   if (isFirstRegisterStep) {
-  //     moveNextRegistration();
-  //     return;
-  //   }
-  //   await addNotices(formik.values);
-  // };
+  const onPhotoURLChange = e => {
+    const { files } = e.currentTarget;
+    if (files) {
+      setPhotoURL(URL.createObjectURL(files[0]));
+      formik.setFieldValue('photoURL', files[0]);
+    }
+  };
 
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
