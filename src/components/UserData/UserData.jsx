@@ -14,19 +14,20 @@ import {
 } from './UserData.styled';
 import UserDataItem from './UserDataItem';
 // временное фото для стилизации
-import photo from './Ellipse 45.jpg';
+import photo from './avatar-placeholder.png';
 // import EditIcon from './icons/editValue.svg';
 import EditPhotoIcon from './icons/editPhoto.svg';
 
 const UserData = () => {
   const { data = [] } = useGetCurrentUserQuery();
   const [changeData] = useUpdateUserInfoMutation();
+
   return (
     <UserContainer>
       <Title>My information:</Title>
       <User>
         <UserPhoto>
-          <Photo src={photo} alt="User" />
+          <Photo src={data.avatarURL || photo} alt="User" />
           <form method="post">
             <PhotoEditLabel>
               <img src={EditPhotoIcon} alt="Edit" />
