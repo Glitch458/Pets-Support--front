@@ -25,7 +25,7 @@ const NoticesCategoriesItem = ({ item }) => {
   };
 
   const imgPath = url => {
-    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
+    return url ? `${url}` : ImgCover;
   };
 
   // const isFavorite = item => {
