@@ -11,7 +11,7 @@ export const noticesApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Notices'],
+  tagTypes: ['Notices', 'FavoriteNotices'],
 
   endpoints: builder => ({
     //useGetNoticesByCategoryQuery
@@ -46,7 +46,7 @@ export const noticesApi = createApi({
         url: `/favorite/${noticeId}`,
         method: 'POST',
       }),
-      invalidatesTags: ['Notices'],
+      invalidatesTags: ['FavoriteNotices'],
     }),
 
     //useDeleteFavoriteNoticesMutation
@@ -55,7 +55,7 @@ export const noticesApi = createApi({
         url: `/favorite/${noticeId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Notices'],
+      invalidatesTags: ['FavoriteNotices'],
     }),
 
     //useAddNoticeMutation

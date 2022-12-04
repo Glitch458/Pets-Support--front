@@ -13,7 +13,7 @@ export const PET_MODAL_KEYS = [
   },
   {
     label: 'Location:',
-    key: 'place',
+    key: 'location',
   },
   {
     label: 'The sex:',
