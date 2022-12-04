@@ -93,10 +93,10 @@ const NoticesCategoriesItem = ({ item }) => {
             {item.breed}
           </DetailsItem>
         )}
-        {item.place && (
-          <DetailsItem key={item.place}>
+        {item.location && (
+          <DetailsItem key={item.location}>
             <span>Place:</span>
-            {item.place}
+            {item.location}
           </DetailsItem>
         )}
         {item.birthday && (
