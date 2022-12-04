@@ -78,7 +78,7 @@ const validationSchema = Yup.object({
 const AddModalNotice = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const { pathname } = useLocation();
-  const [photoURL, setPhotoURL] = useState(null);
+  const [image, setImage] = useState(null);
   const [addNotices] = useAddNoticeMutation();
 
   const moveNextRegistration = () => {
@@ -102,26 +102,35 @@ const AddModalNotice = ({ handleModalToggle }) => {
       sex: '',
       location: '',
       price: 1,
-      photoURL: '',
+      photoURL: null,
       comments: '',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      console.log(values);
-      addNotices(values);
+      const data = new FormData();
+      data.append('category', values.category);
+      data.append('title', values.title);
+      data.append('name', values.name);
+      data.append('birthday', values.birthday);
+      data.append('breed', values.breed);
+      data.append('sex', values.sex);
+      data.append('location', values.location);
+      data.append('price', values.price);
+      data.append('comments', values.comments);
+      data.append('photoURL', values.photoURL);
+      addNotices(data);
       handleModalToggle();
       toast.success(`Your pet ${values.name} has been added to notices`);
     },
   });
 
-  const onPhotoURLChange = e => {
+  const onImageChange = e => {
     const { files } = e.currentTarget;
     if (files) {
-      setPhotoURL(URL.createObjectURL(files[0]));
+      setImage(URL.createObjectURL(files[0]));
       formik.setFieldValue('photoURL', files[0]);
     }
   };
-
   useEffect(() => {
     const ecsClose = handleEscClick(handleModalToggle);
     return () => ecsClose();
@@ -132,7 +141,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       <Container>
         <Title>Add pet</Title>
         <form
-          datatype="multipart/form-data"
+          encType="multipart/form-data"
           onSubmit={e => {
             e.preventDefault();
             formik.handleSubmit();
@@ -303,7 +312,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
 
               <ImageInputWrapper>
                 <ImageTitle>Load the pet`s image:</ImageTitle>
-                {formik.values.photoURL === '' ? (
+                {formik.values.photoURL === null ? (
                   <PhotoAddContainer htmlFor="photoURL">
                     <svg
                       width="51"
@@ -326,13 +335,13 @@ const AddModalNotice = ({ handleModalToggle }) => {
                       accept=".png, .jpg, .jpeg"
                       onChange={e => {
                         formik.handleChange(e);
-                        onPhotoURLChange(e);
+                        onImageChange(e);
                       }}
                     />
                   </PhotoAddContainer>
                 ) : (
                   <AddedIamge>
-                    <img alt="pet" src={photoURL} />
+                    <img alt="pet" src={image} />
                   </AddedIamge>
                 )}
               </ImageInputWrapper>
