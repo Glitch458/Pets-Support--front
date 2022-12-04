@@ -11,14 +11,16 @@ import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import {
   Container,
+  CloseBtn,
   Title,
+  FirstForm,
+  UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
   TextLabel,
   TextInput,
   ActionButtons,
-  CloseButton,
   RadioGroup,
   RadioLabel,
   RadioInput,
@@ -139,6 +141,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
       <Container>
+        <CloseBtn onClick={handleModalToggle} />
         <Title>Add pet</Title>
         <form
           encType="multipart/form-data"
@@ -148,7 +151,11 @@ const AddModalNotice = ({ handleModalToggle }) => {
           }}
         >
           {isFirstRegisterStep && (
-            <>
+            <FirstForm>
+              <UserComment>
+                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                amet, consectetur
+              </UserComment>
               <RadioGroup required>
                 <RadioLabel>
                   <RadioInput
@@ -236,7 +243,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   />
                 </TextLabel>
               </InputCont>
-            </>
+            </FirstForm>
           )}
           {!isFirstRegisterStep && (
             <>
@@ -378,7 +385,6 @@ const AddModalNotice = ({ handleModalToggle }) => {
             )}
           </ActionButtons>
         </form>
-        <CloseButton onClick={handleModalToggle}>X</CloseButton>
       </Container>
     </Modal>
   );
