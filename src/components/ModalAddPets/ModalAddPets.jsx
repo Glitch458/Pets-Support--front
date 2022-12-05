@@ -4,6 +4,9 @@ import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
+import { usePostPetMutation } from 'redux/User/userPetsApi';
+
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -75,6 +78,8 @@ const ModalAddPets = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const [image, setImage] = useState(null);
 
+  const [addUserPet] = usePostPetMutation();
+
   const moveNextRegistration = () => {
     if (formik.values.name && formik.values.birthday && formik.values.breed) {
       isFirstRegisterStep
@@ -101,8 +106,8 @@ const ModalAddPets = ({ handleModalToggle }) => {
       petCard.append('breed', values.breed);
       petCard.append('petURL', values.image);
       petCard.append('comments', values.comments);
-
       console.log(values);
+      addUserPet(petCard);
       handleModalToggle();
       toast.success(`Вашого нового питомця ${values.name} успішно додано`);
     },
