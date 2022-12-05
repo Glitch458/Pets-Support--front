@@ -11,9 +11,9 @@ import {
   Form,
   LogOut,
 } from './UserData.styled';
-import { ReactComponent as Icon } from './icons/editValue.svg';
-import { ReactComponent as Stroke } from './icons/iconStroke.svg';
-import LogOutIcon from './icons/logOut.svg';
+import { ReactComponent as Icon } from 'images/icons/editValue.svg';
+import { ReactComponent as Stroke } from 'images/icons/iconStroke.svg';
+import LogOutIcon from 'images/icons/logOut.svg';
 
 const UserDataItem = ({ data, changeData }) => {
   const [isNameDisabled, setIsNameDisabled] = useState(true);
@@ -70,12 +70,13 @@ const UserDataItem = ({ data, changeData }) => {
     }
   };
 
-  const handleClickPencil = (isDisabled, setIsDisabled) => {
+  const handleClickPencil = (e, userValue, isDisabled, setIsDisabled) => {
+    const { value } = e.currentTarget.attributes.name;
     if (isDisabled) {
       setIsDisabled(false);
       setIconColor('#000');
     } else {
-      changeData();
+      changeData({ [value]: userValue });
       setIsDisabled(true);
       setIconColor('#f59256');
     }
@@ -101,9 +102,14 @@ const UserDataItem = ({ data, changeData }) => {
             <EditInputBtn
               name="name"
               type="submit"
-              onClick={() =>
-                handleClickPencil(isNameDisabled, setIsNameDisabled)
-              }
+              onClick={e => {
+                handleClickPencil(
+                  e,
+                  userName,
+                  isNameDisabled,
+                  setIsNameDisabled
+                );
+              }}
             >
               {isNameDisabled ? (
                 <Icon fill={iconColor} width="9.5" height="9.5" />
@@ -124,10 +130,15 @@ const UserDataItem = ({ data, changeData }) => {
               value={userEmail}
             />
             <EditInputBtn
-              name="name"
+              name="email"
               type="submit"
-              onClick={() =>
-                handleClickPencil(isEmaillDisabled, setIsEmailDisabled)
+              onClick={e =>
+                handleClickPencil(
+                  e,
+                  userEmail,
+                  isEmaillDisabled,
+                  setIsEmailDisabled
+                )
               }
             >
               {isEmaillDisabled ? (
@@ -151,8 +162,13 @@ const UserDataItem = ({ data, changeData }) => {
             <EditInputBtn
               name="birthday"
               type="submit"
-              onClick={() =>
-                handleClickPencil(isbirthdayDisabled, setIsbirthdayDisabled)
+              onClick={e =>
+                handleClickPencil(
+                  e,
+                  userBirthday,
+                  isbirthdayDisabled,
+                  setIsbirthdayDisabled
+                )
               }
             >
               {isbirthdayDisabled ? (
@@ -176,8 +192,13 @@ const UserDataItem = ({ data, changeData }) => {
             <EditInputBtn
               name="phone"
               type="submit"
-              onClick={() =>
-                handleClickPencil(isPhoneDisabled, setPhoneDisabled)
+              onClick={e =>
+                handleClickPencil(
+                  e,
+                  userPhone,
+                  isPhoneDisabled,
+                  setPhoneDisabled
+                )
               }
             >
               {isPhoneDisabled ? (
@@ -201,7 +222,9 @@ const UserDataItem = ({ data, changeData }) => {
             <EditInputBtn
               name="city"
               type="submit"
-              onClick={() => handleClickPencil(isCityDisabled, setCityDisabled)}
+              onClick={e =>
+                handleClickPencil(e, userCity, isCityDisabled, setCityDisabled)
+              }
             >
               {isCityDisabled ? (
                 <Icon fill={iconColor} width="9.5" height="9.5" />

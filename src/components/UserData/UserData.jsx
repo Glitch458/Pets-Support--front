@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   useGetCurrentUserQuery,
   useUpdateUserInfoMutation,
@@ -13,25 +14,48 @@ import {
   UserContainer,
 } from './UserData.styled';
 import UserDataItem from './UserDataItem';
-// временное фото для стилизации
-import photo from './avatar-placeholder.png';
-// import EditIcon from './icons/editValue.svg';
-import EditPhotoIcon from './icons/editPhoto.svg';
+import photo from 'images/avatar-placeholder.png';
+import EditPhotoIcon from 'images/icons/editPhoto.svg';
 
 const UserData = () => {
   const { data = [] } = useGetCurrentUserQuery();
+  const [tempImg, setTempImg] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [changeData] = useUpdateUserInfoMutation();
+
+  const { avatarURL } = data;
+
+  const onImageChange = e => {
+    const { files } = e.currentTarget;
+    if (files) {
+      setTempImg(URL.createObjectURL(files[0]));
+      setAvatar(files[0]);
+    }
+  };
+
+  useEffect(() => {
+    if (avatar) {
+      const update = new FormData();
+      update.append('avatarURL', avatar);
+      changeData(update);
+    }
+  }, [avatar, changeData]);
 
   return (
     <UserContainer>
       <Title>My information:</Title>
       <User>
         <UserPhoto>
-          <Photo src={data.avatarURL || photo} alt="User" />
-          <form method="post">
+          <Photo src={tempImg || avatarURL || photo} alt="avatarURL" />
+          <form encType="multipart/form-data">
             <PhotoEditLabel>
               <img src={EditPhotoIcon} alt="Edit" />
-              <PhotoEdit type="file" placeholder="asdasd" />
+              <PhotoEdit
+                type="file"
+                name="avatarURL"
+                accept=".png, .jpg, .jpeg"
+                onChange={onImageChange}
+              />
               Edit photo
             </PhotoEditLabel>
           </form>

@@ -22,9 +22,10 @@ export const userApi = createApi({
       providesTags: ['User'],
     }),
     updateUserInfo: builder.mutation({
-      query: () => ({
+      query: payload => ({
         url: `/update`,
         method: 'PATCH',
+        body: payload,
       }),
       providesTags: ['User'],
     }),
