@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom';
 import NoticesCategoriesItem from 'components/NoticesCategoriesItem/NoticesCategoriesItem';
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { getFavorite } from 'redux/Notices/noticesSlice';
-//import { renewItems } from 'redux/Notices/noticesSlice';
 import Spinner from 'components/Spinner/Spinner';
 import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
@@ -12,23 +10,12 @@ const NoticesCategoriesList = () => {
   const [searchParams /*setSearchParams*/] = useSearchParams();
   const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  //const noticesItem = useSelector(state => state.notices.items);
-  const token = useSelector(state => state.auth.token);
-  const dispatch = useDispatch();
+
   const [items, setItems] = useState([]);
   const [visibilityItems, setVisibilityItems] = useState([]);
 
   //get serch params
   const params = searchParams.get('search') || '';
-
-  // Get favotite Notices
-  const favoriteCondition = favoriteNotices.length !== 0 || token === null;
-  const { data: favoriteData = [], isSuccess } = useGetNoticesByCategoryQuery(
-    'favorite',
-    {
-      skip: favoriteCondition === true,
-    }
-  );
 
   //Get notices for category
   const {
@@ -40,24 +27,22 @@ const NoticesCategoriesList = () => {
   });
 
   useEffect(() => {
-    if (isSuccess && favoriteData.length !== 0) {
-      const favoriteIds = favoriteData.map(item => {
-        return item._id;
-      });
-      dispatch(getFavorite(favoriteIds));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     if (!isFetching && data) {
       setItems(data);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [isFetching, data]);
 
   useEffect(() => {
-    setVisibilityItems(items);
+    if (categoryName !== 'favorite') {
+      setVisibilityItems(items);
+    }
+
+    if (categoryName === 'favorite' && favoriteNotices) {
+      const favoriteItems = items.filter(item => {
+        return favoriteNotices.includes(item._id);
+      });
+      setVisibilityItems(favoriteItems);
+    }
 
     if (params !== '') {
       const arrayOfParams = params.toLowerCase().split('+');
@@ -70,7 +55,7 @@ const NoticesCategoriesList = () => {
       setVisibilityItems(searchNoticesItem);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, params]);
+  }, [items, params, favoriteNotices, categoryName]);
 
   return (
     <NoticesCategoriesContainerList>

@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-//import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import ImgCover from 'images/pet-cover.jpg';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
@@ -83,7 +82,6 @@ export const ModalNotice = ({
   );
 
   const handleDeleteClick = async () => {
-    //console.log(id);
     try {
       await deleteNotices(id);
       notifySuccess('Deleted!');
@@ -104,10 +102,12 @@ export const ModalNotice = ({
       if (!favoriteId) {
         addNotices(id);
         dispatch(addFavorite(id));
+        notifySuccess('Notices have add to favorite!');
       }
       if (favoriteId) {
         deleteFavoriteNotices(id);
         dispatch(deleteFavorite(id));
+        notifySuccess('Notices have delete from favorite!');
       }
     }
     if (!token || token === null) {
@@ -121,7 +121,6 @@ export const ModalNotice = ({
 
   return (
     <Modal onClick={e => handleBackdropClick(e, handleModalToggle)}>
-      {/* {console.log(currentUserEmail)} */}
       <Container>
         <InfoWrapper>
           <ImageThumb
