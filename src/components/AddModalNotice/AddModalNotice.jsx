@@ -320,7 +320,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               <ImageInputWrapper>
                 <ImageTitle>Load the pet`s image:</ImageTitle>
                 {formik.values.photoURL === null ? (
-                  <PhotoAddContainer htmlFor="photoURL">
+                  <PhotoAddContainer htmlFor="imagePet">
                     <svg
                       width="51"
                       height="51"
@@ -336,7 +336,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                       />
                     </svg>
                     <PhotoPetInput
-                      id="photoURL"
+                      id="imagePet"
                       name="photoURL"
                       type="file"
                       accept=".png, .jpg, .jpeg"

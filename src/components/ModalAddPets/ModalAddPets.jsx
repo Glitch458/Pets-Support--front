@@ -90,23 +90,29 @@ const ModalAddPets = ({ handleModalToggle }) => {
       name: '',
       birthday: '',
       breed: '',
-      image: '',
+      petURL: '',
       comments: '',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      if (values.comments) {
-        console.log(values);
-        handleModalToggle();
-        toast.success(`Вашого нового питомця ${values.name} успішно додано`);
-      }
+      const petCard = new FormData();
+      petCard.append('name', values.name);
+      petCard.append('birthday', values.birthday);
+      petCard.append('breed', values.breed);
+      petCard.append('petURL', values.image);
+      petCard.append('comments', values.comments);
+
+      console.log(values);
+      handleModalToggle();
+      toast.success(`Вашого нового питомця ${values.name} успішно додано`);
     },
   });
 
   const onImageChange = e => {
-    if (e.currentTarget.files && e.currentTarget.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      formik.setFieldValue('image', e.currentTarget.files[0]);
+    const { files } = e.currentTarget;
+    if (files) {
+      setImage(URL.createObjectURL(files[0]));
+      formik.setFieldValue('petURL', files[0]);
     }
   };
 
@@ -120,7 +126,13 @@ const ModalAddPets = ({ handleModalToggle }) => {
       <Container>
         <CloseBtn onClick={handleModalToggle} />
         <Title>Add pet</Title>
-        <form onSubmit={formik.handleSubmit}>
+        <form
+          encType="multipart/form-data"
+          onSubmit={e => {
+            e.preventDefault();
+            formik.handleSubmit();
+          }}
+        >
           {isFirstRegisterStep && (
             <FirstForm>
               <InputCont>
@@ -169,7 +181,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
             <SecondForm>
               <ImageInputWrapper>
                 <ImageTitle>Add photo and some comments</ImageTitle>
-                {formik.values.image === '' ? (
+                {formik.values.petURL === '' ? (
                   <PhotoAddContainer htmlFor="imagePet">
                     <svg
                       width="51"
@@ -187,9 +199,9 @@ const ModalAddPets = ({ handleModalToggle }) => {
                     </svg>
                     <PhotoPetInput
                       id="imagePet"
-                      name="image"
+                      name="petURL"
                       type="file"
-                      accept="image/png, image/gif, image/jpeg"
+                      accept=".png, .jpg, .jpeg"
                       onChange={e => {
                         formik.handleChange(e);
                         onImageChange(e);
