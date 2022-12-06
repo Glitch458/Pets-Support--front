@@ -95,7 +95,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
       name: '',
       birthday: '',
       breed: '',
-      petURL: '',
+      petURL: null,
       comments: '',
     },
     validationSchema: validationSchema,
@@ -106,7 +106,6 @@ const ModalAddPets = ({ handleModalToggle }) => {
       petCard.append('breed', values.breed);
       petCard.append('petURL', values.image);
       petCard.append('comments', values.comments);
-      console.log(values);
       addUserPet(petCard);
       handleModalToggle();
       toast.success(`Вашого нового питомця ${values.name} успішно додано`);
@@ -186,7 +185,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
             <SecondForm>
               <ImageInputWrapper>
                 <ImageTitle>Add photo and some comments</ImageTitle>
-                {formik.values.petURL === '' ? (
+                {formik.values.petURL === null ? (
                   <PhotoAddContainer htmlFor="imagePet">
                     <svg
                       width="51"
