@@ -3,46 +3,44 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './authApi';
 
 const initialState = {
-  name: '',
-  email: '',
-  token: '',
+  user: { name: null, email: null },
+  token: null,
+  isLoggedIn: false,
+  isRefreshing: false,
 };
 
 export const authSlice = createSlice({
   name: 'authReducer',
   initialState,
-  reducers: {},
   extraReducers: builder => {
-    //Login
-    builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
-      (state, { payload }) => {
-        const { user, token } = payload;
-
-        state.name = user.name;
-        state.email = user.email;
-        state.token = token;
-      }
-    );
-
-    //Logout
-    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, state => {
-      state.token = initialState.token;
-      state.name = initialState.name;
-      state.email = initialState.email;
-    });
-
     //Registration
     builder.addMatcher(
       authApi.endpoints.register.matchFulfilled,
       (state, { payload }) => {
         const { user, token } = payload;
-
-        state.name = user.name;
-        state.email = user.email;
+        state.user = user;
         state.token = token;
+        state.isLoggedIn = true;
       }
     );
+
+    //Login
+    builder.addMatcher(
+      authApi.endpoints.login.matchFulfilled,
+      (state, { payload }) => {
+        const { user, token } = payload;
+        state.user = user;
+        state.token = token;
+        state.isLoggedIn = true;
+      }
+    );
+
+    //Logout
+    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, state => {
+      state.user = initialState.user;
+      state.token = initialState.token;
+      state.isLoggedIn = initialState.isLoggedIn;
+    });
 
     //currentUser Success
     builder.addMatcher(

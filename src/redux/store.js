@@ -9,6 +9,7 @@ import { userApi } from './User/userApi';
 import userReducer from './User/userSlice';
 import { friendsApi } from './Friends/friendsApi';
 import friendsReducer from './Friends/friendsSlice';
+import { userPetsApi } from './User/userPetsApi';
 
 import { setupListeners } from '@reduxjs/toolkit/query';
 
@@ -37,6 +38,7 @@ export const store = configureStore({
     [newsApi.reducerPath]: newsApi.reducer,
     [friendsApi.reducerPath]: friendsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [userPetsApi.reducerPath]: userPetsApi.reducer,
     auth: authReducer,
     notices: noticesReducer,
     news: newsReducer,
@@ -52,7 +54,8 @@ export const store = configureStore({
       .concat(noticesApi.middleware)
       .concat(newsApi.middleware)
       .concat(userApi.middleware)
-      .concat(friendsApi.middleware),
+      .concat(friendsApi.middleware)
+      .concat(userPetsApi.middleware),
 });
 
 export const persistor = persistStore(store);

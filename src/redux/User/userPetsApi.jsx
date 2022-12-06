@@ -1,14 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const petsApi = createApi({
-  reducerPath: 'petsApi',
+export const userPetsApi = createApi({
+  reducerPath: 'userpetsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://pets-support.onrender.com/api/user',
     prepareHeaders: (headers, { getState }) => {
-      const token = getState()?.users.token;
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
+      const { token = '' } = getState().auth;
+
+      headers.set('authorization', `Bearer ${token}`);
       return headers;
     },
   }),
@@ -49,4 +48,4 @@ export const {
   usePostPetMutation,
   useUpdatePetMutation,
   useDeletePetMutation,
-} = petsApi;
+} = userPetsApi;

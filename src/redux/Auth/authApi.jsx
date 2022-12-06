@@ -4,7 +4,7 @@ export const authApi = createApi({
   reducerPath: 'authApi',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://pets-support.onrender.com/api',
+    baseUrl: 'https://pets-support.onrender.com/api/auth/',
     prepareHeaders: (headers, { getState }) => {
       const { token = '' } = getState().auth;
 
@@ -14,28 +14,9 @@ export const authApi = createApi({
     },
   }),
 
-  tagTypes: ['User'],
+  tagTypes: ['Auth'],
 
   endpoints: builder => ({
-    //useLoginMutation
-    login: builder.mutation({
-      query: payload => ({
-        url: '/login',
-        method: 'POST',
-        body: payload,
-      }),
-      invalidatesTags: ['User'],
-    }),
-
-    //useLogoutMutation
-    logout: builder.mutation({
-      query: () => ({
-        url: '/logout',
-        method: 'POST',
-      }),
-      invalidatesTags: ['User'],
-    }),
-
     //useRegisterMutation
     register: builder.mutation({
       query: payload => ({
@@ -43,22 +24,41 @@ export const authApi = createApi({
         method: 'POST',
         body: payload,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['Auth'],
+    }),
+
+    //useLoginMutation
+    login: builder.mutation({
+      query: payload => ({
+        url: '/login',
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+
+    //useLogoutMutation
+    logout: builder.query({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
+      invalidatesTags: ['Auth'],
     }),
 
     //useCurrentUserQuery
-    currentUser: builder.query({
+    currentUser: builder.mutation({
       query: () => ({
         url: '/current',
       }),
-      providesTags: ['User'],
+      providesTags: ['Auth'],
     }),
   }),
 });
 
 export const {
-  useLoginMutation,
   useRegisterMutation,
-  useCurrentUserQuery,
+  useLoginMutation,
   useLogoutMutation,
+  useCurrentUserQuery,
 } = authApi;

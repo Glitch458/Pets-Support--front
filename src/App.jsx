@@ -10,8 +10,8 @@ import toastOptions from './helpers/toastOptions';
 
 const SharedLayout = lazy(() => import('components/SharedLayout/SharedLayout'));
 const Homepage = lazy(() => import('pages/Homepage/Homepage'));
-const RegisterPage = lazy(() => import('pages/Register/Register'));
-const LoginPage = lazy(() => import('pages/Login/Login'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const OurFriendsPage = lazy(() =>
   import('pages/OurFriendsPage/OurFriendsPage')
 );

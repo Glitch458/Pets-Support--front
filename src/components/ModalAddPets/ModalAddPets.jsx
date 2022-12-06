@@ -4,6 +4,9 @@ import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
+import { usePostPetMutation } from 'redux/User/userPetsApi';
+
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -75,6 +78,8 @@ const ModalAddPets = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const [image, setImage] = useState(null);
 
+  const [addUserPet] = usePostPetMutation();
+
   const moveNextRegistration = () => {
     if (formik.values.name && formik.values.birthday && formik.values.breed) {
       isFirstRegisterStep
@@ -90,23 +95,28 @@ const ModalAddPets = ({ handleModalToggle }) => {
       name: '',
       birthday: '',
       breed: '',
-      image: '',
+      petURL: null,
       comments: '',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      if (values.comments) {
-        console.log(values);
-        handleModalToggle();
-        toast.success(`Вашого нового питомця ${values.name} успішно додано`);
-      }
+      const petCard = new FormData();
+      petCard.append('name', values.name);
+      petCard.append('birthday', values.birthday);
+      petCard.append('breed', values.breed);
+      petCard.append('petURL', values.image);
+      petCard.append('comments', values.comments);
+      addUserPet(petCard);
+      handleModalToggle();
+      toast.success(`Вашого нового питомця ${values.name} успішно додано`);
     },
   });
 
   const onImageChange = e => {
-    if (e.currentTarget.files && e.currentTarget.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-      formik.setFieldValue('image', e.currentTarget.files[0]);
+    const { files } = e.currentTarget;
+    if (files) {
+      setImage(URL.createObjectURL(files[0]));
+      formik.setFieldValue('petURL', files[0]);
     }
   };
 
@@ -120,7 +130,13 @@ const ModalAddPets = ({ handleModalToggle }) => {
       <Container>
         <CloseBtn onClick={handleModalToggle} />
         <Title>Add pet</Title>
-        <form onSubmit={formik.handleSubmit}>
+        <form
+          encType="multipart/form-data"
+          onSubmit={e => {
+            e.preventDefault();
+            formik.handleSubmit();
+          }}
+        >
           {isFirstRegisterStep && (
             <FirstForm>
               <InputCont>
@@ -169,7 +185,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
             <SecondForm>
               <ImageInputWrapper>
                 <ImageTitle>Add photo and some comments</ImageTitle>
-                {formik.values.image === '' ? (
+                {formik.values.petURL === null ? (
                   <PhotoAddContainer htmlFor="imagePet">
                     <svg
                       width="51"
@@ -187,9 +203,9 @@ const ModalAddPets = ({ handleModalToggle }) => {
                     </svg>
                     <PhotoPetInput
                       id="imagePet"
-                      name="image"
+                      name="petURL"
                       type="file"
-                      accept="image/png, image/gif, image/jpeg"
+                      accept=".png, .jpg, .jpeg"
                       onChange={e => {
                         formik.handleChange(e);
                         onImageChange(e);

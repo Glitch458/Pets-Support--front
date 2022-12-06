@@ -1,5 +1,6 @@
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useDeletePetMutation } from 'redux/User/userPetsApi';
 import {
   Item,
   Image,
@@ -10,13 +11,15 @@ import {
 } from './PetsList.styled';
 
 export const PetsList = ({ data }) => {
+  const [deletePet] = useDeletePetMutation();
+
   return (
     <ul>
-      {data.map(({ name, url, date, breed, comments }) => (
+      {data.map(({ name, url, date, breed, comments, _id }) => (
         <Item key={name}>
           <Image src={url} alt={name} />
           <InfoContainer>
-            <Box>
+            <Box onClick={() => deletePet(_id)}>
               <IconButton aria-label="delete">
                 <DeleteIcon />
               </IconButton>

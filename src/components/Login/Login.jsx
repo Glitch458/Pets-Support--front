@@ -1,8 +1,8 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import authOperations from "redux/Auth/auth-operations";
-import { toast } from "react-toastify";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/Auth/auth-operations';
+import { toast } from 'react-toastify';
 import {
   FormContainer,
   FormInput,
@@ -11,16 +11,16 @@ import {
   RegisterLink,
   FormText,
   InputError,
-} from "./LoginPage.styled";
+} from './Login.styled';
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Email містить помилки")
-    .required("Це поле не може бути порожнім"),
+    .email('Email містить помилки')
+    .required('Це поле не може бути порожнім'),
   password: Yup.string()
-    .required("Це поле не може бути порожнім")
-    .min(7, "Пароль містить мінімум 7 символів")
-    .max(32, "Пароль містить максимум 32 символи"),
+    .required('Це поле не може бути порожнім')
+    .min(7, 'Пароль містить мінімум 7 символів')
+    .max(32, 'Пароль містить максимум 32 символи'),
 });
 
 export default function LoginPage() {
@@ -28,11 +28,11 @@ export default function LoginPage() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       try {
         await dispatch(
           authOperations.logIn({
@@ -41,7 +41,7 @@ export default function LoginPage() {
           })
         );
       } catch (error) {
-        toast.error("Невірна електронна пошта або пароль.");
+        toast.error('Невірна електронна пошта або пароль.');
       }
       formik.resetForm();
     },
@@ -59,9 +59,9 @@ export default function LoginPage() {
           value={formik.values.email}
           onChange={formik.handleChange}
         />
-        {formik.values.email !== "" ||
-          formik.errors.email ||
-          formik.touched.email ? (
+        {formik.values.email !== '' ||
+        formik.errors.email ||
+        formik.touched.email ? (
           <InputError>{formik.errors.email}</InputError>
         ) : null}
         <FormInput
@@ -74,14 +74,12 @@ export default function LoginPage() {
           value={formik.values.password}
           onChange={formik.handleChange}
         />
-        {formik.values.password !== "" ||
-          formik.errors.password ||
-          formik.touched.password ? (
+        {formik.values.password !== '' ||
+        formik.errors.password ||
+        formik.touched.password ? (
           <InputError>{formik.errors.password}</InputError>
         ) : null}
-        <AuthButton type="submit">
-          LOGIN
-        </AuthButton>
+        <AuthButton type="submit">LOGIN</AuthButton>
       </form>
       <FormText>
         Don't have an account?

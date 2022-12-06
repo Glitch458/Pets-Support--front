@@ -144,7 +144,7 @@ export const ModalNotice = ({
   };
 
   const imgPath = url => {
-    return url ? `https://pets-support.onrender.com/${url}` : ImgCover;
+    return url ? `${url}` : ImgCover;
   };
 
   return (
