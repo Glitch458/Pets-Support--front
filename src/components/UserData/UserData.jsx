@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import {
-  useGetCurrentUserQuery,
-  useUpdateUserInfoMutation,
-} from 'redux/User/userApi';
+import { useUpdateUserInfoMutation } from 'redux/User/userApi';
+import { useCurrentUserQuery } from 'redux/Auth/authApi';
 
 import {
   User,
@@ -18,7 +16,8 @@ import photo from 'images/avatar-placeholder.png';
 import EditPhotoIcon from 'images/icons/editPhoto.svg';
 
 const UserData = () => {
-  const { data = [] } = useGetCurrentUserQuery();
+  const { data = [] } = useCurrentUserQuery();
+
   const [tempImg, setTempImg] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [changeData] = useUpdateUserInfoMutation();

@@ -5,7 +5,7 @@ import NoticesSearch from 'components/NoticesSearch/NoticesSearch';
 import NoticesCategoriesNav from 'components/NoticesCategoriesNav/NoticesCategoriesNav';
 import NoticesCategoriesList from 'components/NoticesCategoriesList/NoticesCategoriesList';
 import { useGetNoticesByCategoryQuery } from 'redux/Notices/noticesApi';
-import { useGetCurrentUserQuery } from 'redux/User/userApi';
+import { useCurrentUserQuery } from 'redux/Auth/authApi';
 import { getFavorite } from 'redux/Notices/noticesSlice';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
-  const { data: currentUser } = useGetCurrentUserQuery();
+  const { data: currentUser } = useCurrentUserQuery();
 
   const favoriteCondition = favoriteNotices.length !== 0 && !currentUser;
   const { data: dataFavoriteNotices = [], isSuccess } =
