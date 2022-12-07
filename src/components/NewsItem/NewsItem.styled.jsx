@@ -10,7 +10,7 @@ export const NewsTitle = styled.h2`
   letter-spacing: -1%;
 
   overflow: hidden;
-   display: -webkit-box;
+  display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
@@ -21,7 +21,7 @@ export const NewsText = styled.p`
   font-size: 16px;
   line-height: 22px;
   margin-bottom: 20px;
- 
+
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 7;
@@ -50,7 +50,7 @@ export const OverLine = styled.div`
   height: 4px;
   margin-bottom: 4px;
   border-radius: 40px;
-  background:${p => theme.colors.gradient};
+  background: ${p => theme.colors.gradient};
   @media screen and ${p => p.theme.media.tablet} {
     width: 280px;
     height: 8px;
@@ -65,8 +65,13 @@ export const ReadMoreLink = styled.a`
   font-size: 16px;
   line-height: 22px;
   text-align: right;
-  text-decoration-line: underline;
-  color:${p => theme.colors.secondaryText};
+  text-decoration-line: none;
+  color: ${p => theme.colors.secondaryText};
+  :hover,
+  :focus {
+    color: ${p => theme.colors.buttonAccent};
+    text-decoration: underline;
+  }
 `;
 
 export const Time = styled.p`

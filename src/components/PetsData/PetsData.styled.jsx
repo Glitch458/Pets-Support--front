@@ -30,13 +30,13 @@ export const HeadPetsData = styled.div`
 export const AddButton = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   & a {
     width: 40px;
     height: 40px;
     & svg {
-      width: 16px;
-      height: 16px;
+      width: 30px;
+      height: 30px;
     }
   }
   @media ${p => p.theme.media.tablet} {
@@ -46,7 +46,8 @@ export const AddButton = styled.div`
     margin-right: 32px;
   }
   @media ${p => p.theme.media.desktop} {
-    position: static;
+    position: absolute;
+    top: 115px;
   }
 `;
 

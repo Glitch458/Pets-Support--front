@@ -44,8 +44,8 @@ export const LinkBasic = styled.a`
   font-weight: ${p => p.theme.fontWeights.medium};
   font-family: ${p => p.theme.fonts.body};
   background-color: ${p => p.theme.colors.white};
-  :hover:not(.active),
-  :focus-visible:not(.active) {
+  :hover,
+  :focus {
     background-color: ${p => p.theme.colors.accent};
     color: ${p => p.theme.colors.white};
     transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);

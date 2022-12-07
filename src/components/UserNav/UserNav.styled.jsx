@@ -16,6 +16,11 @@ export const ButtonUserLink = styled(LinkBasic)`
   background-color: ${p => p.theme.colors.accent};
   color: ${p => p.theme.colors.white};
 
+  :hover,
+  :focus {
+    background-color: ${p => p.theme.colors.buttonAccent};
+  }
+
   @media screen and (min-width: 768px) {
     font-size: 20px;
   }

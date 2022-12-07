@@ -53,6 +53,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
+      .concat(authApi.middleware)
       .concat(noticesApi.middleware)
       .concat(newsApi.middleware)
       .concat(userApi.middleware)
