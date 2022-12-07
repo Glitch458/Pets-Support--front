@@ -10,6 +10,7 @@ import { usePostPetMutation } from 'redux/User/userPetsApi';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { Button } from 'components/Button/Button';
 import {
   Container,
   Title,
@@ -29,7 +30,6 @@ import {
   TextAreaInput,
   ActionButtons,
   CloseBtn,
-  ModalBtn,
   NameError,
   BirthdayError,
   BreedError,
@@ -234,14 +234,14 @@ const ModalAddPets = ({ handleModalToggle }) => {
           )}
           <ActionButtons>
             {isFirstRegisterStep ? (
-              <ModalBtn onClick={moveNextRegistration}>Next</ModalBtn>
+              <Button onClick={moveNextRegistration}> Next</Button>
             ) : (
-              <ModalBtn type="submit">Done</ModalBtn>
+              <Button type="submit">Done</Button>
             )}
             {isFirstRegisterStep ? (
-              <ModalBtn onClick={handleModalToggle}>Cancel</ModalBtn>
+              <Button onClick={handleModalToggle}>Cancel</Button>
             ) : (
-              <ModalBtn onClick={moveNextRegistration}>Back</ModalBtn>
+              <Button onClick={moveNextRegistration}>Back</Button>
             )}
           </ActionButtons>
         </form>
