@@ -77,7 +77,6 @@ const validationSchema = Yup.object({
 const ModalAddPets = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
   const [image, setImage] = useState(null);
-
   const [addUserPet] = usePostPetMutation();
 
   const moveNextRegistration = () => {
@@ -100,13 +99,13 @@ const ModalAddPets = ({ handleModalToggle }) => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      const petCard = new FormData();
-      petCard.append('name', values.name);
-      petCard.append('birthday', values.birthday);
-      petCard.append('breed', values.breed);
-      petCard.append('petURL', values.image);
-      petCard.append('comments', values.comments);
-      addUserPet(petCard);
+      const data = new FormData();
+      data.append('name', values.name);
+      data.append('birthday', values.birthday);
+      data.append('breed', values.breed);
+      data.append('petURL', values.petURL);
+      data.append('comments', values.comments);
+      addUserPet(data);
       handleModalToggle();
       toast.success(`Your pet ${values.name} is added to your collection`);
     },

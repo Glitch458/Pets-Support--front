@@ -17,9 +17,9 @@ export const PetsList = ({ data }) => {
 
   return (
     <ul>
-      {data.map(({ name, url, date, breed, comments, _id }) => (
+      {data.map(({ name, petURL, date, breed, comments, _id }) => (
         <Item key={name}>
-          <Image src={url || petCover} alt={name} />
+          <Image src={petURL || petCover} alt={name} />
           <InfoContainer>
             <Box onClick={() => deletePet(_id)}>
               <IconButton aria-label="delete">
