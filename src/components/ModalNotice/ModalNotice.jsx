@@ -32,7 +32,7 @@ import {
 export const ModalNotice = ({
   id,
   handleModalToggle,
-  handleAddToFavoritesClick,
+  // handleAddToFavoritesClick,
   favorite,
 }) => {
   const { data: notices, isSuccess } = useGetNoticeByIdQuery(id);
@@ -47,10 +47,14 @@ export const ModalNotice = ({
   const navigete = useNavigate();
   const dispatch = useDispatch();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
-  const favoriteId = favoriteNotices.find(elem => elem === id);
+  const favoriteId = favoriteNotices.find(elem => elem._id === id);
 
-  const [addNotices] = useAddFavoriteNoticeMutation();
-  const [deleteFavoriteNotices] = useDeleteFavoriteNoticeMutation();
+  const [addFavoriteNotices, { isError: errorAdd, isSuccess: isSuccessAdd }] =
+    useAddFavoriteNoticeMutation();
+  const [
+    deleteFavoriteNotices,
+    { isError: errorDelete, isSuccess: isSuccessDelete },
+  ] = useDeleteFavoriteNoticeMutation();
   const [deleteNotices] = useDeleteNoticeMutation();
 
   useEffect(() => {
@@ -76,6 +80,32 @@ export const ModalNotice = ({
     return () => ecsClose();
   }, [handleModalToggle]);
 
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    if (isSuccessAdd) {
+      dispatch(addFavorite(notices));
+      notifySuccess('Notices have add to favorite!');
+    }
+
+    if (isSuccessDelete) {
+      dispatch(deleteFavorite(notices));
+      notifySuccess('Notices have delete from favorite!');
+    }
+
+    if ((errorAdd && !isSuccessAdd) || (errorDelete && !isSuccessDelete)) {
+      notifyError('Sorry, there was an error!');
+    }
+  }, [
+    errorAdd,
+    errorDelete,
+    isSuccess,
+    notices,
+    isSuccessAdd,
+    isSuccessDelete,
+    dispatch,
+  ]);
+
   const ownPet = useMemo(
     () => petData?.email === currentUserData.email,
     [currentUserData, petData?.email]
@@ -97,17 +127,15 @@ export const ModalNotice = ({
     window.open(`tel:${petData.phone}`);
   };
 
-  handleAddToFavoritesClick = () => {
+  const handleAddToFavoritesClick = () => {
     if (token && token !== null) {
-      if (!favoriteId) {
-        addNotices(id);
-        dispatch(addFavorite(id));
-        notifySuccess('Notices have add to favorite!');
+      const isFavorite = favoriteNotices.find(elem => elem._id === id);
+
+      if (!isFavorite) {
+        addFavoriteNotices(id);
       }
-      if (favoriteId) {
+      if (isFavorite) {
         deleteFavoriteNotices(id);
-        dispatch(deleteFavorite(id));
-        notifySuccess('Notices have delete from favorite!');
       }
     }
     if (!token || token === null) {
@@ -155,10 +183,7 @@ export const ModalNotice = ({
         <ActionButtons>
           <AddToFavorites
             authorized={!favorite}
-            onClick={e => {
-              e.preventDefault();
-              handleAddToFavoritesClick();
-            }}
+            onClick={handleAddToFavoritesClick}
             favoriteId={favoriteId}
           />
           <ModalBtn primary onClick={handleContactClick}>

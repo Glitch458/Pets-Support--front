@@ -27,10 +27,7 @@ const NoticesPage = () => {
 
   useEffect(() => {
     if (isSuccess && dataFavoriteNotices.length !== 0) {
-      const favoriteIds = dataFavoriteNotices.map(item => {
-        return item._id;
-      });
-      dispatch(getFavorite(favoriteIds));
+      dispatch(getFavorite(dataFavoriteNotices));
     }
   }, [isSuccess, dataFavoriteNotices, dispatch]);
 

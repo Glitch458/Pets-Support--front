@@ -7,9 +7,10 @@ import Spinner from 'components/Spinner/Spinner';
 import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams /*setSearchParams*/] = useSearchParams();
   const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
+  //const notices = useSelector(state => state.notices.items);
 
   const [items, setItems] = useState([]);
   const [visibilityItems, setVisibilityItems] = useState([]);
@@ -23,7 +24,7 @@ const NoticesCategoriesList = () => {
     isFetching,
     isError,
   } = useGetNoticesByCategoryQuery(categoryName, {
-    skip: categoryName === '',
+    //skip: categoryName === '',
   });
 
   useEffect(() => {
@@ -38,11 +39,7 @@ const NoticesCategoriesList = () => {
     }
 
     if (categoryName === 'favorite' && favoriteNotices) {
-      const favoriteItems = items.filter(item => {
-        return favoriteNotices.includes(item._id);
-      });
-      setVisibilityItems(favoriteItems);
-      console.log(favoriteItems);
+      setVisibilityItems(favoriteNotices);
     }
 
     if (params !== '') {
@@ -55,7 +52,6 @@ const NoticesCategoriesList = () => {
       });
       setVisibilityItems(searchNoticesItem);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, params, favoriteNotices, categoryName]);
 
   return (

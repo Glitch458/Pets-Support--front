@@ -18,7 +18,7 @@ export const noticesSlice = createSlice({
     },
     deleteFavorite: (state, { payload }) => {
       state.favoriteNotices = state.favoriteNotices.filter(
-        item => item !== payload
+        item => item._id !== payload._id
       );
     },
     renewItems: (state, { payload }) => {
