@@ -37,22 +37,6 @@ export const Title = styled.h3`
   }
 `;
 
-export const FirstForm = styled.div`
-  margin-top: 20px;
-  margin-bottom: 40px;
-`;
-
-export const UserComment = styled.p`
-  text-align: center;
-  padding: 0 5px;
-  margin-bottom: 20px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-`;
-
 export const RadioGroup = styled.div`
   display: flex;
   flex-wrap: wrap;

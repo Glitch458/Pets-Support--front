@@ -18,10 +18,10 @@ export const HeartButton = ({
   text = '',
   noticesId,
 }) => {
-  const token = useSelector(state => state.auth.token);
+  const { token } = useSelector(state => state.auth);
+  const { favoriteNotices } = useSelector(state => state.notices);
   const navigete = useNavigate();
   const dispatch = useDispatch();
-  const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
 
   const isFavorite = item => {
     let res = false;
