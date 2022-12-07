@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  width: auto;
-  height: 100%;
-`;
-
 export const Item = styled.li`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: auto;
   height: 100%;
   padding: 16px 20px 40px 20px;
@@ -39,6 +34,7 @@ export const Image = styled.img`
 
 export const InfoContainer = styled.div`
   position: relative;
+  width: 100%;
   margin-top: 20px;
   @media ${p => p.theme.media.tablet} {
     margin-top: 0;

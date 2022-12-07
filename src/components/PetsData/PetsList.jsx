@@ -10,6 +10,8 @@ import {
   Box,
 } from './PetsList.styled';
 
+import petCover from 'images/pet-cover.jpg';
+
 export const PetsList = ({ data }) => {
   const [deletePet] = useDeletePetMutation();
 
@@ -17,7 +19,7 @@ export const PetsList = ({ data }) => {
     <ul>
       {data.map(({ name, url, date, breed, comments, _id }) => (
         <Item key={name}>
-          <Image src={url} alt={name} />
+          <Image src={url || petCover} alt={name} />
           <InfoContainer>
             <Box onClick={() => deletePet(_id)}>
               <IconButton aria-label="delete">

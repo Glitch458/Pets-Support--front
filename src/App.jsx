@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PublicRoute from 'components/PublicRoute';
-import PrivateRoutes from 'components/PrivateRoute';
+import PublicRoute from 'components/Routes/PublicRoute';
+import PrivateRoute from 'components/Routes/PrivateRoute';
 import toastOptions from './helpers/toastOptions';
 
 import SharedLayout from 'components/SharedLayout/SharedLayout';
@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/notices/:categoryName" element={<NoticesPage />} />
 
-          <Route path="/user" element={<PrivateRoutes />}>
+          <Route path="/user" element={<PrivateRoute />}>
             <Route index element={<UserPage />} />
           </Route>
         </Route>

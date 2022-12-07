@@ -12,7 +12,7 @@ import {
   useAddFavoriteNoticeMutation,
   useDeleteNoticeMutation,
 } from 'redux/Notices/noticesApi';
-import { useGetCurrentUserQuery } from 'redux/User/userApi';
+import { useCurrentUserQuery } from 'redux/Auth/authApi';
 import { addFavorite, deleteFavorite } from 'redux/Notices/noticesSlice';
 import { PET_MODAL_KEYS, NOTICE_CATEGORY_LABELS } from 'constants/petInfoKeys';
 import {
@@ -29,15 +29,9 @@ import {
   ActionButtons,
 } from './ModalNotice.styled';
 
-export const ModalNotice = ({
-  id,
-  handleModalToggle,
-  // handleAddToFavoritesClick,
-  favorite,
-}) => {
+export const ModalNotice = ({ id, handleModalToggle, favorite }) => {
   const { data: notices, isSuccess } = useGetNoticeByIdQuery(id);
-  const { data: currentUser /*isFetching, isError*/ } =
-    useGetCurrentUserQuery();
+  const { data: currentUser } = useCurrentUserQuery();
   const { data: owner = [] } = useGetNoticeOwnerQuery(id);
 
   const [petData, setPetData] = useState({});

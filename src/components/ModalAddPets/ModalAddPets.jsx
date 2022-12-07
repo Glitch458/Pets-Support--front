@@ -108,7 +108,7 @@ const ModalAddPets = ({ handleModalToggle }) => {
       petCard.append('comments', values.comments);
       addUserPet(petCard);
       handleModalToggle();
-      toast.success(`Вашого нового питомця ${values.name} успішно додано`);
+      toast.success(`Your pet ${values.name} is added to your collection`);
     },
   });
 
