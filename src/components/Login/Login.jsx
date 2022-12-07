@@ -1,7 +1,6 @@
+import { useLoginMutation } from 'redux/Auth/authApi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import authOperations from 'redux/Auth/auth-operations';
 import { toast } from 'react-toastify';
 import {
   FormContainer,
@@ -24,7 +23,7 @@ const validationSchema = Yup.object({
 });
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
+  const [login] = useLoginMutation();
 
   const formik = useFormik({
     initialValues: {
@@ -34,12 +33,10 @@ export default function LoginPage() {
     validationSchema: validationSchema,
     onSubmit: async values => {
       try {
-        await dispatch(
-          authOperations.logIn({
-            email: values.email,
-            password: values.password,
-          })
-        );
+        await login({
+          email: values.email,
+          password: values.password,
+        });
       } catch (error) {
         toast.error('Невірна електронна пошта або пароль.');
       }

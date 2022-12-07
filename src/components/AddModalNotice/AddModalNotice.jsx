@@ -13,8 +13,6 @@ import {
   Container,
   CloseBtn,
   Title,
-  FirstForm,
-  UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
@@ -151,11 +149,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
           }}
         >
           {isFirstRegisterStep && (
-            <FirstForm>
-              <UserComment>
-                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-                amet, consectetur
-              </UserComment>
+            <>
               <RadioGroup required>
                 <RadioLabel>
                   <RadioInput
@@ -243,7 +237,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   />
                 </TextLabel>
               </InputCont>
-            </FirstForm>
+            </>
           )}
           {!isFirstRegisterStep && (
             <>

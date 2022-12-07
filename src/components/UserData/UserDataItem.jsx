@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import authOperations from 'redux/Auth/auth-operations';
-import { useDispatch } from 'react-redux';
+import { useLogoutMutation } from 'redux/Auth/authApi';
 
 import {
   InfoItems,
@@ -29,8 +28,7 @@ const UserDataItem = ({ data, changeData }) => {
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
-  const dispatch = useDispatch();
-
+  const [logout] = useLogoutMutation();
   const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
 
   useEffect(() => {
@@ -82,8 +80,8 @@ const UserDataItem = ({ data, changeData }) => {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(authOperations.logOut());
+  const handleLogout = async () => {
+    await logout;
   };
 
   return (
