@@ -1,6 +1,7 @@
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDeletePetMutation } from 'redux/User/userPetsApi';
+import { useState } from 'react';
+import ModalConfirm from 'components/ModalConfirm/ModalConfirm';
 import {
   Item,
   Image,
@@ -13,7 +14,13 @@ import {
 import petCover from 'images/pet-cover.jpg';
 
 export const PetsList = ({ data }) => {
-  const [deletePet] = useDeletePetMutation();
+  const [expanded, setExpanded] = useState(false);
+
+  const handleModalToggle = () => {
+    setExpanded(prev => {
+      return !prev;
+    });
+  };
 
   return (
     <ul>
@@ -21,7 +28,7 @@ export const PetsList = ({ data }) => {
         <Item key={name}>
           <Image src={petURL || petCover} alt={name} />
           <InfoContainer>
-            <Box onClick={() => deletePet(_id)}>
+            <Box onClick={handleModalToggle}>
               <IconButton aria-label="delete">
                 <DeleteIcon />
               </IconButton>
@@ -39,6 +46,13 @@ export const PetsList = ({ data }) => {
               <TitlePetsInfo>Comments:</TitlePetsInfo> {comments}
             </PetsInfo>
           </InfoContainer>
+          {expanded && (
+            <ModalConfirm
+              toggleModal={handleModalToggle}
+              id={_id}
+              text={'Delete'}
+            />
+          )}
         </Item>
       ))}
     </ul>
