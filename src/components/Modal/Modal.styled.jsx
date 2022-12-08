@@ -11,16 +11,13 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: ${p => p.theme.colors.gray};
   backdrop-filter: blur(5px);
-  @media ${p => p.theme.media.tablet} {
-    overflow: scroll;
-  }
+  overflow: scroll;
   z-index: 999;
 `;
 
 export const ModalWindow = styled.div`
-  overflow-x: hidden;
-  overflow-y: auto;
-  box-sizing: border-box;
+  overflow: auto;
+  width: 280px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,11 +25,12 @@ export const ModalWindow = styled.div`
   max-height: 100%;
   border-radius: ${p => p.theme.radii.small};
   background-color: ${p => p.theme.colors.white};
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 
   @media ${p => p.theme.media.tablet} {
     width: 608px;
     border-radius: ${p => p.theme.radii.normal};
-    overflow-x: visible;
-    overflow-y: visible;
   }
 `;
