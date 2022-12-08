@@ -7,8 +7,10 @@ import { toast } from 'react-toastify';
 
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
-import { Button } from 'components/Button/Button';
+// import { Button } from 'components/Button/Button';
+// import { ModalBtn } from 'components/ModalAddPets/ModalAddPets.styled';
 import Modal from 'components/Modal/Modal';
+
 import {
   Container,
   CloseBtn,
@@ -26,12 +28,19 @@ import {
   RadioInput,
   RadioButton,
   DateInput,
+  SexFormBox,
+  BoxQuestion,
+  Asterisk,
+  InputRadio,
+  SexLabel,
   PhotoPetInput,
   PhotoAddContainer,
   ImageInputWrapper,
   ImageTitle,
   AddedIamge,
+  ModalBtn,
 } from './AddModalNotice.styled';
+import { Female } from '@mui/icons-material';
 
 const validationSchema = Yup.object({
   category: Yup.string().required('Choose category'),
@@ -187,7 +196,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </RadioGroup>
               <InputCont>
                 <TextLabel>
-                  Title of ad<span>*</span>
+                  Title of ad<Asterisk>*</Asterisk>
                   <TextInput
                     onChange={formik.handleChange}
                     name="title"
@@ -247,42 +256,40 @@ const AddModalNotice = ({ handleModalToggle }) => {
           )}
           {!isFirstRegisterStep && (
             <>
-              <fieldset>
-                <legend>
-                  The sex<span>*</span>:
-                </legend>
-                <div>
-                  <div>
-                    <input
-                      id="malePet"
-                      name="sex"
-                      type="radio"
-                      value="male"
-                      checked={formik.values.sex === 'male'}
-                      onChange={formik.handleChange}
-                    />
+              <SexFormBox>
+                <BoxQuestion>
+                  The sex<Asterisk>*</Asterisk>:
+                </BoxQuestion>
+                {/* <div> */}
+                {/* <div> */}
+                <InputRadio
+                  id="malePet"
+                  name="sex"
+                  type="radio"
+                  value="male"
+                  checked={formik.values.sex === 'male'}
+                  onChange={formik.handleChange}
+                />
 
-                    <label htmlFor="malePet">Male</label>
-                  </div>
+                <SexLabel htmlFor="malePet">
+                  <svg
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                  >
+                    <title>male</title>
+                    <path
+                      fill="#23c2ef"
+                      d="M20.679 1.6c-0.884 0-1.6 0.716-1.6 1.6v0.81c0 0.884 0.716 1.6 1.6 1.6h2.804l-5.805 5.73c-1.629-1.047-3.57-1.655-5.655-1.655-5.756 0-10.423 4.637-10.423 10.357s4.667 10.358 10.423 10.358c5.756 0 10.422-4.638 10.422-10.358 0-2.174-0.674-4.192-1.826-5.858l5.707-5.672v2.738c0 0.884 0.716 1.6 1.6 1.6h0.835c0.884 0 1.6-0.716 1.602-1.6 0.007-2.602 0.027-5.453 0.033-8.051 0.002-0.884-0.714-1.599-1.598-1.599h-8.121zM12.023 13.854c3.439 0 6.227 2.77 6.227 6.188s-2.788 6.189-6.227 6.189c-3.439 0-6.228-2.771-6.228-6.189s2.789-6.188 6.228-6.188z"
+                    ></path>
+                  </svg>
+                  Male
+                </SexLabel>
+                {/* </div> */}
 
-                  <div>
-                    <input
-                      id="femalePet"
-                      name="sex"
-                      type="radio"
-                      value="female"
-                      checked={formik.values.sex === 'female'}
-                      onChange={formik.handleChange}
-                    />
-
-                    <label htmlFor="femalePet">Female</label>
-                  </div>
-                </div>
-                {formik.touched.sex && formik.errors.sex ? (
-                  <p>{formik.errors.sex}</p>
-                ) : null}
-              </fieldset>
-
+<<<<<<< Updated upstream
               <TextLabel htmlFor="locationPet">
                 City, Region<span>*</span>:
                 {formik.values.location !== '' && formik.errors.location ? (
@@ -292,11 +299,21 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   id="location"
                   name="location"
                   type="text"
+=======
+                {/* <div> */}
+                <InputRadio
+                  id="femalePet"
+                  name="sex"
+                  type="radio"
+                  value="female"
+                  checked={formik.values.sex === 'female'}
+>>>>>>> Stashed changes
                   onChange={formik.handleChange}
-                  placeholder="Введіть місце"
                 />
+<<<<<<< Updated upstream
               </TextLabel>
 
+<<<<<<< Updated upstream
               {formik.values.category === 'sell' ? (
                 <>
                   <TextLabel htmlFor="pricePet">
@@ -306,24 +323,98 @@ const AddModalNotice = ({ handleModalToggle }) => {
                     ) : null}
                   </TextLabel>
 
+=======
+              {formik.values.category === 'sell' && (
+                <TextLabel htmlFor="pricePet">
+                  Price<span>*</span>:
+                  {formik.values.price !== '' && formik.errors.price ? (
+                    <p>{formik.errors.price}</p>
+<<<<<<< Updated upstream
+=======
+=======
+
+                <SexLabel htmlFor="femalePet">
+                  <svg
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                  >
+                    <title>female</title>
+                    <path
+                      fill="#ff8787"
+                      d="M16 0c-5.676 0-10.279 4.603-10.279 10.279 0 4.546 2.953 8.403 7.044 9.759 0.728 0.241 1.277 0.887 1.277 1.654v0.388c0 0.884-0.716 1.6-1.6 1.6h-1.208c-0.884 0-1.6 0.716-1.6 1.6v0.713c0 0.884 0.716 1.6 1.6 1.6h1.208c0.884 0 1.6 0.716 1.6 1.6v1.206c0 0.884 0.716 1.6 1.6 1.6h0.713c0.884 0 1.6-0.716 1.6-1.6v-1.206c0-0.884 0.716-1.6 1.6-1.6h1.208c0.884 0 1.6-0.716 1.6-1.6v-0.713c0-0.884-0.716-1.6-1.6-1.6h-1.208c-0.884 0-1.6-0.716-1.6-1.6v-1.709c4.741-0.914 8.323-5.085 8.323-10.093 0-5.676-4.603-10.279-10.279-10.279zM16 4.087c3.42 0 6.192 2.772 6.192 6.192s-2.772 6.192-6.192 6.192-6.192-2.772-6.192-6.192c0-3.419 2.772-6.192 6.192-6.192z"
+                    ></path>
+                  </svg>
+                  Female
+                </SexLabel>
+                {/* </div> */}
+                {/* </div> */}
+                {/* {formik.touched.sex && formik.errors.sex ? (
+                  <p>{formik.errors.sex}</p>
+                ) : null} */}
+              </SexFormBox>
+              <InputCont>
+                <TextLabel htmlFor="locationPet">
+                  Location<Asterisk>*</Asterisk>:
+                  {formik.values.location !== '' && formik.errors.location ? (
+                    <p>{formik.errors.location}</p>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+                  ) : null}
+>>>>>>> Stashed changes
                   <TextInput
-                    id="pricePet"
-                    name="price"
+                    id="location"
+                    name="location"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.price}
-                    placeholder="Введіть ціну"
+                    placeholder="Type location"
                   />
+<<<<<<< Updated upstream
                 </>
               ) : null}
+=======
+                </TextLabel>
+<<<<<<< Updated upstream
+              )}
+=======
+<<<<<<< Updated upstream
+              )}
+=======
+              </InputCont>
+              <InputCont>
+                {formik.values.category === 'sell' ? (
+                  <>
+                    <TextLabel htmlFor="pricePet">
+                      Price<Asterisk>*</Asterisk>:
+                      {formik.values.price !== '' && formik.errors.price ? (
+                        <p>{formik.errors.price}</p>
+                      ) : null}
+                    </TextLabel>
+
+                    <TextInput
+                      id="pricePet"
+                      name="price"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.price}
+                      placeholder="Введіть ціну"
+                    />
+                  </>
+                ) : null}
+              </InputCont>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
               <ImageInputWrapper>
-                <ImageTitle>Load the pet`s image:</ImageTitle>
+                <ImageTitle>Load the pet's image:</ImageTitle>
                 {formik.values.photoURL === null ? (
                   <PhotoAddContainer htmlFor="imagePet">
                     <svg
-                      width="51"
-                      height="51"
+                      width="48"
+                      height="48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -354,7 +445,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </ImageInputWrapper>
               <InputContTextArea>
                 <TextLabel htmlFor="commentsAd">
-                  Comments<span>*</span>
+                  Comments<Asterisk>*</Asterisk>
                   {formik.values.comments !== '' && formik.errors.comments ? (
                     <p>{formik.errors.comments}</p>
                   ) : null}
@@ -374,14 +465,14 @@ const AddModalNotice = ({ handleModalToggle }) => {
 
           <ActionButtons>
             {isFirstRegisterStep ? (
-              <Button onClick={handleModalToggle}>Cancel</Button>
+              <ModalBtn onClick={handleModalToggle}>Cancel</ModalBtn>
             ) : (
-              <Button onClick={moveNextRegistration}>Back</Button>
+              <ModalBtn onClick={moveNextRegistration}>Back</ModalBtn>
             )}
             {isFirstRegisterStep ? (
-              <Button onClick={moveNextRegistration}> Next</Button>
+              <ModalBtn onClick={moveNextRegistration}> Next</ModalBtn>
             ) : (
-              <Button type="submit">Done</Button>
+              <ModalBtn type="submit">Done</ModalBtn>
             )}
           </ActionButtons>
         </form>
