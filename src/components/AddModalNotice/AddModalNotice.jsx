@@ -7,10 +7,8 @@ import { toast } from 'react-toastify';
 
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
-// import { Button } from 'components/Button/Button';
-// import { ModalBtn } from 'components/ModalAddPets/ModalAddPets.styled';
+import { Button } from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
-
 import {
   Container,
   CloseBtn,
@@ -76,7 +74,7 @@ const validationSchema = Yup.object({
   price: Yup.string().when('category', {
     is: category => category === 'sell',
     then: Yup.string()
-      .required('Введіть ціну')
+      .required('Set price')
       .matches(/^[0-9][0-9]*$/, 'Numbers only'),
   }),
   comments: Yup.string()
@@ -161,13 +159,12 @@ const AddModalNotice = ({ handleModalToggle }) => {
         >
           {isFirstRegisterStep && (
             <FirstForm>
-              <UserComment>
-                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-                amet, consectetur
-              </UserComment>
-              <RadioGroup required>
+              <RadioGroup onChange={formik.handleChange} required>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'lost-found' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="lost/found"
@@ -177,6 +174,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 </RadioLabel>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'for-free' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="in good hands"
@@ -186,6 +186,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 </RadioLabel>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'sell' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="sell"
@@ -198,6 +201,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 <TextLabel>
                   Title of ad<Asterisk>*</Asterisk>
                   <TextInput
+                    value={formik.values.title}
                     onChange={formik.handleChange}
                     name="title"
                     placeholder="Type name"
@@ -288,51 +292,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   Male
                 </SexLabel>
                 {/* </div> */}
-
-<<<<<<< Updated upstream
-              <TextLabel htmlFor="locationPet">
-                City, Region<span>*</span>:
-                {formik.values.location !== '' && formik.errors.location ? (
-                  <p>{formik.errors.location}</p>
-                ) : null}
-                <TextInput
-                  id="location"
-                  name="location"
-                  type="text"
-=======
                 {/* <div> */}
-                <InputRadio
-                  id="femalePet"
-                  name="sex"
-                  type="radio"
-                  value="female"
-                  checked={formik.values.sex === 'female'}
->>>>>>> Stashed changes
-                  onChange={formik.handleChange}
-                />
-<<<<<<< Updated upstream
-              </TextLabel>
-
-<<<<<<< Updated upstream
-              {formik.values.category === 'sell' ? (
-                <>
-                  <TextLabel htmlFor="pricePet">
-                    Price<span>*</span>:
-                    {formik.values.price !== '' && formik.errors.price ? (
-                      <p>{formik.errors.price}</p>
-                    ) : null}
-                  </TextLabel>
-
-=======
-              {formik.values.category === 'sell' && (
-                <TextLabel htmlFor="pricePet">
-                  Price<span>*</span>:
-                  {formik.values.price !== '' && formik.errors.price ? (
-                    <p>{formik.errors.price}</p>
-<<<<<<< Updated upstream
-=======
-=======
-
                 <SexLabel htmlFor="femalePet">
                   <svg
                     version="1.1"
@@ -357,42 +317,27 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </SexFormBox>
               <InputCont>
                 <TextLabel htmlFor="locationPet">
-                  Location<Asterisk>*</Asterisk>:
+                  City, Region<span>*</span>:
                   {formik.values.location !== '' && formik.errors.location ? (
                     <p>{formik.errors.location}</p>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                   ) : null}
->>>>>>> Stashed changes
                   <TextInput
+                    value={formik.values.location}
                     id="location"
                     name="location"
                     type="text"
                     onChange={formik.handleChange}
-                    placeholder="Type location"
+                    placeholder="Введіть місце"
                   />
-<<<<<<< Updated upstream
-                </>
-              ) : null}
-=======
                 </TextLabel>
-<<<<<<< Updated upstream
-              )}
-=======
-<<<<<<< Updated upstream
-              )}
-=======
               </InputCont>
               <InputCont>
-                {formik.values.category === 'sell' ? (
-                  <>
-                    <TextLabel htmlFor="pricePet">
-                      Price<Asterisk>*</Asterisk>:
-                      {formik.values.price !== '' && formik.errors.price ? (
-                        <p>{formik.errors.price}</p>
-                      ) : null}
-                    </TextLabel>
-
+                {formik.values.category === 'sell' && (
+                  <TextLabel htmlFor="pricePet">
+                    Price<Asterisk>*</Asterisk>:
+                    {formik.values.price !== '' && formik.errors.price ? (
+                      <p>{formik.errors.price}</p>
+                    ) : null}
                     <TextInput
                       id="pricePet"
                       name="price"
@@ -401,12 +346,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
                       value={formik.values.price}
                       placeholder="Введіть ціну"
                     />
-                  </>
-                ) : null}
+                  </TextLabel>
+                )}
               </InputCont>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
               <ImageInputWrapper>
                 <ImageTitle>Load the pet's image:</ImageTitle>
@@ -465,14 +407,14 @@ const AddModalNotice = ({ handleModalToggle }) => {
 
           <ActionButtons>
             {isFirstRegisterStep ? (
-              <ModalBtn onClick={handleModalToggle}>Cancel</ModalBtn>
+              <Button onClick={handleModalToggle}>Cancel</Button>
             ) : (
-              <ModalBtn onClick={moveNextRegistration}>Back</ModalBtn>
+              <Button onClick={moveNextRegistration}>Back</Button>
             )}
             {isFirstRegisterStep ? (
-              <ModalBtn onClick={moveNextRegistration}> Next</ModalBtn>
+              <Button onClick={moveNextRegistration}> Next</Button>
             ) : (
-              <ModalBtn type="submit">Done</ModalBtn>
+              <Button type="submit">Done</Button>
             )}
           </ActionButtons>
         </form>

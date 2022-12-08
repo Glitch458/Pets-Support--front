@@ -40,34 +40,15 @@ export const Title = styled.h3`
   }
 `;
 
-<<<<<<< Updated upstream
-export const FirstForm = styled.div`
-  margin-top: 20px;
-  margin-bottom: 40px;
-=======
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
 export const FirstForm = styled.div`
   /* margin-top: 20px;
   margin-bottom: 40px; */
->>>>>>> Stashed changes
 `;
 
 export const UserComment = styled.p`
   text-align: center;
   padding: 0 5px;
   margin-bottom: 20px;
-<<<<<<< Updated upstream
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-`;
-
-=======
   font-style: normal;
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[2]}px;
@@ -78,9 +59,6 @@ export const UserComment = styled.p`
   }
 `;
 
->>>>>>> Stashed changes
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 export const RadioGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -94,7 +72,7 @@ export const RadioGroup = styled.div`
 `;
 
 export const RadioLabel = styled.label`
-  /* margin-bottom: 4px; */
+  // margin-bottom: 4px;
 `;
 
 export const RadioInput = styled.input`
@@ -169,7 +147,7 @@ export const TextInput = styled.input`
   display: flex;
   outline: none;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  /* width: 240px; */
+  // width: 240px;
   width: 100%;
   height: 40px;
   margin-top: 8px;
@@ -236,11 +214,11 @@ export const DateInput = styled.input`
 `;
 
 export const InputContTextArea = styled.div`
-  /* margin-bottom: 16px; */
+  // margin-bottom: 16px;
 
-  /* @media ${p => p.theme.media.tablet} {
-    margin-bottom: 28px;
-  } */
+  // @media ${p => p.theme.media.tablet} {
+  //   margin-bottom: 28px;
+  // }
 `;
 
 export const TextAreaInput = styled.textarea`
@@ -250,7 +228,7 @@ export const TextAreaInput = styled.textarea`
   resize: none;
   margin-top: 8px;
   width: 240px;
-  /* height: 40px; */
+  // height: 40px;
   padding: 12px 5px 12px 14px;
   border-radius: 20px;
   background-color: var(--main-bg-cl);
@@ -339,10 +317,10 @@ export const PhotoAddContainer = styled.label`
   justify-content: center;
   border-radius: 40px;
   cursor: pointer;
-  /* margin: 0 auto; */
+  // margin: 0 auto;
   margin-right: auto;
   box-sizing: border-box;
-  /* padding: 22px; */
+  // padding: 22px;
   border-radius: 20px;
   background-color: ${p => p.theme.colors.background};
   @media ${p => p.theme.media.tablet} {
@@ -354,7 +332,7 @@ export const PhotoAddContainer = styled.label`
 export const ImageInputWrapper = styled.fieldset`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  // align-items: center;
   box-sizing: border-box;
   border: none;
   padding: 0;
@@ -362,7 +340,7 @@ export const ImageInputWrapper = styled.fieldset`
 `;
 
 export const ImageTitle = styled.label`
-  /* text-align: center; */
+  // text-align: center;
   margin-bottom: 8px;
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[3]}px;
@@ -377,9 +355,9 @@ export const ImageTitle = styled.label`
 export const AddedIamge = styled.div`
   overflow: hidden;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
-  /* margin: 0 auto; */
+  // justify-content: center;
+  // align-items: center;
+  // margin: 0 auto;
   margin-right: auto;
   width: 116px;
   height: 116px;
@@ -401,12 +379,12 @@ export const ActionButtons = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-top: 40px;
-  /* gap: 12px; */
+  // gap: 12px;
   @media ${p => p.theme.media.tablet} {
-    /* width: 332px; */
+    // width: 332px;
     flex-direction: row;
-    /* gap: 8px; */
-    /* margin-left: auto; */
+    // gap: 8px;
+    // margin-left: auto;
   }
 `;
 export const ModalBtn = styled(ModalButton)`
