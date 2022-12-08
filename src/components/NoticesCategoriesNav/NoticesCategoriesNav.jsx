@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   NoticesCategoriesNavContainer,
   CategoriesButonContainer,
@@ -12,6 +13,7 @@ import AddModalNotice from 'components/AddModalNotice/AddModalNotice';
 
 const NoticesCategoriesNav = ({ location }) => {
   const { token } = useSelector(state => state.auth);
+  const navigete = useNavigate();
 
   const publicCategories = [
     { sell: 'sell' },
@@ -59,7 +61,7 @@ const NoticesCategoriesNav = ({ location }) => {
       <AddButton
         onClick={e => {
           e.preventDefault();
-          handleModalToggle();
+          token ? handleModalToggle() : navigete('/login');
         }}
       >
         {window.innerWidth < 768 ? (

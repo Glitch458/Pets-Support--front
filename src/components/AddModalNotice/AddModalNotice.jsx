@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -84,9 +85,11 @@ const validationSchema = Yup.object({
 
 const AddModalNotice = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
-  const { pathname } = useLocation();
   const [image, setImage] = useState(null);
   const [addNotices] = useAddNoticeMutation();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const moveNextRegistration = () => {
     isFirstRegisterStep
@@ -127,6 +130,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       data.append('photoURL', values.photoURL);
       addNotices(data);
       handleModalToggle();
+      navigate('/notices/own');
       toast.success(`Your pet ${values.name} has been added to notices`);
     },
   });
