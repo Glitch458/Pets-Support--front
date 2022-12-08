@@ -36,7 +36,6 @@ import {
   ImageInputWrapper,
   ImageTitle,
   AddedIamge,
-  ModalBtn,
 } from './AddModalNotice.styled';
 import { Female } from '@mui/icons-material';
 

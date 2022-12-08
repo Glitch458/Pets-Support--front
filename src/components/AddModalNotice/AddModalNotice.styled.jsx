@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
-import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
 
 export const Container = styled.div`
   display: flex;
@@ -385,24 +384,5 @@ export const ActionButtons = styled.div`
     flex-direction: row;
     // gap: 8px;
     // margin-left: auto;
-  }
-`;
-export const ModalBtn = styled(ModalButton)`
-  width: 100%;
-  &:not(:last-child) {
-    margin-bottom: 12px;
-  }
-  font-family: ${p => p.theme.fonts.body};
-  @media ${p => p.theme.media.tablet} {
-    width: 180px;
-    &:not(:last-child) {
-      margin-bottom: 0px;
-      margin-right: 20px;
-    }
-  }
-  &:hover,
-  &:focus {
-    background-color: ${p => p.theme.colors.accent};
-    color: ${p => p.theme.colors.white};
   }
 `;
