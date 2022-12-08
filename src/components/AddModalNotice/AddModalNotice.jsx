@@ -14,7 +14,7 @@ import {
   CloseBtn,
   Title,
   FirstForm,
-  UserComment,
+  // UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
@@ -37,7 +37,6 @@ import {
   ImageTitle,
   AddedIamge,
 } from './AddModalNotice.styled';
-import { Female } from '@mui/icons-material';
 
 const validationSchema = Yup.object({
   category: Yup.string().required('Choose category'),
