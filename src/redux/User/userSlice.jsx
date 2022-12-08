@@ -18,12 +18,6 @@ export const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addMatcher(
-      userApi.endpoints.getCurrentUser.matchFulfilled,
-      (state, { payload }) => {
-        state.currentUser = payload;
-      }
-    );
-    builder.addMatcher(
       userApi.endpoints.updateUserInfo.matchFulfilled,
       (state, { payload }) => {
         state.currentUser = { ...state.currentUser, payload };

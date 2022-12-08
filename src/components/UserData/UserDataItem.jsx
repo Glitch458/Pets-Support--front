@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import authOperations from 'redux/Auth/auth-operations';
-import { useDispatch } from 'react-redux';
+
+import ModalLogoutConfirm from 'components/ModalConfirm/ModalLogoutConfirm/ModalLogoutConfirm';
 
 import {
   InfoItems,
@@ -29,17 +29,15 @@ const UserDataItem = ({ data, changeData }) => {
   const [userPhone, setUserPhone] = useState('');
   const [userCity, setUserCity] = useState('');
 
-  const dispatch = useDispatch();
+  const [expanded, setExpanded] = useState(false);
 
   const { name = '', email = '', birthday = '', phone = '', city = '' } = data;
 
-  useEffect(() => {
-    setUserName(name);
-    setUserEmail(email);
-    setUserBirthday(birthday);
-    setUserPhone(phone);
-    setUserCity(city);
-  }, [birthday, city, email, name, phone]);
+  const handleModalToggle = () => {
+    setExpanded(prev => {
+      return !prev;
+    });
+  };
 
   const handleChangeValue = evt => {
     const { name, value } = evt.currentTarget;
@@ -82,9 +80,13 @@ const UserDataItem = ({ data, changeData }) => {
     }
   };
 
-  const handleLogout = () => {
-    dispatch(authOperations.logOut());
-  };
+  useEffect(() => {
+    setUserName(name);
+    setUserEmail(email);
+    setUserBirthday(birthday);
+    setUserPhone(phone);
+    setUserCity(city);
+  }, [birthday, city, email, name, phone]);
 
   return (
     <div>
@@ -235,12 +237,15 @@ const UserDataItem = ({ data, changeData }) => {
           </Form>
         </InfoItem>
         <LogOut>
-          <button type="button" onClick={handleLogout}>
+          <button type="button" onClick={handleModalToggle}>
             <img src={LogOutIcon} alt="log out" />
             Log Out
           </button>
         </LogOut>
       </InfoItems>
+      {expanded && (
+        <ModalLogoutConfirm toggleModal={handleModalToggle} text={'Logout'} />
+      )}
     </div>
   );
 };

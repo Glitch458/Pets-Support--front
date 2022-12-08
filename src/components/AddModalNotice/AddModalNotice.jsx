@@ -13,8 +13,6 @@ import {
   Container,
   CloseBtn,
   Title,
-  FirstForm,
-  UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
@@ -67,7 +65,7 @@ const validationSchema = Yup.object({
   price: Yup.string().when('category', {
     is: category => category === 'sell',
     then: Yup.string()
-      .required('Введіть ціну')
+      .required('Set price')
       .matches(/^[0-9][0-9]*$/, 'Numbers only'),
   }),
   comments: Yup.string()
@@ -151,14 +149,13 @@ const AddModalNotice = ({ handleModalToggle }) => {
           }}
         >
           {isFirstRegisterStep && (
-            <FirstForm>
-              <UserComment>
-                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
-                amet, consectetur
-              </UserComment>
-              <RadioGroup required>
+            <>
+              <RadioGroup onChange={formik.handleChange} required>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'lost-found' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="lost/found"
@@ -168,6 +165,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 </RadioLabel>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'for-free' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="in good hands"
@@ -177,6 +177,9 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 </RadioLabel>
                 <RadioLabel>
                   <RadioInput
+                    defaultChecked={
+                      formik.values.category === 'sell' ? true : false
+                    }
                     type="radio"
                     name="category"
                     value="sell"
@@ -189,6 +192,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 <TextLabel>
                   Title of ad<span>*</span>
                   <TextInput
+                    value={formik.values.title}
                     onChange={formik.handleChange}
                     name="title"
                     placeholder="Type name"
@@ -243,7 +247,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   />
                 </TextLabel>
               </InputCont>
-            </FirstForm>
+            </>
           )}
           {!isFirstRegisterStep && (
             <>
@@ -289,6 +293,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   <p>{formik.errors.location}</p>
                 ) : null}
                 <TextInput
+                  value={formik.values.location}
                   id="location"
                   name="location"
                   type="text"
@@ -297,15 +302,12 @@ const AddModalNotice = ({ handleModalToggle }) => {
                 />
               </TextLabel>
 
-              {formik.values.category === 'sell' ? (
-                <>
-                  <TextLabel htmlFor="pricePet">
-                    Price<span>*</span>:
-                    {formik.values.price !== '' && formik.errors.price ? (
-                      <p>{formik.errors.price}</p>
-                    ) : null}
-                  </TextLabel>
-
+              {formik.values.category === 'sell' && (
+                <TextLabel htmlFor="pricePet">
+                  Price<span>*</span>:
+                  {formik.values.price !== '' && formik.errors.price ? (
+                    <p>{formik.errors.price}</p>
+                  ) : null}
                   <TextInput
                     id="pricePet"
                     name="price"
@@ -314,8 +316,8 @@ const AddModalNotice = ({ handleModalToggle }) => {
                     value={formik.values.price}
                     placeholder="Введіть ціну"
                   />
-                </>
-              ) : null}
+                </TextLabel>
+              )}
 
               <ImageInputWrapper>
                 <ImageTitle>Load the pet`s image:</ImageTitle>

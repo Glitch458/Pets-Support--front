@@ -14,13 +14,6 @@ export const userApi = createApi({
   tagTypes: ['User'],
 
   endpoints: builder => ({
-    getCurrentUser: builder.query({
-      query: () => ({
-        url: `/current`,
-        method: 'GET',
-      }),
-      providesTags: ['User'],
-    }),
     updateUserInfo: builder.mutation({
       query: payload => ({
         url: `/update`,

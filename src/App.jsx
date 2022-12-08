@@ -1,14 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { lazy, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { lazy } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import authOperations from 'redux/Auth/auth-operations';
-import PublicRoute from 'components/PublicRoute';
-import PrivateRoutes from 'components/PrivateRoute';
+import PublicRoute from 'components/Routes/PublicRoute';
+import PrivateRoute from 'components/Routes/PrivateRoute';
 import toastOptions from './helpers/toastOptions';
 
-const SharedLayout = lazy(() => import('components/SharedLayout/SharedLayout'));
+import SharedLayout from 'components/SharedLayout/SharedLayout';
 const Homepage = lazy(() => import('pages/Homepage/Homepage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -21,12 +19,6 @@ const UserPage = lazy(() => import('pages/UserPage/UserPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
-
   return (
     <>
       <Routes>
@@ -43,7 +35,7 @@ const App = () => {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/notices/:categoryName" element={<NoticesPage />} />
 
-          <Route path="/user" element={<PrivateRoutes />}>
+          <Route path="/user" element={<PrivateRoute />}>
             <Route index element={<UserPage />} />
           </Route>
         </Route>

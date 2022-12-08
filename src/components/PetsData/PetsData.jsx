@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useGetUserPetsQuery } from 'redux/User/userPetsApi';
-// import { useSelector } from 'react-redux';
-// import { useGetCurrentUserQuery } from 'redux/User/userApi';
+
 import { AddButtonCircleLink } from 'components/Button/Button';
 import PetsList from './PetsList';
 import {

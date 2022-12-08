@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import authOperations from 'redux/Auth/auth-operations';
+import { useRegisterMutation } from 'redux/Auth/authApi';
 // import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import {
@@ -31,8 +30,7 @@ const validationSchema = Yup.object({
 
 export default function SignUpStep1({ data, onSubmit }) {
   const { email, password } = data;
-  const dispatch = useDispatch();
-
+  const [register] = useRegisterMutation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -42,15 +40,13 @@ export default function SignUpStep1({ data, onSubmit }) {
     validationSchema: validationSchema,
     onSubmit: async values => {
       try {
-        await dispatch(
-          authOperations.register({
-            email,
-            password,
-            name: values.name,
-            city: values.city,
-            phone: values.phone,
-          })
-        );
+        await register({
+          email,
+          password,
+          name: values.name,
+          city: values.city,
+          phone: values.phone,
+        });
       } catch (error) {
         toast.error(
           'Щось пішло не так. Можливо користувач з такою електронною поштою вже існує.'
@@ -96,9 +92,7 @@ export default function SignUpStep1({ data, onSubmit }) {
         {formik.values.phone !== '' || formik.errors.phone ? (
           <PhoneError>{formik.errors.phone}</PhoneError>
         ) : null}
-        <AuthButton type="submit">
-          Register
-        </AuthButton>
+        <AuthButton type="submit">Register</AuthButton>
         <BackButton type="button" onClick={onSubmit}>
           Back
         </BackButton>
