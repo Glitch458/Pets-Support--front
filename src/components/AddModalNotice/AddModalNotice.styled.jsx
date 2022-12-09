@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
 
+import maleIcon from 'images/icons/male.png';
+import femaleIcon from 'images/icons/female.png';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,7 +74,7 @@ export const RadioGroup = styled.div`
 `;
 
 export const RadioLabel = styled.label`
-  // margin-bottom: 4px;
+  /* margin-bottom: 4px; */
 `;
 
 export const RadioInput = styled.input`
@@ -292,6 +295,35 @@ export const SexLabel = styled.label`
   }
 `;
 
+export const MaleIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  background-image: url(${maleIcon});
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+
+  @media ${p => p.theme.media.tablet} {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+`;
+export const FeMaleIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  background-image: url(${femaleIcon});
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+
+  @media ${p => p.theme.media.tablet} {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+`;
+
 export const InputRadio = styled.input`
   opacity: 0;
   width: 0;
@@ -378,7 +410,7 @@ export const ActionButtons = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-top: 40px;
-  // gap: 12px;
+  gap: 12px;
   @media ${p => p.theme.media.tablet} {
     // width: 332px;
     flex-direction: row;

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
 import { Button } from 'components/Button/Button';
+
 import Modal from 'components/Modal/Modal';
 import {
   Container,
@@ -32,6 +33,8 @@ import {
   Asterisk,
   InputRadio,
   SexLabel,
+  MaleIcon,
+  FeMaleIcon,
   PhotoPetInput,
   PhotoAddContainer,
   ImageInputWrapper,
@@ -276,39 +279,23 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   checked={formik.values.sex === 'male'}
                   onChange={formik.handleChange}
                 />
-
                 <SexLabel htmlFor="malePet">
-                  <svg
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                  >
-                    <title>male</title>
-                    <path
-                      fill="#23c2ef"
-                      d="M20.679 1.6c-0.884 0-1.6 0.716-1.6 1.6v0.81c0 0.884 0.716 1.6 1.6 1.6h2.804l-5.805 5.73c-1.629-1.047-3.57-1.655-5.655-1.655-5.756 0-10.423 4.637-10.423 10.357s4.667 10.358 10.423 10.358c5.756 0 10.422-4.638 10.422-10.358 0-2.174-0.674-4.192-1.826-5.858l5.707-5.672v2.738c0 0.884 0.716 1.6 1.6 1.6h0.835c0.884 0 1.6-0.716 1.602-1.6 0.007-2.602 0.027-5.453 0.033-8.051 0.002-0.884-0.714-1.599-1.598-1.599h-8.121zM12.023 13.854c3.439 0 6.227 2.77 6.227 6.188s-2.788 6.189-6.227 6.189c-3.439 0-6.228-2.771-6.228-6.189s2.789-6.188 6.228-6.188z"
-                    ></path>
-                  </svg>
+                  <MaleIcon></MaleIcon>
                   Male
                 </SexLabel>
                 {/* </div> */}
                 {/* <div> */}
+                <InputRadio
+                  id="femalePet"
+                  name="sex"
+                  type="radio"
+                  value="female"
+                  checked={formik.values.sex === 'female'}
+                  onChange={formik.handleChange}
+                />
                 <SexLabel htmlFor="femalePet">
-                  <svg
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                  >
-                    <title>female</title>
-                    <path
-                      fill="#ff8787"
-                      d="M16 0c-5.676 0-10.279 4.603-10.279 10.279 0 4.546 2.953 8.403 7.044 9.759 0.728 0.241 1.277 0.887 1.277 1.654v0.388c0 0.884-0.716 1.6-1.6 1.6h-1.208c-0.884 0-1.6 0.716-1.6 1.6v0.713c0 0.884 0.716 1.6 1.6 1.6h1.208c0.884 0 1.6 0.716 1.6 1.6v1.206c0 0.884 0.716 1.6 1.6 1.6h0.713c0.884 0 1.6-0.716 1.6-1.6v-1.206c0-0.884 0.716-1.6 1.6-1.6h1.208c0.884 0 1.6-0.716 1.6-1.6v-0.713c0-0.884-0.716-1.6-1.6-1.6h-1.208c-0.884 0-1.6-0.716-1.6-1.6v-1.709c4.741-0.914 8.323-5.085 8.323-10.093 0-5.676-4.603-10.279-10.279-10.279zM16 4.087c3.42 0 6.192 2.772 6.192 6.192s-2.772 6.192-6.192 6.192-6.192-2.772-6.192-6.192c0-3.419 2.772-6.192 6.192-6.192z"
-                    ></path>
-                  </svg>
+                  <FeMaleIcon></FeMaleIcon>
+                  <span class="checkmark"></span>
                   Female
                 </SexLabel>
                 {/* </div> */}
