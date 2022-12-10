@@ -256,6 +256,11 @@ export const AddedImage = styled.div`
     min-width: 100%;
     min-height: 100%;
   }
+
+  @media ${p => p.theme.media.tablet} {
+    width: 182px;
+    height: 182px;
+  }
 `;
 export const TextAreaInput = styled.textarea`
   display: block;

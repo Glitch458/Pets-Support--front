@@ -9,6 +9,7 @@ export const Backdrop = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  /* padding: 20px 0; */
   background-color: ${p => p.theme.colors.gray};
   backdrop-filter: blur(5px);
   overflow: scroll;
@@ -30,7 +31,8 @@ export const ModalWindow = styled.div`
   }
 
   @media ${p => p.theme.media.tablet} {
-    width: 608px;
+    min-width: 608px;
+    width: auto;
     border-radius: ${p => p.theme.radii.normal};
   }
 `;
