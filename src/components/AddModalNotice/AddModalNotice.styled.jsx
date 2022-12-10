@@ -8,7 +8,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 18px;
+  padding: 40px 20px;
   @media ${p => p.theme.media.tablet} {
     padding: 40px 80px;
   }
@@ -64,12 +64,17 @@ export const UserComment = styled.p`
 export const RadioGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px;
+  /* justify-content: space-between; */
+  /* gap: 8px; */
+  column-gap: 8px;
+  row-gap: 12px;
   margin-bottom: 32px;
   @media ${p => p.theme.media.tablet} {
     margin-bottom: 28px;
-    gap: 5px;
+    column-gap: 12px;
+    row-gap: 16px;
+
+    /* gap: 5px; */
   }
 `;
 
@@ -99,7 +104,7 @@ export const RadioButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 28px;
+  padding: 8px 25px;
   font-size: ${p => p.theme.fontSizes[1]}px;
   font-weight: ${p => p.theme.fontWeights.medium};
   letter-spacing: 0.04em;
@@ -120,6 +125,9 @@ export const RadioButton = styled.div`
 `;
 
 export const InputCont = styled.div`
+  /* width: 100%; */
+  box-sizing: border-box;
+
   &:not(:last-child) {
     margin-bottom: 16px;
   }
@@ -133,6 +141,7 @@ export const InputCont = styled.div`
 
 export const TextLabel = styled.label`
   display: inline-block;
+  width: 100%;
   font-family: ${p => p.theme.fonts.body};
   font-weight: ${p => p.theme.fontWeights.medium};
   font-size: ${p => p.theme.fontSizes[3]}px;
@@ -145,14 +154,16 @@ export const TextLabel = styled.label`
 
 export const TextInput = styled.input`
   display: block;
+  box-sizing: border-box;
   align-items: center;
   display: flex;
   outline: none;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  // width: 240px;
+  /* width: 240px; */
   width: 100%;
   height: 40px;
   margin-top: 8px;
+  padding: 0;
   padding-left: 14px;
   border-radius: ${p => p.theme.radii.normal};
   ::placeholder {
@@ -166,7 +177,8 @@ export const TextInput = styled.input`
 
   @media ${p => p.theme.media.tablet} {
     margin-top: 12px;
-    width: 448px;
+    /* width: 448px; */
+    width: 100%;
     height: 48px;
     padding-left: 16px;
     ::placeholder {
@@ -182,7 +194,9 @@ export const DateInput = styled.input`
   padding-left: 14px;
   margin-top: 8px;
   border: 1px solid rgba(245, 146, 86, 0.5);
-  width: 240px;
+  /* width: 240px; */
+  width: 100%;
+
   height: 40px;
   border-radius: ${p => p.theme.radii.normal};
   ::placeholder {
@@ -207,7 +221,7 @@ export const DateInput = styled.input`
   }
 
   @media ${p => p.theme.media.tablet} {
-    width: 448px;
+    /* width: 448px; */
     height: 48px;
     ::placeholder {
       font-size: ${p => p.theme.fontSizes[2]}px;

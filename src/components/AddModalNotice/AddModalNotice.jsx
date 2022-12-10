@@ -16,7 +16,7 @@ import {
   CloseBtn,
   Title,
   FirstForm,
-  // UserComment,
+  UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
@@ -164,6 +164,10 @@ const AddModalNotice = ({ handleModalToggle }) => {
         >
           {isFirstRegisterStep && (
             <FirstForm>
+              <UserComment>
+                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                amet, consectetur
+              </UserComment>
               <RadioGroup onChange={formik.handleChange} required>
                 <RadioLabel>
                   <RadioInput
