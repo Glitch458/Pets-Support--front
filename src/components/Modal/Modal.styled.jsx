@@ -23,7 +23,9 @@ export const ModalWindow = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 100%;
+  /* max-height: 100%; */
+
+  max-height: 95%;
   border-radius: ${p => p.theme.radii.small};
   background-color: ${p => p.theme.colors.white};
   &::-webkit-scrollbar {

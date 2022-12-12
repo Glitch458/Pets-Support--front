@@ -48,8 +48,8 @@ export const FirstForm = styled.div`
 `;
 
 export const UserComment = styled.p`
+  width: 443px;
   text-align: center;
-  padding: 0 5px;
   margin-bottom: 20px;
   font-style: normal;
   font-weight: ${p => p.theme.fontWeights.medium};
@@ -70,6 +70,7 @@ export const RadioGroup = styled.div`
   row-gap: 12px;
   margin-bottom: 32px;
   @media ${p => p.theme.media.tablet} {
+    width: 448px;
     margin-bottom: 28px;
     column-gap: 12px;
     row-gap: 16px;
