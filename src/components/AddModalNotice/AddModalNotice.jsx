@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -8,11 +9,14 @@ import { toast } from 'react-toastify';
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
 import { useAddNoticeMutation } from 'redux/Notices/noticesApi';
 import { Button } from 'components/Button/Button';
+
 import Modal from 'components/Modal/Modal';
 import {
   Container,
   CloseBtn,
   Title,
+  FirstForm,
+  UserComment,
   InputCont,
   InputContTextArea,
   TextAreaInput,
@@ -24,6 +28,13 @@ import {
   RadioInput,
   RadioButton,
   DateInput,
+  SexFormBox,
+  BoxQuestion,
+  Asterisk,
+  InputRadio,
+  SexLabel,
+  MaleIcon,
+  FeMaleIcon,
   PhotoPetInput,
   PhotoAddContainer,
   ImageInputWrapper,
@@ -77,9 +88,11 @@ const validationSchema = Yup.object({
 
 const AddModalNotice = ({ handleModalToggle }) => {
   const [isFirstRegisterStep, setIsFirstRegisterStep] = useState(true);
-  const { pathname } = useLocation();
   const [image, setImage] = useState(null);
   const [addNotices] = useAddNoticeMutation();
+
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const moveNextRegistration = () => {
     isFirstRegisterStep
@@ -120,6 +133,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
       data.append('photoURL', values.photoURL);
       addNotices(data);
       handleModalToggle();
+      navigate('/notices/own');
       toast.success(`Your pet ${values.name} has been added to notices`);
     },
   });
@@ -149,7 +163,11 @@ const AddModalNotice = ({ handleModalToggle }) => {
           }}
         >
           {isFirstRegisterStep && (
-            <>
+            <FirstForm>
+              <UserComment>
+                Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                amet, consectetur
+              </UserComment>
               <RadioGroup onChange={formik.handleChange} required>
                 <RadioLabel>
                   <RadioInput
@@ -190,7 +208,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </RadioGroup>
               <InputCont>
                 <TextLabel>
-                  Title of ad<span>*</span>
+                  Title of ad<Asterisk>*</Asterisk>
                   <TextInput
                     value={formik.values.title}
                     onChange={formik.handleChange}
@@ -247,85 +265,91 @@ const AddModalNotice = ({ handleModalToggle }) => {
                   />
                 </TextLabel>
               </InputCont>
-            </>
+            </FirstForm>
           )}
           {!isFirstRegisterStep && (
             <>
-              <fieldset>
-                <legend>
-                  The sex<span>*</span>:
-                </legend>
-                <div>
-                  <div>
-                    <input
-                      id="malePet"
-                      name="sex"
-                      type="radio"
-                      value="male"
-                      checked={formik.values.sex === 'male'}
-                      onChange={formik.handleChange}
-                    />
-
-                    <label htmlFor="malePet">Male</label>
-                  </div>
-
-                  <div>
-                    <input
-                      id="femalePet"
-                      name="sex"
-                      type="radio"
-                      value="female"
-                      checked={formik.values.sex === 'female'}
-                      onChange={formik.handleChange}
-                    />
-
-                    <label htmlFor="femalePet">Female</label>
-                  </div>
-                </div>
-                {formik.touched.sex && formik.errors.sex ? (
-                  <p>{formik.errors.sex}</p>
-                ) : null}
-              </fieldset>
-
-              <TextLabel htmlFor="locationPet">
-                City, Region<span>*</span>:
-                {formik.values.location !== '' && formik.errors.location ? (
-                  <p>{formik.errors.location}</p>
-                ) : null}
-                <TextInput
-                  value={formik.values.location}
-                  id="location"
-                  name="location"
-                  type="text"
+              <SexFormBox>
+                <BoxQuestion>
+                  The sex<Asterisk>*</Asterisk>:
+                </BoxQuestion>
+                {/* <div> */}
+                {/* <div> */}
+                <InputRadio
+                  id="malePet"
+                  name="sex"
+                  type="radio"
+                  value="male"
+                  checked={formik.values.sex === 'male'}
                   onChange={formik.handleChange}
-                  placeholder="Введіть місце"
                 />
-              </TextLabel>
-
-              {formik.values.category === 'sell' && (
-                <TextLabel htmlFor="pricePet">
-                  Price<span>*</span>:
-                  {formik.values.price !== '' && formik.errors.price ? (
-                    <p>{formik.errors.price}</p>
+                <SexLabel htmlFor="malePet">
+                  <MaleIcon></MaleIcon>
+                  Male
+                </SexLabel>
+                {/* </div> */}
+                {/* <div> */}
+                <InputRadio
+                  id="femalePet"
+                  name="sex"
+                  type="radio"
+                  value="female"
+                  checked={formik.values.sex === 'female'}
+                  onChange={formik.handleChange}
+                />
+                <SexLabel htmlFor="femalePet">
+                  <FeMaleIcon></FeMaleIcon>
+                  <span class="checkmark"></span>
+                  Female
+                </SexLabel>
+                {/* </div> */}
+                {/* </div> */}
+                {/* {formik.touched.sex && formik.errors.sex ? (
+                  <p>{formik.errors.sex}</p>
+                ) : null} */}
+              </SexFormBox>
+              <InputCont>
+                <TextLabel htmlFor="locationPet">
+                  City, Region<span>*</span>:
+                  {formik.values.location !== '' && formik.errors.location ? (
+                    <p>{formik.errors.location}</p>
                   ) : null}
                   <TextInput
-                    id="pricePet"
-                    name="price"
+                    value={formik.values.location}
+                    id="location"
+                    name="location"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.price}
-                    placeholder="Введіть ціну"
+                    placeholder="Введіть місце"
                   />
                 </TextLabel>
-              )}
+              </InputCont>
+              <InputCont>
+                {formik.values.category === 'sell' && (
+                  <TextLabel htmlFor="pricePet">
+                    Price<Asterisk>*</Asterisk>:
+                    {formik.values.price !== '' && formik.errors.price ? (
+                      <p>{formik.errors.price}</p>
+                    ) : null}
+                    <TextInput
+                      id="pricePet"
+                      name="price"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.price}
+                      placeholder="Введіть ціну"
+                    />
+                  </TextLabel>
+                )}
+              </InputCont>
 
               <ImageInputWrapper>
-                <ImageTitle>Load the pet`s image:</ImageTitle>
+                <ImageTitle>Load the pet's image:</ImageTitle>
                 {formik.values.photoURL === null ? (
                   <PhotoAddContainer htmlFor="imagePet">
                     <svg
-                      width="51"
-                      height="51"
+                      width="48"
+                      height="48"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -356,7 +380,7 @@ const AddModalNotice = ({ handleModalToggle }) => {
               </ImageInputWrapper>
               <InputContTextArea>
                 <TextLabel htmlFor="commentsAd">
-                  Comments<span>*</span>
+                  Comments<Asterisk>*</Asterisk>
                   {formik.values.comments !== '' && formik.errors.comments ? (
                     <p>{formik.errors.comments}</p>
                   ) : null}

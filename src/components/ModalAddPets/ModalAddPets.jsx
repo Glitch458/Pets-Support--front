@@ -1,16 +1,15 @@
-import Modal from 'components/Modal/Modal';
-// import { ModalButton } from 'components/Button/ModalBtn/ModalBtn';
-import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
+import { useEffect, useState } from 'react';
+import { usePostPetMutation } from 'redux/User/userPetsApi';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import { usePostPetMutation } from 'redux/User/userPetsApi';
+import { toast } from 'react-toastify';
 
 import { handleBackdropClick, handleEscClick } from 'helpers/modalHelpers';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import Modal from 'components/Modal/Modal';
+import { CloseBtnn } from 'components/Button/CloseButton/CloseButton';
 import { Button } from 'components/Button/Button';
+
 import {
   Container,
   Title,

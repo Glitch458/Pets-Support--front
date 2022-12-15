@@ -7,7 +7,7 @@ import Spinner from 'components/Spinner/Spinner';
 import { NoticesCategoriesContainerList } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = () => {
-  const [searchParams /*setSearchParams*/] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { categoryName } = useParams();
   const favoriteNotices = useSelector(state => state.notices.favoriteNotices);
   //const notices = useSelector(state => state.notices.items);
