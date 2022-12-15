@@ -48,7 +48,6 @@ export const FirstForm = styled.div`
 `;
 
 export const UserComment = styled.p`
-  width: 443px;
   text-align: center;
   margin-bottom: 20px;
   font-style: normal;
@@ -56,6 +55,7 @@ export const UserComment = styled.p`
   font-size: ${p => p.theme.fontSizes[2]}px;
   line-height: 1.38;
   @media ${p => p.theme.media.tablet} {
+    width: 448px;
     margin-bottom: 28px;
     font-size: ${p => p.theme.fontSizes[4]}px;
   }
